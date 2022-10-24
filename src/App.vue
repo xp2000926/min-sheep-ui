@@ -1,10 +1,16 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import Test from './components/Test'
+const onclickFn = () => {
+  alert(1)
+}
 </script>
 <template>
   <HelloWorld msg="Hello Vue 3 + Vite + Typescript + Vite" />
-  <Test />
+  <Test @click="onclickFn">
+    <template #default>aaaa</template>
+    <template #title><h3>title</h3></template>
+  </Test>
 </template>
 
 <style scoped>

@@ -4,10 +4,10 @@ export default defineComponent({
   name: 'SButton',
   props: buttonProps,
   setup(props: ButtonProps, { slots }) {
-    const { type } = toRefs(props)
+    const { type, size } = toRefs(props)
     return () => {
       return (
-        <button class={`s-btn s-btn--${type.value}`}>
+        <button class={`s-btn s-btn--${type.value} s-btn--${size.value}`}>
           {slots.default ? slots.default() : '按钮'}
         </button>
       )

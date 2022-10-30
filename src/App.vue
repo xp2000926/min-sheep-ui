@@ -9,6 +9,10 @@
   -->
   <SButton type="primary">确定</SButton>
   <SButton>取消</SButton>
+  <SButton type="text">text</SButton>
+  <SButton size="small">Small</SButton>
+  <SButton>Medium</SButton>
+  <SButton size="large">Large</SButton>
 </template>
 
 <style scoped></style>

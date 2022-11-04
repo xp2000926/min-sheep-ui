@@ -5,6 +5,7 @@ const { defineConfig, build } = require('vite')
 const vue = require('@vitejs/plugin-vue')
 const vueJsx = require('@vitejs/plugin-vue-jsx')
 const fsExtra = require('fs-extra')
+const version= "0.0.1"
 // 基础配置
 const baseConfig = defineConfig({
   configFile: false,
@@ -33,7 +34,7 @@ const createPackageJson = (name) => {
   // 预设
   const fileStr = `{
     "name": "${name?name:'min-sheep-ui'}",
-    "version": "0.0.0",
+    "version": "${version}",
     "main": "${name ? 'index.umd.js':'min-sheep-ui.umd.js'}",
     "module": "${name ? 'index.mjs':'min-sheep-ui.mjs'}",
     "author": "xp2000926",

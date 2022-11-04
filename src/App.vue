@@ -20,6 +20,7 @@ const confirm = () => console.log('confirm')
   </SButton>
   <SButton>Medium</SButton>
   <SButton size="large">Large</SButton>
+  <SButton size="large" block>block</SButton>
 </template>
 
 <style scoped></style>

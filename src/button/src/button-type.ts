@@ -17,6 +17,10 @@ export const buttonProps = {
   disabled: {
     type: Boolean,
     default: false
+  },
+  block: {
+    type: Boolean,
+    default: false
   }
 } as const //as const 表示以后 buttonProps 是不可以动态设置一些其他属性
 

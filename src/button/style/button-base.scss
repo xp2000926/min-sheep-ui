@@ -1,4 +1,4 @@
-@import '../../../style/variable.scss';
+@import '../../style/variable.scss';
 
 @mixin button-base {
   // 布局
@@ -25,6 +25,9 @@
   // 禁用状态
   &[disabled] {
     @apply cursor-not-allowed
+  }
+  &.s-btn--block {
+    @apply block w-full
   }
 }
 

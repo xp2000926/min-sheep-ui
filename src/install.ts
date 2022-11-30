@@ -2,6 +2,7 @@ import { setGlobalConfig, getComponentPrefix } from './_utils/global-config'
 import type { SheepUIOptions } from './_utils/global-config'
 import type { App } from 'vue'
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type ComponentType = any
 
 export function installComponent(

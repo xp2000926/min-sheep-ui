@@ -1,58 +1,90 @@
-import { defineComponent as a, toRefs as u, ref as g, createVNode as l } from "vue";
-const P = {
+import { defineComponent as g, toRefs as x, ref as p, computed as m, createVNode as a } from "vue";
+const v = {
   data: {
     type: Object,
     required: !0
   }
 };
-function d(r, n = 0, e = []) {
-  return n++, r.reduce((s, c) => {
-    const t = { ...c };
-    t.level = n, e.length > 0 && e[e.length - 1].level >= n && e.pop(), e.push(t);
-    const o = e[e.length - 2];
-    if (o && (t.parentId = o.id), t.children) {
-      const f = d(t.children, n, e);
-      return delete t.children, s.concat(t, f);
+function f(t, n = 0, e = []) {
+  return n++, t.reduce((i, c) => {
+    const s = { ...c };
+    s.level = n, e.length > 0 && e[e.length - 1].level >= n && e.pop(), e.push(s);
+    const l = e[e.length - 2];
+    if (l && (s.parentId = l.id), s.children) {
+      const r = f(s.children, n, e);
+      return delete s.children, i.concat(s, r);
     } else
-      return t.isLeaf = !0, s.concat(t);
+      return s.isLeaf = !0, i.concat(s);
   }, []);
 }
-const m = a({
+const h = g({
   name: "STree",
-  props: P,
-  setup(r) {
+  props: v,
+  setup(t) {
     const {
       data: n
-    } = u(r), e = g(d(n.value));
-    return () => l("div", {
+    } = x(t), e = p(f(n.value)), i = (l) => {
+      const r = e.value.find((o) => o.id === l.id);
+      r && (r.expanded = !r.expanded);
+    }, c = m(() => {
+      let l = [];
+      const r = [];
+      for (const o of e.value)
+        l.includes(o) || (o.expanded !== !0 && (l = s(o)), r.push(o));
+      return r;
+    }), s = (l) => {
+      const r = [], o = e.value.findIndex((d) => d.id === l.id);
+      for (let d = o + 1; d < e.value.length && l.level < e.value[d].level; d++)
+        r.push(e.value[d]);
+      return r;
+    };
+    return () => a("div", {
       class: "s-tree"
-    }, [e == null ? void 0 : e.value.map((s) => l("div", {
+    }, [c == null ? void 0 : c.value.map((l) => a("div", {
       class: "s-tree-node",
       style: {
-        paddingLeft: `${24 * (s.level - 1)}px`
+        paddingLeft: `${24 * (l.level - 1)}px`
       }
-    }, [s.label]))]);
+    }, [l.isLeaf ? a("span", {
+      style: {
+        display: "inline-block",
+        width: "18px"
+      }
+    }, null) : a("svg", {
+      onClick: () => i(l),
+      style: {
+        width: "18px",
+        height: "18px",
+        display: "inline-block",
+        transform: l.expanded ? "rotate(90deg)" : ""
+      },
+      viewBox: "0 0 1024 1024",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, [a("path", {
+      fill: "currentColor",
+      d: "M384 192v640l384-320.064z"
+    }, null)]), l.label]))]);
   }
-}), x = "s", i = "_sheep", C = "S", b = (r, n = { classPrefix: x }) => {
+}), P = "s", u = "_sheep", C = "S", b = (t, n = { classPrefix: P }) => {
   var e;
-  r.config.globalProperties[i] = {
-    ...(e = r.config.globalProperties[i]) != null ? e : {},
+  t.config.globalProperties[u] = {
+    ...(e = t.config.globalProperties[u]) != null ? e : {},
     classPrefix: n.classPrefix
   };
-}, I = (r) => {
+}, w = (t) => {
   var n;
-  return (n = r == null ? void 0 : r.componentPrefix) != null ? n : C;
+  return (n = t == null ? void 0 : t.componentPrefix) != null ? n : C;
 };
-function L(r, n, e) {
-  const s = I(e);
-  r.component(s + n.name) || (b(r, e), r.component(s + n.name, n));
+function I(t, n, e) {
+  const i = w(e);
+  t.component(i + n.name) || (b(t, e), t.component(i + n.name, n));
 }
-const O = {
-  install(r, n) {
-    L(r, m, n);
+const L = {
+  install(t, n) {
+    I(t, h, n);
   }
 };
 export {
-  m as Tree,
-  O as default
+  h as Tree,
+  L as default
 };

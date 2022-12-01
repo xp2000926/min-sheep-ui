@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite --host",
-    "build": "vue-tsc --noEmit && vite build",
+    "dist": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "clear-dist": "rimraf dist",
     "clear-build": "rimraf build",
@@ -15,7 +15,8 @@
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "test": "vitest",
-    "build:components": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "cli": "cd cli && npm run cli"
   },
   "dependencies": {
     "vue": "^3.2.41"
@@ -34,6 +35,7 @@
     "fs-extra": "^10.1.0",
     "happy-dom": "^7.6.6",
     "husky": "^8.0.1",
+    "inquirer": "^8.2.2",
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.18",
     "prettier": "^2.7.1",

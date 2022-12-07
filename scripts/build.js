@@ -26,6 +26,7 @@ const rollupOptions = {
   // 外置
   external: ['vue', 'vue-router'],
   output: {
+    exports: "named",
     globals: {
       vue: 'Vue'
     }
@@ -105,7 +106,7 @@ const buildLib = async () => {
     //npm run build 版本号会执行
     version = process.argv.slice(2)[0]
   } else if (process.argv.slice(2)[0] == '--v' || process.argv.slice(2)[0] == '--version') {
-    // node ./scripts/build.js --v 版本号 或 node ./scripts/build.js --version 版本号 会执行
+    // node ./scripts/build.js --v 版本号 或 node ./scripts/build.js --version 版本号 或 yarn build --v 版本号 或 yarn build --version 版本号 会执行
     version = process.argv.slice(2)[1]
   } else if (!/^\d+(?:\.\d+){2}$/.test(version)){
     // 没有版本号或者版本号不正确会执行

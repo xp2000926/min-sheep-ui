@@ -1,6 +1,6 @@
 {
     "name": "button",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "main": "index.umd.js",
     "module": "index.mjs",
     "author": "xp2000926",

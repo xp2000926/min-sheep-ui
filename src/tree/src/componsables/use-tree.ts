@@ -13,7 +13,7 @@ export function useTree(node: Ref<ITreeNode[]> | ITreeNode[]) {
     }
   }
   // 获取那些展开的节点列表
-  const expendedTree = computed(() => {
+  const expandedTree = computed(() => {
     let excludeNodes: IInnerTreeNode[] = [] //排除列表
     const result = [] // 结果列表
     // 循环列表，找出那些! expanded
@@ -49,7 +49,7 @@ export function useTree(node: Ref<ITreeNode[]> | ITreeNode[]) {
   return {
     innerData,
     toggleNode,
-    expendedTree,
+    expandedTree,
     getChildren
   }
 }

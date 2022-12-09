@@ -1,90 +1,101 @@
-import { defineComponent as g, toRefs as x, ref as p, computed as m, createVNode as a } from "vue";
-const v = {
+import { ref as f, unref as g, computed as x, defineComponent as p, toRefs as m, createVNode as d } from "vue";
+function u(t, e = 0, n = []) {
+  return e++, t.reduce((i, s) => {
+    const r = { ...s };
+    r.level = e, n.length > 0 && n[n.length - 1].level >= e && n.pop(), n.push(r);
+    const l = n[n.length - 2];
+    if (l && (r.parentId = l.id), r.children) {
+      const o = u(r.children, e, n);
+      return delete r.children, i.concat(r, o);
+    } else
+      return r.isLeaf = !0, i.concat(r);
+  }, []);
+}
+function v(t) {
+  const e = f(u(g(t))), n = (r) => {
+    const l = e.value.find((o) => o.id === r.id);
+    l && (l.expanded = !l.expanded);
+  }, i = x(() => {
+    let r = [];
+    const l = [];
+    for (const o of e.value)
+      r.includes(o) || (o.expanded !== !0 && (r = s(o)), l.push(o));
+    return l;
+  }), s = (r) => {
+    const l = [], o = e.value.findIndex((c) => c.id === r.id);
+    for (let c = o + 1; c < e.value.length && r.level < e.value[c].level; c++)
+      l.push(e.value[c]);
+    return l;
+  };
+  return {
+    innerData: e,
+    toggleNode: n,
+    expandedTree: i,
+    getChildren: s
+  };
+}
+const h = {
   data: {
     type: Object,
     required: !0
   }
-};
-function f(t, n = 0, e = []) {
-  return n++, t.reduce((i, c) => {
-    const s = { ...c };
-    s.level = n, e.length > 0 && e[e.length - 1].level >= n && e.pop(), e.push(s);
-    const l = e[e.length - 2];
-    if (l && (s.parentId = l.id), s.children) {
-      const r = f(s.children, n, e);
-      return delete s.children, i.concat(s, r);
-    } else
-      return s.isLeaf = !0, i.concat(s);
-  }, []);
-}
-const h = g({
+}, P = p({
   name: "STree",
-  props: v,
+  props: h,
   setup(t) {
     const {
-      data: n
-    } = x(t), e = p(f(n.value)), i = (l) => {
-      const r = e.value.find((o) => o.id === l.id);
-      r && (r.expanded = !r.expanded);
-    }, c = m(() => {
-      let l = [];
-      const r = [];
-      for (const o of e.value)
-        l.includes(o) || (o.expanded !== !0 && (l = s(o)), r.push(o));
-      return r;
-    }), s = (l) => {
-      const r = [], o = e.value.findIndex((d) => d.id === l.id);
-      for (let d = o + 1; d < e.value.length && l.level < e.value[d].level; d++)
-        r.push(e.value[d]);
-      return r;
-    };
-    return () => a("div", {
+      data: e
+    } = m(t), {
+      expandedTree: n,
+      toggleNode: i
+    } = v(e);
+    return () => d("div", {
       class: "s-tree"
-    }, [c == null ? void 0 : c.value.map((l) => a("div", {
-      class: "s-tree-node",
+    }, [n == null ? void 0 : n.value.map((s) => d("div", {
+      class: "s-tree-node hover:bg-slate-300",
       style: {
-        paddingLeft: `${24 * (l.level - 1)}px`
+        paddingLeft: `${24 * (s.level - 1)}px`
       }
-    }, [l.isLeaf ? a("span", {
+    }, [s.isLeaf ? d("span", {
       style: {
         display: "inline-block",
         width: "18px"
       }
-    }, null) : a("svg", {
-      onClick: () => i(l),
+    }, null) : d("svg", {
+      onClick: () => i(s),
       style: {
         width: "18px",
         height: "18px",
         display: "inline-block",
-        transform: l.expanded ? "rotate(90deg)" : ""
+        transform: s.expanded ? "rotate(90deg)" : ""
       },
       viewBox: "0 0 1024 1024",
       xmlns: "http://www.w3.org/2000/svg"
-    }, [a("path", {
+    }, [d("path", {
       fill: "currentColor",
       d: "M384 192v640l384-320.064z"
-    }, null)]), l.label]))]);
+    }, null)]), s.label]))]);
   }
-}), P = "s", u = "_sheep", C = "S", b = (t, n = { classPrefix: P }) => {
-  var e;
-  t.config.globalProperties[u] = {
-    ...(e = t.config.globalProperties[u]) != null ? e : {},
-    classPrefix: n.classPrefix
-  };
-}, w = (t) => {
+}), C = "s", a = "_sheep", b = "S", w = (t, e = { classPrefix: C }) => {
   var n;
-  return (n = t == null ? void 0 : t.componentPrefix) != null ? n : C;
+  t.config.globalProperties[a] = {
+    ...(n = t.config.globalProperties[a]) != null ? n : {},
+    classPrefix: e.classPrefix
+  };
+}, I = (t) => {
+  var e;
+  return (e = t == null ? void 0 : t.componentPrefix) != null ? e : b;
 };
-function I(t, n, e) {
-  const i = w(e);
-  t.component(i + n.name) || (b(t, e), t.component(i + n.name, n));
+function y(t, e, n) {
+  const i = I(n);
+  t.component(i + e.name) || (w(t, n), t.component(i + e.name, e));
 }
-const L = {
-  install(t, n) {
-    I(t, h, n);
+const N = {
+  install(t, e) {
+    y(t, P, e);
   }
 };
 export {
-  h as Tree,
-  L as default
+  P as Tree,
+  N as default
 };

@@ -1,5 +1,5 @@
 import { defineComponent, toRefs } from 'vue'
-import { useTree } from './composables/use-tree'
+import { useTree } from './componsables/use-tree'
 import { TreeProps, treeProps } from './tree-type'
 
 export default defineComponent({
@@ -8,13 +8,13 @@ export default defineComponent({
   setup(props: TreeProps) {
     // 获取data
     const { data } = toRefs(props)
-    const { expendedTree, toggleNode } = useTree(data)
+    const { expandedTree, toggleNode } = useTree(data)
     return () => {
       return (
         <div class="s-tree">
-          {expendedTree?.value.map(treeNode => (
+          {expandedTree?.value.map(treeNode => (
             <div
-              class="s-tree-node :hover:bg-slate-300"
+              class="s-tree-node hover:bg-slate-300"
               style={{ paddingLeft: `${24 * (treeNode.level - 1)}px` }}
             >
               {/* 折叠图标 */}

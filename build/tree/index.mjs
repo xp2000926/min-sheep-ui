@@ -1,101 +1,131 @@
-import { ref as f, unref as g, computed as x, defineComponent as p, toRefs as m, createVNode as d } from "vue";
-function u(t, e = 0, n = []) {
-  return e++, t.reduce((i, s) => {
-    const r = { ...s };
-    r.level = e, n.length > 0 && n[n.length - 1].level >= e && n.pop(), n.push(r);
-    const l = n[n.length - 2];
-    if (l && (r.parentId = l.id), r.children) {
-      const o = u(r.children, e, n);
-      return delete r.children, i.concat(r, o);
+import { ref as x, unref as v, computed as k, defineComponent as b, toRefs as m, createVNode as d, withDirectives as C, vModelCheckbox as P } from "vue";
+function p(t, e = 0, c = []) {
+  return e++, t.reduce((r, a) => {
+    const o = { ...a };
+    o.level = e, c.length > 0 && c[c.length - 1].level >= e && c.pop(), c.push(o);
+    const l = c[c.length - 2];
+    if (l && (o.parentId = l.id), o.children) {
+      const n = p(o.children, e, c);
+      return delete o.children, r.concat(o, n);
     } else
-      return r.isLeaf = !0, i.concat(r);
+      return o.isLeaf = !0, r.concat(o);
   }, []);
 }
-function v(t) {
-  const e = f(u(g(t))), n = (r) => {
-    const l = e.value.find((o) => o.id === r.id);
-    l && (l.expanded = !l.expanded);
-  }, i = x(() => {
-    let r = [];
-    const l = [];
-    for (const o of e.value)
-      r.includes(o) || (o.expanded !== !0 && (r = s(o)), l.push(o));
-    return l;
-  }), s = (r) => {
-    const l = [], o = e.value.findIndex((c) => c.id === r.id);
-    for (let c = o + 1; c < e.value.length && r.level < e.value[c].level; c++)
-      l.push(e.value[c]);
-    return l;
+function I(t) {
+  const e = x(p(v(t))), c = (l) => {
+    const n = e.value.find((s) => s.id === l.id);
+    n && (n.expanded = !n.expanded);
+  }, r = k(() => {
+    let l = [];
+    const n = [];
+    for (const s of e.value)
+      l.includes(s) || (s.expanded !== !0 && (l = a(s)), n.push(s));
+    return n;
+  }), a = (l, n = !0) => {
+    const s = [], u = e.value.findIndex((i) => i.id === l.id);
+    for (let i = u + 1; i < e.value.length && l.level < e.value[i].level; i++)
+      (n || l.level === e.value[i].level - 1) && s.push(e.value[i]);
+    return s;
   };
   return {
     innerData: e,
-    toggleNode: n,
-    expandedTree: i,
-    getChildren: s
+    toggleNode: c,
+    expandedTree: r,
+    getChildren: a,
+    toggleCheckNode: (l) => {
+      l.checked = !l.checked, a(l).forEach((i) => {
+        i.checked = l.checked;
+      });
+      const n = e.value.find((i) => i.id === l.parentId);
+      if (!n)
+        return;
+      const s = a(n, !1);
+      s.filter((i) => i.checked).length === s.length ? n.checked = !0 : n.checked = !1;
+    }
   };
 }
-const h = {
+const w = {
   data: {
     type: Object,
     required: !0
+  },
+  checkable: {
+    type: Boolean,
+    default: !1
   }
-}, P = p({
+}, f = 32, g = 24, y = b({
   name: "STree",
-  props: h,
+  props: w,
   setup(t) {
     const {
-      data: e
+      data: e,
+      checkable: c
     } = m(t), {
-      expandedTree: n,
-      toggleNode: i
-    } = v(e);
+      expandedTree: r,
+      toggleNode: a,
+      getChildren: o,
+      toggleCheckNode: l
+    } = I(e);
     return () => d("div", {
       class: "s-tree"
-    }, [n == null ? void 0 : n.value.map((s) => d("div", {
-      class: "s-tree-node hover:bg-slate-300",
+    }, [r == null ? void 0 : r.value.map((n) => d("div", {
+      class: "s-tree-node hover:bg-slate-300 relative leading-8",
       style: {
-        paddingLeft: `${24 * (s.level - 1)}px`
+        paddingLeft: `${g * (n.level - 1)}px`
       }
-    }, [s.isLeaf ? d("span", {
+    }, [!n.isLeaf && n.expanded && d("span", {
+      class: "s-tree-node__vline absolute w-px bg-slate-300",
+      style: {
+        height: `${f * o(n).length}px`,
+        left: `${g * (n.level - 1) + 11}px`,
+        top: `${f}px`
+      }
+    }, null), n.isLeaf ? d("span", {
       style: {
         display: "inline-block",
         width: "18px"
       }
     }, null) : d("svg", {
-      onClick: () => i(s),
+      onClick: () => a(n),
       style: {
         width: "18px",
         height: "18px",
         display: "inline-block",
-        transform: s.expanded ? "rotate(90deg)" : ""
+        transform: n.expanded ? "rotate(90deg)" : ""
       },
       viewBox: "0 0 1024 1024",
       xmlns: "http://www.w3.org/2000/svg"
     }, [d("path", {
       fill: "currentColor",
       d: "M384 192v640l384-320.064z"
-    }, null)]), s.label]))]);
+    }, null)]), c.value && C(d("input", {
+      type: "checkbox",
+      "onUpdate:modelValue": (s) => n.checked = s,
+      onClick: () => {
+        l(n);
+      }
+    }, null), [[P, n.checked]]), n.label]))]);
   }
-}), C = "s", a = "_sheep", b = "S", w = (t, e = { classPrefix: C }) => {
-  var n;
-  t.config.globalProperties[a] = {
-    ...(n = t.config.globalProperties[a]) != null ? n : {},
+}), E = "s", h = "_sheep", N = "S", _ = (t, e = { classPrefix: E }) => {
+  var c;
+  t.config.globalProperties[h] = {
+    ...(c = t.config.globalProperties[h]) != null ? c : {},
     classPrefix: e.classPrefix
   };
-}, I = (t) => {
+}, L = (t) => {
   var e;
-  return (e = t == null ? void 0 : t.componentPrefix) != null ? e : b;
+  return (e = t == null ? void 0 : t.componentPrefix) != null ? e : N;
 };
-function y(t, e, n) {
-  const i = I(n);
-  t.component(i + e.name) || (w(t, n), t.component(i + e.name, e));
+function O(t, e, c) {
+  const r = L(c);
+  t.component(r + e.name) || (_(t, c), t.component(r + e.name, e));
 }
-const N = {
+const S = {
   install(t, e) {
-    y(t, P, e);
+    O(t, y, e);
   }
 };
 export {
-  P as Tree,
-  N as default
+  y as Tree,
+  S as default
 };

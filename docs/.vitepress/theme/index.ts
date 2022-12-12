@@ -4,7 +4,7 @@ import STree from '../../../src/tree/src/tree'
 import Test from '../../../src/components/Test'
 import SButton from '../../../src/button/src/button'
 import 'vitepress-theme-demoblock/theme/styles/index.css'
-import '../../../src/index.scss
+import '../../../src/index.scss'
 import  DemoBlock from 'vitepress-theme-demoblock/components/DemoBlock.vue'
 import  Demo from 'vitepress-theme-demoblock/components/Demo.vue'
 

@@ -25,14 +25,14 @@ export function useTree(node: Ref<ITreeNode[]> | ITreeNode[]) {
       }
       // 当前节点收起，它的子节点应该被排除掉
       if (item.expanded !== true) {
-        excludeNodes = getChildren(item)
+        excludeNodes = getChildrenExpanded(item)
       }
       result.push(item)
     }
     return result
   })
   // 获取指定节点的子节点
-  const getChildren = (
+  const getChildrenExpanded = (
     node: IInnerTreeNode,
     recursive = true
   ): IInnerTreeNode[] => {
@@ -59,7 +59,7 @@ export function useTree(node: Ref<ITreeNode[]> | ITreeNode[]) {
     node.checked = !node.checked
     // 父-子联动
     // 获取子节点，并同步他们的选中状态和父节点一致
-    getChildren(node).forEach(child => {
+    getChildrenExpanded(node).forEach(child => {
       child.checked = node.checked
     })
     // 子-父联动
@@ -69,7 +69,7 @@ export function useTree(node: Ref<ITreeNode[]> | ITreeNode[]) {
       return
     }
     // 获取兄弟节点：相当于获取parentNode的直接子节点
-    const siblingNodes = getChildren(parentNode, false)
+    const siblingNodes = getChildrenExpanded(parentNode, false)
     // 做一次过滤，过滤出选中的所有选中的兄弟节点
     const checkedSiblingNodes = siblingNodes.filter(item => item.checked)
     if (checkedSiblingNodes.length === siblingNodes.length) {
@@ -83,7 +83,7 @@ export function useTree(node: Ref<ITreeNode[]> | ITreeNode[]) {
     innerData,
     toggleNode,
     expandedTree,
-    getChildren,
+    getChildrenExpanded,
     toggleCheckNode
   }
 }

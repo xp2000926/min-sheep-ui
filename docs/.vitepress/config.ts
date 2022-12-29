@@ -1,30 +1,41 @@
-const sidebar = {
-  '/': [
-    { text: '快速开始', link: '/' },
-    {
-      text: '通用',
-      children: [{ text: 'Button 按钮', link: '/components/button/' }]
-    },
-    { text: '导航' },
-    { text: '反馈' },
-    { text: '数据录入' },
-    {
-      text: '数据展示',
-      children: [{ text: 'Tree 树', link: '/components/tree/' }]
-    },
-    { text: '布局' }
-  ]
-}
-const config = {
+import { defineConfig } from 'vitepress'
+const sidebar = [
+  {
+    text: '快速开始',
+    items: [
+      { text: '安装', link: '/guide/install' } // /guide/install.md
+    ]
+  },
+  {
+    text: '通用',
+    items: [
+      { text: 'Button 按钮', link: '/components/button/' },
+    ]
+  },
+  {
+    text: '导航',
+    items: []
+  },
+  { text: '反馈', items: [] },
+  { text: '数据录入', items: [] },
+  { text: '数据展示', items: [{ text: 'Tree 树', link: '/components/tree/' }] },
+  { text: '布局', items: [] }
+]
+
+export default defineConfig({
   themeConfig: {
-    sidebar
+    sidebar,
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/xp2000926/min-sheep-ui' }
+    ]
   },
   markdown: {
     config(md) {
-      // 这里可以使用 markdown-it 插件
+      // 这里可以使用markdown-it插件
       const { demoBlockPlugin } = require('vitepress-theme-demoblock')
-      md.use(demoBlockPlugin)
+      md.use(demoBlockPlugin, {
+        cssPreprocessor: 'scss'
+      })
     }
   }
-}
-export default config
+})

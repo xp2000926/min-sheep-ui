@@ -1,19 +1,15 @@
 //引入vite导出的build方法，用它来创建
 const path = require('path')
+const fsExtra = require('fs-extra')
+
 const fs = require('fs')
 const { defineConfig, build } = require('vite')
 const vue = require('@vitejs/plugin-vue')
 const vueJsx = require('@vitejs/plugin-vue-jsx')
-const fsExtra = require('fs-extra')
+
 const inquirer = require('inquirer')
 let version
 
-// 基础配置
-const baseConfig = defineConfig({
-  configFile: false,
-  publicDir: false,
-  plugins: [vue(), vueJsx()]
-})
 // 入口文件
 const entryFile = path.resolve(__dirname, './entry.ts')
 // 组件目录
@@ -21,6 +17,12 @@ const componentsDir = path.resolve(__dirname, '../src')
 // 输出目录
 const outputDir = path.resolve(__dirname, '../build')
 
+// 基础配置
+const baseConfig = defineConfig({
+  configFile: false,
+  publicDir: false,
+  plugins: [vue(), vueJsx()]
+})
 // rollup 配置
 const rollupOptions = {
   // 外置
@@ -33,7 +35,7 @@ const rollupOptions = {
   }
 }
 // 生成 package.json
-const createPackageJson = (name) => {
+const createPackageJson = name => {
   // 预设
   const fileStr = `{
     "name": "${name ? name : 'min-sheep-ui'}",
@@ -79,6 +81,8 @@ const buildAll = async () => {
       }
     })
   )
+  // 全量打包
+  createPackageJson()
 }
 // 单组件按需构建
 const buildSingle = async name => {
@@ -127,8 +131,6 @@ const buildLib = async () => {
     version = res
   }
   await buildAll()
-  // 全量打包
-  createPackageJson()
   // 按需打包
   fs.readdirSync(componentsDir)
     .filter(name => {

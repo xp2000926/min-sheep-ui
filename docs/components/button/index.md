@@ -1,26 +1,67 @@
-# 按钮-Button
+# Button 按钮
 
-:::demo 这是Helloworld组件，我们可以传递msg属性给它
+## 基础按钮
+
+:::demo 基础按钮
+
 ```vue
 <template>
-<HelloWorld msg="你好" />
+  <s-button></s-button>
+</template>
+```
+
+:::
+
+## 按钮类型 type
+
+:::demo 通过 type 属性设置按钮样式，可选：primary | secondary | text
+
+```vue
+<template>
+  <s-button></s-button>
+  <s-button type="primary"></s-button>
+  <s-button type="text"></s-button>
+</template>
+```
+
+:::
+
+## 按钮尺寸 size
+
+:::demo 通过 size 属性设置按钮样式，可选：small | medium | large
+```vue
+<template>
+  <s-button size="small">Small</s-button>
+  <s-button>Medium</s-button>
+  <s-button size="large">Large</s-button>
 </template>
 ```
 :::
 
-<Test />
 
-::: demo 这是Helloworld组件，我们可以传递msg属性给它
+## 禁用按钮 disabled
+
+:::demo 通过 disabled 属性禁用按钮
 ```vue
-<SButton type="primary">确定</SButton>
-<SButton>取消</SButton>
-<SButton type="text">text</SButton>
-<SButton size="mini">Mini</SButton>
-<SButton size="small">Small</SButton>
-<SButton type="primary" @click="confirm">Primary</SButton>
-<SButton type="primary" size="small" disabled @click="confirm">Disabled</SButton>
-<SButton>Medium</SButton>
-<SButton size="large">Large</SButton>
-<SButton size="large" block>block</SButton>
+<template>
+    <s-button type="primary"          
+      @click="confirm">Primary</s-button>
+    <s-button type="primary" disabled 
+      @click="confirm">Disabled</s-button>
+</template>
+<script setup>
+const confirm = () => console.log('confirm')
+</script>
+```
+:::
+
+## 块级按钮 block
+
+:::demo 通过 block 属性设置按钮为块级
+```vue
+<template>
+  <s-button type="primary" block>Confirm</s-button>
+  <s-button block>Cancel</s-button>
+</template>
 ```
 :::

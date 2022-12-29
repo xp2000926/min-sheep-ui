@@ -3,6 +3,7 @@ import { useTree } from './componsables/use-tree'
 import { IInnerTreeNode, TreeProps, treeProps } from './tree-type'
 import STreeNode from './components/tree-node'
 import STreeNodeToggle from './components/tree-node-toggle'
+import '../style/tree.scss'
 export default defineComponent({
   name: 'STree',
   props: treeProps,

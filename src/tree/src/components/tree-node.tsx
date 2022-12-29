@@ -28,7 +28,7 @@ export default defineComponent({
               height: `${
                 NODE_HEIGHT * getChildrenExpanded(treeNode.value).length
               }px`,
-              left: `${NODE_INDENT * (treeNode.value.level - 1) + 11}px`,
+              left: `${NODE_INDENT * (treeNode.value.level - 1) + 9}px`,
               top: `${NODE_HEIGHT}px`
             }}
           />

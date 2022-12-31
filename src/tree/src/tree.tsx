@@ -12,7 +12,7 @@ export default defineComponent({
     // 获取data
     const { data } = toRefs(props)
     const { slots } = context
-    const treeData = useTree(data, context)
+    const treeData = useTree(data, props, context)
     provide('TREE_UTILS', treeData)
     return () => {
       return (

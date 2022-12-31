@@ -8,6 +8,6 @@ function genCoreTypesTemplate(name) {
     var propsName = name + 'Props'; //属性名
     var propsFileName = name + '-type'; //文件名称
     var className = 's-' + name;
-    return "import { defineComponent, toRefs } from 'vue'\nimport { ".concat(propsTypeName, ", ").concat(propsName, " } from './").concat(propsFileName, "'\n\nexport default defineComponent({\n  name: '").concat(compName, "',\n  props: ").concat(propsName, ",\n  setup(props: ").concat(propsTypeName, ") {\n    return () => {\n      return (\n        <div class=\"").concat(className, "\"></div>\n      )\n    }\n  }\n})\n");
+    return "import { defineComponent, toRefs } from 'vue'\nimport { ".concat(propsTypeName, ", ").concat(propsName, " } from './").concat(propsFileName, "'\nimport '../style/").concat(name, ".scss'\n\nexport default defineComponent({\n  name: '").concat(compName, "',\n  props: ").concat(propsName, ",\n  setup(props: ").concat(propsTypeName, ") {\n    return () => {\n      return (\n        <div class=\"").concat(className, "\"></div>\n      )\n    }\n  }\n})\n");
 }
 exports["default"] = genCoreTypesTemplate;

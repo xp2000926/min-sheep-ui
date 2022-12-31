@@ -1,5 +1,5 @@
-import { defineComponent, provide, toRefs } from 'vue'
-import { useTree } from './componsables/use-tree'
+import { defineComponent, provide, SetupContext, toRefs } from 'vue'
+import { useTree } from './composables/use-tree'
 import { IInnerTreeNode, TreeProps, treeProps } from './tree-type'
 import STreeNode from './components/tree-node'
 import STreeNodeToggle from './components/tree-node-toggle'
@@ -7,10 +7,12 @@ import '../style/tree.scss'
 export default defineComponent({
   name: 'STree',
   props: treeProps,
-  setup(props: TreeProps, { slots }) {
+  emits: ['lazy-load'],
+  setup(props: TreeProps, context: SetupContext) {
     // 获取data
     const { data } = toRefs(props)
-    const treeData = useTree(data)
+    const { slots } = context
+    const treeData = useTree(data, context)
     provide('TREE_UTILS', treeData)
     return () => {
       return (
@@ -31,6 +33,12 @@ export default defineComponent({
                       expanded={!!treeNode.expanded}
                       onClick={() => treeData.toggleNode(treeNode)}
                     ></STreeNodeToggle>
+                  ),
+                loading: () =>
+                  slots.loading ? (
+                    slots.loading({ nodeData: treeData })
+                  ) : (
+                    <span class="ml-1">loading...</span>
                   )
               }}
             </STreeNode>

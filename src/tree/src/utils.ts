@@ -31,60 +31,13 @@ export function generateInnerTree(
       return prev.concat(o, children)
     } else {
       // 叶子节点
-      o.isLeaf = true
+      // 如果是懒加载,isLeaf会被设震为false， 则不需要设置
+      // 如果没有初始化，则默认设置为true
+      if (o.isLeaf === undefined) {
+        o.isLeaf = true
+      }
+      // 将新构造的节点o和已拍平数据拼接起来
       return prev.concat(o)
     }
   }, [] as IInnerTreeNode[])
 }
-// const tree = [
-//   {
-//     label: 'docs',
-//     id: 'docs'
-//   },
-//   {
-//     label: 'packages',
-//     id: 'packages',
-//     expanded: true,
-//     children: [
-//       {
-//         label: 'plugin-vue',
-//         id: 'plugin-vue'
-//       },
-//       {
-//         label: 'vite',
-//         id: 'vite',
-//         expanded: true,
-//         children: [
-//           {
-//             label: 'src',
-//             id: 'src'
-//           },
-//           {
-//             label: 'README.md',
-//             id: 'README.md'
-//           }
-//         ]
-//       }
-//     ]
-//   },
-//   {
-//     label: 'scripts',
-//     id: 'scripts',
-//     children: [
-//       {
-//         label: 'release.ts',
-//         id: 'release.ts'
-//       },
-//       {
-//         label: 'verifyCommit.ts',
-//         id: 'verifyCommit.ts'
-//       }
-//     ]
-//   },
-//   {
-//     label: 'pnpm-workspace.yaml',
-//     id: 'pnpm-workspace.yaml'
-//   }
-// ]
-
-// console.log(generateInnerTree(tree))

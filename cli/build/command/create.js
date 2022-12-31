@@ -39,7 +39,7 @@ exports.__esModule = true;
 exports.onCreate = void 0;
 var inquirer = require("inquirer"); // 如果你使用的是tsnd方式需要这样导入
 var kolorist_1 = require("kolorist"); //颜色库
-var create_component_ts_1 = require("../shared/create-component.ts");
+var create_component_1 = require("../shared/create-component");
 // create type 支持项
 var CREATE_TYPES = ['component', 'lib-entry'];
 // 文档分类
@@ -121,7 +121,7 @@ function onCreate(args) {
                 case 5:
                     info = _b.sent();
                     // 创建组件模板文件
-                    (0, create_component_ts_1["default"])(info);
+                    (0, create_component_1["default"])(info);
                     return [3 /*break*/, 7];
                 case 6: return [3 /*break*/, 7];
                 case 7: return [3 /*break*/, 9];

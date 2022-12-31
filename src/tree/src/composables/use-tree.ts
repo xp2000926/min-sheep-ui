@@ -1,0 +1,29 @@
+import { Ref, ref, SetupContext, unref } from 'vue'
+import { ITreeNode } from '../tree-type'
+import { generateInnerTree } from '../utils'
+import { useCheck } from './use-check'
+import { useCore } from './use-core'
+import { useLazyLoad } from './use-lazy-load'
+import { useOperate } from './use-operate'
+import { useToggle } from './use-toggle'
+import { TreeUtils } from './use-tree-type'
+
+export function useTree(
+  node: Ref<ITreeNode[]> | ITreeNode[],
+  context: SetupContext
+): TreeUtils {
+  const data = unref(node)
+  const innerData = ref(generateInnerTree(data))
+  const core = useCore(innerData)
+  const plugins = [useToggle, useCheck, useOperate]
+  const lazyNode = useLazyLoad(innerData, core, context)
+  // 聚合插件
+  const pluginsMethods = plugins.reduce((acc, plugin) => {
+    return { ...acc, ...plugin(innerData, core, context, lazyNode) }
+  }, {})
+  return {
+    ...pluginsMethods,
+    ...core,
+    treeData: innerData
+  } as TreeUtils
+}

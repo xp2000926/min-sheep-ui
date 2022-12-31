@@ -1,6 +1,6 @@
 import * as inquirer from 'inquirer' // 如果你使用的是tsnd方式需要这样导入
 import { red } from 'kolorist' //颜色库
-import createComponent from '../shared/create-component.ts'
+import createComponent from '../shared/create-component'
 
 // create type 支持项
 const CREATE_TYPES = ['component', 'lib-entry']

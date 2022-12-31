@@ -1,5 +1,5 @@
-import { defineComponent as p, toRefs as f, createVNode as s, ref as N, unref as m, computed as y, inject as T, withDirectives as C, vModelCheckbox as E, provide as S, mergeProps as w } from "vue";
-const I = {
+import { defineComponent as g, toRefs as h, createVNode as u, computed as T, ref as v, unref as w, inject as E, withDirectives as z, vModelCheckbox as S, provide as B, mergeProps as M, createTextVNode as P } from "vue";
+const $ = {
   type: {
     type: String,
     default: "secondary"
@@ -17,193 +17,314 @@ const I = {
     default: !1
   }
 };
-const g = p({
+const k = g({
   name: "SButton",
-  props: I,
-  setup(o, {
+  props: $,
+  setup(n, {
     slots: e
   }) {
     const {
-      type: a,
-      size: i,
-      disabled: n,
-      block: t
-    } = f(o), l = t.value ? "s-btn--block" : "";
-    return () => s("button", {
-      disabled: n.value,
-      class: `s-btn s-btn--${a.value} s-btn--${i.value} ${l}`
+      type: s,
+      size: d,
+      disabled: o,
+      block: c
+    } = h(n), t = c.value ? "s-btn--block" : "";
+    return () => u("button", {
+      disabled: o.value,
+      class: `s-btn s-btn--${s.value} s-btn--${d.value} ${t}`
     }, [e.default ? e.default() : "按钮"]);
   }
-}), B = {
-  install(o) {
-    o.component(g.name, g);
+}), O = {
+  install(n) {
+    n.component(k.name, k);
   }
 };
-function k(o, e = 0, a = []) {
-  return e++, o.reduce((i, n) => {
-    const t = { ...n };
-    t.level = e, a.length > 0 && a[a.length - 1].level >= e && a.pop(), a.push(t);
-    const l = a[a.length - 2];
-    if (l && (t.parentId = l.id), t.children) {
-      const c = k(t.children, e, a);
-      return delete t.children, i.concat(t, c);
+function x(n, e = 0, s = []) {
+  return e++, n.reduce((d, o) => {
+    const c = { ...o };
+    c.level = e, s.length > 0 && s[s.length - 1].level >= e && s.pop(), s.push(c);
+    const t = s[s.length - 2];
+    if (t && (c.parentId = t.id), c.children) {
+      const l = x(c.children, e, s);
+      return delete c.children, d.concat(c, l);
     } else
-      return t.isLeaf = !0, i.concat(t);
+      return c.isLeaf === void 0 && (c.isLeaf = !0), d.concat(c);
   }, []);
 }
-function D(o) {
-  const e = N(k(m(o))), a = (l) => {
-    const c = e.value.find((d) => d.id === l.id);
-    c && (c.expanded = !c.expanded);
-  }, i = y(() => {
-    let l = [];
-    const c = [];
-    for (const d of e.value)
-      l.includes(d) || (d.expanded !== !0 && (l = n(d)), c.push(d));
-    return c;
-  }), n = (l, c = !0) => {
-    const d = [], u = e.value.findIndex((r) => r.id === l.id);
-    for (let r = u + 1; r < e.value.length && l.level < e.value[r].level; r++)
-      (c || l.level === e.value[r].level - 1) && d.push(e.value[r]);
-    return d;
-  };
+function V(n, { getChildren: e }) {
   return {
-    innerData: e,
-    toggleNode: a,
-    expandedTree: i,
-    getChildrenExpanded: n,
-    toggleCheckNode: (l) => {
-      l.checked = !l.checked, n(l).forEach((r) => {
-        r.checked = l.checked;
+    toggleCheckNode: (d) => {
+      d.checked = !d.checked, e(d).forEach((l) => {
+        l.checked = d.checked;
       });
-      const c = e.value.find((r) => r.id === l.parentId);
-      if (!c)
+      const o = n.value.find((l) => l.id === d.parentId);
+      if (!o)
         return;
-      const d = n(c, !1);
-      d.filter((r) => r.checked).length === d.length ? c.checked = !0 : c.checked = !1;
+      const c = e(o, !1), t = c.filter((l) => l.checked);
+      t.length === c.length ? o.checked = !0 : t.length === 0 && (o.checked = !1);
     }
   };
 }
-const x = {
+function _(n) {
+  const e = T(() => {
+    let t = [];
+    const l = [];
+    for (const r of n.value)
+      t.map((i) => i.id).includes(r.id) || (r.expanded !== !0 && (t = s(r)), l.push(r));
+    return l;
+  }), s = (t, l = !0) => {
+    const r = [], i = n.value.findIndex((a) => a.id === t.id);
+    for (let a = i + 1; a < n.value.length && t.level < n.value[a].level; a++)
+      (l || t.level === n.value[a].level - 1) && r.push(n.value[a]);
+    return r;
+  }, d = (t, l = []) => {
+    const r = s(t, !1);
+    return l.push(...r), r.forEach((i) => {
+      i.expanded && d(i, l);
+    }), l;
+  };
+  return {
+    expandedTree: e,
+    getChildren: s,
+    getChildrenExpanded: d,
+    getIndex: (t) => t ? n.value.findIndex((l) => l.id === t.id) : -1,
+    getNode: (t) => n.value.find((l) => l.id === t.id)
+  };
+}
+function H(n, { getNode: e, getIndex: s, getChildren: d }, { emit: o }) {
+  const c = (i) => {
+    const a = e(i);
+    a && a.isLeaf === !1 && !a.childNodeCount && (a.loading = !0, o("lazy-load", i, t));
+  }, t = (i) => {
+    const a = e(i.node);
+    if (a) {
+      a.loading = !1;
+      const p = v(
+        x(i.treeItems, a.level)
+      );
+      l(a, p), r(a, p);
+      const f = d(a);
+      a.childNodeCount = f.length;
+    }
+  }, l = (i, a) => {
+    a.value.forEach((p) => {
+      p.level - 1 === i.level && !p.parentId && (p.parentId = i.id);
+    });
+  }, r = (i, a) => {
+    const p = s(i);
+    p && n.value.splice(p + 1, 0, ...a.value);
+  };
+  return {
+    lazyLoadNodes: c
+  };
+}
+function j(n = 8) {
+  const e = "abcdefghijklmnopqrstuvwxyz0123456789";
+  let s = "";
+  for (let d = 0; d < n; d++)
+    s += e[parseInt((Math.random() * e.length).toString())];
+  return s;
+}
+function q(n, { getChildren: e, getIndex: s }) {
+  return {
+    append: (c, t) => {
+      const l = e(c, !1), r = l[l.length - 1];
+      let i = s(c) + 1;
+      r && (i = s(r) + 1), c.expanded = !0, c.isLeaf = !1;
+      const a = v({
+        ...t,
+        level: c.level + 1,
+        parentId: c.id,
+        isLeaf: !0
+      });
+      a.value.id === void 0 && (a.value.id = j()), n.value.splice(i, 0, a.value);
+    },
+    remove: (c) => {
+      const t = e(c).map((l) => l.id);
+      n.value = n.value.filter(
+        (l) => l.id !== c.id && !t.includes(l.id)
+      );
+    }
+  };
+}
+function R(n, e, s, d) {
+  const { lazyLoadNodes: o } = d;
+  return {
+    toggleNode: (t) => {
+      const l = n.value.find((r) => r.id === t.id);
+      l && (l.expanded = !l.expanded, l.expanded && o(l));
+    }
+  };
+}
+function U(n, e) {
+  const s = w(n), d = v(x(s)), o = _(d), c = [R, V, q], t = H(d, o, e);
+  return {
+    ...c.reduce((r, i) => ({ ...r, ...i(d, o, e, t) }), {}),
+    ...o,
+    treeData: d
+  };
+}
+const I = {
   data: {
     type: Object,
     required: !0
+  },
+  lineable: {
+    type: Boolean,
+    default: !1
   },
   checkable: {
     type: Boolean,
     default: !1
   },
-  lineable: {
+  operable: {
     type: Boolean,
     default: !1
   }
-}, $ = {
-  ...x,
+}, G = {
+  ...I,
   treeNode: {
     type: Object,
     required: !0
   }
-}, v = 32, h = 24, L = p({
+}, m = 32, y = 24, A = g({
   name: "STreeNode",
-  props: $,
-  setup(o, {
+  props: G,
+  setup(n, {
     slots: e
   }) {
     const {
-      lineable: a,
-      checkable: i,
-      treeNode: n
-    } = f(o), {
+      lineable: s,
+      checkable: d,
+      treeNode: o,
+      operable: c
+    } = h(n), {
       toggleCheckNode: t,
-      getChildrenExpanded: l
-    } = T("TREE_UTILS");
+      getChildrenExpanded: l,
+      append: r,
+      remove: i
+    } = E("TREE_UTILS"), a = v(!1), p = () => {
+      a.value ? a.value = !1 : a.value = !0;
+    };
     return () => {
-      var c, d;
-      return s("div", {
+      var f, b, N;
+      return u("div", {
         class: "s-tree-node hover:bg-slate-300 relative leading-8",
         style: {
-          paddingLeft: `${h * (n.value.level - 1)}px`
-        }
-      }, [!n.value.isLeaf && n.value.expanded && a.value && s("span", {
+          paddingLeft: `${y * (o.value.level - 1)}px`
+        },
+        onMouseenter: p,
+        onMouseleave: p
+      }, [!o.value.isLeaf && o.value.expanded && s.value && u("span", {
         class: "s-tree-node__vline absolute w-px bg-slate-300",
         style: {
-          height: `${v * l(n.value).length}px`,
-          left: `${h * (n.value.level - 1) + 9}px`,
-          top: `${v}px`
+          height: `${m * l(o.value).length}px`,
+          left: `${y * (o.value.level - 1) + 9}px`,
+          top: `${m}px`
         }
-      }, null), n.value.isLeaf ? s("span", {
+      }, null), o.value.isLeaf ? u("span", {
         style: {
           display: "inline-block",
           width: "18px"
         }
-      }, null) : (c = e.icon) == null ? void 0 : c.call(e), i.value && C(s("input", {
+      }, null) : (f = e.icon) == null ? void 0 : f.call(e), d.value && z(u("input", {
         type: "checkbox",
-        "onUpdate:modelValue": (u) => n.value.checked = u,
+        "onUpdate:modelValue": (L) => o.value.checked = L,
         onClick: () => {
-          t(n.value);
+          t(o.value);
         }
-      }, null), [[E, n.value.checked]]), (d = e.content) == null ? void 0 : d.call(e)]);
+      }, null), [[S, o.value.checked]]), (b = e.content) == null ? void 0 : b.call(e), c.value && a.value && u("span", {
+        class: "inline-flex ml-1"
+      }, [u("svg", {
+        onClick: () => {
+          r(o.value, {
+            label: "新节点"
+          });
+        },
+        viewBox: "0 0 1024 1024",
+        width: "14",
+        height: "14",
+        class: "cursor-pointer"
+      }, [u("path", {
+        d: "M590.769231 571.076923h324.923077c15.753846 0 29.538462-13.784615 29.538461-29.538461v-59.076924c0-15.753846-13.784615-29.538462-29.538461-29.538461H590.769231c-11.815385 0-19.692308-7.876923-19.692308-19.692308V108.307692c0-15.753846-13.784615-29.538462-29.538461-29.538461h-59.076924c-15.753846 0-29.538462 13.784615-29.538461 29.538461V433.230769c0 11.815385-7.876923 19.692308-19.692308 19.692308H108.307692c-15.753846 0-29.538462 13.784615-29.538461 29.538461v59.076924c0 15.753846 13.784615 29.538462 29.538461 29.538461H433.230769c11.815385 0 19.692308 7.876923 19.692308 19.692308v324.923077c0 15.753846 13.784615 29.538462 29.538461 29.538461h59.076924c15.753846 0 29.538462-13.784615 29.538461-29.538461V590.769231c0-11.815385 7.876923-19.692308 19.692308-19.692308z"
+      }, null)]), u("svg", {
+        onClick: () => {
+          i(o.value);
+        },
+        viewBox: "0 0 1024 1024",
+        width: "14",
+        height: "14",
+        class: "cursor-pointer ml-1"
+      }, [u("path", {
+        d: "M610.461538 500.184615l256-257.96923c11.815385-11.815385 11.815385-29.538462 0-41.353847l-39.384615-41.353846c-11.815385-11.815385-29.538462-11.815385-41.353846 0L527.753846 417.476923c-7.876923 7.876923-19.692308 7.876923-27.569231 0L242.215385 157.538462c-11.815385-11.815385-29.538462-11.815385-41.353847 0l-41.353846 41.353846c-11.815385 11.815385-11.815385 29.538462 0 41.353846l257.969231 257.969231c7.876923 7.876923 7.876923 19.692308 0 27.56923L157.538462 785.723077c-11.815385 11.815385-11.815385 29.538462 0 41.353846l41.353846 41.353846c11.815385 11.815385 29.538462 11.815385 41.353846 0L498.215385 610.461538c7.876923-7.876923 19.692308-7.876923 27.56923 0l257.969231 257.969231c11.815385 11.815385 29.538462 11.815385 41.353846 0L866.461538 827.076923c11.815385-11.815385 11.815385-29.538462 0-41.353846L610.461538 527.753846c-7.876923-7.876923-7.876923-19.692308 0-27.569231z"
+      }, null)])]), o.value.loading && ((N = e.loading) == null ? void 0 : N.call(e))]);
     };
   }
-}), P = (o, {
+}), F = (n, {
   emit: e
-}) => s("svg", {
+}) => u("svg", {
   style: {
     width: "18px",
     height: "18px",
     display: "inline-block",
-    transform: o.expanded ? "rotate(90deg)" : ""
+    transform: n.expanded ? "rotate(90deg)" : ""
   },
   viewBox: "0 0 1024 1024",
   xmlns: "http://www.w3.org/2000/svg",
   onClick: () => e("onClick")
-}, [s("path", {
+}, [u("path", {
   fill: "currentColor",
   d: "M384 192v640l384-320.064z"
 }, null)]);
-const b = p({
+const C = g({
   name: "STree",
-  props: x,
-  setup(o, {
-    slots: e
-  }) {
+  props: I,
+  emits: ["lazy-load"],
+  setup(n, e) {
     const {
-      data: a
-    } = f(o), i = D(a);
-    return S("TREE_UTILS", i), () => {
-      var n;
-      return s("div", {
+      data: s
+    } = h(n), {
+      slots: d
+    } = e, o = U(s, e);
+    return B("TREE_UTILS", o), () => {
+      var c;
+      return u("div", {
         class: "s-tree"
-      }, [(n = i.expandedTree) == null ? void 0 : n.value.map((t) => s(L, w(o, {
+      }, [(c = o.expandedTree) == null ? void 0 : c.value.map((t) => u(A, M(n, {
         treeNode: t
       }), {
-        content: () => e.content ? e.content(t) : t.label,
-        icon: () => e.icon ? e.icon({
+        content: () => d.content ? d.content(t) : t.label,
+        icon: () => d.icon ? d.icon({
           nodeData: t,
-          toggleNode: i.toggleNode
-        }) : s(P, {
+          toggleNode: o.toggleNode
+        }) : u(F, {
           expanded: !!t.expanded,
-          onClick: () => i.toggleNode(t)
-        }, null)
+          onClick: () => o.toggleNode(t)
+        }, null),
+        loading: () => d.loading ? d.loading({
+          nodeData: o
+        }) : u("span", {
+          class: "ml-1"
+        }, [P("loading...")])
       }))]);
     };
   }
-}), _ = {
-  install(o) {
-    o.component(b.name, b);
+}), J = {
+  install(n) {
+    n.component(C.name, C);
   }
 };
-const O = [
-  B,
-  _
-], z = {
+const K = [
+  O,
+  J
+], W = {
   version: "0.0.1",
-  install(o) {
-    O.forEach((e) => o.use(e));
+  install(n) {
+    K.forEach((e) => n.use(e));
   }
 };
 export {
-  g as Button,
-  b as Tree,
-  z as default
+  k as Button,
+  C as Tree,
+  W as default
 };

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { reactive, computed } from 'vue'
 import type { Ref } from 'vue'
 import type { IInnerTreeNode } from '../tree-type'

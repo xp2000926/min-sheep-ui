@@ -14,11 +14,18 @@ const sidebar = [
   },
   {
     text: '导航',
-    items: []
+    items: [
+      { text: 'Pagination 分页', link: '/components/pagination/' },
+    ]
   },
   { text: '反馈', items: [] },
   { text: '数据录入', items: [] },
-  { text: '数据展示', items: [{ text: 'Tree 树', link: '/components/tree/' }] },
+  { 
+    text: '数据展示', 
+    items: [
+      { text: 'Tree 树', link: '/components/tree/' }
+    ] 
+  },
   { text: '布局', items: [] }
 ]
 

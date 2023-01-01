@@ -19,3 +19,18 @@
 </template>
 ```
 :::
+
+## 分页器 pager
+通过`s-pager`直接使用分页器组件
+
+:::demo
+```vue
+<template>
+   When you have few pages
+  <SPager :total="50"></SPager>
+
+  When you have more than 7 pages
+  <SPager :total="1000"></SPager>
+</template>
+```
+:::

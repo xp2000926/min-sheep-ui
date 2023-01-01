@@ -1,41 +1,8 @@
-import { computed, defineComponent, toRefs } from 'vue'
+import { defineComponent } from 'vue'
 import { PaginationProps, paginationProps } from './pagination-type'
 import '../style/pagination.scss'
 import usePage from './composables/use-page'
-
-const getCenterPage = (
-  totalPage: number,
-  pageIndex: number,
-  pagerCount: number
-) => {
-  // [0,1,2,3,4,5,6,7,8]
-  const totalPageArr = Array.from(Array(totalPage).keys())
-  if (totalPage <= pagerCount) {
-    //[0,1,2,3,4]
-    // 页码太少,全部显示
-    // [2,3,4]
-    return totalPageArr.slice(2, totalPage)
-  } else {
-    //计算中位数
-    const middle = Math.ceil(pagerCount / 2)
-    // [0,1,2,3,4,5,6,7,8]
-    if (pageIndex <= middle) {
-      // pageIndex =3
-      // [2,3,4,5,6]
-      // 左边全显示
-      return totalPageArr.slice(2, pagerCount)
-    } else if (pageIndex >= totalPage - middle + 1) {
-      //  pageIndex = 6
-      // 右边全显示
-      return totalPageArr.slice(totalPage - pagerCount + 2, totalPage)
-    } else {
-      // pageIndex=4
-      // [2,3,4,5,6]
-      // 中间显示
-      return totalPageArr.slice(pageIndex - middle + 2, pageIndex + middle - 1)
-    }
-  }
-}
+import SPager from './components/pager'
 export default defineComponent({
   name: 'SPagination',
   props: paginationProps,
@@ -48,61 +15,14 @@ export default defineComponent({
     // 6. 大于等于pagerCount的情况下，中间按钮数量等于pagerCount-2
     // 7. 当中间页码左边的页数大于2时，应该出现左边的...
     // 8. 当中间页码右边的页数小于totalPage-3时，应该出现右边的...
-    const { total, pageSize, pagerCount } = toRefs(props)
-    const totalPage = computed(() => Math.ceil(total.value / pageSize.value))
-    const { pageIndex, setPageIndex, jumpPage, prevPage, nextPage } = usePage()
-    const centerPages = computed(() =>
-      getCenterPage(totalPage.value, pageIndex.value, pagerCount.value)
-    )
+    const { prevPage, nextPage } = usePage()
+
     return () => {
       return (
         <div class="s-pagination">
           <button onClick={() => prevPage()}>上一页</button>
           {/* pagrr 部分 */}
-          {/* Pager 部分 start */}
-          <ul class="s-pager">
-            {/* 首页是常驻的，不管 */}
-            <li
-              onClick={() => setPageIndex(1)}
-              class={{ current: pageIndex.value === 1 }}
-            >
-              1
-            </li>
-            {/* 1.总页码totalPage大于按钮数量pagerCount */}
-            {/* 当中间页码左边的页数大于2时，应该出现左边的... */}
-            {totalPage.value > pagerCount.value &&
-              pageIndex.value > Math.ceil(pagerCount.value / 2) && (
-                <li class="more left" onClick={() => jumpPage(-5)}>
-                  ...
-                </li>
-              )}
-            {/* 中间页码 */}
-            {/* 总页面totalPage,当前页面pageIndex,最大显示页码数pageCount */}
-            {centerPages.value.map(page => (
-              <li
-                onClick={() => setPageIndex(page)}
-                class={{ current: pageIndex.value === page }}
-              >
-                {page}
-              </li>
-            ))}
-            {totalPage.value > pagerCount.value &&
-              pageIndex.value <
-                totalPage.value - Math.ceil(pagerCount.value / 2) + 1 && (
-                <li class="more right" onClick={() => jumpPage(5)}>
-                  ...
-                </li>
-              )}
-            {totalPage.value > 1 && (
-              <li
-                onClick={() => setPageIndex(totalPage.value)}
-                class={{ current: pageIndex.value === totalPage.value }}
-              >
-                {totalPage.value}
-              </li>
-            )}
-          </ul>
-          {/* Pager 部分 end */}
+          <SPager {...props}></SPager>
           {/* 尾页显示的条件是：总页码大于1  */}
           <button onClick={() => nextPage()}>下一页</button>
         </div>

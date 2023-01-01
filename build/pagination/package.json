@@ -1,5 +1,5 @@
 {
-    "name": "button",
+    "name": "pagination",
     "version": "0.0.3",
     "main": "index.umd.js",
     "module": "index.mjs",

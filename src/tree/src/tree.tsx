@@ -3,6 +3,7 @@ import { useTree } from './composables/use-tree'
 import { IInnerTreeNode, TreeProps, treeProps } from './tree-type'
 import STreeNode from './components/tree-node'
 import STreeNodeToggle from './components/tree-node-toggle'
+import '../../index.scss'
 import '../style/tree.scss'
 import { VirtualList } from '../../virtual-list'
 export default defineComponent({

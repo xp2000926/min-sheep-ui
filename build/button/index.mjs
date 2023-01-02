@@ -1,4 +1,4 @@
-import { defineComponent as d, toRefs as b, createVNode as c } from "vue";
+import { defineComponent as d, toRefs as c, createVNode as b } from "vue";
 const p = {
   type: {
     type: String,
@@ -25,21 +25,21 @@ const n = d({
   }) {
     const {
       type: o,
-      size: a,
-      disabled: s,
+      size: s,
+      disabled: a,
       block: l
-    } = b(t), u = l.value ? "s-btn--block" : "";
-    return () => c("button", {
-      disabled: s.value,
-      class: `s-btn s-btn--${o.value} s-btn--${a.value} ${u}`
+    } = c(t), u = l.value ? "s-btn--block" : "";
+    return () => b("button", {
+      disabled: a.value,
+      class: `s-btn s-btn--${o.value} s-btn--${s.value} ${u}`
     }, [e.default ? e.default() : "按钮"]);
   }
-}), f = {
+}), r = {
   install(t) {
     t.component(n.name, n);
   }
 };
 export {
   n as Button,
-  f as default
+  r as default
 };

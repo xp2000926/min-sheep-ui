@@ -1,5 +1,6 @@
 import { computed, defineComponent, onMounted, ref, watch } from 'vue'
 import { PaginationProps, paginationProps } from './pagination-type'
+import '../../index.scss'
 import '../style/pagination.scss'
 import SPager from './components/pager'
 export default defineComponent({

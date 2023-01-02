@@ -73,7 +73,7 @@ const buildAll = async () => {
         rollupOptions,
         lib: {
           entry: entryFile,
-          name: 'min-sheep-ui',
+          name: 'MinSheepUI',
           fileName: 'min-sheep-ui',
           formats: ['es', 'umd']
         },

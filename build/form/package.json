@@ -1,5 +1,5 @@
 {
-    "name": "pagination",
+    "name": "form",
     "version": "0.0.4",
     "main": "index.umd.js",
     "module": "index.mjs",

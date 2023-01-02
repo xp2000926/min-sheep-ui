@@ -1,4 +1,4 @@
-import { computed as C, reactive as j, ref as k, unref as $, defineComponent as E, toRefs as O, inject as R, createVNode as h, mergeProps as V, withDirectives as q, vModelCheckbox as U, onMounted as Y, provide as A, createTextVNode as G } from "vue";
+import { computed as C, reactive as $, ref as k, unref as j, defineComponent as E, toRefs as O, inject as R, createVNode as h, mergeProps as V, withDirectives as q, vModelCheckbox as U, onMounted as Y, provide as A, createTextVNode as G } from "vue";
 function w(o, e = 0, a = []) {
   return e++, o.reduce((d, n) => {
     const l = { ...n };
@@ -58,7 +58,7 @@ const P = {
   dropInner: "s-tree__node--drop-inner"
 };
 function K(o, e, { getChildren: a, getParent: d }) {
-  const n = j({
+  const n = $({
     dropType: void 0,
     draggingNode: null,
     draggingTreeNode: null
@@ -230,7 +230,7 @@ function Z(o, e, a, d) {
   };
 }
 function ee(o, e, a) {
-  const d = $(o), n = k(w(d)), l = J(n), i = [Z, F, X], t = Q(n, l, a), r = K(e.draggable, n, l);
+  const d = j(o), n = k(w(d)), l = J(n), i = [Z, F, X], t = Q(n, l, a), r = K(e.draggable, n, l);
   return {
     ...i.reduce((c, g) => ({ ...c, ...g(n, l, a, t) }), {}),
     ...l,

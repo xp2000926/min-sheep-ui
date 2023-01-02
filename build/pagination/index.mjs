@@ -1,4 +1,4 @@
-import { ref as g, defineComponent as m, toRefs as C, computed as c, createVNode as r, createTextVNode as o, onMounted as k, watch as d, mergeProps as h } from "vue";
+import { ref as g, defineComponent as m, toRefs as C, computed as c, createVNode as s, createTextVNode as o, onMounted as k, watch as d, mergeProps as h } from "vue";
 const P = {
   total: {
     type: Number,
@@ -48,15 +48,15 @@ const I = (t, a, e) => {
       pageSize: e,
       pagerCount: n
     } = C(t), l = c(() => Math.ceil(a.value / e.value)), {
-      pageIndex: s,
+      pageIndex: r,
       setPageIndex: u,
       jumpPage: v,
       prevPage: f,
       nextPage: x
-    } = y(), b = c(() => I(l.value, s.value, n.value));
+    } = y(), b = c(() => I(l.value, r.value, n.value));
     return {
       totalPage: l,
-      pageIndex: s,
+      pageIndex: r,
       setPageIndex: u,
       jumpPage: v,
       prevPage: f,
@@ -71,27 +71,27 @@ const I = (t, a, e) => {
       pageIndex: e,
       setPageIndex: n,
       jumpPage: l,
-      centerPages: s
+      centerPages: r
     } = this;
-    return r("ul", {
+    return s("ul", {
       class: "s-pager"
-    }, [r("li", {
+    }, [s("li", {
       onClick: () => n(1),
       class: {
         current: e === 1
       }
-    }, [o("1")]), a > t && e > Math.ceil(t / 2) && r("li", {
+    }, [o("1")]), a > t && e > Math.ceil(t / 2) && s("li", {
       class: "more left",
       onClick: () => l(-5)
-    }, [o("...")]), s.map((u) => r("li", {
+    }, [o("...")]), r.map((u) => s("li", {
       onClick: () => n(u),
       class: {
         current: e === u
       }
-    }, [u])), a > t && e < a - Math.ceil(t / 2) + 1 && r("li", {
+    }, [u])), a > t && e < a - Math.ceil(t / 2) + 1 && s("li", {
       class: "more right",
       onClick: () => l(5)
-    }, [o("...")]), a > 1 && r("li", {
+    }, [o("...")]), a > 1 && s("li", {
       onClick: () => n(a),
       class: {
         current: e === a
@@ -107,19 +107,19 @@ const I = (t, a, e) => {
   }) {
     const e = g(), n = c(() => e.value ? e.value.pageIndex < 2 : !0), l = c(() => e.value ? e.value.pageIndex > e.value.totalPage - 1 : !0);
     return k(() => {
-      d(() => e.value.pageIndex, (s) => {
-        a("update:modelValue", s);
-      }), d(() => t.modelValue, (s) => {
-        e.value.pageIndex = s;
+      d(() => e.value.pageIndex, (r) => {
+        a("update:modelValue", r);
+      }), d(() => t.modelValue, (r) => {
+        e.value.pageIndex = r;
       });
-    }), () => r("div", {
+    }), () => s("div", {
       class: "s-pagination"
-    }, [r("button", {
+    }, [s("button", {
       disabled: n.value,
       onClick: () => e.value.prevPage()
-    }, [o("上一页")]), r(i, h(t, {
+    }, [o("上一页")]), s(i, h(t, {
       ref: e
-    }), null), r("button", {
+    }), null), s("button", {
       disabled: l.value,
       onClick: () => e.value.nextPage()
     }, [o("下一页")])]);

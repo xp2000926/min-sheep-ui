@@ -2,14 +2,15 @@ import type { App } from 'vue'
 import ButtonPlugin, { Button } from '../src/button'
 import TreePlugin, { Tree } from '../src/tree'
 import PaginationPlugin, { Pagination } from '../src/pagination'
-import '../src/index.scss'
+import FormPlugin, { Form } from '../src/form'
 const installs = [
   ButtonPlugin,
   TreePlugin,
-  PaginationPlugin
+  PaginationPlugin,
+  FormPlugin
 ]
 
-export { Button, Tree,Pagination }
+export { Button, Tree, Pagination, Form }
 
 export default {
   version: '0.0.1',

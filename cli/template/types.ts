@@ -7,7 +7,7 @@ export default function genTypesTemplate(name: string) {
   const propsName = name + 'Props' //属性名
 
   return `\
-import { ExtractPropTypes, PropType } from 'vue'
+import { ExtractPropTypes } from 'vue'
 
 export const ${propsName} = {} as const
 export type ${propsTypeName} = ExtractPropTypes<typeof ${propsName}>

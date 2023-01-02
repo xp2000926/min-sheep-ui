@@ -1,7 +1,9 @@
 import { ExtractPropTypes } from 'vue'
-import { Layout } from './form-type'
+import { LabelAlign, LabelSize, Layout } from './form-type'
 export type LabelData = {
   layout: Layout
+  labelSize: LabelSize
+  labelAlign: LabelAlign
 }
 export const formItemProps = {
   label: {

@@ -1,5 +1,5 @@
-import { defineComponent as c, computed as i, provide as u, createVNode as r, inject as p } from "vue";
-const s = {
+import { defineComponent as u, computed as r, provide as s, createVNode as o, inject as f } from "vue";
+const b = {
   model: {
     type: Object,
     required: !0
@@ -7,22 +7,32 @@ const s = {
   layout: {
     type: String,
     default: "horizontal"
+  },
+  labelSize: {
+    type: String,
+    default: "md"
+  },
+  labelAlign: {
+    type: String,
+    default: "start"
   }
 };
-const m = c({
+const m = u({
   name: "SForm",
-  props: s,
-  setup(t, {
-    slots: e
+  props: b,
+  setup(l, {
+    slots: a
   }) {
-    const o = i(() => ({
-      layout: t.layout
+    const e = r(() => ({
+      layout: l.layout,
+      labelSize: l.labelSize,
+      labelAlign: l.labelAlign
     }));
-    return u("LABEL_DATA", o), () => {
-      var a;
-      return r("div", {
+    return s("LABEL_DATA", e), () => {
+      var t;
+      return o("div", {
         class: "s-form"
-      }, [(a = e.default) == null ? void 0 : a.call(e)]);
+      }, [(t = a.default) == null ? void 0 : t.call(a)]);
     };
   }
 }), d = {
@@ -30,33 +40,38 @@ const m = c({
     type: String
   }
 };
-const l = c({
+const i = u({
   name: "SFormItem",
   props: d,
-  setup(t, {
-    slots: e
+  setup(l, {
+    slots: a
   }) {
-    const o = p("LABEL_DATA"), a = i(() => ({
+    const e = f("LABEL_DATA"), t = r(() => ({
       "s-form__item": !0,
-      "s-form__item--horizontal": o.value.layout === "horizontal",
-      "s-form__item--vertical": o.value.layout === "vertical"
+      "s-form__item--horizontal": e.value.layout === "horizontal",
+      "s-form__item--vertical": e.value.layout === "vertical"
+    })), c = r(() => ({
+      "s-form__label": !0,
+      "s-form__label--vertical": e.value.layout === "vertical",
+      [`s-form__label--${e.value.labelAlign}`]: e.value.layout === "horizontal",
+      [`s-form__label--${e.value.labelSize}`]: e.value.layout === "horizontal"
     }));
     return () => {
       var n;
-      return r("div", {
-        class: a.value
-      }, [r("span", {
-        class: "s-form__label"
-      }, [t.label]), r("div", null, [(n = e.default) == null ? void 0 : n.call(e)])]);
+      return o("div", {
+        class: t.value
+      }, [o("span", {
+        class: c.value
+      }, [l.label]), o("div", null, [(n = a.default) == null ? void 0 : n.call(a)])]);
     };
   }
 }), _ = {
-  install(t) {
-    t.component(m.name, m), t.component(l.name, l);
+  install(l) {
+    l.component(m.name, m), l.component(i.name, i);
   }
 };
 export {
   m as Form,
-  l as FormItem,
+  i as FormItem,
   _ as default
 };

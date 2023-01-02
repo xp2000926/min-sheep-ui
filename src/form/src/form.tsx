@@ -9,7 +9,9 @@ export default defineComponent({
   setup(props: FormProps, { slots }) {
     // 向下通过 label_data
     const labelData = computed(() => ({
-      layout: props.layout
+      layout: props.layout,
+      labelSize: props.labelSize,
+      labelAlign: props.labelAlign
     }))
     provide('LABEL_DATA', labelData)
     return () => <div class="s-form">{slots.default?.()}</div>

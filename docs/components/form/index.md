@@ -153,7 +153,6 @@ const labelAlign = ref('start')
   const loginForm = ref()
   
   const onLogin=()=>{
-    console.log('aaaa');
     loginForm.value.validate(valid => {
       if (valid) {
         alert('登录成功')
@@ -165,3 +164,26 @@ const labelAlign = ref('start')
 </script>
 ```
 :::
+
+## Form API
+### Form 属性
+
+| 属性名      | 说明                                                                                    | 类型     | 可选值 | 默认值 | 备注   |
+| ----------- | --------------------------------------------------------------------------------------- | -------- | ------ | ------ | ------ |
+| model       | 表单数据对象                                                                            | Object   | —      | —      |        |
+| rules       | 表单验证规则                                                                            |          | —      | —      |        |
+| label-width | 表单域标签的宽度，例如 '50px'。作为 Form 直接子元素的 form-item 会继承该值。支持 auto。 | `string` | —      | —      | 未实现 |
+
+### Form 插槽
+
+| 插槽名 | 说明           | 子标签   |
+| ------ | -------------- | -------- |
+| —      | 自定义默认内容 | FormItem |
+
+## FormItem API
+### FormItem 属性
+| 属性名      | 说明     | 类型 | 可选值   | 默认值 | 备注   |
+| ----------- | -------- | ---- | -------- | ------ | ------ |
+| prop        |          |      |          | —      |        |
+| label       | 标签文本 |      | `string` | —      |        |
+| label-width |          |      | `string` | —      | 未实现 |

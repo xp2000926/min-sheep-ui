@@ -65,3 +65,22 @@ const confirm = () => console.log('confirm')
 </template>
 ```
 :::
+
+## Button API
+### Button 属性
+
+| 属性名   | 说明             | 类型      | 可选值                       | 默认值      | 备注   |
+| -------- | ---------------- | --------- | ---------------------------- | ----------- | ------ |
+| size     | 尺寸             | `enum`    | `small`  `medium`  `large`   | `medium`    |        |
+| type     | 类型             | `enum`    | `primary` `secondary` `text` | `secondary` |        |
+| block    | 块级             | `boolean` |                              | false       |        |
+| disabled | 是否禁用状态     | `boolean` |                              | false       |        |
+| loading  | 是否为加载中状态 | `boolean` |                              | false       | 未实现 |
+| icon     | 图标组件         | `string`  |                              |             | 未实现 |
+
+### Button 插槽
+
+| 插槽名  | 说明           | 备注   |
+| ------- | -------------- | ------ |
+| default | 自定义默认内容 |        |
+| icon    | 自定义图标组件 | 未实现 |

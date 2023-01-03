@@ -12,13 +12,10 @@ const sidebar = [
       { text: 'Button 按钮', link: '/components/button/' },
     ]
   },
-  {
-    text: '导航',
-    items: [
-      { text: 'Pagination 分页', link: '/components/pagination/' },
-    ]
-  },
-  { text: '反馈', items: [] },
+  { text: '导航', items: [] },
+  { text: '反馈', items: [
+    { text: 'Modal 对话框', link: '/components/modal/' }
+  ] },
   { 
     text: '数据录入', 
     items: [
@@ -29,7 +26,8 @@ const sidebar = [
   { 
     text: '数据展示', 
     items: [
-      { text: 'Tree 树', link: '/components/tree/' }
+      { text: 'Tree 树', link: '/components/tree/' },
+      { text: 'Pagination 分页', link: '/components/pagination/' },
     ] 
   },
   { text: '布局', items: [] }

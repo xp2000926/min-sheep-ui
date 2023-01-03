@@ -120,3 +120,22 @@ import {ref, computed} from 'vue'
 </script>
 ```
 :::
+
+> Pagination / Pager 属性
+
+| 名称       | 类型   | 默认值 | 描述             |
+| ---------- | ------ | ------ | ---------------- |
+| total      | number | 0      | 总数据条数       |
+| pageSize   | number | 10     | 每页数据条数     |
+| pagerCount | number | 7      | 最大页码按钮数   |
+| v-model    | number | 1      | 双向绑定当前页码 |
+
+> usePage返回值
+
+| 名称         | 类型             | 描述           |
+| ------------ | ---------------- | -------------- |
+| pageIndex    | number           | 总数据条数     |
+| setPageIndex | (number) => void | 跳转到指定页码 |
+| jumpPage     | (number) => void | 往后跳转N页    |
+| prevPage     | () => void       | 跳转上一页     |
+| nextPage     | () => void       | 跳转下一页     |

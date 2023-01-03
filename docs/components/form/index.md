@@ -9,7 +9,7 @@
 <template>
   <s-form :model="model">
     <s-form-item label="用户名">
-      <input v-model="model.user"/>
+      <s-input v-model="model.user"/>
     </s-form-item>
   </s-form>
 </template>
@@ -40,7 +40,7 @@
   </p>
   <s-form :model="model" :layout="layout">
     <s-form-item label="用户名：">
-      <input v-model="model.user"/>
+      <s-input v-model="model.user"/>
     </s-form-item>
   </s-form>
 </template>
@@ -99,10 +99,10 @@ const model = ref({
     :labelSize="labelSize"
   >
     <s-form-item label="用户名：">
-      <input />
+      <s-input />
     </s-form-item>
     <s-form-item label="密码：">
-      <input type="password" />
+      <s-input type="password" />
     </s-form-item>
   </s-form>
 </template>
@@ -114,6 +114,54 @@ const model = ref({
 })
 const labelSize = ref('md')
 const labelAlign = ref('start')
+</script>
+```
+:::
+
+## 表单校验
+:::demo 
+```vue
+<template>
+  <s-form 
+    :model="model" 
+    :rules="rules" 
+    layout="vertical"
+    @submit="onLogin"
+    ref="loginForm" 
+  >
+    <s-form-item label="用户名：" prop="user">
+      <s-input v-model="model.user" />
+    </s-form-item>
+    <s-form-item label="密码：" prop="pwd">
+      <s-input type="password" v-model="model.pwd" />
+    </s-form-item>
+    <s-form-item>
+      <s-button></s-button>
+    </s-form-item>
+  </s-form>
+</template>
+<script setup>
+  import {ref} from 'vue'
+  const model = ref({
+    user: '',
+    pwd: ''
+  })
+  const rules = ref({
+    user: [{required: true, message: '用户名为必填项'}],
+    pwd: [{required: true, message: '密码为必填项'}],
+  })
+  const loginForm = ref()
+  
+  const onLogin=()=>{
+    console.log('aaaa');
+    loginForm.value.validate(valid => {
+      if (valid) {
+        alert('登录成功')
+      } else {
+        alert('校验失败，请重试！')
+      }
+    })
+  }
 </script>
 ```
 :::

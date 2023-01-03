@@ -19,6 +19,7 @@
     "cli": "cd cli && npm run cli"
   },
   "dependencies": {
+    "async-validator": "^4.2.5",
     "vue": "^3.2.41"
   },
   "devDependencies": {

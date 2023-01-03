@@ -22,6 +22,7 @@ const sidebar = [
   { 
     text: '数据录入', 
     items: [
+      { text: 'input 输入框', link: '/components/input/' },
       { text: 'Form 表单', link: '/components/form/' }
     ]
   },

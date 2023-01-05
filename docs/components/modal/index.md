@@ -166,17 +166,19 @@ export default defineComponent({
 | center      | 是否对头部采用居中布局                          | `boolean` | —      | false  |        |
 | show-close  | 是否显示关闭按钮                                | `boolean` | —      | false  |        |
 | alignCenter | 对话框居中                                      | `boolean` | —      | false  |        |
+| v-model     |                                                 | `boolean` | 1      | false  |        |
 | top         | Dialog CSS 中的 margin-top 值                   | `string`  | —      |        | 未实现 |
 
 ### Modal 插槽
 
-| 插槽名 | 说明                    | 备注 |
-| ------ | ----------------------- | ---- |
-| —      | Dialog 的内容           |      |
-| header | Dialog 标题区的内容     |      |
-| footer | Dialog 按钮操作区的内容 |      |
+| 插槽名 | 说明                    |
+| ------ | ----------------------- |
+| —      | Dialog 的内容           |
+| header | Dialog 标题区的内容     |
+| footer | Dialog 按钮操作区的内容 |
 
 ### Modal 事件
+
 | 事件名称 | 说明              | 回调参数 |
 | -------- | ----------------- | -------- |
 | close    | Dialog 关闭的回调 | —        |

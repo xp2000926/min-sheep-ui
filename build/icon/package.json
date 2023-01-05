@@ -1,5 +1,5 @@
 {
-    "name": "tree",
+    "name": "icon",
     "version": "0.0.5",
     "main": "index.umd.js",
     "module": "index.mjs",

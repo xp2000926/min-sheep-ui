@@ -10,12 +10,17 @@ const sidebar = [
     text: '通用',
     items: [
       { text: 'Button 按钮', link: '/components/button/' },
+      { text: 'Icon 图标', link: '/components/icon/' },
     ]
   },
   { text: '导航', items: [] },
-  { text: '反馈', items: [
-    { text: 'Modal 对话框', link: '/components/modal/' }
-  ] },
+  { 
+    text: '反馈', 
+    items: [
+      { text: 'Modal 对话框', link: '/components/modal/' },
+      { text: 'Drawer 抽屉', link: '/components/drawer/' }
+    ] 
+  },
   { 
     text: '数据录入', 
     items: [

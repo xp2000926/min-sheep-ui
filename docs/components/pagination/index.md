@@ -1,4 +1,4 @@
-# 分页
+# 分页 Pagination
 ## 基础
 通过设置`total`属性设置分页总条目数即可
 :::demo
@@ -121,7 +121,8 @@ import {ref, computed} from 'vue'
 ```
 :::
 
-> Pagination / Pager 属性
+## Pagination/Pager API
+## Pagination / Pager 属性
 
 | 名称       | 类型   | 默认值 | 描述             |
 | ---------- | ------ | ------ | ---------------- |
@@ -130,7 +131,7 @@ import {ref, computed} from 'vue'
 | pagerCount | number | 7      | 最大页码按钮数   |
 | v-model    | number | 1      | 双向绑定当前页码 |
 
-> usePage返回值
+## usePage返回值
 
 | 名称         | 类型             | 描述           |
 | ------------ | ---------------- | -------------- |

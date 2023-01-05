@@ -272,7 +272,7 @@ const B = {
     type: Object,
     required: !0
   }
-}, S = 32, H = 24, te = E({
+}, S = 34, H = 24, te = E({
   name: "STreeNode",
   props: ne,
   setup(o, {

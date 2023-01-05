@@ -1,6 +1,4 @@
-/dist
-/build
-/node_modules
-/scripts
-/src/main.ts
-/cli/build
+dist
+build
+node_modules
+scripts

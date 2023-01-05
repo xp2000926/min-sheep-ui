@@ -11,7 +11,7 @@
     "clear-node_modules": "rimraf node_modules",
     "lint": "eslint . --ext .js,.ts,.tsx,.vue",
     "prepare": "husky install",
-    "docs:dev": "vitepress dev docs",
+    "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs",
     "test": "vitest",

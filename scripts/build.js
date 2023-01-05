@@ -28,7 +28,7 @@ const rollupOptions = {
   // 外置
   external: ['vue', 'vue-router'],
   output: {
-    exports: "named",
+    exports: 'named',
     globals: {
       vue: 'Vue'
     }
@@ -58,10 +58,18 @@ const createPackageJson = name => {
 
   if (name) {
     // 单个组件，输出对应的package.json
-    fsExtra.outputFile(path.resolve(outputDir, `${name}/package.json`), fileStr, 'utf-8')
+    fsExtra.outputFile(
+      path.resolve(outputDir, `${name}/package.json`),
+      fileStr,
+      'utf-8'
+    )
   } else {
     // 全量
-    fsExtra.outputFile(path.resolve(outputDir, 'package.json'), fileStr, 'utf-8')
+    fsExtra.outputFile(
+      path.resolve(outputDir, 'package.json'),
+      fileStr,
+      'utf-8'
+    )
   }
 }
 //全量构建
@@ -109,16 +117,19 @@ const buildLib = async () => {
   if (/^\d+(?:\.\d+){2}$/.test(process.argv.slice(2)[0])) {
     //npm run build 版本号会执行
     version = process.argv.slice(2)[0]
-  } else if (process.argv.slice(2)[0] == '--v' || process.argv.slice(2)[0] == '--version') {
+  } else if (
+    process.argv.slice(2)[0] == '--v' ||
+    process.argv.slice(2)[0] == '--version'
+  ) {
     // node ./scripts/build.js --v 版本号 或 node ./scripts/build.js --version 版本号 或 yarn build --v 版本号 或 yarn build --version 版本号 会执行
     version = process.argv.slice(2)[1]
-  } else if (!/^\d+(?:\.\d+){2}$/.test(version)){
+  } else if (!/^\d+(?:\.\d+){2}$/.test(version)) {
     // 没有版本号或者版本号不正确会执行
-    let { version:res } = await inquirer.prompt({
+    let { version: res } = await inquirer.prompt({
       name: 'version',
       type: 'input',
       message: '（必填）请输入版本号 ，将用min-sheep-ui发布于使用：',
-      validate: (value) => {
+      validate: value => {
         if (value.trim() === '') {
           return '版本号不能为空'
         }

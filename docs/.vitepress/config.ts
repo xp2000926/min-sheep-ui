@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { demoBlockPlugin } from 'vitepress-theme-demoblock'
 const sidebar = [
   {
     text: '快速开始',
@@ -38,7 +38,7 @@ const sidebar = [
   { text: '布局', items: [] }
 ]
 
-export default defineConfig({
+export default {
   themeConfig: {
     sidebar,
     socialLinks: [
@@ -46,12 +46,11 @@ export default defineConfig({
     ]
   },
   markdown: {
-    config(md) {
-      // 这里可以使用markdown-it插件
-      const { demoBlockPlugin } = require('vitepress-theme-demoblock')
-      md.use(demoBlockPlugin, {
+    config: md => {
+      // 这里可以使用 markdown-it 插件，vitepress-theme-demoblock就是基于此开发的
+      md.use(demoBlockPlugin,{
         cssPreprocessor: 'scss'
       })
     }
   }
-})
+}

@@ -3,7 +3,11 @@
 // import VirtualList from './components/VirtualList.vue'
 import { ref } from 'vue'
 import SBaseModal from './modal/src/base-modal.tsx'
+import STabs from './tabs/src/tabs'
+import STab from './tabs/src/tab'
+
 const modalVisible = ref(false)
+const activeTab = ref('tab1')
 const open = () => {
   modalVisible.value = true
 }
@@ -42,6 +46,11 @@ const open = () => {
       <img src="./assets/sheep.webp" />
     </div>
   </SBaseModal>
+  <s-tabs v-model="activeTab">
+    <s-tab id="tab1" title="Tab1">Tab1 Content</s-tab>
+    <s-tab id="tab2" title="Tab2">Tab2 Content</s-tab>
+    <s-tab id="tab3" title="Tab3">Tab3 Content</s-tab>
+  </s-tabs>
 </template>
 
 <style scoped></style>

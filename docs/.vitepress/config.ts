@@ -13,7 +13,12 @@ const sidebar = [
       { text: 'Icon 图标', link: '/components/icon/' },
     ]
   },
-  { text: '导航', items: [] },
+  { 
+    text: '导航', 
+    items: [
+      { text: 'Tabs 标签页', link: '/components/tabs/' },
+    ] 
+  },
   { 
     text: '反馈', 
     items: [
@@ -25,7 +30,7 @@ const sidebar = [
     text: '数据录入', 
     items: [
       { text: 'input 输入框', link: '/components/input/' },
-      { text: 'Form 表单', link: '/components/form/' }
+      { text: 'Form 表单', link: '/components/form/' },
     ]
   },
   { 

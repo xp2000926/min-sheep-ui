@@ -1,5 +1,5 @@
 {
-    "name": "virtual-list",
+    "name": "tabs",
     "version": "0.0.6",
     "main": "index.umd.js",
     "module": "index.mjs",

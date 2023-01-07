@@ -9,7 +9,7 @@ import '../style/iconfont.js'
 export default defineComponent({
   name: 'SIcon',
   props: iconProps,
-  setup(props: IconProps, { attrs }) {
+  setup(props: IconProps) {
     // 获取尺寸
     const iconSize = computed(() =>
       typeof props.size === 'number' ? `${props.size}px` : props.size
@@ -20,7 +20,6 @@ export default defineComponent({
       <img
         src={props.name}
         style={{ width: iconSize.value, verticalAlign: 'middle' }}
-        {...attrs}
       />
     )
     // 否则用span的class显示字体图标

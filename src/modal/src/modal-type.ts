@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from 'vue'
+import { ExtractPropTypes, PropType } from 'vue'
 
 export const modalProps = {
   modelValue: {
@@ -24,6 +24,14 @@ export const modalProps = {
   alignCenter: {
     type: Boolean,
     default: false
+  },
+  backgroundColor: {
+    type: String,
+    default: ''
+  },
+  top: {
+    type: [String, Number] as PropType<string | number>,
+    default: '15vh'
   }
 } as const
 export type ModalProps = ExtractPropTypes<typeof modalProps>

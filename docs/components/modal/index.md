@@ -156,26 +156,72 @@ export default defineComponent({
 ```
 :::
 
+## 自定义对话框的背景色
+
+:::demo 
+```vue
+<template>
+  <s-button @click="open">打开</s-button>
+
+  <s-modal v-model="visible" title="小贴士" center backgroundColor="#D6B679">
+    <span>这是一条消息！</span>
+    <template #footer>
+      <div class="dialog-footer">
+        <s-button style="margin-right: 12px;" @click="visible = false">取消</s-button>
+        <s-button type="primary" @click="visible = false">确定</s-button>
+      </div>
+    </template>
+  </s-modal>
+</template>
+<script>
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const visible = ref(false)
+
+    const open = () => {
+      visible.value = true;
+    }
+
+    return {
+      visible,
+      open,
+    }
+  }
+})
+</script>
+
+<style>
+.dialog-footer {
+  padding: 20px;
+  text-align: right;
+}
+</style>
+```
+:::
+
 ## Modal API
 ### Modal 属性
 
-| 属性名      | 说明                                            | 类型      | 可选值 | 默认值 | 备注   |
-| ----------- | ----------------------------------------------- | --------- | ------ | ------ | ------ |
-| title       | Dialog 的标题，也可通过具名 slot （见下表）传入 | `string`  | —      | —      |        |
-| width       | Dialog 的宽度                                   | `string`  | —      | 30%    |        |
-| center      | 是否对头部采用居中布局                          | `boolean` | —      | false  |        |
-| show-close  | 是否显示关闭按钮                                | `boolean` | —      | false  |        |
-| alignCenter | 对话框居中                                      | `boolean` | —      | false  |        |
-| v-model     |                                                 | `boolean` | 1      | false  |        |
-| top         | Dialog CSS 中的 margin-top 值                   | `string`  | —      |        | 未实现 |
+| 属性名          | 说明                                           | 类型              | 可选值 | 默认值 |
+| --------------- | ---------------------------------------------- | ----------------- | ------ | ------ |
+| title           | 对话框的标题，也可通过具名 slot （见下表）传入 | `string`          | —      | —      |
+| width           | 对话框的宽度                                   | `string`          | —      | 30%    |
+| center          | 是否对头部采用居中布局                         | `boolean`         | —      | false  |
+| show-close      | 是否显示关闭按钮                               | `boolean`         | —      | false  |
+| alignCenter     | 对话框居中                                     | `boolean`         | —      | false  |
+| v-model         |                                                | `boolean`         | 1      | false  |
+| top             | 对话框 CSS 中的 margin-top 值                  | `string`,`number` | —      | 15vh   |
+| backgroundColor | 设置弹窗的背景色                               | `string`          | —      | —      |
 
-### Modal 插槽
+### Modal 插槽(slot)
 
-| 插槽名 | 说明                    |
-| ------ | ----------------------- |
-| —      | Dialog 的内容           |
-| header | Dialog 标题区的内容     |
-| footer | Dialog 按钮操作区的内容 |
+| 插槽名 | 说明                   |
+| ------ | ---------------------- |
+| —      | 对话框的内容           |
+| header | 对话框标题区的内容     |
+| footer | 对话框按钮操作区的内容 |
 
 ### Modal 事件
 

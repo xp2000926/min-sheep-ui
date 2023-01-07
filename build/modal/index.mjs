@@ -1,4 +1,4 @@
-import { defineComponent as s, toRefs as c, createVNode as a } from "vue";
+import { defineComponent as s, toRefs as c, createVNode as a, computed as C } from "vue";
 const _ = {
   modelValue: {
     type: Boolean,
@@ -23,84 +23,96 @@ const _ = {
   alignCenter: {
     type: Boolean,
     default: !1
+  },
+  backgroundColor: {
+    type: String,
+    default: ""
+  },
+  top: {
+    type: [String, Number],
+    default: "15vh"
   }
 };
-const h = {
+const w = {
   modelValue: {
     type: Boolean,
     default: !1
   }
 };
-const w = s({
+const b = s({
   name: "SBaseModal",
-  props: h,
+  props: w,
   emits: ["update:modelValue"],
   setup(l, {
     slots: e,
-    emit: d
+    emit: o
   }) {
     const {
       modelValue: t
     } = c(l);
     return () => {
-      var o;
+      var d;
       return a("div", null, [t.value && a("div", {
         class: "s-base-modal"
       }, [a("div", {
         class: "s-base-modal__mask",
         onClick: () => {
-          d("update:modelValue", !1);
+          o("update:modelValue", !1);
         }
-      }, null), (o = e.default) == null ? void 0 : o.call(e)])]);
+      }, null), (d = e.default) == null ? void 0 : d.call(e)])]);
     };
   }
-}), r = s({
+}), p = s({
   name: "SModal",
   props: _,
   emits: ["update:modelValue"],
   setup(l, {
     slots: e,
-    emit: d
+    emit: o
   }) {
     const {
       modelValue: t,
-      title: o,
+      title: d,
       showClose: i,
-      width: p,
-      center: f,
-      alignCenter: v
-    } = c(l), V = v.value ? {
+      width: f,
+      center: v,
+      alignCenter: g,
+      backgroundColor: y,
+      top: n
+    } = c(l), V = g.value ? {
       marginTop: 0,
       top: "50%",
       transform: "translateY(-50%)"
-    } : null;
-    return () => a(w, {
+    } : null, h = C(() => typeof n.value == "number" ? `${n.value}px` : n.value);
+    return () => a(b, {
       class: "s-modal",
       modelValue: t.value,
       "onUpdate:modelValue": () => {
-        d("update:modelValue");
+        o("update:modelValue");
       }
     }, {
       default: () => {
-        var n, u, m;
+        var u, r, m;
         return [a("div", {
           class: "s-modal__container",
           style: {
-            width: p.value,
-            ...V
+            width: f.value,
+            ...V,
+            marginTop: h.value,
+            backgroundColor: y.value
           }
-        }, [e.header ? (n = e.header) == null ? void 0 : n.call(e, {
+        }, [e.header ? (u = e.header) == null ? void 0 : u.call(e, {
           close: () => {
-            d("update:modelValue", !1);
+            o("update:modelValue", !1);
           }
         }) : a("div", {
           class: "s-modal__header",
           style: {
-            textAlign: f.value ? "center" : "left"
+            textAlign: v.value ? "center" : "left"
           }
-        }, [o.value, i.value && a("svg", {
+        }, [d.value, i.value && a("svg", {
           onClick: () => {
-            d("update:modelValue", !1);
+            o("update:modelValue", !1);
           },
           class: "s-modal__close",
           viewBox: "0 0 1024 1024",
@@ -111,18 +123,18 @@ const w = s({
           d: "M764.288 214.592 512 466.88 259.712 214.592a31.936 31.936 0 0 0-45.12 45.12L466.752 512 214.528 764.224a31.936 31.936 0 1 0 45.12 45.184L512 557.184l252.288 252.288a31.936 31.936 0 0 0 45.12-45.12L557.12 512.064l252.288-252.352a31.936 31.936 0 1 0-45.12-45.184z"
         }, null)])]), a("div", {
           className: "s-modal__body"
-        }, [(u = e.default) == null ? void 0 : u.call(e)]), a("div", {
+        }, [(r = e.default) == null ? void 0 : r.call(e)]), a("div", {
           className: "s-modal__footer"
         }, [(m = e.footer) == null ? void 0 : m.call(e)])])];
       }
     });
   }
-}), g = {
+}), x = {
   install(l) {
-    l.component(r.name, r);
+    l.component(p.name, p);
   }
 };
 export {
-  r as Modal,
-  g as default
+  p as Modal,
+  x as default
 };

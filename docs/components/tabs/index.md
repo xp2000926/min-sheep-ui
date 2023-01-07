@@ -41,3 +41,13 @@ const activeTab = ref('tab1')
 </script>
 ```
 :::
+
+## Tabs API
+### Tabs 属性
+
+| 属性名       | 说明           | 类型    | 可选值                           | 默认值 | 备注   |
+| ------------ | -------------- | ------- | -------------------------------- | ------ | ------ |
+| closable     | 标签是否可关闭 | boolean | —                                | false  |        |
+| addable      | 标签是否可增加 | boolean | —                                | false  |        |
+| tab-position | 选项卡所在位置 | string  | `top`、`right`、`bottom`、`left` | top    | 未实现 |
+| type         | 风格类型       | string  | `card`、`border-card`、          | —      | 未实现 |

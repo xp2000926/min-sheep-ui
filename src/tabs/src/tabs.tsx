@@ -33,8 +33,8 @@ export default defineComponent({
       tabsData.value.push({
         id,
         type: 'random',
-        title: `Tab ${id}`,
-        content: `Tab ${id} Content`
+        title: `Tab${id}`,
+        content: `Tab${id} Content`
       })
       activeTab.value = id
     }
@@ -81,9 +81,9 @@ export default defineComponent({
         {/* 显示新增的内容 */}
         {tabsData.value
           .filter(tab => tab.type === 'random')
-          .map(tab => (
+          .map(tabArr => (
             <div class="s-tab">
-              {tab.id === activeTab.value ? tab.content : ''}
+              {tabArr.id === activeTab.value && tabArr.content}
             </div>
           ))}
       </div>

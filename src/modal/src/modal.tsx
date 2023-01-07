@@ -1,16 +1,24 @@
-import { defineComponent, toRefs } from 'vue'
+import { computed, defineComponent, toRefs } from 'vue'
 import { ModalProps, modalProps } from './modal-type'
 import '../../index.scss'
 import '../style/modal.scss'
-import BaseModal from './base-modal'
+import { BaseModal } from '../../base-modal'
 
 export default defineComponent({
   name: 'SModal',
   props: modalProps,
   emits: ['update:modelValue'],
   setup(props: ModalProps, { slots, emit }) {
-    const { modelValue, title, showClose, width, center, alignCenter } =
-      toRefs(props)
+    const {
+      modelValue,
+      title,
+      showClose,
+      width,
+      center,
+      alignCenter,
+      backgroundColor,
+      top
+    } = toRefs(props)
     // 动态设置居中样式
     const alignCenterStyle = alignCenter.value
       ? {
@@ -19,6 +27,10 @@ export default defineComponent({
           transform: 'translateY(-50%)'
         }
       : null
+    // 获取top
+    const modalTop = computed(() =>
+      typeof top.value === 'number' ? `${top.value}px` : top.value
+    )
     return () => (
       <BaseModal
         class="s-modal"
@@ -29,7 +41,12 @@ export default defineComponent({
       >
         <div
           class="s-modal__container"
-          style={{ width: width.value, ...alignCenterStyle }}
+          style={{
+            width: width.value,
+            ...alignCenterStyle,
+            marginTop: modalTop.value,
+            backgroundColor: backgroundColor.value
+          }}
         >
           {/* 标题区 title */}
           {slots.header ? (

@@ -6,7 +6,7 @@
 ```vue
 <template>
     <s-icon name="vuejs" />
-    <s-icon name="https://vitejs.dev/logo.svg" width="30" />
+    <s-icon name="https://vitejs.dev/logo.svg" :size="30" />
 </template>
 ```
 :::
@@ -48,3 +48,12 @@
 </template>
 ```
 :::
+
+## Icon API
+### Icon 属性
+
+| 属性名    | 说明                           | 类型     | 可选值 | 默认值 | 
+| --------- | ------------------------------ | -------- | ------ | ------ | 
+| name      |                                | `string` | —      | —      |
+| size      | 设置图标颜色                   | `string` | —      | —      |
+| component | 设置component可以显示svg图标。 | `string` | —      | —      |

@@ -23,7 +23,8 @@ const sidebar = [
     text: '反馈', 
     items: [
       { text: 'Modal 对话框', link: '/components/modal/' },
-      { text: 'Drawer 抽屉', link: '/components/drawer/' }
+      { text: 'Drawer 抽屉', link: '/components/drawer/' },
+      { text: 'Popover 气泡卡片', link: '/components/popover/' },
     ] 
   },
   { 

@@ -63,7 +63,7 @@ createApp(App).use(MinSheepUI).mount("#app")
 >
 > [formily UI](https://antd.formilyjs.org/zh-CN/components/upload)
 
-## 开发UI的基本目录
+## 准备开发UI的基本目录
 
 ```md
 const sidebar = [

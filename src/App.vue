@@ -1,26 +1,27 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 // const confirm = () => console.log('confirm')
 // import VirtualList from './components/VirtualList.vue'
 import { ref } from 'vue'
-import SBaseModal from './modal/src/base-modal.tsx'
-import STabs from './tabs/src/tabs'
-import STab from './tabs/src/tab'
+// import SBaseModal from './modal/src/base-modal.tsx'
+// import STabs from './tabs/src/tabs'
+// import STab from './tabs/src/tab'
 
-const modalVisible = ref(false)
-const activeTab = ref('tab1')
-const open = () => {
-  modalVisible.value = true
-}
+// const modalVisible = ref(false)
+// const activeTab = ref('tab1')
+// const open = () => {
+//   modalVisible.value = true
+// }
+import SBasePopover from './base-popover/src/base-popover'
 </script>
 <template>
-  <!-- 
+
     1.primary,secondary, text
     2. 尺寸 size
     3. disabled
     4. 块级block
     5. iconButton
   -->
-  <!-- <s-button type="primary">确定</s-button>
+<!-- <s-button type="primary">确定</s-button>
   <s-button>取消</s-button>
   <s-button type="text">text</s-button>
   <s-button size="mini">Mini</s-button>
@@ -33,7 +34,7 @@ const open = () => {
   <s-button size="large">Large</s-button>
   <s-button size="large" block>block</s-button>
   <VirtualList /> -->
-  <button @click="open">打开</button>
+<!-- <button @click="open">打开</button>
   <SBaseModal v-model="modalVisible">
     <div
       style="
@@ -50,7 +51,31 @@ const open = () => {
     <s-tab id="tab1" title="Tab1">Tab1 Content</s-tab>
     <s-tab id="tab2" title="Tab2">Tab2 Content</s-tab>
     <s-tab id="tab3" title="Tab3">Tab3 Content</s-tab>
-  </s-tabs>
+  </s-tabs> 
+  <SBasePopover></SBasePopover>
 </template>
 
-<style scoped></style>
+<style scoped></style>-->
+<script setup lang="ts">
+import { ref } from 'vue'
+// import SBasePopover from './base-popover/src/base-popover'
+import SPopover from './popover/src/popover'
+const visible = ref(false)
+const host = ref()
+const open = () => {
+  visible.value = !visible.value
+}
+</script>
+<template>
+  <div ref="host" class="host" @click="open">host</div>
+  <!-- <SBasePopover v-model="visible" :host="host"> overlay </SBasePopover> -->
+  <SPopover v-model="visible" :host="host" title="Title" show-arrow>
+    overlay
+  </SPopover>
+</template>
+<style scoped>
+/* .host {
+  width: 50px;
+  margin: 0 auto;
+} */
+</style>

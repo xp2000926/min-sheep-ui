@@ -45,7 +45,12 @@ const sidebar = [
 ]
 
 export default {
+  title: 'min Sheep UI', //站点标题
+  description: '一个vue3组件库',
+  lang: 'cn-ZH',
   themeConfig: {
+    siteTitle: "min Sheep UI",
+    // logo: "/logo.png",
     sidebar,
     socialLinks: [
       { icon: 'github', link: 'https://github.com/xp2000926/min-sheep-ui' }

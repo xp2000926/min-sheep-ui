@@ -62,6 +62,8 @@ createApp(App).use(MinSheepUI).mount("#app")
 > [ant-design-vue UI](https://www.antdv.com/components/overview-cn)
 >
 > [formily UI](https://antd.formilyjs.org/zh-CN/components/upload)
+> 
+> [formkit UI](https://formkit.com/)
 
 ## 准备开发UI的基本目录
 

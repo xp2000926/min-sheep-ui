@@ -18,15 +18,14 @@ const installs = [
   IconPlugin,
   TabsPlugin,
   PopoverPlugin
-
 ]
 
-export { 
+export {
   Button,
   Tree,
   Pagination,
   Form,
-  Input, 
+  Input,
   Modal,
   Icon,
   Tabs,

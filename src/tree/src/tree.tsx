@@ -32,7 +32,7 @@ export default defineComponent({
                 <STreeNodeToggle
                   expanded={!!treeNode.expanded}
                   onClick={() => treeData.toggleNode(treeNode)}
-                ></STreeNodeToggle>
+                />
               ),
             loading: () =>
               slots.loading ? (

@@ -6,7 +6,7 @@ Tree 组件基本用法，传入`data`属性即可。
 :::demo Tree 组件基本用法，传入 data 属性
 ```vue
 <template>
-  <s-tree :data="data"></s-tree>
+  <s-tree :data="data" />
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -72,7 +72,7 @@ const data = ref([
 
 ```vue
 <template>
-  <s-tree :data="data" lineable></s-tree>
+  <s-tree :data="data" lineable />
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -138,7 +138,7 @@ const data = ref([
 
 ```vue
 <template>
-  <s-tree :data="data" checkable></s-tree>
+  <s-tree :data="data" checkable />
 </template>
 <script setup>
 import { ref } from 'vue'
@@ -376,7 +376,7 @@ const data = ref([
 :::demo
 ```vue
 <template>
-  <s-tree :data="data" operable></s-tree>
+  <s-tree :data="data" operable />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -414,7 +414,7 @@ export default defineComponent({
 :::demo 通过设置该节点 isLeaf 参数为 false, 组件回调 lazyLoad 方法实现节点懒加载。
 ```vue
 <template>
-  <s-tree :data="data" @lazy-load="lazyLoad"></s-tree>
+  <s-tree :data="data" @lazy-load="lazyLoad" />
 </template>
 <script>
 import { defineComponent, ref } from 'vue';
@@ -492,7 +492,7 @@ export default defineComponent({
   <s-tree :data="data" draggable></s-tree>
 
   <h6><p>排序</p></h6>
-  <s-tree :data="data" :draggable="{ dropPrev: true, dropNext: true, dropInner: true }"></s-tree>
+  <s-tree :data="data" :draggable="{ dropPrev: true, dropNext: true, dropInner: true }" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
@@ -530,7 +530,7 @@ export default defineComponent({
 :::demo
 ```vue
 <template>
-  <s-tree :data="data" :height="300"></s-tree>
+  <s-tree :data="data" :height="300" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
@@ -558,7 +558,7 @@ export default defineComponent({
 :::demo
 ```vue
 <template>
-  <s-tree :data="data" accordion></s-tree>
+  <s-tree :data="data" accordion />
 </template>
 <script setup>
 import { ref } from 'vue'

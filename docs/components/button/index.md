@@ -28,9 +28,10 @@
 
 ## 按钮尺寸 size
 
-:::demo 通过 size 属性设置按钮样式，可选：small | medium | large
+:::demo 通过 size 属性设置按钮样式，可选：mini|small | medium | large
 ```vue
 <template>
+  <s-button size="mini">mini</s-button>
   <s-button size="small">Small</s-button>
   <s-button>Medium</s-button>
   <s-button size="large">Large</s-button>
@@ -69,17 +70,17 @@ const confirm = () => console.log('confirm')
 ## Button API
 ### Button 属性
 
-| 属性名          | 说明                  | 类型      | 可选值                       | 默认值      | 备注   |
-| --------------- | --------------------- | --------- | ---------------------------- | ----------- | ------ |
-| size            | 尺寸                  | `enum`    | `small`  `medium`  `large`   | `medium`    |        |
-| type            | 类型                  | `enum`    | `primary` `secondary` `text` | `secondary` |        |
-| block           | 块级                  | `boolean` |                              | false       |        |
-| disabled        | 是否禁用状态          | `boolean` |                              | false       |        |
-| loading         | 是否为加载中状态      | `boolean` |                              | false       | 未实现 |
-| icon            | 图标组件              | `string`  |                              |             | 未实现 |
-| backgroundColor | 设置按钮的背景色      | `string`  | —                            | —           | 未实现 |
-| borderColor     | 设置按钮的边框色      | `string`  | —                            | —           | 未实现 |
-| hoverColor      | 设置按钮的hover的颜色 | `string`  | —                            | —           | 未实现 |
+| 属性名          | 说明                  | 类型      | 可选值                          | 默认值      | 备注   |
+| --------------- | --------------------- | --------- | ------------------------------- | ----------- | ------ |
+| size            | 尺寸                  | `enum`    | `mini`,`small`,`medium`,`large` | `medium`    |        |
+| type            | 类型                  | `enum`    | `primary` `secondary` `text`    | `secondary` |        |
+| block           | 块级                  | `boolean` |                                 | false       |        |
+| disabled        | 是否禁用状态          | `boolean` |                                 | false       |        |
+| loading         | 是否为加载中状态      | `boolean` |                                 | false       | 未实现 |
+| icon            | 图标组件              | `string`  |                                 |             | 未实现 |
+| backgroundColor | 设置按钮的背景色      | `string`  | —                               | —           | 未实现 |
+| borderColor     | 设置按钮的边框色      | `string`  | —                               | —           | 未实现 |
+| hoverColor      | 设置按钮的hover的颜色 | `string`  | —                               | —           | 未实现 |
 
 ### Button 插槽
 

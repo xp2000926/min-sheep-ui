@@ -1,4 +1,9 @@
 import { defineComponent, inject, ref, toRefs } from 'vue'
+import {
+  BaseSelectAll, // 全选
+  BaseSemiSelection, // 半选
+  BaseSelectionBox // 选择框
+} from '../../../base-selection-box'
 import { TreeUtils } from '../composables/use-tree-type'
 import { IInnerTreeNode } from '../tree-type'
 import { TreeNodeProps, treeNodeProps } from './tree-node-type.'
@@ -73,13 +78,21 @@ export default defineComponent({
           )}
           {/* 复选框 */}
           {checkable.value && (
-            <input
-              type="checkbox"
-              v-model={treeNode.value.checked}
-              onClick={() => {
-                toggleCheckNode(treeNode.value)
-              }}
-            />
+            <>
+              {treeNode.value.inChecked ? (
+                <BaseSemiSelection
+                  onClick={() => toggleCheckNode(treeNode.value)}
+                />
+              ) : treeNode.value.checked ? (
+                <BaseSelectAll
+                  onClick={() => toggleCheckNode(treeNode.value)}
+                />
+              ) : (
+                <BaseSelectionBox
+                  onClick={() => toggleCheckNode(treeNode.value)}
+                />
+              )}
+            </>
           )}
           {/* 节点文本本 */}
           {slots.content?.()}

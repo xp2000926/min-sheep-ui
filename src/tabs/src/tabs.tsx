@@ -22,10 +22,16 @@ export default defineComponent({
       activeTab.value = TabId
     }
     // 增加一个关闭方法
-    const closeTab = (tabId: string) => {
+    const closeTab = (e: Event, tabId: string) => {
       // 关闭标签的逻辑
       const tabIndex = tabsData.value.findIndex(item => item.id === tabId)
       tabsData.value.splice(tabIndex, 1)
+      e.stopPropagation()
+      if (tabsData.value.length === tabIndex) {
+        changeTab(tabsData.value[tabIndex - 1].id)
+      } else {
+        changeTab(tabsData.value[tabIndex].id)
+      }
     }
 
     const addTab = () => {
@@ -51,7 +57,7 @@ export default defineComponent({
               {/* 关闭页签 */}
               {props.closable && (
                 <svg
-                  onClick={() => closeTab(tab.id)}
+                  onClick={e => closeTab(e, tab.id)}
                   style="margin-left: 8px;"
                   viewBox="0 0 1024 1024"
                   width="12"

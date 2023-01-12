@@ -54,6 +54,10 @@ export const treeProps = {
   itemHeight: {
     type: Number,
     default: 30
+  },
+  accordion: {
+    type: Boolean,
+    default: false
   }
 } as const
 export type TreeProps = ExtractPropTypes<typeof treeProps>

@@ -51,3 +51,9 @@ const activeTab = ref('tab1')
 | addable      | 标签是否可增加 | boolean | —                                | false  |        |
 | tab-position | 选项卡所在位置 | string  | `top`、`right`、`bottom`、`left` | top    | 未实现 |
 | type         | 风格类型       | string  | `card`、`border-card`、          | —      | 未实现 |
+
+### Tab 插槽
+
+| 插槽名 | 说明           | 备注 |
+| ------ | -------------- | ---- |
+| —      | 自定义默认内容 |      |

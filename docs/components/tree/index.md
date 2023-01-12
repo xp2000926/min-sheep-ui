@@ -215,9 +215,8 @@ const data = ref([
       <span
         v-else
         @click="
-          event => {
-            event.stopPropagation()
-            toggleNode(nodeData)
+            event => {
+              toggleNode(event,nodeData)
           }
         "
       >
@@ -294,7 +293,6 @@ const data = ref([
   ])
 </script>
 ```
-
 :::
 
 ## 自定义节点内容
@@ -553,7 +551,8 @@ export default defineComponent({
 ```
 :::
 
-<!-- ## 手风琴模式
+## 手风琴模式
+
 `accordion`对于同一级的节点，每次只能展开一个
 :::demo
 ```vue
@@ -562,57 +561,93 @@ export default defineComponent({
 </template>
 <script setup>
 import { ref } from 'vue'
-  const data = ref([{
-      label: '一级 1',
-      children: [{
-        label: '二级 1-1',
-        children: [{
-          label: '三级 1-1-1'
-        }]
-      }]
-    }, {
-      label: '一级 2',
-      children: [{
+const data = ref([
+  {
+    label: '一级 1',
+    id:'一级 1',
+    children: [
+      {
+      label: '二级 1-1',
+      id:'二级 1-1',
+      children: [
+        {
+          label: '三级 1-1-1', 
+          id:'三级 1-1-1'
+        }
+        ]
+      }
+    ]
+  },
+  {
+    label: '一级 2', 
+    id:'一级 2',
+    children: [
+      {
         label: '二级 2-1',
-        children: [{
-          label: '三级 2-1-1'
-        }]
-      }, {
-        label: '二级 2-2',
-        children: [{
-          label: '三级 2-2-1'
-        }]
-      }]
-    }, {
-      label: '一级 3',
-      children: [{
+        id:'二级 2-1',
+        children: [
+          {
+            label: '三级 2-1-1',
+            id:'三级 2-1-1'
+          }
+        ]
+      },
+      {
+        label: '二级 2-2', 
+        id:'二级 2-2',
+        children: [
+          {
+            label: '三级 2-2-1',
+            id:'三级 2-2-1',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: '一级 3',
+    id:'一级 3',
+    children: [
+      {
         label: '二级 3-1',
-        children: [{
-          label: '三级 3-1-1'
-        }]
-      }, {
+        id:'二级 3-1',
+        children: [
+          {
+            label: '三级 3-1-1',
+            id:'三级 3-1-1'
+          }
+        ]
+      },
+      {
         label: '二级 3-2',
-        children: [{
-          label: '三级 3-2-1'
-        }]
-      }]
-    }])
+        id:'二级 3-2',
+        children: [
+          {
+            label: '三级 3-2-1',
+            id:'三级 3-2-1'
+          }
+        ]
+      }
+    ]
+  }
+])
 </script>
 ```
-::: -->
+:::
+
 ## Tree API
-## Tree 属性
+### Tree 属性
 
 | 属性名    | 说明                             | 类型      | 可选值 | 默认值 | 备注   |
 | --------- | -------------------------------- | --------- | ------ | ------ | ------ |
 | data      | 展示数据                         |           | —      | —      |        |
 | draggable | 是否开启拖拽节点功能             | `boolean` | —      | false  |        |
 | lineable  | 连接线                           | `boolean` | —      | false  |        |
+| accordion | 是否每次只打开一个同级树节点展开 | `boolean` | —      | false  |        |
 | icon      | 图标组件                         | `string`  | —      | —      | 未实现 |
-| accordion | 是否每次只打开一个同级树节点展开 | `boolean` | —      | false  | 未实现 |
 | props     | 配置选项，具体看下表             | object    | —      | —      | 未实现 |
 
-## props
+### props
 
 | 属性名   | 说明                                                     | 类型                            | 可选值 | 默认值 | 备注   |
 | -------- | -------------------------------------------------------- | ------------------------------- | ------ | ------ | ------ |
@@ -620,3 +655,18 @@ import { ref } from 'vue'
 | children | 指定子树为节点对象的某个属性值                           | `string`                        | —      | —      | 未实现 |
 | disabled | 指定节点选择框是否禁用为节点对象的某个属性值             | `boolean, function(data, node)` | —      | —      | 未实现 |
 | isLeaf   | 指定节点是否为叶子节点，仅在指定了 lazy 属性的情况下生效 | `boolean, function(data, node)` | —      | —      | 未实现 |
+
+### Tree 事件
+
+| 事件名称   | 说明                         | 类型                                                          | 回调参数 |
+| ---------- | ---------------------------- | ------------------------------------------------------------- | -------- |
+| toggleNode | <!--accordion 默认 false --> | (e: Event, node: IInnerTreeNode, accordion?: boolean) => void |          |
+| lazy-load  |                              | (node: IInnerTreeNode) => void                                |          |
+
+### Tree 插槽
+
+| 插槽名  | 说明                                                                   | 备注       |
+| ------- | ---------------------------------------------------------------------- | ---------- |
+| icon    | 自定义图标组件，参数为`{nodeData:IInnerTreeNode, toggleNode:Function}` | 功能太完善 |
+| content | 自定义节点内容 参数为`treeNode:IInnerTreeNode`                         |            |
+| loading |                                                                        |            |

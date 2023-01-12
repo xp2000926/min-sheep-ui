@@ -11,7 +11,7 @@ export type IUseCore = {
 }
 
 export type IUseToggle = {
-  toggleNode: (node: IInnerTreeNode) => void
+  toggleNode: (e: Event, node: IInnerTreeNode, accordion?: boolean) => void
 }
 
 export type IUseCheck = {

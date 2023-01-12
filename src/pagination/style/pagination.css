@@ -7,13 +7,11 @@
   display: flex;
   padding-left: 0;
 }
-
 .s-pager li {
   margin-top: 0 !important;
   padding: 0 4px;
   cursor: pointer;
 }
-
 .s-pager li.current {
-  color: #6060ff;
-}
+  color: rgb(96, 96, 255);
+}/*# sourceMappingURL=pagination.css.map */

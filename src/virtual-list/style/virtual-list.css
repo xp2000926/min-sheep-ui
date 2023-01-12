@@ -4,11 +4,10 @@
   position: relative;
   -webkit-overflow-scrolling: touch;
 }
-
 .s-virtual-list__blank {
   position: absolute;
   left: 0;
   top: 0;
   right: 0;
   z-index: -1;
-}
+}/*# sourceMappingURL=virtual-list.css.map */

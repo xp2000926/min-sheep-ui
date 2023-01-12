@@ -14,13 +14,19 @@ export function useToggle(
     // 手风琴模式
     if (accordion) {
       innerData.value.forEach(item => {
-        if (item.level === node.level && item.id !== node.id) {
+        if (item.level <= node.level) {
+          if (item.level === node.level && item.id !== node.id) {
+            item.expanded = false
+          }
+          if (item.id === node.id) {
+            item.expanded = !item.expanded
+          }
+          if (item.expanded) {
+            // 节点懒加载
+            lazyLoadNodes(item)
+          }
+        } else {
           item.expanded = false
-        }
-        if (item.id === node.id) item.expanded = !item.expanded
-        if (item.expanded) {
-          // 节点懒加载
-          lazyLoadNodes(item)
         }
       })
     } else {

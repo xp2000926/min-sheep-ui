@@ -1,13 +1,13 @@
 import { defineComponent as n, createVNode as e } from "vue";
-const i = {
+const l = {
   onClick: {
     type: Function,
     required: !0
   }
 };
-const l = n({
+const a = n({
   name: "SBaseSelectAll",
-  props: i,
+  props: l,
   setup(s) {
     return () => e("label", {
       class: "s-base-select-all is-checked"
@@ -26,15 +26,10 @@ const l = n({
       }
     }, null)])]);
   }
-}), t = {
-  onClick: {
-    type: Function,
-    required: !0
-  }
-};
-const a = n({
+});
+const c = n({
   name: "SBaseSelectionBox",
-  props: t,
+  props: l,
   setup(s) {
     return () => e("label", {
       class: "s-base-selection-box"
@@ -53,15 +48,10 @@ const a = n({
       }
     }, null)])]);
   }
-}), o = {
-  onClick: {
-    type: Function,
-    required: !0
-  }
-};
-const c = n({
+});
+const i = n({
   name: "SBaseSemiSelection",
-  props: o,
+  props: l,
   setup(s) {
     return () => e("label", {
       class: "s-base-semi-selection",
@@ -84,14 +74,14 @@ const c = n({
       }
     }, null)])]);
   }
-}), b = {
+}), t = {
   install(s) {
-    s.component(l.name, l), s.component(a.name, a), s.component(c.name, c);
+    s.component(a.name, a), s.component(c.name, c), s.component(i.name, i);
   }
 };
 export {
-  l as BaseSelectAll,
-  a as BaseSelectionBox,
-  c as BaseSemiSelection,
-  b as default
+  a as BaseSelectAll,
+  c as BaseSelectionBox,
+  i as BaseSemiSelection,
+  t as default
 };

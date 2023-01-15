@@ -1,12 +1,15 @@
 import { defineComponent } from 'vue'
-import { BaseSelectAllProps, baseSelectAllProps } from './base-select-all-type'
+import {
+  BaseSelectionBoxProps,
+  baseSelectionBoxProps
+} from './base-selection-box-type'
 import '../../index.scss'
 import '../style/base-select-all.scss' // 全选
 
 export default defineComponent({
   name: 'SBaseSelectAll',
-  props: baseSelectAllProps,
-  setup(props: BaseSelectAllProps) {
+  props: baseSelectionBoxProps,
+  setup(props: BaseSelectionBoxProps) {
     return () => (
       <label class="s-base-select-all is-checked">
         <span class="s-base-select-all__input is-checked">

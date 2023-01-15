@@ -11,6 +11,7 @@ https://cdn.jsdelivr.net/npm/min-sheep-ui/style.css
 ```
 
 ## Install
+
 ```bash
 npm i min-sheep-ui
 ```
@@ -27,22 +28,23 @@ createApp(App).use(MinSheepUI).mount("#app")
 ```
 ```json
 "scripts": {
-    "dev": "vite --host", // vite 运行
-    "dist": "vue-tsc --noEmit && vite build", //vite 打包
-    "preview": "vite preview", // 暂未研究
-    "clear-dist": "rimraf dist",//删除 dist
-    "clear-build": "rimraf build",//删除 build
-    "clear-node_modules": "rimraf node_modules", //删除 node_modules
-    "lint": "eslint . --ext .js,.ts,.tsx,.vue",//  eslint
-    "prepare": "husky install", //提交 husky 钩子初始化
-    "docs:dev": "vitepress dev docs --host",//文档运行
-    "docs:build": "vitepress build docs",//文档打包
-    "docs:serve": "vitepress serve docs",//运行打包后的dist
-    "test": "vitest",//单元测试
-    "build": "node ./scripts/build.js",// ui 库打包
-    "cli": "cd cli && npm run cli" // ui库目录创建
-  },
+  "dev": "vite --host", // vite 运行
+  "dist": "vue-tsc --noEmit && vite build", //vite 打包
+  "preview": "vite preview", // 暂未研究
+  "clear-dist": "rimraf dist",//删除 dist
+  "clear-build": "rimraf build",//删除 build
+  "clear-node_modules": "rimraf node_modules", //删除 node_modules
+  "lint": "eslint . --ext .js,.ts,.tsx,.vue",//  eslint
+  "prepare": "husky install", //提交 husky 钩子初始化
+  "docs:dev": "vitepress dev docs --host",//文档运行
+  "docs:build": "vitepress build docs",//文档打包
+  "docs:serve": "vitepress serve docs",//运行打包后的dist
+  "test": "vitest",//单元测试
+  "build": "node ./scripts/build.js",// ui 库打包
+  "cli": "cd cli && npm run cli" // ui库目录创建
+},
 ```
+
 ## 参考UI库
 
 >[Naive UI](https://www.naiveui.com/zh-CN/dark/docs/installation)
@@ -72,7 +74,7 @@ const sidebar = [
   {
     text: '快速开始',
     items: [
-      { text: '安装', link: '/guide/install' } // /guide/install.md
+      { text: '安装', link: '/guide/install' } <!-- /guide/install.md -->
     ]
   },
   {
@@ -92,7 +94,7 @@ const sidebar = [
       { text: 'Menu 导航菜单', link: '/components/menu/' },
       { text: 'Dropdown 下拉菜单', link: '/components/dropdown/' },
       { text: 'Breadcrumb 面包屑', link: '/components/breadcrumb/' },
-      { text: 'Affix 固钉', link: '/components/Affix/' },
+      { text: 'Affix 固钉', link: '/components/affix/' },
     ] 
   },
   { 
@@ -107,7 +109,7 @@ const sidebar = [
       { text: 'Notification 通知提醒框', link: '/components/notification/' },
       { text: 'BubbleConfirmationBox 气泡确认框', link: '/components/bubbleConfirmationBox/' },
       { text: 'Progress 进度条', link: '/components/progress/' },
-      { text: 'Watermark 水印', link: '/components/Watermark/' },
+      { text: 'Watermark 水印', link: '/components/watermark/' },
     ] 
   },
   { 
@@ -115,13 +117,13 @@ const sidebar = [
     items: [
       { text: 'Input 输入框', link: '/components/input/' },<!--完成基本构建，目前可以使用，但后续要补充-->
       { text: 'Form 表单', link: '/components/form/' },<!--完成基本构建，目前可以使用，但后续要补充-->
-      { text: 'AutoComplete 自动填充', link: '/components/AutoComplete/' },
+      { text: 'AutoComplete 自动填充', link: '/components/autoComplete/' },
       { text: 'InputNumber 数字输入框', link: '/components/inputNumber/' },
       { text: 'Radio 单选框', link: '/components/radio/' },
       { text: 'Checkbox 多选框', link: '/components/checkbox/' },
       { text: 'Rate 评分', link: '/components/rate/' },
       { text: 'Select 选择器', link: '/components/select/' },
-      { text: 'CascadeSelector 级联选择器', link: '/components/CascadeSelector/' },
+      { text: 'CascadeSelector 级联选择器', link: '/components/cascadeSelector/' },
       { text: 'Switch 开关', link: '/components/switch/' },
       { text: 'TimePicker 时间选择器', link: '/components/timePicker/' },
       { text: 'DatePicker 日期选择器', link: '/components/datePicker/' },
@@ -146,9 +148,9 @@ const sidebar = [
       { text: 'Tag 标签', link: '/components/tag/' },
       { text: 'Badge 标记', link: '/components/badge/' },
       { text: 'Skeleton 骨架屏', link: '/components/skeleton/' },
-      { text: 'Empty 空状态', link: '/components/Empty/' },
-      { text: 'Result 结果', link: '/components/Result/' },
-      { text: 'Image 图片', link: '/components/Image/' },
+      { text: 'Empty 空状态', link: '/components/empty/' },
+      { text: 'Result 结果', link: '/components/result/' },
+      { text: 'Image 图片', link: '/components/image/' },
       { text: 'Calendar 日历', link: '/components/calendar/' },
     ] 
   },
@@ -156,7 +158,7 @@ const sidebar = [
     text: '布局',
     items: [
       { text: 'Space 间距', link: '/components/space/' },
-      { text: 'Container  布局', link: '/components/container /' },
+      { text: 'Container 布局', link: '/components/container/' },
       { text: 'Grid 栅格', link: '/components/Grid/' },
     ] 
   }
@@ -170,5 +172,6 @@ const sidebar = [
 <img src="./src/assets/QQ%E6%88%AA%E5%9B%BE20230109183547.png" width="200"/>
 
 ## QQ
+
 <img src="./src/assets/QQ%E6%88%AA%E5%9B%BE20230109183816.png" width="200"/>
 

@@ -1,15 +1,15 @@
 import { defineComponent } from 'vue'
 import {
-  BaseSemiSelectionProps,
-  baseSemiSelectionProps
-} from './base-semi-selection-type'
+  BaseSelectionBoxProps,
+  baseSelectionBoxProps
+} from './base-selection-box-type'
 import '../../index.scss'
 import '../style/base-semi-selection.scss' // 半选
 
 export default defineComponent({
   name: 'SBaseSemiSelection',
-  props: baseSemiSelectionProps,
-  setup(props: BaseSemiSelectionProps) {
+  props: baseSelectionBoxProps,
+  setup(props: BaseSelectionBoxProps) {
     return () => (
       <label class="s-base-semi-selection" aria-controls="undefined">
         <span

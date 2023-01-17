@@ -2,6 +2,7 @@
 
 [![](https://data.jsdelivr.com/v1/package/npm/min-sheep-ui/badge)](https://www.jsdelivr.com/package/npm/min-sheep-ui)
 [![](https://img.shields.io/npm/v/min-sheep-ui?color=c95f8b&amp;label=NPM)](https://www.npmjs.com/package/min-sheep-ui)
+[![](https://flat.badgen.net/bundlephobia/minzip/min-sheep-ui)](https://bundlephobia.com/result?p=min-sheep-ui)
 
 ## csdn
 

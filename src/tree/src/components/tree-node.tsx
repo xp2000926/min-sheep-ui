@@ -6,7 +6,7 @@ import {
 } from '../../../base-selection-box'
 import { TreeUtils } from '../composables/use-tree-type'
 import { IInnerTreeNode } from '../tree-type'
-import { TreeNodeProps, treeNodeProps } from './tree-node-type.'
+import { TreeNodeProps, treeNodeProps } from './tree-node-type'
 const NODE_HEIGHT = 34 // 节点高度
 const NODE_INDENT = 24 // 节点缩进大小
 

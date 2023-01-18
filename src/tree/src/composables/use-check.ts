@@ -1,21 +1,49 @@
-import { Ref } from 'vue'
+import { Ref, SetupContext } from 'vue'
 import { IInnerTreeNode } from '../tree-type'
 import { IUseCheck, IUseCore } from './use-tree-type'
 
 export function useCheck(
   innerData: Ref<IInnerTreeNode[]>,
-  { getChildren, getParent }: IUseCore
+  { getChildren, getParent }: IUseCore,
+  { emit }: SetupContext
 ): IUseCheck {
-  const toggleCheckNode = (node: IInnerTreeNode) => {
+  const toggleCheckNode = (currentNode: IInnerTreeNode) => {
     //避免初始化的时候node中没有checked设置
-    node.checked = !node.checked
-    node.inChecked = false // 重置待选中状态
+    currentNode.checked = !currentNode.checked
     // 父-子联动
     // 获取子节点，并同步他们的选中状态和父节点一致
-    getChildren(node).forEach(child => {
-      child.checked = node.checked
+    getChildren(currentNode).forEach(child => {
+      child.checked = currentNode.checked
+      child.inChecked = getChildren(currentNode, true).every(
+        sibling => sibling.inChecked
+      )
     })
-    setChecked(node)
+    currentNode.inChecked = false // 重置待选中状态
+    setChecked(currentNode)
+    /**
+     * @param {IInnerTreeNode} currentNode 当前节点
+     * @param {Array<{id:string}>} selectedRowKeys 所选节点id
+     * @param {Array<IInnerTreeNode| ''>} selectedRows 选定的行
+     */
+    const selectedRowKeys = innerData.value
+      .map(item => {
+        if (item.checked) {
+          return item.id
+        } else {
+          return ''
+        }
+      })
+      .filter(items => items)
+    const selectedRows: Array<IInnerTreeNode | ''> = innerData.value
+      .map(item => {
+        if (item.checked) {
+          return item
+        } else {
+          return ''
+        }
+      })
+      .filter(items => items)
+    emit('check', currentNode, selectedRowKeys, selectedRows)
   }
   // 子-父联动 并且设置父节点选中内容
   const setChecked = (node: IInnerTreeNode) => {

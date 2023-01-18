@@ -9,7 +9,7 @@ import { VirtualList } from '../../virtual-list'
 export default defineComponent({
   name: 'STree',
   props: treeProps,
-  emits: ['lazy-load'],
+  emits: ['lazy-load', 'check'],
   setup(props: TreeProps, context: SetupContext) {
     // 获取data
     const { data, height, itemHeight, accordion } = toRefs(props)

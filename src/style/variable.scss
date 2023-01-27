@@ -3,7 +3,7 @@
 $s-border-radius: var(--s-border-radius, 2px); //一般圆角
 $s-animation-duration-slow: var(--s-animation-duration-slow, 300ms);
 $s-animation-ease-in-out-smooth: var(--s-animation-ease-in-out-smooth, cubic-bezier(0.645, 0.045, 0.355, 1));
-$s-light-text: var(--s-light-text, #ffffff); // 有色深色背景下字体颜色（固定）
+$s-light-text: var(--s-light-text, #fff); // 有色深色背景下字体颜色（固定）
 $s-primary: var(--s-primary, #5e7ce0); // 主要按钮，同品牌色
 $s-primary-disabled: var(--s-primary-disabled, #879ada); // 主要按钮，同品牌色
 $s-primary-hover: var(--s-primary-hover, #7693f5); // 主要按钮悬停
@@ -18,7 +18,12 @@ $s-form-control-line-active: var(--s-form-control-line-active, #5e7ce0); // 表�
 $s-brand-active: var(--s-brand-active, #526ecc); // 品牌色激活色（加深）
 $s-brand-active-focus: var(--s-brand-active-focus, #344899); // 品牌色焦点色（重度加深）
 //  定义size变量
-$s-font-size-mm: var(--s-font-size-md, 10px); //当组件size为''时使用此字号大小
+$s-font-size-mn: var(--s-font-size-md, 10px); //当组件size为''时使用此字号大小
 $s-font-size-sm: var(--s-font-size-md, 12px); //当组件size为''时使用此字号大小
 $s-font-size-md: var(--s-font-size-md, 14px); //当组件size为''时使用此字号大小
 $s-font-size-lg: var(--s-font-size-md, 16px); //当组件size为''时使用此字号大小
+// 圆角按钮
+$s-border-radius-mn:var(--s-border-radius-md,10px);
+$s-border-radius-sm:var(--s-border-radius-md,12px);
+$s-border-radius-md:var(--s-border-radius-md,14px);
+$s-border-radius-lg:var(--s-border-radius-md,16px);

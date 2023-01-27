@@ -1,6 +1,10 @@
 import { ExtractPropTypes, PropType } from 'vue'
 
 export type IButtonType = 'primary' | 'secondary' | 'text'
+// | 'success'
+// | 'info'
+// | 'warning'
+// | 'danger'
 export type ButtonSize = 'mini' | 'small' | 'medium' | 'large'
 // export type EmitType<T> = T | T[]
 /**
@@ -22,18 +26,33 @@ export const buttonProps = {
   block: {
     type: Boolean,
     default: false
-    // },
-    // tag: {
-    //   type: String as PropType<keyof HTMLElementTagNameMap>,
-    //   default: 'button'
-    // },
-    // loading: {
-    //   type: Boolean,
-    //   default: false
-    // },
-    // // just for jsx
-    // onclick: {
-    //   type: [Function, Array] as PropType<EmitType<(e: MouseEvent)>>
+  },
+  // tag: {
+  //   type: String as PropType<keyof HTMLElementTagNameMap>,
+  //   default: 'button'
+  // },
+  // loading: {
+  //   type: Boolean,
+  //   default: false
+  // },
+  // // just for jsx
+  // onclick: {
+  //   type: [Function, Array] as PropType<EmitType<(e: MouseEvent)>>
+  // },
+  // 圆角按钮
+  round: {
+    type: Boolean,
+    default: false
+  },
+  //朴素按钮
+  plain: {
+    type: Boolean,
+    default: false
+  },
+  //圆形按钮
+  circle: {
+    type: Boolean,
+    default: false
   }
 } as const //as const 表示以后 buttonProps 是不可以动态设置一些其他属性
 

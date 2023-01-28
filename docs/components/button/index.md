@@ -41,6 +41,11 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
   <s-button round>Medium</s-button>
   <s-button size="small" round>Small</s-button>
   <s-button size="mini" round>mini</s-button>
+  <br>
+  <s-button size="large" circle iconSvg="vuejs"></s-button>
+  <s-button circle iconSvg="vuejs"></s-button>
+  <s-button size="small" circle  iconSvg="vuejs"></s-button>
+  <s-button size="mini" circle iconSvg="vuejs"></s-button>
 </template>
 ```
 :::

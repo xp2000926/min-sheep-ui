@@ -53,6 +53,15 @@ export const buttonProps = {
   circle: {
     type: Boolean,
     default: false
+  },
+  //icon
+  icon: {
+    type: String,
+    default: ''
+  },
+  iconSvg: {
+    type: String,
+    default: ''
   }
 } as const //as const 表示以后 buttonProps 是不可以动态设置一些其他属性
 

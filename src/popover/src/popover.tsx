@@ -1,4 +1,4 @@
-import { defineComponent, ref, toRefs } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 import { PopoverProps, popoverProps } from './popover-type'
 import '../../index.scss'
 import '../style/popover.scss'

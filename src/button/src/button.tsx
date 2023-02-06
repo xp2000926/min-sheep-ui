@@ -13,6 +13,14 @@ export default defineComponent({
     const roundClass = round.value ? 's-btn--round' : '' // 圆角按钮
     const plainClass = plain.value ? 's-btn--plain' : '' //朴素按钮
     const circleClass = circle.value ? 's-btn--circle' : '' //圆形按钮
+    const IconSize =
+      size.value === 'mini'
+        ? '18'
+        : size.value === 'small'
+        ? '22'
+        : size.value === 'medium'
+        ? '26'
+        : '30'
     return () => {
       return (
         <button
@@ -24,15 +32,7 @@ export default defineComponent({
               <Icon
                 name={icon.value}
                 component={iconSvg.value}
-                size={
-                  size.value === 'mini'
-                    ? '18'
-                    : size.value === 'small'
-                    ? '22'
-                    : size.value === 'medium'
-                    ? '26'
-                    : '30'
-                }
+                size={IconSize}
               />
               {slots.default()}
             </>
@@ -42,19 +42,7 @@ export default defineComponent({
               {slots.default()}
             </>
           ) : icon.value || iconSvg.value ? (
-            <Icon
-              name={icon.value}
-              component={iconSvg.value}
-              size={
-                size.value === 'mini'
-                  ? '18'
-                  : size.value === 'small'
-                  ? '22'
-                  : size.value === 'medium'
-                  ? '26'
-                  : '30'
-              }
-            />
+            <Icon name={icon.value} component={iconSvg.value} size={IconSize} />
           ) : (
             '按钮'
           )}

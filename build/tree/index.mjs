@@ -1,4 +1,4 @@
-import { computed as L, reactive as $, ref as N, unref as j, defineComponent as _, createVNode as d, toRefs as B, inject as R, mergeProps as z, Fragment as q, onMounted as A, provide as F, createTextVNode as U } from "vue";
+import { computed as L, reactive as $, ref as T, unref as j, defineComponent as _, createVNode as d, toRefs as B, inject as R, mergeProps as z, Fragment as q, onMounted as A, provide as F, createTextVNode as U } from "vue";
 function E(t, l = 0, i = []) {
   return l++, t.reduce((f, o) => {
     const s = { ...o };
@@ -81,8 +81,8 @@ function K(t, l, { getChildren: i, getParent: f }) {
   ), c = (u) => {
     u == null || u.classList.remove(...Object.values(P));
   }, n = (u, p) => {
-    var h;
-    const g = (h = s.value[u]) == null ? void 0 : h.parentId;
+    var x;
+    const g = (x = s.value[u]) == null ? void 0 : x.parentId;
     return g === p ? !0 : g !== void 0 ? n(g, p) : !1;
   }, r = () => {
     o.dropType = void 0, o.draggingNode = null, o.draggingTreeNode = null;
@@ -95,78 +95,78 @@ function K(t, l, { getChildren: i, getParent: f }) {
         return;
       let p = {};
       typeof t == "object" ? p = t : t === !0 && (p = { dropInner: !0 });
-      const { dropPrev: g, dropNext: h, dropInner: x } = p;
-      let b;
-      const m = g ? x ? 0.25 : h ? 0.45 : 1 : -1, T = h ? x ? 0.75 : g ? 0.55 : 0 : 1, I = u.currentTarget, C = I == null ? void 0 : I.getBoundingClientRect(), w = u.clientY - ((C == null ? void 0 : C.top) || 0);
-      if (w < ((C == null ? void 0 : C.height) || 0) * m ? b = "dropPrev" : w > ((C == null ? void 0 : C.height) || 0) * T ? b = "dropNext" : x ? b = "dropInner" : b = void 0, b) {
+      const { dropPrev: g, dropNext: x, dropInner: C } = p;
+      let h;
+      const k = g ? C ? 0.25 : x ? 0.45 : 1 : -1, y = x ? C ? 0.75 : g ? 0.55 : 0 : 1, I = u.currentTarget, N = I == null ? void 0 : I.getBoundingClientRect(), w = u.clientY - ((N == null ? void 0 : N.top) || 0);
+      if (w < ((N == null ? void 0 : N.height) || 0) * k ? h = "dropPrev" : w > ((N == null ? void 0 : N.height) || 0) * y ? h = "dropNext" : C ? h = "dropInner" : h = void 0, h) {
         const D = I == null ? void 0 : I.classList;
-        D && (D.contains(P[b]) || (c(I), D.add(P[b])));
+        D && (D.contains(P[h]) || (c(I), D.add(P[h])));
       } else
         c(I);
-      o.dropType = b;
+      o.dropType = h;
     }
   }, v = (u) => {
     u.stopPropagation(), o.draggingNode && c(u.currentTarget);
-  }, k = (u, p) => {
-    var h;
+  }, b = (u, p) => {
+    var x;
     if (u.preventDefault(), u.stopPropagation(), c(u.currentTarget), !o.draggingNode || !t)
       return;
-    const g = (h = u.dataTransfer) == null ? void 0 : h.getData("dragNodeId");
+    const g = (x = u.dataTransfer) == null ? void 0 : x.getData("dragNodeId");
     if (g) {
-      const x = n(p.id, g);
-      if (g === p.id || x)
+      const C = n(p.id, g);
+      if (g === p.id || C)
         return;
-      o.dropType && y(g, p), r();
+      o.dropType && m(g, p), r();
     }
   };
-  function y(u, p) {
-    const g = l.value.find((h) => h.id === u);
+  function m(u, p) {
+    const g = l.value.find((x) => x.id === u);
     if (g) {
-      let h;
-      const x = i(g), b = f(g);
+      let x;
+      const C = i(g), h = f(g);
       if (o.dropType === "dropInner") {
-        h = {
+        x = {
           ...g,
           parentId: p.id,
           level: p.level + 1
         };
-        const m = l.value.indexOf(p);
-        l.value.splice(m + 1, 0, h), p.isLeaf = void 0;
-        const T = l.value.indexOf(g);
-        l.value.splice(T, 1);
+        const k = l.value.indexOf(p);
+        l.value.splice(k + 1, 0, x), p.isLeaf = void 0;
+        const y = l.value.indexOf(g);
+        l.value.splice(y, 1);
       } else if (o.dropType === "dropNext") {
-        h = {
+        x = {
           ...g,
           parentId: p.parentId,
           level: p.level
         };
-        const m = l.value.indexOf(p), T = i(p, !0).length;
+        const k = l.value.indexOf(p), y = i(p, !0).length;
         l.value.splice(
-          m + T + 1,
+          k + y + 1,
           0,
-          h
+          x
         );
         const I = l.value.indexOf(g);
         l.value.splice(I, 1);
       } else if (o.dropType === "dropPrev") {
-        h = {
+        x = {
           ...g,
           parentId: p.parentId,
           level: p.level
         };
-        const m = l.value.indexOf(p);
-        l.value.splice(m, 0, h);
-        const T = l.value.indexOf(g);
-        l.value.splice(T, 1);
+        const k = l.value.indexOf(p);
+        l.value.splice(k, 0, x);
+        const y = l.value.indexOf(g);
+        l.value.splice(y, 1);
       }
-      o.dropType = "dropInner", x.forEach((m) => y(m.id, h)), b && i(b).length === 0 && (b.isLeaf = !0);
+      o.dropType = "dropInner", C.forEach((k) => m(k.id, x)), h && i(h).length === 0 && (h.isLeaf = !0);
     }
   }
   return {
     onDragstart: e,
     onDragover: a,
     onDragleave: v,
-    onDrop: k,
+    onDrop: b,
     onDragend: (u) => {
       u.preventDefault(), u.stopPropagation(), r();
     }
@@ -180,12 +180,12 @@ function J(t, { getNode: l, getIndex: i, getChildren: f }, { emit: o }) {
     const a = l(e.node);
     if (a) {
       a.loading = !1;
-      const v = N(
+      const v = T(
         E(e.treeItems, a.level)
       );
       n(a, v), r(a, v);
-      const k = f(a);
-      a.childNodeCount = k.length;
+      const b = f(a);
+      a.childNodeCount = b.length;
     }
   }, n = (e, a) => {
     a.value.forEach((v) => {
@@ -212,7 +212,7 @@ function W(t, { getChildren: l, getIndex: i }) {
       const n = l(s, !1), r = n[n.length - 1];
       let e = i(s) + 1;
       r && (e = i(r) + 1), s.expanded = !0, s.isLeaf = !1;
-      const a = N({
+      const a = T({
         ...c,
         level: s.level + 1,
         parentId: s.id,
@@ -244,7 +244,7 @@ function X(t, l, i, f) {
   };
 }
 function Z(t, l, i) {
-  const f = j(t), o = N(E(f)), s = G(o), c = [X, Y, W], n = J(o, s, i), r = K(l.draggable, o, s);
+  const f = j(t), o = T(E(f)), s = G(o), c = [X, Y, W], n = J(o, s, i), r = K(l.draggable, o, s);
   return {
     ...c.reduce((a, v) => ({ ...a, ...v(o, s, i, n) }), {}),
     ...s,
@@ -393,23 +393,31 @@ const ae = _({
       append: e,
       remove: a,
       onDragend: v,
-      onDragleave: k,
-      onDragover: y,
+      onDragleave: b,
+      onDragover: m,
       onDragstart: S,
       onDrop: u
-    } = R("TREE_UTILS"), p = N(!1), g = () => {
+    } = R("TREE_UTILS"), p = T(!1), g = () => {
       p.value ? p.value = !1 : p.value = !0;
     };
-    let h = {};
-    return c.value && (h = {
+    let x = {};
+    c.value && (x = {
       draggable: !0,
-      onDragend: (x) => v(x),
-      onDragleave: (x) => k(x),
-      onDragover: (x) => y(x),
-      onDragstart: (x) => S(x, o.value),
-      onDrop: (x) => u(x, o.value)
-    }), () => {
-      var x, b, m;
+      onDragend: (h) => v(h),
+      onDragleave: (h) => b(h),
+      onDragover: (h) => m(h),
+      onDragstart: (h) => S(h, o.value),
+      onDrop: (h) => u(h, o.value)
+    });
+    const C = () => d(q, null, [o.value.inChecked ? d(ae, {
+      onClick: () => n(o.value)
+    }, null) : o.value.checked ? d(ne, {
+      onClick: () => n(o.value)
+    }, null) : d(te, {
+      onClick: () => n(o.value)
+    }, null)]);
+    return () => {
+      var h, k, y;
       return d("div", {
         class: "s-tree__node hover:bg-slate-300 relative leading-8",
         style: {
@@ -426,18 +434,12 @@ const ae = _({
         }
       }, null), d("div", z({
         class: "s-tree__node--content"
-      }, h), [o.value.isLeaf ? d("span", {
+      }, x), [o.value.isLeaf ? d("span", {
         style: {
           display: "inline-block",
           width: "18px"
         }
-      }, null) : (x = l.icon) == null ? void 0 : x.call(l), f.value && d(q, null, [o.value.inChecked ? d(ae, {
-        onClick: () => n(o.value)
-      }, null) : o.value.checked ? d(ne, {
-        onClick: () => n(o.value)
-      }, null) : d(te, {
-        onClick: () => n(o.value)
-      }, null)]), (b = l.content) == null ? void 0 : b.call(l), s.value && p.value && d("span", {
+      }, null) : (h = l.icon) == null ? void 0 : h.call(l), f.value && C(), (k = l.content) == null ? void 0 : k.call(l), s.value && p.value && d("span", {
         class: "inline-flex ml-1"
       }, [d("svg", {
         onClick: () => {
@@ -461,7 +463,7 @@ const ae = _({
         class: "cursor-pointer ml-1"
       }, [d("path", {
         d: "M610.461538 500.184615l256-257.96923c11.815385-11.815385 11.815385-29.538462 0-41.353847l-39.384615-41.353846c-11.815385-11.815385-29.538462-11.815385-41.353846 0L527.753846 417.476923c-7.876923 7.876923-19.692308 7.876923-27.569231 0L242.215385 157.538462c-11.815385-11.815385-29.538462-11.815385-41.353847 0l-41.353846 41.353846c-11.815385 11.815385-11.815385 29.538462 0 41.353846l257.969231 257.969231c7.876923 7.876923 7.876923 19.692308 0 27.56923L157.538462 785.723077c-11.815385 11.815385-11.815385 29.538462 0 41.353846l41.353846 41.353846c11.815385 11.815385 29.538462 11.815385 41.353846 0L498.215385 610.461538c7.876923-7.876923 19.692308-7.876923 27.56923 0l257.969231 257.969231c11.815385 11.815385 29.538462 11.815385 41.353846 0L866.461538 827.076923c11.815385-11.815385 11.815385-29.538462 0-41.353846L610.461538 527.753846c-7.876923-7.876923-7.876923-19.692308 0-27.569231z"
-      }, null)])]), o.value.loading && ((m = l.loading) == null ? void 0 : m.call(l))])]);
+      }, null)])]), o.value.loading && ((y = l.loading) == null ? void 0 : y.call(l))])]);
     };
   }
 }), re = (t, {
@@ -504,16 +506,16 @@ const de = _({
       data: i,
       itemHeight: f,
       component: o
-    } = B(t), s = N(), c = N(0), n = N(0), r = N(0), e = L(() => Math.ceil(c.value / f.value)), a = L(() => i.value.slice(r.value, Math.min(r.value + e.value, i.value.length)));
+    } = B(t), s = T(), c = T(0), n = T(0), r = T(0), e = L(() => Math.ceil(c.value / f.value)), a = L(() => i.value.slice(r.value, Math.min(r.value + e.value, i.value.length)));
     A(() => {
-      var k;
-      c.value = (k = s.value) == null ? void 0 : k.clientHeight;
+      var b;
+      c.value = (b = s.value) == null ? void 0 : b.clientHeight;
     });
-    const v = (k) => {
+    const v = (b) => {
       const {
-        scrollTop: y
-      } = k.target;
-      r.value = Math.floor(y / f.value), n.value = y - y % f.value;
+        scrollTop: m
+      } = b.target;
+      r.value = Math.floor(m / f.value), n.value = m - m % f.value;
     };
     return () => d(o.value, {
       class: "s-virtual-list__container",
@@ -530,11 +532,11 @@ const de = _({
         style: {
           transform: `translate3d(0, ${n.value}px, 0)`
         }
-      }, [a.value.map((k, y) => {
+      }, [a.value.map((b, m) => {
         var S;
         return (S = l.default) == null ? void 0 : S.call(l, {
-          item: k,
-          index: y
+          item: b,
+          index: m
         });
       })])]
     });

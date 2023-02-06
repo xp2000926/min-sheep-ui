@@ -47,6 +47,19 @@ export default defineComponent({
         onDrop: (event: DragEvent) => onDrop(event, treeNode.value)
       }
     }
+
+    const CheckBoxStatus = () => (
+      <>
+        {treeNode.value.inChecked ? (
+          <BaseSemiSelection onClick={() => toggleCheckNode(treeNode.value)} />
+        ) : treeNode.value.checked ? (
+          <BaseSelectAll onClick={() => toggleCheckNode(treeNode.value)} />
+        ) : (
+          <BaseSelectionBox onClick={() => toggleCheckNode(treeNode.value)} />
+        )}
+      </>
+    )
+
     return () => (
       <div
         class="s-tree__node hover:bg-slate-300 relative leading-8"
@@ -72,28 +85,12 @@ export default defineComponent({
           {/* 折叠图标 */}
           {/* 判断当前节点是否是叶子节点则放一个空白站位元素，否则发一个三角形反馈图标 */}
           {treeNode.value.isLeaf ? (
-            <span style={{ display: 'inline-block', width: '18px' }}></span>
+            <span style={{ display: 'inline-block', width: '18px' }} />
           ) : (
             slots.icon?.()
           )}
           {/* 复选框 */}
-          {checkable.value && (
-            <>
-              {treeNode.value.inChecked ? (
-                <BaseSemiSelection
-                  onClick={() => toggleCheckNode(treeNode.value)}
-                />
-              ) : treeNode.value.checked ? (
-                <BaseSelectAll
-                  onClick={() => toggleCheckNode(treeNode.value)}
-                />
-              ) : (
-                <BaseSelectionBox
-                  onClick={() => toggleCheckNode(treeNode.value)}
-                />
-              )}
-            </>
-          )}
+          {checkable.value && CheckBoxStatus()}
           {/* 节点文本本 */}
           {slots.content?.()}
           {/* 增删改操作 */}

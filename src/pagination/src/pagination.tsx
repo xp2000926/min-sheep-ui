@@ -49,7 +49,7 @@ export default defineComponent({
             上一页
           </button>
           {/* pagrr 部分 */}
-          <SPager {...props} ref={pager}></SPager>
+          <SPager {...props} ref={pager} />
           {/* 尾页显示的条件是：总页码大于1  */}
           <button
             disabled={disabledNext.value}

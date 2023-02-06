@@ -15,6 +15,10 @@ export const formItemProps = {
   },
   prop: {
     type: String
+  },
+  error: {
+    type: String,
+    default: ''
   }
 } as const
 export type FormItemProps = ExtractPropTypes<typeof formItemProps>

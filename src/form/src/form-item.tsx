@@ -6,7 +6,8 @@ import {
   onMounted,
   onUnmounted,
   provide,
-  ref
+  ref,
+  toRefs
 } from 'vue'
 import { FormItemProps, formItemProps, LabelData } from './form-item-type'
 import '../../index.scss'
@@ -18,6 +19,7 @@ export default defineComponent({
   name: 'SFormItem',
   props: formItemProps,
   setup(props: FormItemProps, { slots }) {
+    const { error } = toRefs(props)
     // 注入label_data，然后生成动态样式
     const labelData = inject('LABEL_DATA') as ComputedRef<LabelData>
     const ItemClass = computed(() => ({
@@ -97,6 +99,7 @@ export default defineComponent({
         {/* control */}
         <div>{slots.default?.()}</div>
         {/* error message */}
+        {error.value && <div class="error-message">{error.value}</div>}
         {showMessage.value && (
           <div class="error-message">{errorMessage.value}</div>
         )}

@@ -736,12 +736,12 @@ const ie = ae({
       validate: () => {
         if (!a)
           return console.warn("请在Form中使用FormItem"), Promise.reject("请在Form中使用FormItem");
-        if (!n.prop)
-          return console.warn("如果要校验当前项，请设置prop字段"), Promise.reject("如果要校验当前项，请设置prop字段");
         if (!a.rules)
           return Promise.resolve({
             result: !0
           });
+        if (!n.prop)
+          return console.warn("如果要校验当前项，请设置prop字段"), Promise.reject("如果要校验当前项，请设置prop字段");
         const m = a.rules[n.prop] || void 0;
         if (!m)
           return Promise.resolve({

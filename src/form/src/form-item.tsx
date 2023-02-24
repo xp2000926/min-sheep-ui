@@ -47,13 +47,13 @@ export default defineComponent({
         console.warn('请在Form中使用FormItem')
         return Promise.reject('请在Form中使用FormItem')
       }
-      if (!props.prop) {
-        console.warn('如果要校验当前项，请设置prop字段')
-        return Promise.reject('如果要校验当前项，请设置prop字段')
-      }
       // 不需要校验
       if (!formCtx.rules) {
         return Promise.resolve({ result: true })
+      }
+      if (!props.prop) {
+        console.warn('如果要校验当前项，请设置prop字段')
+        return Promise.reject('如果要校验当前项，请设置prop字段')
       }
       const itemRules = formCtx.rules[props.prop] || undefined
       if (!itemRules) {

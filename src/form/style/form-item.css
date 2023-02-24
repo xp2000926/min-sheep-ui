@@ -15,7 +15,10 @@
 }
 
 .s-form__item .error-message {
-  color: red;
+  color: #f56c6c;
+  font-size: 12px;
+  line-height: 1;
+  padding-top: 5px;
 }
 
 .s-form__label {

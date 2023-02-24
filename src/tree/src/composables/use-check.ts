@@ -23,27 +23,46 @@ export function useCheck(
     /**
      * @param {IInnerTreeNode} currentNode 当前节点
      * @param {Array<{id:string}>} selectedRowKeys 所选节点id
-     * @param {Array<IInnerTreeNode| ''>} selectedRows 选定的行
+     * @param {Array<IInnerTreeNode>} selectedRows 选定的行
+     * @param {Array<{id:string}>} halfselectedRowKeys 所选节点id
+     * @param {Array<IInnerTreeNode>} halfselectedRows 选定的行
      */
     const selectedRowKeys = innerData.value
       .map(item => {
         if (item.checked) {
           return item.id
-        } else {
-          return ''
         }
       })
-      .filter(items => items)
-    const selectedRows: Array<IInnerTreeNode | ''> = innerData.value
+      .filter(Boolean)
+    const selectedRows = innerData.value
       .map(item => {
         if (item.checked) {
           return item
-        } else {
-          return ''
         }
       })
-      .filter(items => items)
-    emit('check', currentNode, selectedRowKeys, selectedRows)
+      .filter(Boolean)
+    const halfselectedRowKeys = innerData.value
+      .map(item => {
+        if (item.inChecked) {
+          return item.id
+        }
+      })
+      .filter(Boolean)
+    const halfselectedRows = innerData.value
+      .map(item => {
+        if (item.inChecked) {
+          return item
+        }
+      })
+      .filter(Boolean)
+    emit(
+      'check',
+      currentNode,
+      selectedRowKeys,
+      selectedRows,
+      halfselectedRowKeys,
+      halfselectedRows
+    )
   }
   // 子-父联动 并且设置父节点选中内容
   const setChecked = (node: IInnerTreeNode) => {

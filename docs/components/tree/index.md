@@ -140,8 +140,8 @@ const data = ref([
 </template>
 <script setup>
 import { ref } from 'vue'
-const check=(currentNode, selectedRowKeys, selectedRows)=>{
-   console.log(currentNode, selectedRowKeys, selectedRows);
+const check=(currentNode,selectedRowKeys,selectedRows,halfselectedRowKeys,halfselectedRows)=>{
+   console.log(currentNode,selectedRowKeys,selectedRows,halfselectedRowKeys,halfselectedRows);
 }
 const data = ref([
   {

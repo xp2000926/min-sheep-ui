@@ -1,19 +1,28 @@
 import { defineComponent } from 'vue'
 import {
-  BaseSemiSelectionProps,
-  baseSemiSelectionProps
-} from './base-semi-selection-type'
+  BaseSelectionBoxProps,
+  baseSelectionBoxProps
+} from './base-selection-box-type'
 import '../../index.scss'
 import '../style/base-semi-selection.scss' // 半选
-
+import classNames from 'classnames'
 export default defineComponent({
   name: 'SBaseSemiSelection',
-  props: baseSemiSelectionProps,
-  setup(props: BaseSemiSelectionProps) {
+  props: baseSelectionBoxProps,
+  setup(props: BaseSelectionBoxProps) {
     return () => (
-      <label class="s-base-semi-selection" aria-controls="undefined">
+      <label
+        class={classNames('s-base-semi-selection', {
+          'is-disabled': props.disabled
+        })}
+        style={{ marginRight: props.marginRight + 'px' }}
+      >
         <span
-          class="s-base-semi-selection__input is-indeterminate"
+          class={classNames(
+            's-base-semi-selection__input',
+            'is-indeterminate',
+            { 'is-disabled': props.disabled }
+          )}
           tabindex="0"
           role="checkbox"
           aria-checked="mixed"
@@ -22,6 +31,7 @@ export default defineComponent({
           <input
             type="checkbox"
             aria-hidden="true"
+            disabled={props.disabled}
             class="s-base-semi-selection__original"
             value=""
             tabindex="-1"

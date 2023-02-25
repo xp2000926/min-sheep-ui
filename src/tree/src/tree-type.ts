@@ -14,6 +14,7 @@ export interface ITreeNode {
   disableSelect?: boolean
   disableCheck?: boolean
   disableToggle?: boolean
+  disabled?: boolean
 }
 
 export interface IInnerTreeNode extends ITreeNode {

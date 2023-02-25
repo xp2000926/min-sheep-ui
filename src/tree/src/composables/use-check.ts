@@ -24,8 +24,8 @@ export function useCheck(
      * @param {IInnerTreeNode} currentNode 当前节点
      * @param {Array<{id:string}>} selectedRowKeys 所选节点id
      * @param {Array<IInnerTreeNode>} selectedRows 选定的行
-     * @param {Array<{id:string}>} halfselectedRowKeys 所选节点id
-     * @param {Array<IInnerTreeNode>} halfselectedRows 选定的行
+     * @param {Array<{id:string}>} halfSelectedRowKeys 所选节点id
+     * @param {Array<IInnerTreeNode>} halfSelectedRows 选定的行
      */
     const selectedRowKeys = innerData.value
       .map(item => {
@@ -41,14 +41,14 @@ export function useCheck(
         }
       })
       .filter(Boolean)
-    const halfselectedRowKeys = innerData.value
+    const halfSelectedRowKeys = innerData.value
       .map(item => {
         if (item.inChecked) {
           return item.id
         }
       })
       .filter(Boolean)
-    const halfselectedRows = innerData.value
+    const halfSelectedRows = innerData.value
       .map(item => {
         if (item.inChecked) {
           return item
@@ -60,8 +60,8 @@ export function useCheck(
       currentNode,
       selectedRowKeys,
       selectedRows,
-      halfselectedRowKeys,
-      halfselectedRows
+      halfSelectedRowKeys,
+      halfSelectedRows
     )
   }
   // 子-父联动 并且设置父节点选中内容

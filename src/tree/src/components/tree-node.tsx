@@ -51,11 +51,20 @@ export default defineComponent({
     const CheckBoxStatus = () => (
       <>
         {treeNode.value.inChecked ? (
-          <BaseSemiSelection onClick={() => toggleCheckNode(treeNode.value)} />
+          <BaseSemiSelection
+            onClick={() => toggleCheckNode(treeNode.value)}
+            disabled={treeNode.value.disabled}
+          />
         ) : treeNode.value.checked ? (
-          <BaseSelectAll onClick={() => toggleCheckNode(treeNode.value)} />
+          <BaseSelectAll
+            onClick={() => toggleCheckNode(treeNode.value)}
+            disabled={treeNode.value.disabled}
+          />
         ) : (
-          <BaseSelectionBox onClick={() => toggleCheckNode(treeNode.value)} />
+          <BaseSelectionBox
+            onClick={() => toggleCheckNode(treeNode.value)}
+            disabled={treeNode.value.disabled}
+          />
         )}
       </>
     )

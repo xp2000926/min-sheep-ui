@@ -24,8 +24,8 @@ export function useCheck(
      * @param {IInnerTreeNode} currentNode 当前节点
      * @param {Array<{id:string}>} selectedRowKeys 所选节点id
      * @param {Array<IInnerTreeNode>} selectedRows 选定的行
-     * @param {Array<{id:string}>} halfSelectedRowKeys 所选节点id
-     * @param {Array<IInnerTreeNode>} halfSelectedRows 选定的行
+     * @param {Array<{id:string}>} halfSelectedRowKeys 半选节点id
+     * @param {Array<IInnerTreeNode>} halfSelectedRows 半选的行
      */
     const selectedRowKeys = innerData.value
       .map(item => {

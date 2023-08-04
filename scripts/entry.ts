@@ -8,6 +8,7 @@ import ModalPlugin, { Modal } from '../src/modal'
 import IconPlugin, { Icon } from '../src/icon'
 import TabsPlugin, { Tabs, Tab } from '../src/tabs'
 import PopoverPlugin, { Popover } from '../src/popover'
+import TablePlugin, { Table,TableColumn } from '../src/table'
 const installs = [
   ButtonPlugin,
   TreePlugin,
@@ -17,7 +18,8 @@ const installs = [
   ModalPlugin,
   IconPlugin,
   TabsPlugin,
-  PopoverPlugin
+  PopoverPlugin,
+  TablePlugin
 ]
 
 export {
@@ -30,7 +32,9 @@ export {
   Icon,
   Tabs,
   Tab,
-  Popover
+  Popover,
+  Table,
+  TableColumn
 }
 
 export default {

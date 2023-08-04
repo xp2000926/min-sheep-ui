@@ -51,6 +51,7 @@ const sidebar = [
     items: [
       { text: 'Tree 树', link: '/components/tree/' },
       { text: 'Pagination 分页', link: '/components/pagination/' },
+      { text: 'Table 表格', link: '/components/table/' },
     ] 
   },
   { 

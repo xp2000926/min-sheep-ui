@@ -32,9 +32,9 @@ const tableData = ref([
 ```vue
 <template>
   <s-table :data="tableData">
-    <s-table-column prop="date" title="Date" />
-    <s-table-column prop="name" title="Name" />
-    <s-table-column prop="address" title="Address" />
+    <s-table-column prop="date" title="日期" />
+    <s-table-column prop="name" title="姓名" />
+    <s-table-column prop="address" title="地址" />
     <s-table-column title="操作">
       <template #default="row">
         <s-button type='primary' @click="editRow(row)">编辑</s-button>
@@ -55,6 +55,45 @@ const tableData = ref([
 ])
 const editRow = (row) => {
   console.log('editRow', row)
+}
+</script>
+```
+:::
+
+## 多选
+
+:::demo
+```vue
+<template>
+  <s-table :data="tableData" @selection-change="onSelectionChange">
+    <s-table-column type="selection" />
+    <s-table-column prop="date" title="日期" />
+    <s-table-column prop="name" title="姓名" />
+    <s-table-column prop="address" title="地址" />
+  </s-table>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+const tableData = ref([
+  {
+    date: '2016-05-03',
+    name: 'Mark',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-03',
+    name: 'Mark',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
+  {
+    date: '2016-05-03',
+    name: 'Mark',
+    address: 'No. 189, Grove St, Los Angeles'
+  }
+])
+const onSelectionChange=(checkedRows)=>{
+  console.log('checkedRows',checkedRows);
 }
 </script>
 ```

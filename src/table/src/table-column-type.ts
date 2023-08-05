@@ -8,10 +8,15 @@ export const tableColumnProps = {
     title: {
         type: String,
         default: ''
+    },
+    type:{
+        type:String,
+        default: ''
     }
 } as const
 export type TableColumnProps = ExtractPropTypes<typeof tableColumnProps>
 export interface ColumnContext {
     prop?: string
     title?: string
+    type?: string
 }

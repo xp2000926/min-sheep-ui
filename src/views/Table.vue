@@ -1,6 +1,8 @@
 <template>
-  <Table :data="tableData">
+  <Table :data="tableData" @selection-change="onSelectionChange">
+    <TableColumn type="selection" />
     <TableColumn prop="date" title="Date" />
+    <TableColumn prop="name" title="Name" />
     <TableColumn prop="name" title="Name" />
     <TableColumn prop="address" title="Address" />
     <TableColumn title="操作">
@@ -13,16 +15,31 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Table, TableColumn } from '../table/index'
-const tableData = [
+const tableData = ref([
+  {
+    date: '2016-05-03',
+    name: 'Mark',
+    address: 'No. 189, Grove St, Los Angeles',
+    checked:true
+  },
+  {
+    date: '2016-05-03',
+    name: 'Mark',
+    address: 'No. 189, Grove St, Los Angeles'
+  },
   {
     date: '2016-05-03',
     name: 'Mark',
     address: 'No. 189, Grove St, Los Angeles'
   }
-]
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+])
 const editRow = (row: any) => {
   console.log('editRow', row)
+}
+const onSelectionChange=(checkedRows: any)=>{
+  console.log('checkedRows',checkedRows);
+  
 }
 </script>

@@ -16,6 +16,10 @@ export const paginationProps = {
   modelValue: {
     type: Number,
     default: 1
+  },
+  hideOnSinglePage: {
+    type: Boolean,
+    default: true
   }
 } as const
 export type PaginationProps = ExtractPropTypes<typeof paginationProps>

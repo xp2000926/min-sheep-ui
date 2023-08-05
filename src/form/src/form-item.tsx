@@ -6,7 +6,8 @@ import {
   onMounted,
   onUnmounted,
   provide,
-  ref
+  ref,
+  toRefs
 } from 'vue'
 import { FormItemProps, formItemProps, LabelData } from './form-item-type'
 import '../../index.scss'
@@ -18,6 +19,7 @@ export default defineComponent({
   name: 'SFormItem',
   props: formItemProps,
   setup(props: FormItemProps, { slots }) {
+    const { error } = toRefs(props)
     // 注入label_data，然后生成动态样式
     const labelData = inject('LABEL_DATA') as ComputedRef<LabelData>
     const ItemClass = computed(() => ({
@@ -45,13 +47,13 @@ export default defineComponent({
         console.warn('请在Form中使用FormItem')
         return Promise.reject('请在Form中使用FormItem')
       }
-      if (!props.prop) {
-        console.warn('如果要校验当前项，请设置prop字段')
-        return Promise.reject('如果要校验当前项，请设置prop字段')
-      }
       // 不需要校验
       if (!formCtx.rules) {
         return Promise.resolve({ result: true })
+      }
+      if (!props.prop) {
+        console.warn('如果要校验当前项，请设置prop字段')
+        return Promise.reject('如果要校验当前项，请设置prop字段')
       }
       const itemRules = formCtx.rules[props.prop] || undefined
       if (!itemRules) {
@@ -97,6 +99,7 @@ export default defineComponent({
         {/* control */}
         <div>{slots.default?.()}</div>
         {/* error message */}
+        {error.value && <div class="error-message">{error.value}</div>}
         {showMessage.value && (
           <div class="error-message">{errorMessage.value}</div>
         )}

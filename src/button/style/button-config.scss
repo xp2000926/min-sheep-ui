@@ -71,22 +71,105 @@ $pseudo: (
   )
 );
 $size: (
-  mini:(
+  mini: (
     height: 20px,
     padding: 0 12px,
-    font-size: $s-font-size-mm,
+    font-size: $s-font-size-mn
   ),
   small: (
     height: 24px,
     padding: 0 16px,
-    font-size: $s-font-size-sm,
+    font-size: $s-font-size-sm
   ),
   medium: (
-    font-size: $s-font-size-md,
+    font-size: $s-font-size-md
   ),
   large: (
     height: 32px,
     padding: 0 24px,
-    font-size: $s-font-size-lg,
+    font-size: $s-font-size-lg
+  )
+);
+$round: (
+  'mini.s-btn--round': (
+    border-radius: $s-border-radius-mn
   ),
+  'small.s-btn--round': (
+    border-radius: $s-border-radius-sm
+  ),
+  'medium.s-btn--round': (
+    border-radius: $s-border-radius-md
+  ),
+  'large.s-btn--round': (
+    border-radius: $s-border-radius-lg
+  )
+);
+$circle: (
+  'mini.s-btn--circle': (
+    padding: 9px,
+    border-radius: $s-border-radius-50
+  ),
+  'small.s-btn--circle': (
+    padding: 11px,
+    border-radius: $s-border-radius-50
+  ),
+  'medium.s-btn--circle': (
+    padding: 13px,
+    border-radius: $s-border-radius-50
+  ),
+  'large.s-btn--circle': (
+    padding: 15px,
+    border-radius: $s-border-radius-50
+  )
+);
+$plain: (
+  'primary.s-btn--plain': (
+    color: #409eff,
+    background: #ecf5ff,
+    border-color: #b3d8ff
+  ),
+  // 'medium.s-btn--plain': (
+  //   border-radius: $s-border-radius-md
+  // ),
+  // 'success.s-btn--plain': (
+  //   border-radius: $s-border-radius-mn
+  // ),
+  // 'info.s-btn--plain': (
+  //   border-radius: $s-border-radius-sm
+  // ),
+  // 'warning.s-btn--plain': (
+  //   border-radius: $s-border-radius-md
+  // ),
+  // 'danger.s-btn--plain': (
+  //   border-radius: $s-border-radius-lg
+  // )
+);
+$plainPseudo: (
+  'primary.s-btn--plain': (
+    hover: (
+      border-color: $s-form-control-line-active,
+      color: $s-brand-active
+    )
+  ),
+  'secondary.s-btn--plain': (
+    hover: (
+      border-color: #409eff,
+      color: #ecf5ff
+    )
+  ),
+  // 'medium.s-btn--plain': (
+  //   border-radius: $s-border-radius-md
+  // ),
+  // 'success.s-btn--plain': (
+  //   border-radius: $s-border-radius-mn
+  // ),
+  // 'info.s-btn--plain': (
+  //   border-radius: $s-border-radius-sm
+  // ),
+  // 'warning.s-btn--plain': (
+  //   border-radius: $s-border-radius-md
+  // ),
+  // 'danger.s-btn--plain': (
+  //   border-radius: $s-border-radius-lg
+  // )
 );

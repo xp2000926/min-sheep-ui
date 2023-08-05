@@ -1,6 +1,6 @@
 {
     "name": "min-sheep-ui",
-    "version": "0.0.6",
+    "version": "0.1.0",
     "main": "min-sheep-ui.umd.js",
     "module": "min-sheep-ui.mjs",
     "author": "xp2000926",

@@ -24,10 +24,10 @@
 
   // 禁用状态
   &[disabled] {
-    @apply cursor-not-allowed
+    @apply cursor-not-allowed;
   }
   &.s-btn--block {
-    @apply block w-full
+    @apply block w-full;
   }
 }
 

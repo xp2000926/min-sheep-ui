@@ -26,15 +26,26 @@
 
 :::
 
-## 按钮尺寸 size
+## 不同尺寸
 
-:::demo 通过 size 属性设置按钮样式，可选：mini|small | medium | large
+Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+:::demo 额外的尺寸：`large`,`medium`、`small`、`mini`，通过设置size属性来配置它们。
 ```vue
 <template>
-  <s-button size="mini">mini</s-button>
-  <s-button size="small">Small</s-button>
-  <s-button>Medium</s-button>
   <s-button size="large">Large</s-button>
+  <s-button>Medium</s-button>
+  <s-button size="small">Small</s-button>
+  <s-button size="mini">mini</s-button>
+  <br>
+  <s-button size="large" round>Large</s-button>
+  <s-button round>Medium</s-button>
+  <s-button size="small" round>Small</s-button>
+  <s-button size="mini" round>mini</s-button>
+  <br>
+  <s-button size="large" circle iconSvg="vuejs"></s-button>
+  <s-button circle iconSvg="vuejs"></s-button>
+  <s-button size="small" circle  iconSvg="vuejs"></s-button>
+  <s-button size="mini" circle iconSvg="vuejs"></s-button>
 </template>
 ```
 :::
@@ -76,6 +87,7 @@ const confirm = () => console.log('confirm')
 | type            | 类型                  | `enum`    | `primary` `secondary` `text`    | `secondary` |        |
 | block           | 块级                  | `boolean` |                                 | false       |        |
 | disabled        | 是否禁用状态          | `boolean` |                                 | false       |        |
+| round           | 是否圆角按钮          | `boolean` |                                 | false       |        |
 | loading         | 是否为加载中状态      | `boolean` |                                 | false       | 未实现 |
 | icon            | 图标组件              | `string`  |                                 |             | 未实现 |
 | backgroundColor | 设置按钮的背景色      | `string`  | —                               | —           | 未实现 |

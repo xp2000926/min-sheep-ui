@@ -1,5 +1,5 @@
-import { defineComponent as ae, computed as B, provide as U, createVNode as D, inject as C, ref as H, onMounted as de, onUnmounted as ce } from "vue";
-const fe = Symbol("formContextToken"), le = {
+import { defineComponent as ae, computed as B, provide as U, createVNode as N, toRefs as de, inject as C, ref as H, onMounted as ce, onUnmounted as le } from "vue";
+const fe = Symbol("formContextToken"), pe = {
   model: {
     type: Object,
     required: !0
@@ -22,7 +22,7 @@ const fe = Symbol("formContextToken"), le = {
 };
 const Q = ae({
   name: "SForm",
-  props: le,
+  props: pe,
   emits: ["submit"],
   setup(n, {
     slots: e,
@@ -35,35 +35,39 @@ const Q = ae({
       labelAlign: n.labelAlign
     }));
     U("LABEL_DATA", i);
-    const a = /* @__PURE__ */ new Set(), f = (c) => a.add(c), s = (c) => a.delete(c);
+    const f = /* @__PURE__ */ new Set(), a = (l) => f.add(l), s = (l) => f.delete(l);
     U(fe, {
       model: n.model,
       rules: n.rules,
-      addItem: f,
+      addItem: a,
       removeItem: s
     });
-    const u = (c) => {
-      c.preventDefault(), r("submit");
+    const o = (l) => {
+      l.preventDefault(), r("submit");
     };
     return t({
-      validate: (c) => {
+      validate: (l) => {
         const m = [];
-        a.forEach((h) => m.push(h.validate())), Promise.all(m).then(() => c(!0)).catch(() => c(!1));
+        f.forEach((g) => m.push(g.validate())), Promise.all(m).then(() => l(!0)).catch(() => l(!1));
       }
     }), () => {
-      var c;
-      return D("form", {
+      var l;
+      return N("form", {
         class: "s-form",
-        onSubmit: u
-      }, [(c = e.default) == null ? void 0 : c.call(e)]);
+        onSubmit: o
+      }, [(l = e.default) == null ? void 0 : l.call(e)]);
     };
   }
-}), pe = {
+}), me = {
   label: {
     type: String
   },
   prop: {
     type: String
+  },
+  error: {
+    type: String,
+    default: ""
   }
 };
 function R() {
@@ -76,7 +80,7 @@ function R() {
     return n;
   }, R.apply(this, arguments);
 }
-function me(n, e) {
+function ye(n, e) {
   n.prototype = Object.create(e.prototype), n.prototype.constructor = n, I(n, e);
 }
 function J(n) {
@@ -89,7 +93,7 @@ function I(n, e) {
     return t.__proto__ = i, t;
   }, I(n, e);
 }
-function ye() {
+function ge() {
   if (typeof Reflect > "u" || !Reflect.construct || Reflect.construct.sham)
     return !1;
   if (typeof Proxy == "function")
@@ -102,20 +106,20 @@ function ye() {
   }
 }
 function L(n, e, r) {
-  return ye() ? L = Reflect.construct.bind() : L = function(i, a, f) {
+  return ge() ? L = Reflect.construct.bind() : L = function(i, f, a) {
     var s = [null];
-    s.push.apply(s, a);
-    var u = Function.bind.apply(i, s), v = new u();
-    return f && I(v, f.prototype), v;
+    s.push.apply(s, f);
+    var o = Function.bind.apply(i, s), b = new o();
+    return a && I(b, a.prototype), b;
   }, L.apply(null, arguments);
 }
-function ge(n) {
+function ve(n) {
   return Function.toString.call(n).indexOf("[native code]") !== -1;
 }
 function W(n) {
   var e = typeof Map == "function" ? /* @__PURE__ */ new Map() : void 0;
   return W = function(t) {
-    if (t === null || !ge(t))
+    if (t === null || !ve(t))
       return t;
     if (typeof t != "function")
       throw new TypeError("Super expression must either be null or a function");
@@ -137,7 +141,7 @@ function W(n) {
     }), I(i, t);
   }, W(n);
 }
-var ve = /%[sdj%]/g, se = function() {
+var he = /%[sdj%]/g, se = function() {
 };
 typeof process < "u" && process.env && process.env.NODE_ENV !== "production" && typeof window < "u" && typeof document < "u" && (se = function(e, r) {
   typeof console < "u" && console.warn && typeof ASYNC_VALIDATOR_NO_WARNING > "u" && r.every(function(t) {
@@ -156,14 +160,14 @@ function Z(n) {
 function x(n) {
   for (var e = arguments.length, r = new Array(e > 1 ? e - 1 : 0), t = 1; t < e; t++)
     r[t - 1] = arguments[t];
-  var i = 0, a = r.length;
+  var i = 0, f = r.length;
   if (typeof n == "function")
     return n.apply(null, r);
   if (typeof n == "string") {
-    var f = n.replace(ve, function(s) {
+    var a = n.replace(he, function(s) {
       if (s === "%%")
         return "%";
-      if (i >= a)
+      if (i >= f)
         return s;
       switch (s) {
         case "%s":
@@ -181,81 +185,81 @@ function x(n) {
           return s;
       }
     });
-    return f;
+    return a;
   }
   return n;
 }
-function he(n) {
+function be(n) {
   return n === "string" || n === "url" || n === "hex" || n === "email" || n === "date" || n === "pattern";
 }
-function b(n, e) {
-  return !!(n == null || e === "array" && Array.isArray(n) && !n.length || he(e) && typeof n == "string" && !n);
+function h(n, e) {
+  return !!(n == null || e === "array" && Array.isArray(n) && !n.length || be(e) && typeof n == "string" && !n);
 }
-function be(n, e, r) {
-  var t = [], i = 0, a = n.length;
-  function f(s) {
-    t.push.apply(t, s || []), i++, i === a && r(t);
+function we(n, e, r) {
+  var t = [], i = 0, f = n.length;
+  function a(s) {
+    t.push.apply(t, s || []), i++, i === f && r(t);
   }
   n.forEach(function(s) {
-    e(s, f);
+    e(s, a);
   });
 }
 function k(n, e, r) {
   var t = 0, i = n.length;
-  function a(f) {
-    if (f && f.length) {
-      r(f);
+  function f(a) {
+    if (a && a.length) {
+      r(a);
       return;
     }
     var s = t;
-    t = t + 1, s < i ? e(n[s], a) : r([]);
+    t = t + 1, s < i ? e(n[s], f) : r([]);
   }
-  a([]);
+  f([]);
 }
-function we(n) {
+function qe(n) {
   var e = [];
   return Object.keys(n).forEach(function(r) {
     e.push.apply(e, n[r] || []);
   }), e;
 }
 var ee = /* @__PURE__ */ function(n) {
-  me(e, n);
+  ye(e, n);
   function e(r, t) {
     var i;
     return i = n.call(this, "Async Validation Error") || this, i.errors = r, i.fields = t, i;
   }
   return e;
 }(/* @__PURE__ */ W(Error));
-function qe(n, e, r, t, i) {
+function Fe(n, e, r, t, i) {
   if (e.first) {
-    var a = new Promise(function(h, F) {
-      var O = function(o) {
-        return t(o), o.length ? F(new ee(o, Z(o))) : h(i);
-      }, d = we(n);
-      k(d, r, O);
+    var f = new Promise(function(g, O) {
+      var q = function(u) {
+        return t(u), u.length ? O(new ee(u, Z(u))) : g(i);
+      }, d = qe(n);
+      k(d, r, q);
     });
-    return a.catch(function(h) {
-      return h;
-    }), a;
+    return f.catch(function(g) {
+      return g;
+    }), f;
   }
-  var f = e.firstFields === !0 ? Object.keys(n) : e.firstFields || [], s = Object.keys(n), u = s.length, v = 0, c = [], m = new Promise(function(h, F) {
-    var O = function(g) {
-      if (c.push.apply(c, g), v++, v === u)
-        return t(c), c.length ? F(new ee(c, Z(c))) : h(i);
+  var a = e.firstFields === !0 ? Object.keys(n) : e.firstFields || [], s = Object.keys(n), o = s.length, b = 0, l = [], m = new Promise(function(g, O) {
+    var q = function(v) {
+      if (l.push.apply(l, v), b++, b === o)
+        return t(l), l.length ? O(new ee(l, Z(l))) : g(i);
     };
-    s.length || (t(c), h(i)), s.forEach(function(d) {
-      var g = n[d];
-      f.indexOf(d) !== -1 ? k(g, r, O) : be(g, r, O);
+    s.length || (t(l), g(i)), s.forEach(function(d) {
+      var v = n[d];
+      a.indexOf(d) !== -1 ? k(v, r, q) : we(v, r, q);
     });
   });
-  return m.catch(function(h) {
-    return h;
+  return m.catch(function(g) {
+    return g;
   }), m;
 }
-function Fe(n) {
+function xe(n) {
   return !!(n && n.message !== void 0);
 }
-function xe(n, e) {
+function Oe(n, e) {
   for (var r = n, t = 0; t < e.length; t++) {
     if (r == null)
       return r;
@@ -266,7 +270,7 @@ function xe(n, e) {
 function re(n, e) {
   return function(r) {
     var t;
-    return n.fullFields ? t = xe(e, n.fullFields) : t = e[r.field || n.fullField], Fe(r) ? (r.field = r.field || n.fullField, r.fieldValue = t, r) : {
+    return n.fullFields ? t = Oe(e, n.fullFields) : t = e[r.field || n.fullField], xe(r) ? (r.field = r.field || n.fullField, r.fieldValue = t, r) : {
       message: typeof r == "function" ? r() : r,
       fieldValue: t,
       field: r.field || n.fullField
@@ -283,11 +287,11 @@ function te(n, e) {
   }
   return n;
 }
-var oe = function(e, r, t, i, a, f) {
-  e.required && (!t.hasOwnProperty(e.field) || b(r, f || e.type)) && i.push(x(a.messages.required, e.fullField));
-}, Oe = function(e, r, t, i, a) {
-  (/^\s+$/.test(r) || r === "") && i.push(x(a.messages.whitespace, e.fullField));
-}, $, Ae = function() {
+var oe = function(e, r, t, i, f, a) {
+  e.required && (!t.hasOwnProperty(e.field) || h(r, a || e.type)) && i.push(x(f.messages.required, e.fullField));
+}, Ae = function(e, r, t, i, f) {
+  (/^\s+$/.test(r) || r === "") && i.push(x(f.messages.whitespace, e.fullField));
+}, $, Ee = function() {
   if ($)
     return $;
   var n = "[a-fA-F\\d:]", e = function(y) {
@@ -303,15 +307,15 @@ var oe = function(e, r, t, i, a, f) {
 (?:` + t + ":){1}(?:(?::" + t + "){0,4}:" + r + "|(?::" + t + `){1,6}|:)| // 1::              1::3:4:5:6:7:8   1::8            1::3:4:5:6:7:1.2.3.4
 (?::(?:(?::` + t + "){0,5}:" + r + "|(?::" + t + `){1,7}|:))             // ::2:3:4:5:6:7:8  ::2:3:4:5:6:7:8  ::8             ::1.2.3.4
 )(?:%[0-9a-zA-Z]{1,})?                                             // %eth0            %1
-`).replace(/\s*\/\/.*$/gm, "").replace(/\n/g, "").trim(), a = new RegExp("(?:^" + r + "$)|(?:^" + i + "$)"), f = new RegExp("^" + r + "$"), s = new RegExp("^" + i + "$"), u = function(y) {
-    return y && y.exact ? a : new RegExp("(?:" + e(y) + r + e(y) + ")|(?:" + e(y) + i + e(y) + ")", "g");
+`).replace(/\s*\/\/.*$/gm, "").replace(/\n/g, "").trim(), f = new RegExp("(?:^" + r + "$)|(?:^" + i + "$)"), a = new RegExp("^" + r + "$"), s = new RegExp("^" + i + "$"), o = function(y) {
+    return y && y.exact ? f : new RegExp("(?:" + e(y) + r + e(y) + ")|(?:" + e(y) + i + e(y) + ")", "g");
   };
-  u.v4 = function(p) {
-    return p && p.exact ? f : new RegExp("" + e(p) + r + e(p), "g");
-  }, u.v6 = function(p) {
+  o.v4 = function(p) {
+    return p && p.exact ? a : new RegExp("" + e(p) + r + e(p), "g");
+  }, o.v6 = function(p) {
     return p && p.exact ? s : new RegExp("" + e(p) + i + e(p), "g");
   };
-  var v = "(?:(?:[a-z]+:)?//)", c = "(?:\\S+(?::\\S*)?@)?", m = u.v4().source, h = u.v6().source, F = "(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)", O = "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*", d = "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))", g = "(?::\\d{2,5})?", o = '(?:[/?#][^\\s"]*)?', E = "(?:" + v + "|www\\.)" + c + "(?:localhost|" + m + "|" + h + "|" + F + O + d + ")" + g + o;
+  var b = "(?:(?:[a-z]+:)?//)", l = "(?:\\S+(?::\\S*)?@)?", m = o.v4().source, g = o.v6().source, O = "(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)", q = "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*", d = "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))", v = "(?::\\d{2,5})?", u = '(?:[/?#][^\\s"]*)?', E = "(?:" + b + "|www\\.)" + l + "(?:localhost|" + m + "|" + g + "|" + O + q + d + ")" + v + u;
   return $ = new RegExp("(?:^" + E + "$)", "i"), $;
 }, ne = {
   email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+\.)+[a-zA-Z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]{2,}))$/,
@@ -351,177 +355,177 @@ var oe = function(e, r, t, i, a, f) {
     return typeof e == "string" && e.length <= 320 && !!e.match(ne.email);
   },
   url: function(e) {
-    return typeof e == "string" && e.length <= 2048 && !!e.match(Ae());
+    return typeof e == "string" && e.length <= 2048 && !!e.match(Ee());
   },
   hex: function(e) {
     return typeof e == "string" && !!e.match(ne.hex);
   }
-}, Ee = function(e, r, t, i, a) {
+}, _e = function(e, r, t, i, f) {
   if (e.required && r === void 0) {
-    oe(e, r, t, i, a);
+    oe(e, r, t, i, f);
     return;
   }
-  var f = ["integer", "float", "array", "regexp", "object", "method", "email", "number", "date", "url", "hex"], s = e.type;
-  f.indexOf(s) > -1 ? T[s](r) || i.push(x(a.messages.types[s], e.fullField, e.type)) : s && typeof r !== e.type && i.push(x(a.messages.types[s], e.fullField, e.type));
-}, _e = function(e, r, t, i, a) {
-  var f = typeof e.len == "number", s = typeof e.min == "number", u = typeof e.max == "number", v = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g, c = r, m = null, h = typeof r == "number", F = typeof r == "string", O = Array.isArray(r);
-  if (h ? m = "number" : F ? m = "string" : O && (m = "array"), !m)
+  var a = ["integer", "float", "array", "regexp", "object", "method", "email", "number", "date", "url", "hex"], s = e.type;
+  a.indexOf(s) > -1 ? T[s](r) || i.push(x(f.messages.types[s], e.fullField, e.type)) : s && typeof r !== e.type && i.push(x(f.messages.types[s], e.fullField, e.type));
+}, Pe = function(e, r, t, i, f) {
+  var a = typeof e.len == "number", s = typeof e.min == "number", o = typeof e.max == "number", b = /[\uD800-\uDBFF][\uDC00-\uDFFF]/g, l = r, m = null, g = typeof r == "number", O = typeof r == "string", q = Array.isArray(r);
+  if (g ? m = "number" : O ? m = "string" : q && (m = "array"), !m)
     return !1;
-  O && (c = r.length), F && (c = r.replace(v, "_").length), f ? c !== e.len && i.push(x(a.messages[m].len, e.fullField, e.len)) : s && !u && c < e.min ? i.push(x(a.messages[m].min, e.fullField, e.min)) : u && !s && c > e.max ? i.push(x(a.messages[m].max, e.fullField, e.max)) : s && u && (c < e.min || c > e.max) && i.push(x(a.messages[m].range, e.fullField, e.min, e.max));
-}, S = "enum", Pe = function(e, r, t, i, a) {
-  e[S] = Array.isArray(e[S]) ? e[S] : [], e[S].indexOf(r) === -1 && i.push(x(a.messages[S], e.fullField, e[S].join(", ")));
-}, je = function(e, r, t, i, a) {
+  q && (l = r.length), O && (l = r.replace(b, "_").length), a ? l !== e.len && i.push(x(f.messages[m].len, e.fullField, e.len)) : s && !o && l < e.min ? i.push(x(f.messages[m].min, e.fullField, e.min)) : o && !s && l > e.max ? i.push(x(f.messages[m].max, e.fullField, e.max)) : s && o && (l < e.min || l > e.max) && i.push(x(f.messages[m].range, e.fullField, e.min, e.max));
+}, S = "enum", je = function(e, r, t, i, f) {
+  e[S] = Array.isArray(e[S]) ? e[S] : [], e[S].indexOf(r) === -1 && i.push(x(f.messages[S], e.fullField, e[S].join(", ")));
+}, Re = function(e, r, t, i, f) {
   if (e.pattern) {
     if (e.pattern instanceof RegExp)
-      e.pattern.lastIndex = 0, e.pattern.test(r) || i.push(x(a.messages.pattern.mismatch, e.fullField, r, e.pattern));
+      e.pattern.lastIndex = 0, e.pattern.test(r) || i.push(x(f.messages.pattern.mismatch, e.fullField, r, e.pattern));
     else if (typeof e.pattern == "string") {
-      var f = new RegExp(e.pattern);
-      f.test(r) || i.push(x(a.messages.pattern.mismatch, e.fullField, r, e.pattern));
+      var a = new RegExp(e.pattern);
+      a.test(r) || i.push(x(f.messages.pattern.mismatch, e.fullField, r, e.pattern));
     }
   }
-}, l = {
+}, c = {
   required: oe,
-  whitespace: Oe,
-  type: Ee,
-  range: _e,
-  enum: Pe,
-  pattern: je
-}, Re = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  whitespace: Ae,
+  type: _e,
+  range: Pe,
+  enum: je,
+  pattern: Re
+}, Se = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r, "string") && !e.required)
+    if (h(r, "string") && !e.required)
       return t();
-    l.required(e, r, i, f, a, "string"), b(r, "string") || (l.type(e, r, i, f, a), l.range(e, r, i, f, a), l.pattern(e, r, i, f, a), e.whitespace === !0 && l.whitespace(e, r, i, f, a));
+    c.required(e, r, i, a, f, "string"), h(r, "string") || (c.type(e, r, i, a, f), c.range(e, r, i, a, f), c.pattern(e, r, i, a, f), e.whitespace === !0 && c.whitespace(e, r, i, a, f));
   }
-  t(f);
-}, Se = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Ne = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && l.type(e, r, i, f, a);
+    c.required(e, r, i, a, f), r !== void 0 && c.type(e, r, i, a, f);
   }
-  t(f);
-}, Ne = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, De = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (r === "" && (r = void 0), b(r) && !e.required)
+    if (r === "" && (r = void 0), h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && (l.type(e, r, i, f, a), l.range(e, r, i, f, a));
+    c.required(e, r, i, a, f), r !== void 0 && (c.type(e, r, i, a, f), c.range(e, r, i, a, f));
   }
-  t(f);
-}, De = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Te = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && l.type(e, r, i, f, a);
+    c.required(e, r, i, a, f), r !== void 0 && c.type(e, r, i, a, f);
   }
-  t(f);
-}, Te = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Ve = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), b(r) || l.type(e, r, i, f, a);
+    c.required(e, r, i, a, f), h(r) || c.type(e, r, i, a, f);
   }
-  t(f);
-}, Ve = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Ie = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && (l.type(e, r, i, f, a), l.range(e, r, i, f, a));
+    c.required(e, r, i, a, f), r !== void 0 && (c.type(e, r, i, a, f), c.range(e, r, i, a, f));
   }
-  t(f);
-}, Ie = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Me = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && (l.type(e, r, i, f, a), l.range(e, r, i, f, a));
+    c.required(e, r, i, a, f), r !== void 0 && (c.type(e, r, i, a, f), c.range(e, r, i, a, f));
   }
-  t(f);
-}, Me = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, $e = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
     if (r == null && !e.required)
       return t();
-    l.required(e, r, i, f, a, "array"), r != null && (l.type(e, r, i, f, a), l.range(e, r, i, f, a));
+    c.required(e, r, i, a, f, "array"), r != null && (c.type(e, r, i, a, f), c.range(e, r, i, a, f));
   }
-  t(f);
-}, $e = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Le = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && l.type(e, r, i, f, a);
+    c.required(e, r, i, a, f), r !== void 0 && c.type(e, r, i, a, f);
   }
-  t(f);
-}, Le = "enum", ze = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, ze = "enum", Be = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a), r !== void 0 && l[Le](e, r, i, f, a);
+    c.required(e, r, i, a, f), r !== void 0 && c[ze](e, r, i, a, f);
   }
-  t(f);
-}, Be = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Ue = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r, "string") && !e.required)
+    if (h(r, "string") && !e.required)
       return t();
-    l.required(e, r, i, f, a), b(r, "string") || l.pattern(e, r, i, f, a);
+    c.required(e, r, i, a, f), h(r, "string") || c.pattern(e, r, i, a, f);
   }
-  t(f);
-}, Ue = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+  t(a);
+}, Je = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r, "date") && !e.required)
+    if (h(r, "date") && !e.required)
       return t();
-    if (l.required(e, r, i, f, a), !b(r, "date")) {
-      var u;
-      r instanceof Date ? u = r : u = new Date(r), l.type(e, u, i, f, a), u && l.range(e, u.getTime(), i, f, a);
+    if (c.required(e, r, i, a, f), !h(r, "date")) {
+      var o;
+      r instanceof Date ? o = r : o = new Date(r), c.type(e, o, i, a, f), o && c.range(e, o.getTime(), i, a, f);
     }
   }
-  t(f);
-}, Je = function(e, r, t, i, a) {
-  var f = [], s = Array.isArray(r) ? "array" : typeof r;
-  l.required(e, r, i, f, a, s), t(f);
-}, z = function(e, r, t, i, a) {
-  var f = e.type, s = [], u = e.required || !e.required && i.hasOwnProperty(e.field);
-  if (u) {
-    if (b(r, f) && !e.required)
+  t(a);
+}, We = function(e, r, t, i, f) {
+  var a = [], s = Array.isArray(r) ? "array" : typeof r;
+  c.required(e, r, i, a, f, s), t(a);
+}, z = function(e, r, t, i, f) {
+  var a = e.type, s = [], o = e.required || !e.required && i.hasOwnProperty(e.field);
+  if (o) {
+    if (h(r, a) && !e.required)
       return t();
-    l.required(e, r, i, s, a, f), b(r, f) || l.type(e, r, i, s, a);
+    c.required(e, r, i, s, f, a), h(r, a) || c.type(e, r, i, s, f);
   }
   t(s);
-}, We = function(e, r, t, i, a) {
-  var f = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
+}, Ze = function(e, r, t, i, f) {
+  var a = [], s = e.required || !e.required && i.hasOwnProperty(e.field);
   if (s) {
-    if (b(r) && !e.required)
+    if (h(r) && !e.required)
       return t();
-    l.required(e, r, i, f, a);
+    c.required(e, r, i, a, f);
   }
-  t(f);
+  t(a);
 }, V = {
-  string: Re,
-  method: Se,
-  number: Ne,
-  boolean: De,
-  regexp: Te,
-  integer: Ve,
-  float: Ie,
-  array: Me,
-  object: $e,
-  enum: ze,
-  pattern: Be,
-  date: Ue,
+  string: Se,
+  method: Ne,
+  number: De,
+  boolean: Te,
+  regexp: Ve,
+  integer: Ie,
+  float: Me,
+  array: $e,
+  object: Le,
+  enum: Be,
+  pattern: Ue,
+  date: Je,
   url: z,
   hex: z,
   email: z,
-  required: Je,
-  any: We
+  required: We,
+  any: Ze
 };
 function Y() {
   return {
@@ -587,110 +591,110 @@ var G = Y(), M = /* @__PURE__ */ function() {
       throw new Error("Cannot configure a schema with no rules");
     if (typeof t != "object" || Array.isArray(t))
       throw new Error("Rules must be an object");
-    this.rules = {}, Object.keys(t).forEach(function(a) {
-      var f = t[a];
-      i.rules[a] = Array.isArray(f) ? f : [f];
+    this.rules = {}, Object.keys(t).forEach(function(f) {
+      var a = t[f];
+      i.rules[f] = Array.isArray(a) ? a : [a];
     });
   }, e.messages = function(t) {
     return t && (this._messages = te(Y(), t)), this._messages;
-  }, e.validate = function(t, i, a) {
-    var f = this;
-    i === void 0 && (i = {}), a === void 0 && (a = function() {
+  }, e.validate = function(t, i, f) {
+    var a = this;
+    i === void 0 && (i = {}), f === void 0 && (f = function() {
     });
-    var s = t, u = i, v = a;
-    if (typeof u == "function" && (v = u, u = {}), !this.rules || Object.keys(this.rules).length === 0)
-      return v && v(null, s), Promise.resolve(s);
-    function c(d) {
-      var g = [], o = {};
+    var s = t, o = i, b = f;
+    if (typeof o == "function" && (b = o, o = {}), !this.rules || Object.keys(this.rules).length === 0)
+      return b && b(null, s), Promise.resolve(s);
+    function l(d) {
+      var v = [], u = {};
       function E(y) {
         if (Array.isArray(y)) {
-          var q;
-          g = (q = g).concat.apply(q, y);
+          var F;
+          v = (F = v).concat.apply(F, y);
         } else
-          g.push(y);
+          v.push(y);
       }
       for (var p = 0; p < d.length; p++)
         E(d[p]);
-      g.length ? (o = Z(g), v(g, o)) : v(null, s);
+      v.length ? (u = Z(v), b(v, u)) : b(null, s);
     }
-    if (u.messages) {
+    if (o.messages) {
       var m = this.messages();
-      m === G && (m = Y()), te(m, u.messages), u.messages = m;
+      m === G && (m = Y()), te(m, o.messages), o.messages = m;
     } else
-      u.messages = this.messages();
-    var h = {}, F = u.keys || Object.keys(this.rules);
-    F.forEach(function(d) {
-      var g = f.rules[d], o = s[d];
-      g.forEach(function(E) {
+      o.messages = this.messages();
+    var g = {}, O = o.keys || Object.keys(this.rules);
+    O.forEach(function(d) {
+      var v = a.rules[d], u = s[d];
+      v.forEach(function(E) {
         var p = E;
-        typeof p.transform == "function" && (s === t && (s = R({}, s)), o = s[d] = p.transform(o)), typeof p == "function" ? p = {
+        typeof p.transform == "function" && (s === t && (s = R({}, s)), u = s[d] = p.transform(u)), typeof p == "function" ? p = {
           validator: p
-        } : p = R({}, p), p.validator = f.getValidationMethod(p), p.validator && (p.field = d, p.fullField = p.fullField || d, p.type = f.getType(p), h[d] = h[d] || [], h[d].push({
+        } : p = R({}, p), p.validator = a.getValidationMethod(p), p.validator && (p.field = d, p.fullField = p.fullField || d, p.type = a.getType(p), g[d] = g[d] || [], g[d].push({
           rule: p,
-          value: o,
+          value: u,
           source: s,
           field: d
         }));
       });
     });
-    var O = {};
-    return qe(h, u, function(d, g) {
-      var o = d.rule, E = (o.type === "object" || o.type === "array") && (typeof o.fields == "object" || typeof o.defaultField == "object");
-      E = E && (o.required || !o.required && d.value), o.field = d.field;
+    var q = {};
+    return Fe(g, o, function(d, v) {
+      var u = d.rule, E = (u.type === "object" || u.type === "array") && (typeof u.fields == "object" || typeof u.defaultField == "object");
+      E = E && (u.required || !u.required && d.value), u.field = d.field;
       function p(w, j) {
         return R({}, j, {
-          fullField: o.fullField + "." + w,
-          fullFields: o.fullFields ? [].concat(o.fullFields, [w]) : [w]
+          fullField: u.fullField + "." + w,
+          fullFields: u.fullFields ? [].concat(u.fullFields, [w]) : [w]
         });
       }
       function y(w) {
         w === void 0 && (w = []);
         var j = Array.isArray(w) ? w : [w];
-        !u.suppressWarning && j.length && n.warning("async-validator:", j), j.length && o.message !== void 0 && (j = [].concat(o.message));
-        var _ = j.map(re(o, s));
-        if (u.first && _.length)
-          return O[o.field] = 1, g(_);
+        !o.suppressWarning && j.length && n.warning("async-validator:", j), j.length && u.message !== void 0 && (j = [].concat(u.message));
+        var _ = j.map(re(u, s));
+        if (o.first && _.length)
+          return q[u.field] = 1, v(_);
         if (!E)
-          g(_);
+          v(_);
         else {
-          if (o.required && !d.value)
-            return o.message !== void 0 ? _ = [].concat(o.message).map(re(o, s)) : u.error && (_ = [u.error(o, x(u.messages.required, o.field))]), g(_);
-          var N = {};
-          o.defaultField && Object.keys(d.value).map(function(P) {
-            N[P] = o.defaultField;
-          }), N = R({}, N, d.rule.fields);
+          if (u.required && !d.value)
+            return u.message !== void 0 ? _ = [].concat(u.message).map(re(u, s)) : o.error && (_ = [o.error(u, x(o.messages.required, u.field))]), v(_);
+          var D = {};
+          u.defaultField && Object.keys(d.value).map(function(P) {
+            D[P] = u.defaultField;
+          }), D = R({}, D, d.rule.fields);
           var K = {};
-          Object.keys(N).forEach(function(P) {
-            var A = N[P], ue = Array.isArray(A) ? A : [A];
+          Object.keys(D).forEach(function(P) {
+            var A = D[P], ue = Array.isArray(A) ? A : [A];
             K[P] = ue.map(p.bind(null, P));
           });
           var X = new n(K);
-          X.messages(u.messages), d.rule.options && (d.rule.options.messages = u.messages, d.rule.options.error = u.error), X.validate(d.value, d.rule.options || u, function(P) {
+          X.messages(o.messages), d.rule.options && (d.rule.options.messages = o.messages, d.rule.options.error = o.error), X.validate(d.value, d.rule.options || o, function(P) {
             var A = [];
-            _ && _.length && A.push.apply(A, _), P && P.length && A.push.apply(A, P), g(A.length ? A : null);
+            _ && _.length && A.push.apply(A, _), P && P.length && A.push.apply(A, P), v(A.length ? A : null);
           });
         }
       }
-      var q;
-      if (o.asyncValidator)
-        q = o.asyncValidator(o, d.value, y, d.source, u);
-      else if (o.validator) {
+      var F;
+      if (u.asyncValidator)
+        F = u.asyncValidator(u, d.value, y, d.source, o);
+      else if (u.validator) {
         try {
-          q = o.validator(o, d.value, y, d.source, u);
+          F = u.validator(u, d.value, y, d.source, o);
         } catch (w) {
-          console.error == null || console.error(w), u.suppressValidatorError || setTimeout(function() {
+          console.error == null || console.error(w), o.suppressValidatorError || setTimeout(function() {
             throw w;
           }, 0), y(w.message);
         }
-        q === !0 ? y() : q === !1 ? y(typeof o.message == "function" ? o.message(o.fullField || o.field) : o.message || (o.fullField || o.field) + " fails") : q instanceof Array ? y(q) : q instanceof Error && y(q.message);
+        F === !0 ? y() : F === !1 ? y(typeof u.message == "function" ? u.message(u.fullField || u.field) : u.message || (u.fullField || u.field) + " fails") : F instanceof Array ? y(F) : F instanceof Error && y(F.message);
       }
-      q && q.then && q.then(function() {
+      F && F.then && F.then(function() {
         return y();
       }, function(w) {
         return y(w);
       });
     }, function(d) {
-      c(d);
+      l(d);
     }, s);
   }, e.getType = function(t) {
     if (t.type === void 0 && t.pattern instanceof RegExp && (t.type = "pattern"), typeof t.validator != "function" && t.type && !V.hasOwnProperty(t.type))
@@ -699,8 +703,8 @@ var G = Y(), M = /* @__PURE__ */ function() {
   }, e.getValidationMethod = function(t) {
     if (typeof t.validator == "function")
       return t.validator;
-    var i = Object.keys(t), a = i.indexOf("message");
-    return a !== -1 && i.splice(a, 1), i.length === 1 && i[0] === "required" ? V.required : V[this.getType(t)] || void 0;
+    var i = Object.keys(t), f = i.indexOf("message");
+    return f !== -1 && i.splice(f, 1), i.length === 1 && i[0] === "required" ? V.required : V[this.getType(t)] || void 0;
   }, n;
 }();
 M.register = function(e, r) {
@@ -713,60 +717,64 @@ M.messages = G;
 M.validators = V;
 const ie = ae({
   name: "SFormItem",
-  props: pe,
+  props: me,
   setup(n, {
     slots: e
   }) {
-    const r = C("LABEL_DATA"), t = B(() => ({
+    const {
+      error: r
+    } = de(n), t = C("LABEL_DATA"), i = B(() => ({
       "s-form__item": !0,
-      "s-form__item--horizontal": r.value.layout === "horizontal",
-      "s-form__item--vertical": r.value.layout === "vertical"
-    })), i = B(() => ({
+      "s-form__item--horizontal": t.value.layout === "horizontal",
+      "s-form__item--vertical": t.value.layout === "vertical"
+    })), f = B(() => ({
       "s-form__label": !0,
-      "s-form__label--vertical": r.value.layout === "vertical",
-      [`s-form__label--${r.value.labelAlign}`]: r.value.layout === "horizontal",
-      [`s-form__label--${r.value.labelSize}`]: r.value.layout === "horizontal"
-    })), a = C(fe), f = H(!1), s = H(""), v = {
+      "s-form__label--vertical": t.value.layout === "vertical",
+      [`s-form__label--${t.value.labelAlign}`]: t.value.layout === "horizontal",
+      [`s-form__label--${t.value.labelSize}`]: t.value.layout === "horizontal"
+    })), a = C(fe), s = H(!1), o = H(""), l = {
       validate: () => {
         if (!a)
           return console.warn("请在Form中使用FormItem"), Promise.reject("请在Form中使用FormItem");
-        if (!n.prop)
-          return console.warn("如果要校验当前项，请设置prop字段"), Promise.reject("如果要校验当前项，请设置prop字段");
         if (!a.rules)
           return Promise.resolve({
             result: !0
           });
-        const c = a.rules[n.prop] || void 0;
-        if (!c)
+        if (!n.prop)
+          return console.warn("如果要校验当前项，请设置prop字段"), Promise.reject("如果要校验当前项，请设置prop字段");
+        const m = a.rules[n.prop] || void 0;
+        if (!m)
           return Promise.resolve({
             result: !0
           });
-        const m = a.model[n.prop];
+        const g = a.model[n.prop];
         return new M({
-          [n.prop]: c
-        }).validate({
           [n.prop]: m
-        }, (F) => {
-          F ? (f.value = !0, s.value = F[0].message || "校验错误") : (f.value = !1, s.value = "");
+        }).validate({
+          [n.prop]: g
+        }, (q) => {
+          q ? (s.value = !0, o.value = q[0].message || "校验错误") : (s.value = !1, o.value = "");
         });
       }
     };
-    return U("FORM_ITEM_CTX", v), de(() => {
-      n.prop && (a == null || a.addItem(v));
-    }), ce(() => {
-      n.prop && (a == null || a.removeItem(v));
+    return U("FORM_ITEM_CTX", l), ce(() => {
+      n.prop && (a == null || a.addItem(l));
+    }), le(() => {
+      n.prop && (a == null || a.removeItem(l));
     }), () => {
-      var c;
-      return D("div", {
-        class: t.value
-      }, [D("span", {
+      var m;
+      return N("div", {
         class: i.value
-      }, [n.label]), D("div", null, [(c = e.default) == null ? void 0 : c.call(e)]), f.value && D("div", {
+      }, [N("span", {
+        class: f.value
+      }, [n.label]), N("div", null, [(m = e.default) == null ? void 0 : m.call(e)]), r.value && N("div", {
         class: "error-message"
-      }, [s.value])]);
+      }, [r.value]), s.value && N("div", {
+        class: "error-message"
+      }, [o.value])]);
     };
   }
-}), Ye = {
+}), Ge = {
   install(n) {
     n.component(Q.name, Q), n.component(ie.name, ie);
   }
@@ -774,5 +782,5 @@ const ie = ae({
 export {
   Q as Form,
   ie as FormItem,
-  Ye as default
+  Ge as default
 };

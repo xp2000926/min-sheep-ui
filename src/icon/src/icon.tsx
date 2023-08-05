@@ -40,7 +40,7 @@ export default defineComponent({
         <use
           xlinkHref={`#${props.prefix}-${props.component}`}
           fill={props.color}
-        ></use>
+        />
       </svg>
     )
     const icon = props.component

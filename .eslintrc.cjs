@@ -9,27 +9,22 @@ module.exports = {
         "plugin:vue/vue3-essential",
         'plugin:prettier/recommended',
     ],
-    "overrides": [
+    overrides: [
         {
-            "env": {
-                "node": true
+            env: {
+                node: true
             },
-            "files": [
-                ".eslintrc.{js,cjs}"
-            ],
-            "parserOptions": {
-                "sourceType": "script"
+            files: ['.eslintrc.{js,cjs}'],
+            parserOptions: {
+                sourceType: 'script'
             }
         }
     ],
-    "parserOptions": {
-        "ecmaVersion": "latest",
-        "parser": "@typescript-eslint/parser",
-        "sourceType": "module"
+    parserOptions: {
+        ecmaVersion: 'latest',
+        parser: '@typescript-eslint/parser',
+        sourceType: 'module'
     },
-    "plugins": [
-        "@typescript-eslint",
-        "vue"
-    ],
+    plugins: ['@typescript-eslint', 'vue'],
     rules: {}
 }

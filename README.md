@@ -1,6 +1,10 @@
 <h1 align="center">min-sheep-ui</h1>
 
-[![](https://data.jsdelivr.com/v1/package/npm/min-sheep-ui/badge)](https://www.jsdelivr.com/package/npm/min-sheep-ui) [![](https://img.shields.io/npm/v/min-sheep-ui?color=c95f8b&label=NPM)](https://www.npmjs.com/package/min-sheep-ui) [![](https://flat.badgen.net/bundlephobia/minzip/min-sheep-ui)](https://bundlephobia.com/result?p=min-sheep-ui)
+[![](https://data.jsdelivr.com/v1/package/npm/min-sheep-ui/badge)](https://www.jsdelivr.com/package/npm/min-sheep-ui)
+[![](https://img.shields.io/npm/v/min-sheep-ui?color=c95f8b&label=NPM)](https://www.npmjs.com/package/min-sheep-ui)
+[![](https://flat.badgen.net/bundlephobia/minzip/min-sheep-ui)](https://bundlephobia.com/result?p=min-sheep-ui)
+[![](https://pkg-size.dev/badge/install/514123)](https://pkg-size.dev/min-sheep-ui)
+[![](https://pkg-size.dev/badge/bundle/63323)](https://pkg-size.dev/min-sheep-ui)
 
 ## csdn
 
@@ -18,11 +22,11 @@ npm i min-sheep-ui
 ## Quick Start
 
 ```js
-import Vue from 'vue'
-import App from './App.vue'
-import MinSheepUI from 'min-sheep-ui'
-import 'min-sheep-ui/style.css'
-createApp(App).use(MinSheepUI).mount('#app')
+import Vue from 'vue';
+import App from './App.vue';
+import MinSheepUI from 'min-sheep-ui';
+import 'min-sheep-ui/style.css';
+createApp(App).use(MinSheepUI).mount('#app');
 ```
 
 ```json

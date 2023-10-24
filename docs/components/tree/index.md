@@ -68,6 +68,7 @@ const data = ref([
 ## 连接线
 
 展开节点之后设置连接线便于分辨同级节点。通过`lineable`属性控制特性开关，默认 false。
+
 :::demo 通过`lineable`属性控制特性开关，默认 false
 ```vue
 <template>
@@ -133,15 +134,29 @@ const data = ref([
 ## 复选框
 
 通过复选框可以多选节点，这样可以批量操作节点。
+
 :::demo 通过`checkable`属性控制特性开关，默认 false
+
 ```vue
 <template>
-  <s-tree :data="data" checkable @check="check"/>
+  <s-tree :data="data" checkable @check="check" />
 </template>
 <script setup>
 import { ref } from 'vue'
-const check=(currentNode,selectedRowKeys,selectedRows,halfselectedRowKeys,halfselectedRows)=>{
-   console.log(currentNode,selectedRowKeys,selectedRows,halfselectedRowKeys,halfselectedRows);
+const check = (
+  currentNode,
+  selectedRowKeys,
+  selectedRows,
+  halfselectedRowKeys,
+  halfselectedRows
+) => {
+  console.log(
+    currentNode,
+    selectedRowKeys,
+    selectedRows,
+    halfselectedRowKeys,
+    halfselectedRows
+  )
 }
 const data = ref([
   {
@@ -153,12 +168,14 @@ const data = ref([
     label: 'packages',
     id: 'packages',
     expanded: true,
-    checked: true,
+    inChecked: true,
+    checked: false,
+    disabled:true,
     children: [
       {
         label: 'plugin-vue',
         id: 'plugin-vue',
-        checked: true
+        checked: false
       },
       {
         label: 'vite',
@@ -169,7 +186,8 @@ const data = ref([
           {
             label: 'src',
             id: 'src',
-            checked: true
+            checked: true,
+            disabled:true
           },
           {
             label: 'README.md',
@@ -183,10 +201,14 @@ const data = ref([
   {
     label: 'scripts',
     id: 'scripts',
+    expanded: true,
+    inChecked: true,
+    checked: false,
     children: [
       {
         label: 'release.ts',
-        id: 'release.ts'
+        id: 'release.ts',
+        checked: true,
       },
       {
         label: 'verifyCommit.ts',
@@ -201,6 +223,7 @@ const data = ref([
 ])
 </script>
 ```
+
 :::
 
 ## 自定义 icon 图标
@@ -298,6 +321,7 @@ const data = ref([
 ## 自定义节点内容
 
 通过 content 插槽可以自定义节点内容。
+
 :::demo 在 label 左边设置图标，右侧设置一个修改状态图标。
 ```vue
 <template>
@@ -402,11 +426,13 @@ const data = ref([
 ])
 </script>
 ```
+
 :::
 
 ## 操作节点
 
 通过设置 operable 打开节点操作按钮。
+
 :::demo
 ```vue
 <template>
@@ -446,6 +472,7 @@ export default defineComponent({
 ## 节点懒加载
 
 通过设置该节点 isLeaf 参数为 false, 组件回调 lazyLoad 方法实现节点懒加载。
+
 :::demo 通过设置该节点 isLeaf 参数为 false, 组件回调 lazyLoad 方法实现节点懒加载。
 ```vue
 <template>
@@ -519,6 +546,7 @@ export default defineComponent({
 ## 可拖拽树
 
 通过`draggable`属性配置节点的拖拽功能。
+
 :::demo
 ```vue
 <template>
@@ -564,6 +592,7 @@ export default defineComponent({
 ## 虚拟滚动
 
 通过`height`开启虚拟滚动，通过`itemHeight`设置项目高度
+
 :::demo
 ```vue
 <template>
@@ -592,7 +621,8 @@ export default defineComponent({
 
 ## 手风琴模式
 
-`accordion`对于同一级的节点，每次只能展开一个
+`accordion`对于同一级的节点，每次只能展开一
+
 :::demo
 ```vue
 <template>
@@ -685,29 +715,34 @@ const data = ref([
 | lineable | 连接线 | `boolean` | — | false |  |
 | accordion | 是否每次只打开一个同级树节点展开 | `boolean` | — | false |  |
 | icon | 图标组件 | `string` | — | — | 未实现 |
-| props | 配置选项，具体看下表 | object | — | — | 未实现 |
+| props | 配置选项，具体看下表 | object | — | — | 实现中 |
 
 ### props
 
-| 属性名 | 说明 | 类型 | 可选值 | 默认值 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| label | 指定节点标签为节点对象的某个属性值 | `string, function(data, node)` | — | — | 未实现 |
-| children | 指定子树为节点对象的某个属性值 | `string` | — | — | 未实现 |
-| disabled | 指定节点选择框是否禁用为节点对象的某个属性值 | `boolean, function(data, node)` | — | — | 未实现 |
-| isLeaf | 指定节点是否为叶子节点，仅在指定了 lazy 属性的情况下生效 | `boolean, function(data, node)` | — | — | 未实现 |
+| 属性名    | 说明                                                    | 类型                           | 可选值 | 默认值 | 备注   |
+| --------- | ------------------------------------------------------- | ------------------------------ | ------ | ---    | ------ |
+| label     | 指定节点标签为节点对象的某个属性值                       | `string, function(data, node)` | —      | —      |        |
+| children  | 指定子树为节点对象的某个属性值                           | `string`                       | —      | —      |        |
+| disabled  | 指定节点选择框是否禁用为节点对象的某个属性值             | `boolean, function(data, node)` | —     | —      |        |
+| isLeaf    | 指定节点是否为叶子节点，仅在指定了 lazy 属性的情况下生效 | `boolean, function(data, node)` | —      | —      |        |
+| expanded  | 控制节点是否为展开                                        | boolean                         | —      | false  |        |
+| checked   | 控制节点是否为选中                                        | boolean                         | —      | false  |        |
+| inChecked | 控制节点否是为半选                                        | boolean                         | —      | false  |        |
+| id        | key值                                                     | string                         | —      | —      |        |
+
 
 ### Tree 事件
 
-| 事件名称 | 说明 | 类型 | 回调参数 |备注 |
-| --- | --- | --- | --- |--- |
-| toggleNode | <!--accordion 默认 false --> | (e: Event, node: IInnerTreeNode, accordion?: boolean) => void |  ||
-| lazy-load |  | (node: IInnerTreeNode) => void |  ||
-| check |  | | | 实现中 |
+| 事件名称 | 说明 | 类型 | 回调参数 | 备注 |
+| --- | --- | --- | --- | --- |
+| toggleNode | <!--accordion 默认 false --> | (e: Event, node: IInnerTreeNode, accordion?: boolean) => void |  |  |
+| lazy-load |  | (node: IInnerTreeNode) => void |  |  |
+| check |  |  |  | 实现中 |
 
 ### Tree 插槽
 
-| 插槽名 | 说明 | 
+| 插槽名 | 说明 |
 | --- | --- |
-| icon | 自定义图标组件，参数为`{nodeData:IInnerTreeNode, toggleNode:Function}`|
+| icon | 自定义图标组件，参数为`{nodeData:IInnerTreeNode, toggleNode:Function}` |
 | content | 自定义节点内容 参数为`treeNode:IInnerTreeNode` |  |
-| loading |  |  
+| loading |  |

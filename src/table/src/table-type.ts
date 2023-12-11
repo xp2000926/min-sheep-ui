@@ -16,10 +16,7 @@ export const tableProps = {
     default: false
   },
   //带斑马纹表格
-  stripe: {
-    type: Boolean,
-    default: false
-  },
+  stripe: { type: Boolean, default: false },
   //合计行
   showSummary: { type: Boolean, default: false }
 } as const

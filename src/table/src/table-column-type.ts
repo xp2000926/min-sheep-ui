@@ -15,7 +15,8 @@ export const tableColumnProps = {
     }
 } as const
 export type TableColumnProps = ExtractPropTypes<typeof tableColumnProps>
-export interface ColumnContext {
+export interface 
+ColumnContext {
     prop?: string
     title?: string
     type?: string

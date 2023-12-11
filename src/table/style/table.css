@@ -19,6 +19,14 @@
   border-bottom: 1px solid #ebeef5;
 }
 
+.s-table .s-table-placeholder .ant-empty-description {
+  text-align: center;
+}
+
+.s-table .s-table-placeholder:hover td {
+  background-color: transparent;
+}
+
 .s-table.s-table--border {
   border: 1px solid #ebeef5;
 }

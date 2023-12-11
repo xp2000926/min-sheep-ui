@@ -420,6 +420,10 @@ div[class~='language-vue']:before {
   border: none;
 }
 
+.vp-doc tr:nth-child(2n) {
+  background-color: transparent;
+}
+
 .s-table th,
 .s-table td {
   border-bottom: 1px solid #ebeef5;

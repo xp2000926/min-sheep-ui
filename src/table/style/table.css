@@ -8,9 +8,31 @@
   color: #909399;
 }
 
+.s-table tr:hover td {
+  background-color: #f5f7fa;
+}
+
 .s-table th,
 .s-table td {
-  padding: 8px 0;
+  padding: 8px 15px;
   text-align: left;
   border-bottom: 1px solid #ebeef5;
+}
+
+.s-table.s-table--border {
+  border: 1px solid #ebeef5;
+}
+
+.s-table.s-table--border th,
+.s-table.s-table--border td {
+  border-right: 1px solid #ebeef5;
+}
+
+.s-table.s-table--border th:last-child,
+.s-table.s-table--border td:last-child {
+  border-right: none;
+}
+
+.s-table.s-table--striped .s-table__row--striped {
+  background-color: #fafafa;
 }

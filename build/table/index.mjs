@@ -1,49 +1,28 @@
-import { defineComponent as x, toRefs as C, ref as p, provide as v, watch as m, createVNode as a, withDirectives as T, vModelCheckbox as D, inject as h, nextTick as I } from "vue";
-const P = {
+import { defineComponent as h, toRefs as T, inject as k, ref as v, nextTick as H, watch as S, createVNode as a, withDirectives as D, vModelCheckbox as V, Fragment as O, mergeProps as R, createTextVNode as E, provide as x } from "vue";
+const I = {
   data: {
     type: Array,
     default: () => []
+  },
+  columns: {
+    type: Array,
+    default: []
+  },
+  border: {
+    type: Boolean,
+    default: !1
+  },
+  stripe: {
+    type: Boolean,
+    default: !1
+  },
+  showSummary: { type: Boolean, default: !1 }
+}, U = {
+  columns: {
+    type: Array,
+    default: {}
   }
-};
-const y = x({
-  name: "STable",
-  props: P,
-  emits: ["selection-change"],
-  setup(i, {
-    slots: n,
-    emit: r
-  }) {
-    const {
-      data: l
-    } = C(i), s = p([]);
-    v("column-data", s), m(l, (e) => {
-      const t = e.filter((o) => o.checked);
-      t.length === l.value.length ? (c.value = !0, u.value = !1) : t.length === 0 ? (c.value = !1, u.value = !1) : u.value = !0, r("selection-change", t);
-    }, {
-      deep: !0
-    });
-    const c = p(l.value.every((e) => e.checked));
-    v("all-checked", c), m(c, (e) => {
-      l.value.forEach((t) => {
-        t.checked = e;
-      });
-    });
-    const u = p(l.value.some((e) => e.checked) && !c.value);
-    return v("is-indeterminate", u), () => {
-      var e;
-      return a("table", {
-        class: "s-table"
-      }, [a("thead", null, [a("tr", null, [(e = n.default) == null ? void 0 : e.call(n)])]), a("tbody", null, [l.value.map((t) => a("tr", null, [s.value.map((o, R) => {
-        var f, b, k;
-        const d = (f = n.default) == null ? void 0 : f.call(n)[R];
-        return d != null && d.children ? a("td", null, [(k = (b = d == null ? void 0 : d.children).default) == null ? void 0 : k.call(b, t)]) : a("td", null, [o.prop ? t[o.prop] : o.type === "selection" ? T(a("input", {
-          type: "checkbox",
-          "onUpdate:modelValue": (V) => t.checked = V
-        }, null), [[D, t.checked]]) : ""]);
-      })]))])]);
-    };
-  }
-}), S = {
+}, _ = {
   prop: {
     type: String,
     default: ""
@@ -57,42 +36,156 @@ const y = x({
     default: ""
   }
 };
-const g = x({
+const g = h({
   name: "STableColumn",
-  props: S,
-  setup(i) {
+  props: _,
+  setup(l) {
     const {
       prop: n,
-      title: r,
-      type: l
-    } = C(i);
-    h("column-data").value.push({
+      title: u,
+      type: t
+    } = T(l);
+    k("column-data").value.push({
       prop: n.value,
-      title: r.value,
-      type: l.value
+      title: u.value,
+      type: t.value
     });
-    const c = h("all-checked"), u = h("is-indeterminate"), e = p();
-    return I(() => {
-      e.value && (e.value.indeterminate = u.value);
-    }), m(u, () => {
-      e.value && (e.value.indeterminate = u.value);
+    const e = k("all-checked"), o = k("is-indeterminate"), r = v();
+    return H(() => {
+      r.value && (r.value.indeterminate = o.value);
+    }), S(o, () => {
+      r.value && (r.value.indeterminate = o.value);
     }, {
       immediate: !0
     }), () => a("th", {
       class: "s-table-column"
-    }, [l.value === "selection" ? T(a("input", {
-      ref: e,
+    }, [t.value === "selection" ? D(a("input", {
+      ref: r,
       type: "checkbox",
-      "onUpdate:modelValue": (t) => c.value = t
-    }, null), [[D, c.value]]) : r.value]);
+      "onUpdate:modelValue": (i) => e.value = i
+    }, null), [[V, e.value]]) : u.value]);
   }
-}), j = {
-  install(i) {
-    i.component(y.name, y), i.component(g.name, g);
+}), M = h({
+  name: "STableHeader",
+  props: U,
+  setup(l) {
+    const {
+      columns: n
+    } = T(l);
+    return () => a(O, null, [n.value.map((u, t) => a(g, R(u, {
+      key: t
+    }), null))]);
+  }
+}), $ = h({
+  name: "STableFooter",
+  setup() {
+    return () => a("div", {
+      class: "table-footer"
+    }, [E("table-footer")]);
+  }
+});
+var C = {}, q = {
+  get exports() {
+    return C;
+  },
+  set exports(l) {
+    C = l;
+  }
+};
+/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/
+(function(l) {
+  (function() {
+    var n = {}.hasOwnProperty;
+    function u() {
+      for (var t = [], p = 0; p < arguments.length; p++) {
+        var e = arguments[p];
+        if (e) {
+          var o = typeof e;
+          if (o === "string" || o === "number")
+            t.push(e);
+          else if (Array.isArray(e)) {
+            if (e.length) {
+              var r = u.apply(null, e);
+              r && t.push(r);
+            }
+          } else if (o === "object") {
+            if (e.toString !== Object.prototype.toString && !e.toString.toString().includes("[native code]")) {
+              t.push(e.toString());
+              continue;
+            }
+            for (var i in e)
+              n.call(e, i) && e[i] && t.push(i);
+          }
+        }
+      }
+      return t.join(" ");
+    }
+    l.exports ? (u.default = u, l.exports = u) : window.classNames = u;
+  })();
+})(q);
+const P = C;
+const j = h({
+  name: "STable",
+  props: I,
+  emits: ["selection-change"],
+  setup(l, {
+    slots: n,
+    emit: u
+  }) {
+    const {
+      data: t,
+      border: p,
+      stripe: e,
+      columns: o,
+      showSummary: r
+    } = T(l), i = v([]);
+    x("column-data", i), S(t, (s) => {
+      const c = s.filter((b) => b.checked);
+      c.length === t.value.length ? (f.value = !0, m.value = !1) : c.length === 0 ? (f.value = !1, m.value = !1) : m.value = !0, u("selection-change", c);
+    }, {
+      deep: !0
+    });
+    const f = v(t.value.every((s) => s.checked));
+    x("all-checked", f), S(f, (s) => {
+      t.value.forEach((c) => {
+        c.checked = s;
+      });
+    });
+    const m = v(t.value.some((s) => s.checked) && !f.value);
+    return x("is-indeterminate", m), () => {
+      var s;
+      return a("table", {
+        class: P("s-table", {
+          "s-table--border": p.value,
+          "s-table--striped": e.value
+        })
+      }, [a("thead", null, [a("tr", null, [o.value.length > 0 ? a(M, {
+        columns: o.value
+      }, null) : (s = n.default) == null ? void 0 : s.call(n)])]), a("tbody", null, [t.value.map((c, b) => a("tr", {
+        class: P({
+          "s-table__row--striped": b % 2 == 1 && e.value
+        })
+      }, [i.value.map((y, B) => {
+        var w, A, N;
+        const d = (w = n.default) == null ? void 0 : w.call(n)[B];
+        return d != null && d.children ? a("td", null, [(N = (A = d == null ? void 0 : d.children).default) == null ? void 0 : N.call(A, c)]) : a("td", null, [y.prop ? c[y.prop] : y.type === "selection" ? D(a("input", {
+          type: "checkbox",
+          "onUpdate:modelValue": (F) => c.checked = F
+        }, null), [[V, c.checked]]) : ""]);
+      })]))]), r.value ? a($, null, null) : null]);
+    };
+  }
+}), G = {
+  install(l) {
+    l.component(j.name, j), l.component(g.name, g);
   }
 };
 export {
-  y as Table,
+  j as Table,
   g as TableColumn,
-  j as default
+  G as default
 };

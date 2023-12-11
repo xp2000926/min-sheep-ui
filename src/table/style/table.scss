@@ -6,11 +6,30 @@
   thead {
     color: #909399;
   }
-
+  tr:hover {
+    td {
+      background-color: #f5f7fa;
+    }
+  }
   th,
   td {
-    padding: 8px 0;
+    padding: 8px 15px;
     text-align: left;
     border-bottom: 1px solid #ebeef5;
+  }
+  &.s-table--border {
+    border: 1px solid #ebeef5;
+    th,
+    td {
+      border-right: 1px solid #ebeef5;
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+  &.s-table--striped {
+    .s-table__row--striped {
+      background-color: #fafafa;
+    }
   }
 }

@@ -1,6 +1,9 @@
 import { defineComponent, ref, toRefs, provide, watch } from 'vue'
 import { TableProps, tableProps } from './table-type'
 import { ColumnContext } from './table-column-type'
+import STableHeader from './table-header'
+import STableFooter from './table-footer'
+import classNames from 'classnames'
 import '../../index.scss'
 import '../style/table.scss'
 
@@ -10,7 +13,7 @@ export default defineComponent({
   // 声明事件
   emits: ['selection-change'],
   setup(props: TableProps, { slots, emit }) {
-    const { data } = toRefs(props)
+    const { data, border, stripe, columns, showSummary } = toRefs(props)
     // 获取 Column 数组中的列数据
     const columnData = ref([])
     provide('column-data', columnData)
@@ -54,13 +57,28 @@ export default defineComponent({
     )
     provide('is-indeterminate', isIndeterminate)
     return () => (
-      <table class="s-table">
+      <table
+        class={classNames('s-table', {
+          's-table--border': border.value,
+          's-table--striped': stripe.value
+        })}
+      >
         <thead>
-          <tr>{slots.default?.()}</tr>
+          <tr>
+            {columns.value.length > 0 ? (
+              <STableHeader columns={columns.value}></STableHeader>
+            ) : (
+              slots.default?.()
+            )}
+          </tr>
         </thead>
         <tbody>
-          {data.value.map((row: any) => (
-            <tr>
+          {data.value.map((row: any, index: number) => (
+            <tr
+              class={classNames({
+                's-table__row--striped': index % 2 == 1 && stripe.value
+              })}
+            >
               {columnData.value.map((column: ColumnContext, index: number) => {
                 // 如果存在默认插槽，则优先渲染
                 const columnSlots = slots.default?.()[index]
@@ -84,6 +102,7 @@ export default defineComponent({
             </tr>
           ))}
         </tbody>
+        {showSummary.value ? <STableFooter /> : null}
       </table>
     )
   }

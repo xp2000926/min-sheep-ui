@@ -12,5 +12,6 @@ export default {
     app.component(BaseSelectAll.name, BaseSelectAll) // 全选
     app.component(BaseSelectionBox.name, BaseSelectionBox) // 选择框
     app.component(BaseSemiSelection.name, BaseSemiSelection) // 半选
+    // app.component(selectionBox.name, selectionBox)
   }
 }

@@ -59,6 +59,13 @@ export const treeProps = {
   accordion: {
     type: Boolean,
     default: false
+  },
+  props: {
+    type: Object,
+    default: {
+      label: 'label',
+      children: 'children'
+    }
   }
 } as const
 export type TreeProps = ExtractPropTypes<typeof treeProps>

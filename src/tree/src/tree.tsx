@@ -12,7 +12,13 @@ export default defineComponent({
   emits: ['lazy-load', 'check'],
   setup(props: TreeProps, context: SetupContext) {
     // 获取data
-    const { data, height, itemHeight, accordion } = toRefs(props)
+    const {
+      data,
+      height,
+      itemHeight,
+      accordion,
+      props: defaultProps
+    } = toRefs(props)
     const { slots } = context
     const treeData = useTree(data, props, context)
     provide('TREE_UTILS', treeData)
@@ -29,7 +35,11 @@ export default defineComponent({
         >
           {{
             content: () =>
-              slots.content ? slots.content(treeNode) : treeNode.label,
+              slots.content
+                ? slots.content(treeNode)
+                : defaultProps.value.label == 'label'
+                ? treeNode.label
+                : treeNode[defaultProps.value.label],
             icon: () =>
               slots.icon ? (
                 slots.icon({

@@ -14,7 +14,17 @@ const sidebar = [
     collapsed: false,
     items: [
       { text: 'Button 按钮', link: '/components/button/' },
-      { text: 'Icon 图标', link: '/components/icon/' }
+      { text: 'Icon 图标', link: '/components/icon/' },
+      {text: 'Link 文字链接',link: '/components/link/'},
+      {text: 'Text 文本',link: '/components/text/'},
+    ]
+  },
+  {
+    text:'配置组件', 
+    collapsible: true,
+    collapsed: false,
+    items: [
+      { text:'Config Provider 全局配置',link: '/components/config-provider/' }
     ]
   },
   {

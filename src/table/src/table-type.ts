@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from 'vue'
+import { ExtractPropTypes, PropType } from 'vue'
 import { ColumnContext } from './table-column-type'
 
 export const tableProps = {
@@ -18,6 +18,18 @@ export const tableProps = {
   //带斑马纹表格
   stripe: { type: Boolean, default: false },
   //合计行
-  showSummary: { type: Boolean, default: false }
+  showSummary: { type: Boolean, default: false },
+  headerCellStyle: {
+    type: [Object, Function], //as PropType<object | function>,
+    default: {}
+  },
+  showHeader: {
+    type: Boolean,
+    default: true
+  },
+  headerRowClassName: {
+    type: [Object, Function], //as PropType<object | function>,
+    default: {}
+  }
 } as const
 export type TableProps = ExtractPropTypes<typeof tableProps>

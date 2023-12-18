@@ -1,5 +1,6 @@
 dist
 build
+views
 node_modules
 scripts
 table-column-type.ts

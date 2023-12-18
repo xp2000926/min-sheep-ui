@@ -1,8 +1,7 @@
-import { defineComponent, ref, toRefs, provide, watch } from 'vue'
+import { defineComponent, ref, toRefs, provide, watch, computed } from 'vue'
 import { TableProps, tableProps } from './table-type'
 import { ColumnContext } from './table-column-type'
-import STableHeader from './table-header'
-import STableFooter from './table-footer'
+import STableColumn from './table-column'
 import classNames from 'classnames'
 import '../../index.scss'
 import '../style/table.scss'
@@ -13,7 +12,15 @@ export default defineComponent({
   // 声明事件
   emits: ['selection-change'],
   setup(props: TableProps, { slots, emit }) {
-    const { data, border, stripe, columns, showSummary } = toRefs(props)
+    const {
+      data,
+      border,
+      stripe,
+      columns,
+      showSummary,
+      headerCellStyle,
+      showHeader
+    } = toRefs(props)
     // 获取 Column 数组中的列数据
     const columnData = ref([])
     provide('column-data', columnData)
@@ -56,6 +63,35 @@ export default defineComponent({
       data.value.some((row: any) => row.checked) && !allChecked.value
     )
     provide('is-indeterminate', isIndeterminate)
+    const tableHeaderCellStyle = computed(() =>
+      typeof headerCellStyle.value == 'object' ? true : false
+    )
+    provide('is-table-thead-styles', {
+      isStyles: tableHeaderCellStyle.value,
+      headerCellStyle: headerCellStyle.value
+    })
+    const tableThead = (tableThead: ColumnContext[], rowIndex = 0) => {
+      return tableThead.map((item: ColumnContext, index: number) => {
+        if (item.children) {
+          rowIndex++
+          return tableThead(item.children, rowIndex)
+        }
+        return typeof headerCellStyle.value == 'function' ? (
+          <STableColumn
+            {...item}
+            key={index}
+            style={headerCellStyle.value({
+              row: tableThead,
+              column: item,
+              rowIndex,
+              columnIndex: index
+            })}
+          />
+        ) : (
+          <STableColumn {...item} key={index} />
+        )
+      })
+    }
     return () => (
       <table
         class={classNames('s-table', {
@@ -63,16 +99,21 @@ export default defineComponent({
           's-table--striped': stripe.value
         })}
       >
-        <thead>
-          <tr>
-            {columns.value.length > 0 ? (
-              <STableHeader columns={columns.value}></STableHeader>
-            ) : (
-              slots.default?.()
-            )}
+        {slots.title ? <div class="table-title">{slots.title()}</div> : null}
+        <thead style={showHeader.value ? '' : 'display:none'}>
+          <tr style={tableHeaderCellStyle.value ? headerCellStyle.value : {}}>
+            {columns.value.length > 0
+              ? tableThead(columns.value)
+              : slots.default?.()}
           </tr>
         </thead>
         <tbody>
+          {/* <STableTbody
+            data={data.value}
+            columnData={columnData.value}
+            stripe={stripe.value}
+          >
+          </STableTbody> */}
           {data.value.length > 0 ? (
             data.value.map((row: any, index: number) => (
               <tr
@@ -114,7 +155,8 @@ export default defineComponent({
             </tr>
           )}
         </tbody>
-        {showSummary.value ? <STableFooter /> : null}
+        {slots.footer ? <div class="table-footer">{slots.footer()}</div> : null}
+        {showSummary.value ? <div class="table-summary">总结</div> : null}
       </table>
     )
   }

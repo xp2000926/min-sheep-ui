@@ -14,7 +14,14 @@ export default defineComponent({
   name: 'STreeNode',
   props: treeNodeProps,
   setup(props: TreeNodeProps, { slots }) {
-    const { lineable, checkable, treeNode, operable, draggable } = toRefs(props)
+    const {
+      lineable,
+      checkable,
+      treeNode,
+      operable,
+      draggable,
+      props: defaultProps
+    } = toRefs(props)
     const {
       toggleCheckNode,
       getChildrenExpanded,
@@ -26,6 +33,8 @@ export default defineComponent({
       onDragstart,
       onDrop
     } = inject('TREE_UTILS') as TreeUtils
+    console.log('defaultProps', defaultProps)
+
     // 创建一个开关的变量
     const isShow = ref(false)
     const toggleOperate = () => {

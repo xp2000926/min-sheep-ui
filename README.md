@@ -83,6 +83,9 @@ const sidebar = [
       {text: 'Button 按钮',link: '/components/button/'},
       {text: 'Icon 图标',link: '/components/icon/'},
       {text: 'Link 文字链接',link: '/components/link/'},
+      {text: 'Text 文本',link: '/components/text/'},
+      {text: 'Color 色彩',link: '/components/color/'},
+      {text: 'Scrollbar 滚动条',link: '/components/scrollbar/'},
     ]
   },
   {
@@ -107,9 +110,13 @@ const sidebar = [
       { text: 'Message 消息提示', link: '/components/message/' },
       { text: 'MessageBox 弹框', link: '/components/messageBox/' },
       { text: 'Notification 通知提醒框', link: '/components/notification/' },
-      { text: 'BubbleConfirmationBox 气泡确认框', link: '/components/bubbleConfirmationBox/' },
+      { text: 'Popconfirm  气泡确认框', link: '/components/Popconfirm /' },
       { text: 'Progress 进度条', link: '/components/progress/' },
       { text: 'Watermark 水印', link: '/components/watermark/' },
+      { text: 'Spin 加载中', link: '/components/Spin/' },
+      { text: 'Tour 漫游式引导', link: '/components/Tour/' },
+      { text: 'FloatButton 悬浮按钮', link: '/components/FloatButton/' },
+      { text: 'ConfigProvider 全局化配置', link: '/components/ConfigProvider/' },
     ]
   },
   {
@@ -146,12 +153,15 @@ const sidebar = [
       { text: 'Table 表格', link: '/components/table/' },
       { text: 'Timeline 时间轴', link: '/components/timeline/' },
       { text: 'Tag 标签', link: '/components/tag/' },
-      { text: 'Badge 标记', link: '/components/badge/' },
+      { text: 'Badge 徽标数', link: '/components/badge/' },
       { text: 'Skeleton 骨架屏', link: '/components/skeleton/' },
       { text: 'Empty 空状态', link: '/components/empty/' },
       { text: 'Result 结果', link: '/components/result/' },
       { text: 'Image 图片', link: '/components/image/' },
       { text: 'Calendar 日历', link: '/components/calendar/' }
+      { text: 'Tooltip 文字提示', link: '/components/Tooltip/' }
+      { text: 'QRCode 二维码', link: '/components/QRCode/' }
+      { text: 'Comment 评论', link: '/components/QRCode/' }
     ]
   },
   {

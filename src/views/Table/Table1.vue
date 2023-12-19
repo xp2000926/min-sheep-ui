@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
-import { Table, TableColumn } from "../table/index";
+import { Table, TableColumn } from "../../table/index";
 const tableColumns = ref([
   { prop: "date", title: "Date" },
   { prop: "name", title: "Name" },

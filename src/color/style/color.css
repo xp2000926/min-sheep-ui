@@ -1,0 +1,39 @@
+.s-color {
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  height: 114px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px 4px 0 0;
+}
+
+.s-color .color {
+  font-size: 12px;
+  opacity: 0.69;
+  line-height: 24px;
+}
+
+.s-color .bg-color-sub {
+  width: 100%;
+  height: 40px;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  border-radius: 0 0 4px 4px;
+}
+
+.s-color .bg-color-sub .bg-blue-sub-item {
+  width: 10%;
+  height: 100%;
+  display: inline-block;
+}
+
+.s-color .bg-color-sub .bg-blue-sub-item:first-child {
+  border-radius: 0 0 0 4px;
+}
+
+.s-color .bg-color-sub .bg-blue-sub-item:last-child {
+  border-radius: 0 0 4px 0;
+}

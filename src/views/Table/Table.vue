@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Table, TableColumn } from '../table/index'
+import { Table, TableColumn } from '../../table/index'
 const tableData = ref([
   {
     date: '2016-05-03',

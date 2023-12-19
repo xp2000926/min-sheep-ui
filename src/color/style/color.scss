@@ -1,4 +1,35 @@
 .s-color {
-/* your component style */
+  width: 100%;
+  position: relative;
+  padding: 20px;
+  height: 114px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 4px 4px 0 0;
+  .color {
+    font-size: 12px;
+    opacity: 0.69;
+    line-height: 24px;
+  }
+  .bg-color-sub {
+    width: 100%;
+    height: 40px;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    border-radius: 0 0 4px 4px;
 
+    .bg-blue-sub-item {
+      width: 10%;
+      height: 100%;
+      display: inline-block;
+      &:first-child {
+        border-radius: 0 0 0 4px;
+      }
+      &:last-child {
+        border-radius: 0 0 4px 0;
+      }
+    }
+  }
 }

@@ -19,11 +19,12 @@ export default defineComponent({
   name: 'SFormItem',
   props: formItemProps,
   setup(props: FormItemProps, { slots }) {
-    const { error } = toRefs(props)
+    const { error, hidden } = toRefs(props)
     // 注入label_data，然后生成动态样式
     const labelData = inject('LABEL_DATA') as ComputedRef<LabelData>
     const ItemClass = computed(() => ({
       's-form__item': true,
+      's-form__item--hidden': hidden.value,
       's-form__item--horizontal': labelData.value.layout === 'horizontal',
       's-form__item--vertical': labelData.value.layout === 'vertical'
     }))

@@ -1,4 +1,4 @@
-import { defineComponent as m, createVNode as e, createTextVNode as j, toRefs as w, inject as k, ref as y, nextTick as E, watch as T, withDirectives as D, vModelCheckbox as B, Fragment as I, mergeProps as U, provide as x, isVNode as M } from "vue";
+import { defineComponent as R, toRefs as E, inject as k, ref as C, nextTick as I, watch as w, createVNode as t, withDirectives as g, vModelCheckbox as j, provide as S, computed as _, createTextVNode as M, mergeProps as A } from "vue";
 const $ = {
   data: {
     type: Array,
@@ -13,20 +13,20 @@ const $ = {
     default: !1
   },
   stripe: { type: Boolean, default: !1 },
-  showSummary: { type: Boolean, default: !1 }
-}, q = m({
-  name: "STableTitle",
-  setup() {
-    return () => e("div", {
-      class: "table-title"
-    }, [j("table-footer")]);
-  }
-}), z = {
-  columns: {
-    type: Array,
+  showSummary: { type: Boolean, default: !1 },
+  headerCellStyle: {
+    type: [Object, Function],
+    default: {}
+  },
+  showHeader: {
+    type: Boolean,
+    default: !0
+  },
+  headerRowClassName: {
+    type: [Object, Function],
     default: {}
   }
-}, G = {
+}, q = {
   prop: {
     type: String,
     default: ""
@@ -40,67 +40,56 @@ const $ = {
     default: ""
   }
 };
-const g = m({
+const x = R({
   name: "STableColumn",
-  props: G,
-  setup(n) {
+  props: q,
+  setup(s) {
     const {
-      prop: t,
-      title: u,
+      prop: a,
+      title: c,
       type: l
-    } = w(n);
+    } = E(s);
     k("column-data").value.push({
-      prop: t.value,
-      title: u.value,
+      prop: a.value,
+      title: c.value,
       type: l.value
     });
-    const a = k("all-checked"), r = k("is-indeterminate"), c = y();
-    return E(() => {
-      c.value && (c.value.indeterminate = r.value);
-    }), T(r, () => {
-      c.value && (c.value.indeterminate = r.value);
+    const e = k("all-checked"), i = k("is-indeterminate"), r = C();
+    I(() => {
+      r.value && (r.value.indeterminate = i.value);
+    }), w(i, () => {
+      r.value && (r.value.indeterminate = i.value);
     }, {
       immediate: !0
-    }), () => e("th", {
-      class: "s-table-column"
-    }, [l.value === "selection" ? D(e("input", {
-      ref: c,
+    });
+    const n = k("is-table-thead-styles");
+    return () => n.isStyles == !1 ? n.columnData.map((h, y) => t("th", {
+      class: "s-table-column",
+      style: n.headerCellStyle({
+        row: n.columnData,
+        column: h,
+        rowIndex: 1,
+        columnIndex: y
+      })
+    }, [l.value === "selection" ? g(t("input", {
+      ref: r,
       type: "checkbox",
-      "onUpdate:modelValue": (i) => a.value = i
-    }, null), [[B, a.value]]) : u.value]);
-  }
-}), J = m({
-  name: "STableHeader",
-  props: z,
-  setup(n) {
-    const {
-      columns: t
-    } = w(n);
-    return () => e(I, null, [t.value.map((u, l) => e(g, U(u, {
-      key: l
-    }), null))]);
-  }
-}), K = m({
-  name: "STableFooter",
-  setup() {
-    return () => e("div", {
-      class: "table-footer"
-    }, [j("table-footer")]);
-  }
-}), L = m({
-  name: "STableSummary",
-  setup() {
-    return () => e("div", {
-      class: "table-summary"
-    }, [j("table-footer")]);
+      "onUpdate:modelValue": (p) => e.value = p
+    }, null), [[j, e.value]]) : c.value])) : t("th", {
+      class: "s-table-column"
+    }, [l.value === "selection" ? g(t("input", {
+      ref: r,
+      type: "checkbox",
+      "onUpdate:modelValue": (h) => e.value = h
+    }, null), [[j, e.value]]) : c.value]);
   }
 });
-var C = {}, Q = {
+var D = {}, z = {
   get exports() {
-    return C;
+    return D;
   },
-  set exports(n) {
-    C = n;
+  set exports(s) {
+    D = s;
   }
 };
 /*!
@@ -108,109 +97,128 @@ var C = {}, Q = {
 	Licensed under the MIT License (MIT), see
 	http://jedwatson.github.io/classnames
 */
-(function(n) {
+(function(s) {
   (function() {
-    var t = {}.hasOwnProperty;
-    function u() {
-      for (var l = [], p = 0; p < arguments.length; p++) {
-        var a = arguments[p];
-        if (a) {
-          var r = typeof a;
-          if (r === "string" || r === "number")
-            l.push(a);
-          else if (Array.isArray(a)) {
-            if (a.length) {
-              var c = u.apply(null, a);
-              c && l.push(c);
+    var a = {}.hasOwnProperty;
+    function c() {
+      for (var l = [], f = 0; f < arguments.length; f++) {
+        var e = arguments[f];
+        if (e) {
+          var i = typeof e;
+          if (i === "string" || i === "number")
+            l.push(e);
+          else if (Array.isArray(e)) {
+            if (e.length) {
+              var r = c.apply(null, e);
+              r && l.push(r);
             }
-          } else if (r === "object") {
-            if (a.toString !== Object.prototype.toString && !a.toString.toString().includes("[native code]")) {
-              l.push(a.toString());
+          } else if (i === "object") {
+            if (e.toString !== Object.prototype.toString && !e.toString.toString().includes("[native code]")) {
+              l.push(e.toString());
               continue;
             }
-            for (var i in a)
-              t.call(a, i) && a[i] && l.push(i);
+            for (var n in e)
+              a.call(e, n) && e[n] && l.push(n);
           }
         }
       }
       return l.join(" ");
     }
-    n.exports ? (u.default = u, n.exports = u) : window.classNames = u;
+    s.exports ? (c.default = c, s.exports = c) : window.classNames = c;
   })();
-})(Q);
-const P = C;
-function V(n) {
-  return typeof n == "function" || Object.prototype.toString.call(n) === "[object Object]" && !M(n);
-}
-const _ = m({
+})(z);
+const H = D;
+const P = R({
   name: "STable",
   props: $,
   emits: ["selection-change"],
-  setup(n, {
-    slots: t,
-    emit: u
+  setup(s, {
+    slots: a,
+    emit: c
   }) {
     const {
       data: l,
-      border: p,
-      stripe: a,
-      columns: r,
-      showSummary: c
-    } = w(n), i = y([]);
-    x("column-data", i), T(l, (o) => {
-      const s = o.filter((b) => b.checked);
-      s.length === l.value.length ? (f.value = !0, v.value = !1) : s.length === 0 ? (f.value = !1, v.value = !1) : v.value = !0, u("selection-change", s);
+      border: f,
+      stripe: e,
+      columns: i,
+      showSummary: r,
+      headerCellStyle: n,
+      showHeader: h
+    } = E(s), y = C([]);
+    S("column-data", y), w(l, (u) => {
+      const o = u.filter((d) => d.checked);
+      o.length === l.value.length ? (p.value = !0, b.value = !1) : o.length === 0 ? (p.value = !1, b.value = !1) : b.value = !0, c("selection-change", o);
     }, {
       deep: !0
     });
-    const f = y(l.value.every((o) => o.checked));
-    x("all-checked", f), T(f, (o) => {
-      l.value.forEach((s) => {
-        s.checked = o;
+    const p = C(l.value.every((u) => u.checked));
+    S("all-checked", p), w(p, (u) => {
+      l.value.forEach((o) => {
+        o.checked = u;
       });
     });
-    const v = y(l.value.some((o) => o.checked) && !f.value);
-    return x("is-indeterminate", v), () => {
-      var b;
-      let o, s;
-      return e("table", {
-        class: P("s-table", {
-          "s-table--border": p.value,
-          "s-table--striped": a.value
+    const b = C(l.value.some((u) => u.checked) && !p.value);
+    S("is-indeterminate", b);
+    const N = _(() => typeof n.value == "object");
+    S("is-table-thead-styles", {
+      isStyles: N.value,
+      headerCellStyle: n.value
+    });
+    const T = (u, o = 0) => u.map((d, v) => d.children ? (o++, u(d.children, o)) : typeof n.value == "function" ? t(x, A(d, {
+      key: v,
+      style: n.value({
+        row: u,
+        column: d,
+        rowIndex: o,
+        columnIndex: v
+      })
+    }), null) : t(x, A(d, {
+      key: v
+    }), null));
+    return () => {
+      var u;
+      return t("table", {
+        class: H("s-table", {
+          "s-table--border": f.value,
+          "s-table--striped": e.value
         })
-      }, [t.title ? e(q, null, V(o = t.title()) ? o : {
-        default: () => [o]
-      }) : null, e("thead", null, [e("tr", null, [r.value.length > 0 ? e(J, {
-        columns: r.value
-      }, null) : (b = t.default) == null ? void 0 : b.call(t)])]), e("tbody", null, [l.value.length > 0 ? l.value.map((h, F) => e("tr", {
-        class: P({
-          "s-table__row--striped": F % 2 == 1 && a.value
+      }, [a.title ? t("div", {
+        class: "table-title"
+      }, [a.title()]) : null, t("thead", {
+        style: h.value ? "" : "display:none"
+      }, [t("tr", {
+        style: N.value ? n.value : {}
+      }, [i.value.length > 0 ? T(i.value) : (u = a.default) == null ? void 0 : u.call(a)])]), t("tbody", null, [l.value.length > 0 ? l.value.map((o, d) => t("tr", {
+        class: H({
+          "s-table__row--striped": d % 2 == 1 && e.value
         })
-      }, [i.value.map((S, H) => {
-        var N, A, O;
-        const d = (N = t.default) == null ? void 0 : N.call(t)[H];
-        return d != null && d.children ? e("td", null, [(O = (A = d == null ? void 0 : d.children).default) == null ? void 0 : O.call(A, h)]) : e("td", null, [S.prop ? h[S.prop] : S.type === "selection" ? D(e("input", {
+      }, [y.value.map((v, U) => {
+        var B, O, V;
+        const m = (B = a.default) == null ? void 0 : B.call(a)[U];
+        return m != null && m.children ? t("td", null, [(V = (O = m == null ? void 0 : m.children).default) == null ? void 0 : V.call(O, o)]) : t("td", null, [v.prop ? o[v.prop] : v.type === "selection" ? g(t("input", {
           type: "checkbox",
-          "onUpdate:modelValue": (R) => h.checked = R
-        }, null), [[B, h.checked]]) : ""]);
-      })])) : e("tr", {
+          "onUpdate:modelValue": (F) => o.checked = F
+        }, null), [[j, o.checked]]) : ""]);
+      })])) : t("tr", {
         class: "s-table-placeholder"
-      }, [e("td", {
+      }, [t("td", {
         colspan: 3
-      }, [e("div", {
+      }, [t("div", {
         class: "ant-empty-description"
-      }, [t.empty ? t.empty() : "暂无数据"])])])]), t.footer ? e(K, null, V(s = t.footer()) ? s : {
-        default: () => [s]
-      }) : c.value ? e(L, null, null) : null]);
+      }, [a.empty ? a.empty() : "暂无数据"])])])]), a.footer ? t("div", {
+        class: "table-footer"
+      }, [a.footer()]) : null, r.value ? t("div", {
+        class: "table-summary"
+      }, [M("总结")]) : null]);
     };
   }
-}), X = {
-  install(n) {
-    n.component(_.name, _), n.component(g.name, g);
+}), J = {
+  install(s) {
+    s.component(P.name, P), s.component(x.name, x);
   }
 };
 export {
-  _ as Table,
-  g as TableColumn,
-  X as default
+  P as Table,
+  x as TableColumn,
+  J as default
 };

@@ -3,6 +3,8 @@ export const getCenterPage = (
   pageIndex: number,
   pagerCount: number
 ) => {
+  console.log(totalPage, pageIndex, pagerCount)
+
   // [0,1,2,3,4,5,6,7,8]
   const totalPageArr = Array.from(Array(totalPage).keys())
   if (totalPage <= pagerCount) {

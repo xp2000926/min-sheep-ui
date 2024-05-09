@@ -130,7 +130,10 @@ const labelAlign = ref('start')
     @submit="onLogin"
     ref="loginForm"
   >
-    <s-form-item label="用户名：" prop="user">
+    <s-form-item hidden  label="id">
+      <s-input v-model="model.id" />
+    </s-form-item>
+    <s-form-item  label="用户名：" prop="user">
       <s-input v-model="model.user" />
     </s-form-item>
     <s-form-item label="密码：" prop="pwd">
@@ -144,6 +147,7 @@ const labelAlign = ref('start')
 <script setup>
 import { ref } from 'vue'
 const model = ref({
+  id:'1111',
   user: '',
   pwd: ''
 })
@@ -192,6 +196,7 @@ const onLogin = () => {
 | label | 标签文本 | `string` | — | — |  |
 | label-width | 表单域标签的的宽度，例如 '50px'。支持 auto。 | `string` | — | — | 未实现 |
 | error | 表单域验证错误信息, 设置该值会使表单验证状态变为 error，并显示该错误信息 | `string` | — | — | 未实现 |
+| hidden | 影藏这个FormItem | `boolean` | — | false |  |
 
 ### Form-Item 插槽
 

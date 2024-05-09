@@ -11,7 +11,8 @@ export const paginationProps = {
   },
   pagerCount: {
     type: Number,
-    default: 7
+    // default: 7
+    default: 5
   },
   modelValue: {
     type: Number,

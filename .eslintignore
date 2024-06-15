@@ -1,9 +1,0 @@
-dist
-build
-views
-node_modules
-scripts
-table-column-type.ts
-table-column.tsx
-table-column.test.ts
-Table.vue

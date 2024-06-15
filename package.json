@@ -7,12 +7,16 @@
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.ts,.tsx,.vue",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:serve": "vitepress serve docs"
   },
   "dependencies": {
     "vue": "^3.4.21"
   },
   "devDependencies": {
+    "@types/node": "^20.14.2",
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
     "@vitejs/plugin-vue": "^5.0.4",
@@ -24,8 +28,11 @@
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7",
     "prettier": "^3.3.2",
+    "sass": "^1.77.5",
     "typescript": "5.1.6",
     "vite": "^5.2.0",
+    "vitepress": "1.0.0-alpha.10",
+    "vitepress-theme-demoblock": "1.4.2",
     "vue-tsc": "^2.0.6"
   },
   "lint-staged": {

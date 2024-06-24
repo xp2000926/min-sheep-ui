@@ -1,7 +1,7 @@
 <!--  =============App.vue============= -->
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue';
-import Test from './components/test';
+import HelloWorld from "./components/HelloWorld.vue";
+import Test from "./components/test";
 const onclickFn = () => {
   alert(1);
 };

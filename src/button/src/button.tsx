@@ -10,7 +10,7 @@ export default defineComponent({
 
     const blockClass = block.value ? 's-button--block' : ''; // 新增
     return () => {
-      const defaultSlots = slots.default ? slots.default() : '  ';
+      const defaultSlots = slots.default ? slots.default() : '';
       return (
         <button
           disabled={disabled.value}

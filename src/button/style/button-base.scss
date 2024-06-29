@@ -5,27 +5,36 @@
   @apply inline-flex items-center justify-center;
   // 元素
   @apply border-[1px] border-solid border-transparent 
-  h-[28px] py-0 px-[20px]
+  h-[32px] py-0 px-[15px]
   bg-transparent;
   border-radius: $s-border-radius;
 
   // 文本属性
   @apply outline-0 leading-normal whitespace-nowrap
      cursor-pointer;
-
+  border: 1px solid #dcdfe6;
   // 文字样式
   font-size: $s-font-size-md;
+  font-weight: 500;
 
   // 其他样式
   transition:
     background-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
     border-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
     color $s-animation-duration-slow $s-animation-ease-in-out-smooth;
+  & > span {
+    @apply inline-flex items-center;
+  }
   // 禁用状态
   &[disabled] {
     @apply cursor-not-allowed;
   }
-  &.s-button--block {
+  &.is-circle {
+    width: 32px;
+    border-radius: 50%;
+    padding: 8px;
+  }
+  &.is-block {
     @apply block w-full;
   }
 }

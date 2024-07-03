@@ -1,4 +1,416 @@
-.s-button{@apply inline-flex items-center justify-center text-center;@apply border-[1px] border-solid border-transparent
+.s-button {
+  @apply inline-flex items-center justify-center text-center;
+  @apply border-[1px] border-solid border-transparent
   h-[32px] py-[8px] px-[15px]
-  bg-transparent;@apply outline-0 leading-normal whitespace-nowrap
-     cursor-pointer;line-height:1;border:1px solid #dcdfe6;font-weight:500;font-size:14px;color:#606266;transition:background-color var(--s-animation-duration-slow, 300ms) var(--s-animation-ease-in-out-smooth, cubic-bezier(0.645, 0.045, 0.355, 1)),border-color var(--s-animation-duration-slow, 300ms) var(--s-animation-ease-in-out-smooth, cubic-bezier(0.645, 0.045, 0.355, 1)),color var(--s-animation-duration-slow, 300ms) var(--s-animation-ease-in-out-smooth, cubic-bezier(0.645, 0.045, 0.355, 1))}.s-button:hover{color:#409eff;border-color:#c6e2ff;background-color:#ecf5ff;@apply outline-none}.s-button:active{color:#409eff;border-color:#409eff;background-color:#ecf5ff;@apply outline-none}.s-button:focus-visible{outline:2px solid #a0cfff;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button[disabled]{@apply cursor-not-allowed;color:#a8abb2;background-image:none;background-color:#fff;border-color:#e4e7ed}.s-button.is-plain:hover{color:#409eff;border-color:#409eff;background-color:#fff;outline:none}.s-button.is-plain:active{color:#409eff;border-color:#409eff;background-color:#fff;outline:none}.s-button.is-plain:focus-visible{outline:2px solid #a0cfff;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.is-plain[disabled]{@apply cursor-not-allowed;color:#a8abb2;background-image:none;background-color:#fff;border-color:#e4e7ed}.s-button.is-round{border-radius:20px}.s-button.is-circle{width:32px;border-radius:50%;padding:8px}.s-button.is-block{@apply block w-full}.s-button.s-button--small{height:24px;padding:5px 11px;font-size:12px}.s-button.s-button--small.is-circle{width:24px;padding:5px}.s-button.s-button--large{height:40px;padding:12px 19px;font-size:16px}.s-button.s-button--large.is-circle{width:40px;padding:12px}.s-button.s-button--primary{color:#fff;background-color:#409eff;border-color:#409eff}.s-button.s-button--primary:hover{color:#fff;border-color:#79bbff;background-color:#79bbff;@apply outline-none}.s-button.s-button--primary:active{color:#fff;border-color:#337ecc;background-color:#337ecc;@apply outline-none}.s-button.s-button--primary:focus-visible{outline:2px solid #a0cfff;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--primary[disabled]{color:#fff;@apply cursor-not-allowed;background-image:none;background-color:#a0cfff;border-color:#a0cfff}.s-button.s-button--primary.is-plain{color:#409eff;background-color:#ecf5ff;border-color:#a0cfff}.s-button.s-button--primary.is-plain:hover{color:#fff;border-color:#409eff;background-color:#409eff;@apply outline-none}.s-button.s-button--primary.is-plain:active{color:#fff;border-color:#337ecc;background-color:#337ecc;@apply outline-none}.s-button.s-button--primary.is-plain:focus-visible{outline:2px solid #a0cfff;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--primary.is-plain[disabled]{color:#a0cfff;background-color:#ecf5ff;border-color:#d9ecff}.s-button.s-button--success{color:#fff;background-color:#67c23a;border-color:#67c23a}.s-button.s-button--success:hover{color:#fff;border-color:#95d475;background-color:#95d475;@apply outline-none}.s-button.s-button--success:active{color:#fff;border-color:#529b2e;background-color:#529b2e;@apply outline-none}.s-button.s-button--success:focus-visible{outline:2px solid #b3e19d;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--success[disabled]{color:#fff;@apply cursor-not-allowed;background-image:none;background-color:#b3e19d;border-color:#b3e19d}.s-button.s-button--success.is-plain{color:#67c23a;background-color:#ecf5ff;border-color:#b3e19d}.s-button.s-button--success.is-plain:hover{color:#fff;border-color:#67c23a;background-color:#67c23a;@apply outline-none}.s-button.s-button--success.is-plain:active{color:#fff;border-color:#529b2e;background-color:#529b2e;@apply outline-none}.s-button.s-button--success.is-plain:focus-visible{outline:2px solid #b3e19d;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--success.is-plain[disabled]{color:#b3e19d;background-color:#f0f9eb;border-color:#d9ecff}.s-button.s-button--info{color:#fff;background-color:#909399;border-color:#909399}.s-button.s-button--info:hover{color:#fff;border-color:#b1b3b8;background-color:#b1b3b8;@apply outline-none}.s-button.s-button--info:active{color:#fff;border-color:#73767a;background-color:#73767a;@apply outline-none}.s-button.s-button--info:focus-visible{outline:2px solid #c8c9cc;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--info[disabled]{color:#fff;@apply cursor-not-allowed;background-image:none;background-color:#c8c9cc;border-color:#c8c9cc}.s-button.s-button--info.is-plain{color:#909399;background-color:#f4f4f5;border-color:#c8c9cc}.s-button.s-button--info.is-plain:hover{color:#fff;border-color:#909399;background-color:#909399;@apply outline-none}.s-button.s-button--info.is-plain:active{color:#fff;border-color:#73767a;background-color:#73767a;@apply outline-none}.s-button.s-button--info.is-plain:focus-visible{outline:2px solid #73767a;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--info.is-plain[disabled]{color:#c8c9cc;background-color:#f4f4f5;border-color:#e9e9eb}.s-button.s-button--warning{color:#fff;background-color:#e6a23c;border-color:#e6a23c}.s-button.s-button--warning:hover{color:#fff;border-color:#eebe77;background-color:#eebe77;@apply outline-none}.s-button.s-button--warning:active{color:#fff;border-color:#b88230;background-color:#b88230;@apply outline-none}.s-button.s-button--warning:focus-visible{outline:2px solid #b88230;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--warning[disabled]{color:#fff;@apply cursor-not-allowed;background-image:none;background-color:#f3d19e;border-color:#f3d19e}.s-button.s-button--warning.is-plain{color:#e6a23c;background-color:#fdf6ec;border-color:#f3d19e}.s-button.s-button--warning.is-plain:hover{color:#fff;border-color:#e6a23c;background-color:#e6a23c;@apply outline-none}.s-button.s-button--warning.is-plain:active{color:#fff;border-color:#b88230;background-color:#b88230;@apply outline-none}.s-button.s-button--warning.is-plain:focus-visible{outline:2px solid #f3d19e;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--warning.is-plain[disabled]{color:#f3d19e;background-color:#fdf6ec;border-color:#faecd8}.s-button.s-button--danger{color:#fff;background-color:#f56c6c;border-color:#f56c6c}.s-button.s-button--danger:hover{color:#fff;border-color:#f89898;background-color:#f89898;@apply outline-none}.s-button.s-button--danger:active{color:#fff;border-color:#c45656;background-color:#c45656;@apply outline-none}.s-button.s-button--danger:focus-visible{outline:2px solid #fab6b6;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--danger[disabled]{color:#fff;@apply cursor-not-allowed;background-image:none;background-color:#fab6b6;border-color:#fab6b6}.s-button.s-button--danger.is-plain{color:#f56c6c;background-color:#fef0f0;border-color:#fab6b6}.s-button.s-button--danger.is-plain:hover{color:#fff;border-color:#f56c6c;background-color:#f56c6c;@apply outline-none}.s-button.s-button--danger.is-plain:active{color:#fff;border-color:#c45656;background-color:#c45656;@apply outline-none}.s-button.s-button--danger.is-plain:focus-visible{outline:2px solid #fab6b6;@apply outline-offset-1;transition:outline-offset 0s,outline 0s}.s-button.s-button--danger.is-plain[disabled]{color:#fab6b6;background-color:#fef0f0;border-color:#fde2e2}
+  bg-transparent;
+  @apply outline-0 leading-normal whitespace-nowrap
+     cursor-pointer;
+  line-height: 1;
+  border: 1px solid #dcdfe6;
+  font-weight: 500;
+  font-size: 14px;
+  color: #606266;
+  transition:
+    background-color var(--s-animation-duration-slow, 300ms)
+      var(
+        --s-animation-ease-in-out-smooth,
+        cubic-bezier(0.645, 0.045, 0.355, 1)
+      ),
+    border-color var(--s-animation-duration-slow, 300ms)
+      var(
+        --s-animation-ease-in-out-smooth,
+        cubic-bezier(0.645, 0.045, 0.355, 1)
+      ),
+    color var(--s-animation-duration-slow, 300ms)
+      var(
+        --s-animation-ease-in-out-smooth,
+        cubic-bezier(0.645, 0.045, 0.355, 1)
+      );
+}
+.s-button:hover {
+  color: #409eff;
+  border-color: #c6e2ff;
+  background-color: #ecf5ff;
+  @apply outline-none;
+}
+.s-button:active {
+  color: #409eff;
+  border-color: #409eff;
+  background-color: #ecf5ff;
+  @apply outline-none;
+}
+.s-button:focus-visible {
+  outline: 2px solid #a0cfff;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button[disabled] {
+  @apply cursor-not-allowed;
+  color: #a8abb2;
+  background-image: none;
+  background-color: #fff;
+  border-color: #e4e7ed;
+}
+.s-button.is-plain:hover {
+  color: #409eff;
+  border-color: #409eff;
+  background-color: #fff;
+  outline: none;
+}
+.s-button.is-plain:active {
+  color: #409eff;
+  border-color: #409eff;
+  background-color: #fff;
+  outline: none;
+}
+.s-button.is-plain:focus-visible {
+  outline: 2px solid #a0cfff;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.is-plain[disabled] {
+  @apply cursor-not-allowed;
+  color: #a8abb2;
+  background-image: none;
+  background-color: #fff;
+  border-color: #e4e7ed;
+}
+.s-button.is-round {
+  border-radius: 20px;
+}
+.s-button.is-circle {
+  width: 32px;
+  border-radius: 50%;
+  padding: 8px;
+}
+.s-button.is-block {
+  @apply block w-full;
+}
+.s-button.is-block + .s-button {
+  margin-left: 0px;
+}
+.s-button + .s-button {
+  margin-left: 12px;
+}
+.s-button.s-button--small {
+  height: 24px;
+  padding: 5px 11px;
+  font-size: 12px;
+}
+.s-button.s-button--small.is-circle {
+  width: 24px;
+  padding: 5px;
+}
+.s-button.s-button--large {
+  height: 40px;
+  padding: 12px 19px;
+  font-size: 16px;
+}
+.s-button.s-button--large.is-circle {
+  width: 40px;
+  padding: 12px;
+}
+.s-button.s-button--primary {
+  color: #fff;
+  background-color: #409eff;
+  border-color: #409eff;
+}
+.s-button.s-button--primary:hover {
+  color: #fff;
+  border-color: #79bbff;
+  background-color: #79bbff;
+  @apply outline-none;
+}
+.s-button.s-button--primary:active {
+  color: #fff;
+  border-color: #337ecc;
+  background-color: #337ecc;
+  @apply outline-none;
+}
+.s-button.s-button--primary:focus-visible {
+  outline: 2px solid #a0cfff;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--primary[disabled] {
+  color: #fff;
+  @apply cursor-not-allowed;
+  background-image: none;
+  background-color: #a0cfff;
+  border-color: #a0cfff;
+}
+.s-button.s-button--primary.is-plain {
+  color: #409eff;
+  background-color: #ecf5ff;
+  border-color: #a0cfff;
+}
+.s-button.s-button--primary.is-plain:hover {
+  color: #fff;
+  border-color: #409eff;
+  background-color: #409eff;
+  @apply outline-none;
+}
+.s-button.s-button--primary.is-plain:active {
+  color: #fff;
+  border-color: #337ecc;
+  background-color: #337ecc;
+  @apply outline-none;
+}
+.s-button.s-button--primary.is-plain:focus-visible {
+  outline: 2px solid #a0cfff;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--primary.is-plain[disabled] {
+  color: #a0cfff;
+  background-color: #ecf5ff;
+  border-color: #d9ecff;
+}
+.s-button.s-button--success {
+  color: #fff;
+  background-color: #67c23a;
+  border-color: #67c23a;
+}
+.s-button.s-button--success:hover {
+  color: #fff;
+  border-color: #95d475;
+  background-color: #95d475;
+  @apply outline-none;
+}
+.s-button.s-button--success:active {
+  color: #fff;
+  border-color: #529b2e;
+  background-color: #529b2e;
+  @apply outline-none;
+}
+.s-button.s-button--success:focus-visible {
+  outline: 2px solid #b3e19d;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--success[disabled] {
+  color: #fff;
+  @apply cursor-not-allowed;
+  background-image: none;
+  background-color: #b3e19d;
+  border-color: #b3e19d;
+}
+.s-button.s-button--success.is-plain {
+  color: #67c23a;
+  background-color: #ecf5ff;
+  border-color: #b3e19d;
+}
+.s-button.s-button--success.is-plain:hover {
+  color: #fff;
+  border-color: #67c23a;
+  background-color: #67c23a;
+  @apply outline-none;
+}
+.s-button.s-button--success.is-plain:active {
+  color: #fff;
+  border-color: #529b2e;
+  background-color: #529b2e;
+  @apply outline-none;
+}
+.s-button.s-button--success.is-plain:focus-visible {
+  outline: 2px solid #b3e19d;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--success.is-plain[disabled] {
+  color: #b3e19d;
+  background-color: #f0f9eb;
+  border-color: #d9ecff;
+}
+.s-button.s-button--info {
+  color: #fff;
+  background-color: #909399;
+  border-color: #909399;
+}
+.s-button.s-button--info:hover {
+  color: #fff;
+  border-color: #b1b3b8;
+  background-color: #b1b3b8;
+  @apply outline-none;
+}
+.s-button.s-button--info:active {
+  color: #fff;
+  border-color: #73767a;
+  background-color: #73767a;
+  @apply outline-none;
+}
+.s-button.s-button--info:focus-visible {
+  outline: 2px solid #c8c9cc;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--info[disabled] {
+  color: #fff;
+  @apply cursor-not-allowed;
+  background-image: none;
+  background-color: #c8c9cc;
+  border-color: #c8c9cc;
+}
+.s-button.s-button--info.is-plain {
+  color: #909399;
+  background-color: #f4f4f5;
+  border-color: #c8c9cc;
+}
+.s-button.s-button--info.is-plain:hover {
+  color: #fff;
+  border-color: #909399;
+  background-color: #909399;
+  @apply outline-none;
+}
+.s-button.s-button--info.is-plain:active {
+  color: #fff;
+  border-color: #73767a;
+  background-color: #73767a;
+  @apply outline-none;
+}
+.s-button.s-button--info.is-plain:focus-visible {
+  outline: 2px solid #73767a;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--info.is-plain[disabled] {
+  color: #c8c9cc;
+  background-color: #f4f4f5;
+  border-color: #e9e9eb;
+}
+.s-button.s-button--warning {
+  color: #fff;
+  background-color: #e6a23c;
+  border-color: #e6a23c;
+}
+.s-button.s-button--warning:hover {
+  color: #fff;
+  border-color: #eebe77;
+  background-color: #eebe77;
+  @apply outline-none;
+}
+.s-button.s-button--warning:active {
+  color: #fff;
+  border-color: #b88230;
+  background-color: #b88230;
+  @apply outline-none;
+}
+.s-button.s-button--warning:focus-visible {
+  outline: 2px solid #b88230;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--warning[disabled] {
+  color: #fff;
+  @apply cursor-not-allowed;
+  background-image: none;
+  background-color: #f3d19e;
+  border-color: #f3d19e;
+}
+.s-button.s-button--warning.is-plain {
+  color: #e6a23c;
+  background-color: #fdf6ec;
+  border-color: #f3d19e;
+}
+.s-button.s-button--warning.is-plain:hover {
+  color: #fff;
+  border-color: #e6a23c;
+  background-color: #e6a23c;
+  @apply outline-none;
+}
+.s-button.s-button--warning.is-plain:active {
+  color: #fff;
+  border-color: #b88230;
+  background-color: #b88230;
+  @apply outline-none;
+}
+.s-button.s-button--warning.is-plain:focus-visible {
+  outline: 2px solid #f3d19e;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--warning.is-plain[disabled] {
+  color: #f3d19e;
+  background-color: #fdf6ec;
+  border-color: #faecd8;
+}
+.s-button.s-button--danger {
+  color: #fff;
+  background-color: #f56c6c;
+  border-color: #f56c6c;
+}
+.s-button.s-button--danger:hover {
+  color: #fff;
+  border-color: #f89898;
+  background-color: #f89898;
+  @apply outline-none;
+}
+.s-button.s-button--danger:active {
+  color: #fff;
+  border-color: #c45656;
+  background-color: #c45656;
+  @apply outline-none;
+}
+.s-button.s-button--danger:focus-visible {
+  outline: 2px solid #fab6b6;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--danger[disabled] {
+  color: #fff;
+  @apply cursor-not-allowed;
+  background-image: none;
+  background-color: #fab6b6;
+  border-color: #fab6b6;
+}
+.s-button.s-button--danger.is-plain {
+  color: #f56c6c;
+  background-color: #fef0f0;
+  border-color: #fab6b6;
+}
+.s-button.s-button--danger.is-plain:hover {
+  color: #fff;
+  border-color: #f56c6c;
+  background-color: #f56c6c;
+  @apply outline-none;
+}
+.s-button.s-button--danger.is-plain:active {
+  color: #fff;
+  border-color: #c45656;
+  background-color: #c45656;
+  @apply outline-none;
+}
+.s-button.s-button--danger.is-plain:focus-visible {
+  outline: 2px solid #fab6b6;
+  @apply outline-offset-1;
+  transition:
+    outline-offset 0s,
+    outline 0s;
+}
+.s-button.s-button--danger.is-plain[disabled] {
+  color: #fab6b6;
+  background-color: #fef0f0;
+  border-color: #fde2e2;
+}

@@ -118,9 +118,3 @@ const confirm = () => {
   console.log("confirm !!");
 };
 </script>
-
-<style lang="scss" scoped>
-.mb-4 {
-  margin-bottom: 1rem;
-}
-</style>

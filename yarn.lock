@@ -4577,7 +4577,7 @@ vite@^5.0.0, vite@^5.2.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
-vitepress-theme-demoblock@1.4.2:
+vitepress-theme-demoblock@^1.4.2:
   version "1.4.2"
   resolved "https://r2.cnpmjs.org/vitepress-theme-demoblock/-/vitepress-theme-demoblock-1.4.2.tgz#0b55695e53d3cd142d5351f93f62d651ed057df1"
   integrity sha512-OMIRg1JJI8NvBVLFu2G0cd+gT5IzXZfTsV7yws7GfRXZE3Q4qLO5cR1+ngNnFZw44ID1oLk+Yu9HZM+AJYtgWA==
@@ -4591,10 +4591,10 @@ vitepress-theme-demoblock@1.4.2:
     vitepress "^0.16.1"
     yaml "^2.0.0-6"
 
-vitepress@1.0.0-alpha.10:
-  version "1.0.0-alpha.10"
-  resolved "https://r.cnpmjs.org/vitepress/-/vitepress-1.0.0-alpha.10.tgz#833763efa2b43b33c5f91a7e30649e57f3af7a2f"
-  integrity sha512-RGPU+YApj2jaYplAIJUe+2qlDks9FzPX1QGK+7NdGByeCCVZg6z9eYWjjvfvA/sgCtG3yeJE/4/jCwlv4Y8bVw==
+vitepress@1.0.0-alpha.8:
+  version "1.0.0-alpha.8"
+  resolved "https://r.cnpmjs.org/vitepress/-/vitepress-1.0.0-alpha.8.tgz#b6a3b503c2ea3ed0a44a16539849c02fa996c090"
+  integrity sha512-kTRN5DCagvMqr9OjylSV9/waGg0IHrxL0hBVuJoz7ykleZq2qR02n5CaiFq5QrSB/VRBGqiVsFQzet9vJsXS8g==
   dependencies:
     "@docsearch/css" "^3.2.1"
     "@docsearch/js" "^3.2.1"

@@ -1,5 +1,7 @@
 import { App } from 'vue';
 import Tree from './src/tree';
+import '../index.scss';
+import './style/tree.scss';
 
 // 具名导出
 export { Tree };

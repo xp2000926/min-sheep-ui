@@ -45,10 +45,75 @@ const value2 = ref(true)
   />
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref } from 'vue'
 
 const value = ref(true)
+</script>
+```
+:::
+
+## 文字描述
+
+:::demo 使用active-text属性与inactive-text属性来设置开关的文字描述。 使用 inline-prompt 属性来控制文本是否显示在点内。<br><br>使用active-text属性与inactive-text属性来设置开关的文字描述。
+```vue
+<template>
+  <s-switch
+    v-model="value1"
+    class="mb-2"
+    active-text="Pay by month"
+    inactive-text="Pay by year"
+  />
+  <br />
+  <s-switch
+    v-model="value2"
+    class="mb-2"
+    style="--s-switch-on-color: #13ce66; --s-switch-off-color: #ff4949"
+    active-text="Pay by month"
+    inactive-text="Pay by year"
+  />
+  <br />
+  <s-switch
+    v-model="value3"
+    inlinePrompt
+    active-text="是"
+    inactive-text="否"
+  />
+  <s-switch
+    v-model="value4"
+    class="ml-2"
+    inlinePrompt
+    style="--s-switch-on-color: #13ce66; --s-switch-off-color: #ff4949"
+    active-text="Y"
+    inactive-text="N"
+  />
+  <s-switch
+    v-model="value6"
+    class="ml-2"
+    width="60"
+    inlinePrompt
+    active-text="超出省略"
+    inactive-text="超出省略"
+  />
+  <s-switch
+    v-model="value5"
+    class="ml-2"
+    inlinePrompt
+    style="--s-switch-on-color: #13ce66; --s-switch-off-color: #ff4949"
+    active-text="完整展示多个内容"
+    inactive-text="多个内容"
+  />
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const value1 = ref(true)
+const value2 = ref(true)
+const value3 = ref(true)
+const value4 = ref(true)
+const value5 = ref(true)
+const value6 = ref(true)
 </script>
 ```
 :::
@@ -67,7 +132,7 @@ const value = ref(true)
     </template>
   </s-switch>
 </template>
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 
 const value1 = ref(true)

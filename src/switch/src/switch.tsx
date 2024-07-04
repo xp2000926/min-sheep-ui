@@ -5,20 +5,24 @@ export default defineComponent({
   name: 'SSwitch',
   props: switchProps,
   emits: ['update:modelValue'],
-  setup(props: SwitchProps, { slots }) {
+  setup(props: SwitchProps, { emit, slots }) {
     const {
       modelValue,
       disabled,
       size,
       activeText,
       inactiveText,
-      inlinePrompt
+      inlinePrompt,
+      width
     } = toRefs(props);
     const sizeClass = size.value == '' ? '' : `s-switch--${size.value}`;
     return () => (
       <div
+        onClick={() => {
+          emit('update:modelValue', !modelValue.value);
+        }}
         class={classNames(
-          `s-switch inline-flex leading-5 vertical-middle items-center relative ${sizeClass}`,
+          `s-switch inline-flex leading-5 align-middle  items-center relative ${sizeClass}`,
           {
             'is-checked': modelValue.value,
             'is-disabled': disabled.value
@@ -30,17 +34,29 @@ export default defineComponent({
           type="checkbox"
           v-model={modelValue.value}
         />
+        {!inlinePrompt.value ? (
+          <div
+            class={classNames('s-switch__label s-switch__label--left ', {
+              'is-active': !modelValue.value
+            })}
+          >
+            <span>{inactiveText.value}</span>
+          </div>
+        ) : null}
+        {/* style={{
+            width: `${width.value}px`;
+          }} */}
         <div
-          class={classNames('s-switch__label s-switch__label--left ', {
-            'is-active': !modelValue.value
-          })}
+          class="s-switch__core inline-flex items-center relative cursor-pointer"
+          style={{
+            width: width.value == 0 ? 'auto' : `${width.value}px`
+          }}
         >
-          <span>{inactiveText.value}</span>
-        </div>
-        <div class="s-switch__core inline-flex items-center relative cursor-pointer">
           {inlinePrompt.value ? (
             <div class="s-switch__inner">
-              <span class="is-text"></span>
+              <span class="is-text">
+                {modelValue.value ? activeText.value : inactiveText.value}
+              </span>
             </div>
           ) : null}
           <div class="s-switch__action flex absolute items-center justify-center">
@@ -52,13 +68,15 @@ export default defineComponent({
               : ''}
           </div>
         </div>
-        <div
-          class={classNames('s-switch__label s-switch__label--right', {
-            'is-active': modelValue.value
-          })}
-        >
-          <span>{activeText.value}</span>
-        </div>
+        {!inlinePrompt.value ? (
+          <div
+            class={classNames('s-switch__label s-switch__label--right', {
+              'is-active': modelValue.value
+            })}
+          >
+            <span>{activeText.value}</span>
+          </div>
+        ) : null}
       </div>
     );
   }

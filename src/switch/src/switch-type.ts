@@ -28,10 +28,10 @@ export const switchProps = {
   loading: {
     type: Boolean,
     default: false
+  },
+  width: {
+    type: Number,
+    default: 0
   }
-  // width: {
-  //   type: Number | String,
-  //   default: ''
-  // }
 } as const;
 export type SwitchProps = ExtractPropTypes<typeof switchProps>;

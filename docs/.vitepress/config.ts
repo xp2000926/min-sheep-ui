@@ -14,7 +14,10 @@ const sidebar = [
   },
   { text: '导航', items: [] },
   { text: '反馈', items: [] },
-  { text: '数据录入', items: [] },
+  {
+    text: '数据录入',
+    items: [{ text: 'Switch 开关', link: '/components/switch/' }]
+  },
   {
     text: '数据展示',
     items: [{ text: 'tree 树', link: '/components/tree/' }]

@@ -47,29 +47,29 @@ export const treeProps = {
   checkboxPlacement: {
     type: String as PropType<ICheckboxPlacement>,
     default: 'left'
-  },
+  }
   // 拖拽开关属性
   // draggable: {
   //   type: [Boolean, Object] as PropType<IDraggable>,
   //   default: false
   // },
-  height: {
-    type: Number
-  },
-  itemHeight: {
-    type: Number,
-    default: 30
-  },
-  accordion: {
-    type: Boolean,
-    default: false
-  },
-  props: {
-    type: Object,
-    default: {
-      label: 'label',
-      children: 'children'
-    }
-  }
+  // height: {
+  //   type: Number
+  // },
+  // itemHeight: {
+  //   type: Number,
+  //   default: 30
+  // },
+  // accordion: {
+  //   type: Boolean,
+  //   default: false
+  // },
+  // props: {
+  //   type: Object,
+  //   default: {
+  //     label: 'label',
+  //     children: 'children'
+  //   }
+  // }
 } as const;
 export type TreeProps = ExtractPropTypes<typeof treeProps>;

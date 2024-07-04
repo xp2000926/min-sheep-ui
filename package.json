@@ -14,6 +14,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "vue": "^3.4.21"
   },
   "devDependencies": {

@@ -4,7 +4,6 @@ const { defineConfig, build } = require('vite');
 const vue = require('@vitejs/plugin-vue');
 const vueJsx = require('@vitejs/plugin-vue-jsx');
 const fsExtra = require('fs-extra');
-// 新增
 const inquirer = require('inquirer');
 let version;
 

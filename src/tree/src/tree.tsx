@@ -9,7 +9,6 @@ export default defineComponent({
   props: treeProps,
   setup(props: TreeProps, { slots }) {
     const { data } = toRefs(props);
-    console.log('data', data.value);
 
     const treeData = useTree(data);
     provide('TREE_UTILS', treeData);
@@ -17,27 +16,29 @@ export default defineComponent({
       // return <div class="s-tree">tree</div>;
       return (
         <div class="s-tree">
-          {//循环输出节点
-          treeData.expandedTree?.value.map(treeNode => (
-            <STreeNode {...props} treeNode={treeNode}>
-              {{
-                content: () =>
-                  slots.content ? slots.content(treeNode) : treeNode.label,
-                icon: () =>
-                  slots.icon ? (
-                    slots.icon({
-                      nodeData: treeNode,
-                      toggleNode: treeData.toggleNode
-                    })
-                  ) : (
-                    <STreeNodeToggle
-                      expanded={!!treeNode.expanded}
-                      onClick={() => treeData.toggleNode(treeNode)}
-                    />
-                  )
-              }}
-            </STreeNode>
-          ))}
+          {
+            //循环输出节点
+            treeData.expandedTree?.value.map(treeNode => (
+              <STreeNode {...props} treeNode={treeNode}>
+                {{
+                  content: () =>
+                    slots.content ? slots.content(treeNode) : treeNode.label,
+                  icon: () =>
+                    slots.icon ? (
+                      slots.icon({
+                        nodeData: treeNode,
+                        toggleNode: treeData.toggleNode
+                      })
+                    ) : (
+                      <STreeNodeToggle
+                        expanded={!!treeNode.expanded}
+                        onClick={() => treeData.toggleNode(treeNode)}
+                      />
+                    )
+                }}
+              </STreeNode>
+            ))
+          }
         </div>
       );
     };

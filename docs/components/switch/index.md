@@ -118,6 +118,22 @@ const value6 = ref(true)
 ```
 :::
 
+## 形状
+
+:::demo 开关可以设为方形。
+```vue
+<template>
+  <s-switch v-model="value1" class="ml-2"  :round="false" />
+  <s-switch v-model="value1"/>
+</template>
+<script setup>
+import { ref } from 'vue'
+
+const value1 = ref(true)
+</script>
+```
+:::
+
 ## 自定义操作图标
 
 :::demo 使用 active-action 和 inactive-action 属性来添加图标。

@@ -39,15 +39,17 @@ export const treeProps = {
     type: Boolean,
     default: false
   },
+  // 复选框的位置
+  checkboxPlacement: {
+    type: String as PropType<ICheckboxPlacement>,
+    default: 'left'
+  },
   //  是否显示操作按钮
   operable: {
     type: Boolean,
     default: false
-  }, // 复选框的位置
-  checkboxPlacement: {
-    type: String as PropType<ICheckboxPlacement>,
-    default: 'left'
   }
+
   // 拖拽开关属性
   // draggable: {
   //   type: [Boolean, Object] as PropType<IDraggable>,

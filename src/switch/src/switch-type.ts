@@ -25,13 +25,18 @@ export const switchProps = {
     type: Boolean,
     default: false
   },
-  loading: {
-    type: Boolean,
-    default: false
-  },
   width: {
     type: Number,
     default: 0
+  },
+  //todo
+  round: {
+    type: Boolean,
+    default: true
+  },
+  loading: {
+    type: Boolean,
+    default: false
   }
 } as const;
 export type SwitchProps = ExtractPropTypes<typeof switchProps>;

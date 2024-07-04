@@ -3,7 +3,7 @@
   --s-transition-duration: 0.3s;
   --s-switch-on-color: #409eff;
   font-size: 14px;
-  height: 32px; 
+  height: 32px;
   .s-switch__input {
     width: 0;
     height: 0;
@@ -48,6 +48,14 @@
       white-space: nowrap;
     }
   }
+  &.is-round {
+    .s-switch__core {
+      border-radius: 0;
+      .s-switch__action {
+        border-radius: 0;
+      }
+    }
+  }
   &.is-checked {
     .s-switch__core {
       border-color: var(--s-switch-on-color);
@@ -57,60 +65,57 @@
       left: calc(100% - 17px);
       color: var(--s-switch-on-color);
     }
-    .s-switch__inner{
+    .s-switch__inner {
       padding: 0 18px 0 4px;
     }
   }
-  &.s-switch--small{
+  &.s-switch--small {
     font-size: 12px;
     line-height: 16px;
-    height: 24px; &.is-checked{
-       .s-switch__action {
-          left: calc(100% - 13px);
-       }
+    height: 24px;
+    &.is-checked {
+      .s-switch__action {
+        left: calc(100% - 13px);
+      }
     }
-    .s-switch__core{
+    .s-switch__core {
       min-width: 30px;
       height: 16px;
-      border-radius: 8px; 
-      .s-switch__action{
+      border-radius: 8px;
+      .s-switch__action {
         width: 12px;
         height: 12px;
-       
       }
     }
   }
-  &.s-switch--large{
+  &.s-switch--large {
     font-size: 14px;
     line-height: 24px;
     height: 40px;
-    &.is-checked{
-       .s-switch__action {
+    &.is-checked {
+      .s-switch__action {
         left: calc(100% - 21px);
-       }
+      }
     }
-    .s-switch__core{
+    .s-switch__core {
       min-width: 50px;
       height: 24px;
       border-radius: 12px;
-      .s-switch__action{
+      .s-switch__action {
         width: 20px;
         height: 20px;
-       
       }
     }
   }
-  .s-switch__label{
+  .s-switch__label {
     &.is-active {
-    color: #409eff;
+      color: #409eff;
     }
   }
   .s-switch__label--left {
     margin-right: 10px;
   }
-  .s-switch__label--right{
+  .s-switch__label--right {
     margin-left: 10px;
   }
-  
-
 }

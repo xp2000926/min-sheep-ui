@@ -13,7 +13,8 @@ export default defineComponent({
       activeText,
       inactiveText,
       inlinePrompt,
-      width
+      width,
+      round
     } = toRefs(props);
     const sizeClass = size.value == '' ? '' : `s-switch--${size.value}`;
     return () => (
@@ -25,7 +26,8 @@ export default defineComponent({
           `s-switch inline-flex leading-5 align-middle  items-center relative ${sizeClass}`,
           {
             'is-checked': modelValue.value,
-            'is-disabled': disabled.value
+            'is-disabled': disabled.value,
+            'is-round': !round.value
           }
         )}
       >
@@ -43,9 +45,6 @@ export default defineComponent({
             <span>{inactiveText.value}</span>
           </div>
         ) : null}
-        {/* style={{
-            width: `${width.value}px`;
-          }} */}
         <div
           class="s-switch__core inline-flex items-center relative cursor-pointer"
           style={{

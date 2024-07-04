@@ -20,7 +20,9 @@ export default defineComponent({
     return () => (
       <div
         onClick={() => {
-          emit('update:modelValue', !modelValue.value);
+          if (!disabled.value) {
+            emit('update:modelValue', !modelValue.value);
+          }
         }}
         class={classNames(
           `s-switch inline-flex leading-5 align-middle  items-center relative ${sizeClass}`,

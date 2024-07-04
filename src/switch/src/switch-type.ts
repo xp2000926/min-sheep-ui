@@ -29,10 +29,18 @@ export const switchProps = {
     type: Number,
     default: 0
   },
-  //todo
   round: {
     type: Boolean,
     default: true
+  },
+  //todo
+  activeIcon: {
+    type: String,
+    default: ''
+  },
+  inactiveIcon: {
+    type: String,
+    default: ''
   },
   loading: {
     type: Boolean,

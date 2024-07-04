@@ -134,6 +134,23 @@ const value1 = ref(true)
 ```
 :::
 
+## 禁用状态
+
+:::demo 设置disabled属性，接受一个Boolean，设置true即可禁用。
+```vue
+<template>
+  <s-switch v-model="value1" disabled />
+  <s-switch v-model="value2" class="ml-2" disabled :round="false" />
+</template>
+
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const value1 = ref(true)
+const value2 = ref(true)
+</script>
+```
+:::
 ## 自定义操作图标
 
 :::demo 使用 active-action 和 inactive-action 属性来添加图标。

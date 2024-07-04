@@ -107,6 +107,14 @@
       }
     }
   }
+  &.is-disabled {
+    opacity: 0.6;
+    @apply cursor-not-allowed;
+    .s-switch__core,
+    .s-switch__label {
+      @apply cursor-not-allowed;
+    }
+  }
   .s-switch__label {
     &.is-active {
       color: #409eff;

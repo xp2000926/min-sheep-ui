@@ -324,8 +324,7 @@ const data = ref([
           v-else
           @click="
             (event) => {
-              event.stopPropagation();
-              toggleNode(nodeData);
+              toggleNode(event,nodeData);
             }
           "
         >
@@ -664,6 +663,117 @@ export default defineComponent({
     }
   },
 })
+</script>
+```
+:::
+
+## 虚拟滚动
+
+:::demo 通过`height`开启虚拟滚动，通过`itemHeight`设置项目高度
+```vue
+<template>
+  <s-tree :data="data" :height="300"></s-tree>
+</template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const data = ref([
+      ...Array.from({ length: 1000 }).map((_, index) => ({
+        id: 'node ' + index,
+        label: 'node ' + index,
+      })),
+    ]);
+
+    return {
+      data
+    };
+  },
+});
+</script>
+```
+:::
+
+## 手风琴模式
+
+:::demo `accordion`对于同一级的节点，每次只能展开一个
+```vue
+<template>
+  <s-tree :data="data" accordion />
+</template>
+<script setup>
+import { ref } from 'vue'
+const data = ref([
+  {
+    label: '一级 1',
+    id:'一级 1',
+    children: [
+      {
+      label: '二级 1-1',
+      id:'二级 1-1',
+      children: [
+        {
+          label: '三级 1-1-1', 
+          id:'三级 1-1-1'
+        }
+        ]
+      }
+    ]
+  },
+  {
+    label: '一级 2', 
+    id:'一级 2',
+    children: [
+      {
+        label: '二级 2-1',
+        id:'二级 2-1',
+        children: [
+          {
+            label: '三级 2-1-1',
+            id:'三级 2-1-1'
+          }
+        ]
+      },
+      {
+        label: '二级 2-2', 
+        id:'二级 2-2',
+        children: [
+          {
+            label: '三级 2-2-1',
+            id:'三级 2-2-1',
+          }
+        ]
+      }
+    ]
+  },
+  {
+    label: '一级 3',
+    id:'一级 3',
+    children: [
+      {
+        label: '二级 3-1',
+        id:'二级 3-1',
+        children: [
+          {
+            label: '三级 3-1-1',
+            id:'三级 3-1-1'
+          }
+        ]
+      },
+      {
+        label: '二级 3-2',
+        id:'二级 3-2',
+        children: [
+          {
+            label: '三级 3-2-1',
+            id:'三级 3-2-1'
+          }
+        ]
+      }
+    ]
+  }
+])
 </script>
 ```
 :::

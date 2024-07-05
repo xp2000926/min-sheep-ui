@@ -10,8 +10,7 @@ export type IUseCore = {
   getParent: (node: IInnerTreeNode) => IInnerTreeNode | undefined;
 };
 export type IUseToggle = {
-  //   toggleNode: (e: Event, node: IInnerTreeNode, accordion?: boolean) => void;
-  toggleNode: (node: IInnerTreeNode, accordion?: boolean) => void;
+  toggleNode: (e: Event, node: IInnerTreeNode, accordion?: boolean) => void;
 };
 export type IUseCheck = {
   toggleCheckNode: (treeNode: IInnerTreeNode) => void;

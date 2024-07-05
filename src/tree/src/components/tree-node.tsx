@@ -2,6 +2,11 @@ import { defineComponent, inject, ref, toRefs } from 'vue';
 import { treeNodeProps, TreeNodeProps } from './tree-node-type';
 import { IInnerTreeNode } from '../tree-type';
 import { TreeUtils } from '../composables/use-tree-type';
+import {
+  BaseSelectAll, // 全选
+  BaseSemiSelection, // 半选
+  BaseSelectionBox // 选择框
+} from '../../../base-selection-box';
 const NODE_HEIGHT = 28; // 节点高度
 const NODE_INDENT = 24; // 节点缩进大小
 
@@ -86,13 +91,23 @@ export default defineComponent({
             )}
             {/* 复选框 */}
             {checkable.value && checkboxPlacement.value == 'left' && (
-              <input
-                type="checkbox"
-                v-model={treeNode.value.checked}
-                onClick={() => {
-                  toggleCheckNode(treeNode.value);
-                }}
-              />
+              <>
+                {treeNode.value.inChecked ? (
+                  <BaseSemiSelection
+                    onClick={() => toggleCheckNode(treeNode.value)}
+                  />
+                ) : treeNode.value.checked ? (
+                  <BaseSelectAll
+                    onClick={() => {
+                      toggleCheckNode(treeNode.value);
+                    }}
+                  />
+                ) : (
+                  <BaseSelectionBox
+                    onClick={() => toggleCheckNode(treeNode.value)}
+                  />
+                )}
+              </>
             )}
             {/* 标签 */}
             {slots.content!()}
@@ -130,13 +145,23 @@ export default defineComponent({
           <div>
             {/* 复选框 */}
             {checkable.value && checkboxPlacement.value == 'right' && (
-              <input
-                type="checkbox"
-                v-model={treeNode.value.checked}
-                onClick={() => {
-                  toggleCheckNode(treeNode.value);
-                }}
-              />
+              <>
+                {treeNode.value.inChecked ? (
+                  <BaseSemiSelection
+                    onClick={() => toggleCheckNode(treeNode.value)}
+                  />
+                ) : treeNode.value.checked ? (
+                  <BaseSelectAll
+                    onClick={() => {
+                      toggleCheckNode(treeNode.value);
+                    }}
+                  />
+                ) : (
+                  <BaseSelectionBox
+                    onClick={() => toggleCheckNode(treeNode.value)}
+                  />
+                )}
+              </>
             )}
           </div>
         </div>

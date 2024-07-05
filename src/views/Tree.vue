@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-4">
+  <!-- <div class="mb-4">
     <STree :data="data"></STree>
   </div>
   <div class="mb-4">
@@ -86,8 +86,10 @@
         </svg>
       </template>
     </STree>
+  </div> -->
+  <div class="mb-4">
+    <STree :data="advancedData" :height="300" accordion />
   </div>
-  <div class="mb-4"></div>
   <div class="mb-4">
     <!-- <STree :data="dataTwo" :props="defaultProps"></STree> -->
   </div>
@@ -148,54 +150,82 @@ const data = ref([
 const defaultProps = ref({
   label: "name",
 });
-const dataTwo = ref([
-  {
-    name: "docs",
-    id: "docs",
-  },
-  {
-    name: "packages",
-    id: "packages",
-    expanded: true,
-    children: [
-      {
-        name: "plugin-vue",
-        id: "plugin-vue",
-      },
-      {
-        name: "vite",
-        id: "vite",
-        expanded: true,
-        children: [
-          {
-            name: "src",
-            id: "src",
-          },
-          {
-            name: "README.md",
-            id: "README.md",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: "scripts",
-    id: "scripts",
-    children: [
-      {
-        name: "release.ts",
-        id: "release.ts",
-      },
-      {
-        name: "verifyCommit.ts",
-        id: "verifyCommit.ts",
-      },
-    ],
-  },
-  {
-    name: "pnpm-workspace.yaml",
-    id: "pnpm-workspace.yaml",
-  },
-]);
+const advancedData = ref([]);
+
+const root = 100,
+  children = 3;
+// base = 1000;
+for (let i = 0; i < root; i++) {
+  advancedData.value.push({
+    id: `${i}`,
+    label: `test-${i}`,
+    children: [],
+    childNodeCount: children,
+  });
+  for (let j = 0; j < children; j++) {
+    advancedData.value[i].children.push({
+      id: `${i}-${j}`,
+      label: `test-${i}-${j}`,
+      children: [],
+      // childNodeCount: base,
+    });
+    // for (let k = 0; k < base; k++) {
+    //   advancedData.value[i].children[j].children.push({
+    //     id: `${i}-${j}-${k}`,
+    //     label: `test-${i}-${j}-${k}`,
+    //   });
+    // }
+  }
+}
+console.log("advancedData", advancedData.value);
+// const dataTwo = ref([
+//   {
+//     name: "docs",
+//     id: "docs",
+//   },
+//   {
+//     name: "packages",
+//     id: "packages",
+//     expanded: true,
+//     children: [
+//       {
+//         name: "plugin-vue",
+//         id: "plugin-vue",
+//       },
+//       {
+//         name: "vite",
+//         id: "vite",
+//         expanded: true,
+//         children: [
+//           {
+//             name: "src",
+//             id: "src",
+//           },
+//           {
+//             name: "README.md",
+//             id: "README.md",
+//           },
+//         ],
+//       },
+//     ],
+//   },
+//   {
+//     name: "scripts",
+//     id: "scripts",
+//     children: [
+//       {
+//         name: "release.ts",
+//         id: "release.ts",
+//       },
+//       {
+//         name: "verifyCommit.ts",
+//         id: "verifyCommit.ts",
+//       },
+//     ],
+//   },
+//   {
+//     name: "pnpm-workspace.yaml",
+//     id: "pnpm-workspace.yaml",
+//   },
+// ]);
 </script>

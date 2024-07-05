@@ -10,7 +10,7 @@ export default (props: { expanded: boolean }, { emit }: SetupContext) => (
     }}
     viewBox="0 0 1024 1024"
     xmlns="http://www.w3.org/2000/svg"
-    onClick={() => emit('onClick')}
+    onClick={e => emit('onClick', e)}
   >
     <path fill="currentColor" d="M384 192v640l384-320.064z"></path>
   </svg>

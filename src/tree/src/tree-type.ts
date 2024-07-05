@@ -53,18 +53,19 @@ export const treeProps = {
   draggable: {
     type: [Boolean, Object] as PropType<IDraggable>,
     default: false
+  },
+  height: {
+    type: Number
+  },
+  itemHeight: {
+    type: Number,
+    default: 30
+  },
+  accordion: {
+    type: Boolean,
+    default: false
   }
-  // height: {
-  //   type: Number
-  // },
-  // itemHeight: {
-  //   type: Number,
-  //   default: 30
-  // },
-  // accordion: {
-  //   type: Boolean,
-  //   default: false
-  // },
+  //todo
   // props: {
   //   type: Object,
   //   default: {

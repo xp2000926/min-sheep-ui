@@ -18,7 +18,7 @@ export const buttonProps = {
   },
   size: {
     type: String as PropType<ButtonSize>,
-    default: 'medium'
+    default: ''
   },
   disabled: {
     type: Boolean,
@@ -39,6 +39,19 @@ export const buttonProps = {
   circle: {
     type: Boolean,
     default: false
+  },
+  //todo
+  link: {
+    type: Boolean,
+    default: false
+  },
+  icon: {
+    type: String,
+    default: ''
+  },
+  color: {
+    type: String,
+    default: ''
   }
 } as const; //as const 表示以后 buttonProps 是不可以动态设置一些其他属性
 

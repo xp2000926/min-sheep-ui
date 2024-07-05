@@ -1,4 +1,4 @@
-import { defineComponent, toRefs, provide } from 'vue';
+import { defineComponent, toRefs, provide, SetupContext } from 'vue';
 import { TreeProps, treeProps } from './tree-type';
 import { useTree } from './composables/use-tree';
 import STreeNode from './components/tree-node';
@@ -7,10 +7,12 @@ import STreeNodeToggle from './components/tree-node-toggle';
 export default defineComponent({
   name: 'STree',
   props: treeProps,
-  setup(props: TreeProps, { slots }) {
+  emits: ['lazy-load'],
+  setup(props: TreeProps, context: SetupContext) {
     const { data } = toRefs(props);
+    const { slots } = context;
 
-    const treeData = useTree(data);
+    const treeData = useTree(data, props, context);
     provide('TREE_UTILS', treeData);
     return () => {
       // return <div class="s-tree">tree</div>;
@@ -34,6 +36,12 @@ export default defineComponent({
                         expanded={!!treeNode.expanded}
                         onClick={() => treeData.toggleNode(treeNode)}
                       />
+                    ),
+                  loading: () =>
+                    slots.loading ? (
+                      slots.loading({ nodeData: treeData })
+                    ) : (
+                      <span class="ml-1">loading...</span>
                     )
                 }}
               </STreeNode>

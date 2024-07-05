@@ -551,3 +551,119 @@ export default defineComponent({
 </script>
 ```
 :::
+
+## 节点懒加载
+
+:::demo 通过设置该节点 isLeaf 参数为 false, 组件回调 lazyLoad 方法实现节点懒加载。
+```vue
+<template>
+  <s-tree :data="data" @lazy-load="lazyLoad"></s-tree>
+</template>
+<script>
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const data = ref([
+      {
+        id: 'node-1',
+        label: 'node-1',
+        children: [
+          {
+            id: 'node-1-1',
+            label: 'node 1-1 - dynamic loading',
+            isLeaf: false,
+          },
+          {
+            id: 'node 1-2',
+            label: 'node 1-2',
+          },
+        ],
+      },
+      {
+        id: 'node-2',
+        label: 'node 2 - dynamic loading',
+        isLeaf: false
+      },
+    ]);
+
+    const lazyLoad = (node, callback) => {
+      setTimeout(() => {
+        const data = [
+          {
+            label: 'lazy node 1',
+            expanded: true,
+            children: [
+              {
+                id: 'lazy node 1-1',
+                label: 'lazy node 1-1',
+              },
+              {
+                id: 'lazy node 1-2',
+                label: 'lazy node 1-2',
+              },
+            ],
+          },
+          {
+            id: 'lazy node 2',
+            label: 'lazy node 2',
+          },
+        ];
+        callback({
+          treeItems: data,
+          node,
+        });
+      }, 1000);
+    };
+
+    return {
+      data,
+      lazyLoad,
+    }
+  }
+})
+</script>
+```
+:::
+
+## 可拖拽树
+
+:::demo 通过`draggable`属性配置节点的拖拽功能。
+```vue
+<template>
+  <h6><p>默认行为</p></h6>
+  <s-tree :data="data" draggable></s-tree>
+
+  <h6><p>排序</p></h6>
+  <s-tree :data="data" :draggable="{ dropPrev: true, dropNext: true, dropInner: true }"></s-tree>
+</template>
+<script lang="ts">
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const data = ref([
+      {
+        label: 'node 1',
+        id: 'node-1',
+        children: [
+          {
+            label: 'node 1-1',
+            id: 'node-1-1'
+          },
+        ]
+      },
+      {
+        label: 'node 2',
+        id: 'node-2'
+      },
+    ])
+
+    return {
+      data,
+    }
+  },
+})
+</script>
+```
+:::

@@ -26,7 +26,7 @@ export const switchProps = {
     default: false
   },
   width: {
-    type: Number,
+    type: [String, Number] as PropType<string | number>,
     default: 0
   },
   round: {

@@ -1,4 +1,4 @@
-import { IInnerTreeNode, ITreeNode, IProps } from './tree-type';
+import { IInnerTreeNode, ITreeNode } from './tree-type';
 
 export function generateInnerTree(
   tree: ITreeNode[],
@@ -32,7 +32,11 @@ export function generateInnerTree(
       return prev.concat(o, children);
     } else {
       // 叶子节点
-      o.isLeaf = true;
+      // 如果是懒加载,isLeaf会被设震为false， 则不需要设置
+      // 如果没有初始化，则默认设置为true
+      if (o.isLeaf === undefined) {
+        o.isLeaf = true;
+      }
       return prev.concat(o);
     }
   }, [] as IInnerTreeNode[]);

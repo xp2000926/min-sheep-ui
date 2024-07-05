@@ -15,5 +15,8 @@ module.exports = {
     sourceType: 'module'
   },
   plugins: ['vue', '@typescript-eslint'],
-  rules: {}
+  rules: {
+    complexity: ['error', 25], // 圈复杂度
+    'no-plusplus': 'off' // 关闭i++ 报错
+  }
 };

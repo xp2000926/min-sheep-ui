@@ -1,5 +1,5 @@
 import { ExtractPropTypes, PropType } from 'vue';
-// import { IDraggable } from './composables/use-tree-type';
+import { IDraggable } from './composables/use-tree-type';
 export type ICheckboxPlacement = 'left' | 'right';
 export interface ITreeNode {
   label: string;
@@ -48,13 +48,12 @@ export const treeProps = {
   operable: {
     type: Boolean,
     default: false
-  }
-
+  },
   // 拖拽开关属性
-  // draggable: {
-  //   type: [Boolean, Object] as PropType<IDraggable>,
-  //   default: false
-  // },
+  draggable: {
+    type: [Boolean, Object] as PropType<IDraggable>,
+    default: false
+  }
   // height: {
   //   type: Number
   // },

@@ -60,10 +60,18 @@ export const useCore = (innerData: Ref<IInnerTreeNode[]>): IUseCore => {
     if (!node) return -1;
     return innerData.value.findIndex(item => item.id === node.id);
   };
+  const getNode = (node: IInnerTreeNode) => {
+    return innerData.value.find(item => item.id === node.id);
+  };
+  const getParent = (node: IInnerTreeNode) => {
+    return innerData.value.find(item => item.id === node.parentId);
+  };
   return {
     expandedTree,
     getChildren,
     getChildrenExpanded,
-    getIndex
+    getIndex,
+    getNode,
+    getParent
   };
 };

@@ -6,8 +6,9 @@ export type ButtonType =
   | 'success'
   | 'info'
   | 'warning'
-  | 'danger';
-export type ButtonSize = '' | 'small' | 'large';
+  | 'danger'
+  | 'default';
+export type ButtonSize = '' | 'small' | 'large' | 'default';
 /**
  * buttonProps 是用于约束用户在进行属性定义的时候的属性对象，并不是属性类型
  */
@@ -39,8 +40,12 @@ export const buttonProps = {
   circle: {
     type: Boolean,
     default: false
+  }, //todo
+  dashed: {
+    type: Boolean,
+    default: false
   },
-  //todo
+
   link: {
     type: Boolean,
     default: false

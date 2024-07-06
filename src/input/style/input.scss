@@ -1,4 +1,6 @@
 .s-input {
+    --s-input-height:32px;
+    --s-input-inner-height:calc(32px - 2px);
     width: 100%;
     font-size: 14px;
     line-height:32px;
@@ -15,11 +17,77 @@
             color:#a8abb2;
         }
     }
-    &__wrapper{width: 100%;
+    &.is-round{
+        .s-input__wrapper{
+            border-radius:  calc(var(--s-input-height) / 2);
+        }
+    }
+    &.s-input--small{
+        --s-input-height:24px;
+        height: var(--s-input-height);
+        line-height:var(--s-input-height);
+        font-size:12px;
+        .s-input__wrapper{
+            padding: 1px 7px;
+        }
+        .s-input-inner{
+            --s-input-inner-height:calc(var(--s-input-height) - 2px)
+        }
+    }
+    &.s-input--large{
+        --s-input-height:40px;
+        height: var(--s-input-height);
+        line-height:var(--s-input-height);
+        .s-input__wrapper{
+            padding: 1px 15px;
+        }
+        .s-input-inner{
+            --s-input-inner-height:calc(var(--s-input-height) - 2px)
+        }
+    }
+    &.s-input--success{
+        .s-input__wrapper{
+
+            box-shadow:0 0 0 1px #67c23a inset;
+            &.is-focus{
+                background-color: rgba(103, 194, 58,.1);
+            }
+        }
+    }
+    &.s-input--warning{
+        .s-input__wrapper{
+            box-shadow:0 0 0 1px #e6a23c inset;
+            &.is-focus{
+                background-color: rgb(230, 162, 60,.1);
+            }
+        }
+    }
+    &.s-input--error{
+        .s-input__wrapper{
+            box-shadow:0 0 0 1px #f56c6c inset;
+            &.is-focus{
+                background-color: rgb(245, 108, 108,.1)
+            }
+        }
+    }
+    &__wrapper{
+        width: 100%;
         padding:1px 11px;
         box-shadow:0 0 0 1px #dcdfe6 inset;
-        input{
-            width: 100%;
+        border-radius: 4px;
+        &.is-focus{
+            box-shadow:0 0 0 1px #409eff inset;
+            background-color: rgb(64, 158, 255,.1);
+        }
+        .s-input-inner{
+            width: 100%;    font-size: inherit;
+            color: #606266;padding: 0;
+            height:var(--s-input-inner-height);
+            line-height:var(--s-input-inner-height);
+            outline: none;
+            border: none;
+            background: none;
+            box-sizing: border-box;
         }
     }
 }

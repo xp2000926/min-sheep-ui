@@ -88,7 +88,7 @@
     </STree>
   </div> -->
   <div class="mb-4">
-    <STree :data="advancedData" :height="300" accordion />
+    <STree :data="advancedData" :height="300" accordion @lazy-load="lazyLoad" />
   </div>
   <div class="mb-4">
     <!-- <STree :data="dataTwo" :props="defaultProps"></STree> -->
@@ -153,8 +153,8 @@ const defaultProps = ref({
 const advancedData = ref([]);
 
 const root = 100,
-  children = 3;
-// base = 1000;
+  children = 3,
+  base = 2000;
 for (let i = 0; i < root; i++) {
   advancedData.value.push({
     id: `${i}`,
@@ -167,16 +167,47 @@ for (let i = 0; i < root; i++) {
       id: `${i}-${j}`,
       label: `test-${i}-${j}`,
       children: [],
+      isLeaf: false,
+      // loading: false,
       // childNodeCount: base,
     });
-    // for (let k = 0; k < base; k++) {
-    //   advancedData.value[i].children[j].children.push({
-    //     id: `${i}-${j}-${k}`,
-    //     label: `test-${i}-${j}-${k}`,
-    //   });
-    // }
   }
 }
+const lazyLoad = (node, callback) => {
+  console.log('node',node);
+  let data = [];
+  for (let k = 0; k < base; k++) {
+    data.push({
+      id: `${node.id}-${k}`,
+      label: `test-${node.id}-${k}`,
+    });
+  }
+  // const data = [
+  //   {
+  //     label: "lazy node 1",
+  //     expanded: true,
+  //     children: [
+  //       {
+  //         id: "lazy node 1-1",
+  //         label: "lazy node 1-1",
+  //       },
+  //       {
+  //         id: "lazy node 1-2",
+  //         label: "lazy node 1-2",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: "lazy node 2",
+  //     label: "lazy node 2",
+  //   },
+  // ];
+  console.log("data", data);
+  callback({
+    treeItems: data,
+    node,
+  });
+};
 console.log("advancedData", advancedData.value);
 // const dataTwo = ref([
 //   {

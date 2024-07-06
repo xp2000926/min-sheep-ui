@@ -17,7 +17,6 @@ export default defineComponent({
     provide('TREE_UTILS', treeData);
 
     return () => {
-      console.log('accordion', accordion.value);
       const TreeNode = (treeNode: IInnerTreeNode) => (
         <STreeNode
           {...props}
@@ -35,12 +34,15 @@ export default defineComponent({
               slots.icon ? (
                 slots.icon({
                   nodeData: treeNode,
-                  toggleNode: treeData.toggleNode
+                  toggleNode: treeData.toggleNode,
+                  accordion: accordion.value
                 })
               ) : (
                 <STreeNodeToggle
                   expanded={!!treeNode.expanded}
-                  onClick={e => treeData.toggleNode(e, treeNode)}
+                  onClick={(e: Event) =>
+                    treeData.toggleNode(e, treeNode, accordion.value)
+                  }
                 ></STreeNodeToggle>
               ),
             loading: () =>

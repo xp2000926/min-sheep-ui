@@ -16,7 +16,10 @@ const sidebar = [
   { text: '反馈', items: [] },
   {
     text: '数据录入',
-    items: [{ text: 'Switch 开关', link: '/components/switch/' }]
+    items: [
+      { text: 'Switch 开关', link: '/components/switch/' },
+      { text: 'form 表单', link: '/components/form/' }
+    ]
   },
   {
     text: '数据展示',

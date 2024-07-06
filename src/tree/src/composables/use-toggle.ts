@@ -10,7 +10,6 @@ export const useToggle = (
 ): IUseToggle => {
   const { lazyLoadNodes } = lazyNode;
   const toggleNode = (e: Event, node: IInnerTreeNode, accordion = false) => {
-    console.log('accordion33', accordion);
     e.stopPropagation();
     // 手风琴模式
     if (accordion) {

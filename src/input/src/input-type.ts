@@ -8,6 +8,18 @@ export const inputProps = {
   type: {
     type: String as PropType<IInputType>,
     default: 'text'
+  },
+  placeholder: {
+    type: String,
+    default: ''
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  clearable: {
+    type: Boolean,
+    default: false
   }
 } as const;
 export type InputProps = ExtractPropTypes<typeof inputProps>;

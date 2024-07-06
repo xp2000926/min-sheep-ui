@@ -1,3 +1,25 @@
 .s-input {
-
+    width: 100%;
+    font-size: 14px;
+    line-height:32px;
+    box-sizing: border-box;
+    &.is-disabled{
+        @apply cursor-not-allowed;
+        .s-input__wrapper{
+            background-color:#f5f7fa;
+            box-shadow:0 0 0 1px #e4e7ed inset;
+        }
+        .s-input-inner{ 
+            @apply cursor-not-allowed;
+            -webkit-text-fill-color:#a8abb2;
+            color:#a8abb2;
+        }
+    }
+    &__wrapper{width: 100%;
+        padding:1px 11px;
+        box-shadow:0 0 0 1px #dcdfe6 inset;
+        input{
+            width: 100%;
+        }
+    }
 }

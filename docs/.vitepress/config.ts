@@ -9,16 +9,21 @@ const sidebar = [
   {
     text: '通用',
     items: [
-      { text: 'Button 按钮', link: '/components/button/' } // /components/button/index.md
+      { text: 'Button 按钮', link: '/components/button/' }, // /components/button/index.md
+      { text: 'icon 图标', link: '/components/icon/' }
     ]
   },
-  { text: '导航', items: [] },
+  {
+    text: '导航',
+    items: [{ text: 'Menu 菜单', link: '/components/menu/' }]
+  },
   { text: '反馈', items: [] },
   {
     text: '数据录入',
     items: [
       { text: 'Input 输入框', link: '/components/input/' },
       { text: 'Switch 开关', link: '/components/switch/' },
+      { text: 'Select 选择器', link: '/components/select/' },
       { text: 'form 表单', link: '/components/form/' }
     ]
   },

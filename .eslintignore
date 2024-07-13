@@ -4,3 +4,6 @@ views
 study
 node_modules
 scripts
+.vitepress
+scripts
+icons

@@ -1,55 +1,33 @@
 @import '../../style/variable.scss';
-$s-animation-duration-slow: var(--s-animation-duration-slow, 300ms);
-$s-animation-ease-in-out-smooth: var(
-  --s-animation-ease-in-out-smooth,
-  cubic-bezier(0.645, 0.045, 0.355, 1)
-);
+
 @mixin button-base {
   // 布局
-  @apply inline-flex items-center justify-center text-center;
+  @apply inline-flex items-center justify-center;
   // 元素
-  @apply border-[1px] border-solid border-transparent
-  h-[32px] py-[8px] px-[15px]
+  @apply border-[1px] border-solid border-transparent 
+  h-[32px] py-0 px-[15px]
   bg-transparent;
+  border-radius: $s-border-radius;
+
   // 文本属性
   @apply outline-0 leading-normal whitespace-nowrap
      cursor-pointer;
-  line-height: 1;
   border: 1px solid #dcdfe6;
+  // 文字样式
+  font-size: $s-font-size-md;
   font-weight: 500;
-  font-size: 14px;
-  color: #606266;
+
   // 其他样式
-  transition: background-color $s-animation-duration-slow
-      $s-animation-ease-in-out-smooth,
+  transition:
+    background-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
     border-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
     color $s-animation-duration-slow $s-animation-ease-in-out-smooth;
-  &:hover {
-    color: #409eff;
-    border-color: #c6e2ff;
-    background-color: #ecf5ff;
-    @apply outline-none;
+  & > span {
+    @apply inline-flex items-center;
   }
-  &:active {
-    color: #409eff;
-    border-color: #409eff;
-    background-color: #ecf5ff;
-    @apply outline-none;
-  }
-  &:focus-visible {
-    outline: 2px solid #a0cfff;
-    @apply outline-offset-1;
-    transition: outline-offset 0s, outline 0s;
-  }
+  // 禁用状态
   &[disabled] {
     @apply cursor-not-allowed;
-    color: #a8abb2;
-    background-image: none;
-    background-color: #fff;
-    border-color: #e4e7ed;
-  }
-  &.is-round {
-    border-radius: 20px;
   }
   &.is-circle {
     width: 32px;
@@ -58,12 +36,6 @@ $s-animation-ease-in-out-smooth: var(
   }
   &.is-block {
     @apply block w-full;
-    & + .s-button {
-      margin-left: 0px;
-    }
-  }
-  & + .s-button {
-    margin-left: 12px;
   }
 }
 @mixin button-variant($variant, $pseudo: false) {

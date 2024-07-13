@@ -105,3 +105,19 @@
 </div>
 ```
 :::
+
+## Button API
+
+### Button 属性
+
+| 属性         | 说明                           | 类型                                                  | 默认值  | 备注   |
+| ------------ | ------------------------------ | ----------------------------------------------------- | ------- | ------ |
+| size         | 尺寸                           | `large`,`default`,`small`                             | —       |        |
+| type         | 类型                           | `primary`, `success`,`warning`,`danger`,`info`,`text` | —       |        |
+| plain        | 是否为朴素按钮                 | `boolean`                                             | `false` |        |
+| round        | 是否为圆角按钮                 | `boolean`                                             | `false` |        |
+| circle       | 是否为圆形按钮                 | `boolean`                                             | `false` |        |
+| loading      | 是否为加载中状态               | `boolean`                                             | `false` | 开发中 |
+| loading-icon | 自定义加载中状态图标组件       | `string` /`Component`                                 | `false` | 开发中 |
+| block        | 将按钮宽度调整为其父宽度的选项 | `boolean`                                             | `false` |        |
+| disabled     | 按钮失效状态                   | `boolean`                                             | `false` |        |

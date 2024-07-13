@@ -1,83 +1,37 @@
-// 定义主题变量
-$s-border-radius: var(--s-border-radius, 2px); //一般圆角
-$s-font-size-mm: var(--s-font-size-md, 10px); //当组件size为''时使用此字号大小
-$s-font-size-sm: var(--s-font-size-md, 12px); //当组件size为''时使用此字号大小
-$s-font-size-md: var(--s-font-size-md, 14px); //当组件size为''时使用此字号大小
-$s-font-size-lg: var(--s-font-size-md, 16px); //当组件size为''时使用此字号大小
-$s-animation-duration-slow: var(--s-animation-duration-slow, 300ms);
-$s-animation-ease-in-out-smooth: var(
-  --s-animation-ease-in-out-smooth,
-  cubic-bezier(0.645, 0.045, 0.355, 1)
-);
-$s-light-text: var(--s-light-text, #ffffff); // 有色深色背景下字体颜色（固定）
-$s-primary: var(--s-primary, #5e7ce0); // 主要按钮，同品牌色
-$s-primary-hover: var(--s-primary-hover, #7693f5); // 主要按钮悬停
-$s-primary-disabled: var(--s-primary-disabled, #98a8df); // 主要按钮禁用状态
-$s-primary-active: var(--s-primary-active, #344899); // 主要按钮激活
-$s-text: var(--s-text, #252b3a); // 正文文本
-$s-disabled-text: var(--s-disabled-text, #757a83); // 禁用文本
-$s-disabled-bg: var(--s-disabled-bg, #c6c9cf); // 禁用背景
-$s-disabled-line: var(--s-disabled-line, #a5a8ad); // 禁用边框
-$s-block: var(
-  --s-block,
-  #ffffff
-); // 大面积的不可折叠区块的背景色（例如顶部导航背景色）
-$s-line: var(--s-line, #adb0b8); // 边框分割线，仅用于边框
-$s-form-control-line-active: var(
-  --s-form-control-line-active,
-  #5e7ce0
-); // 表单控件边框激活色，用于获得焦点
-$s-brand-active: var(--s-brand-active, #526ecc); // 品牌色激活色（加深）
-$s-brand-active-focus: var(
-  --s-brand-active-focus,
-  #344899
-); // 品牌色焦点色（重度加深）
+// // 定义主题变量
+// $s-border-radius: var(--s-border-radius, 2px); //一般圆角
+// $s-font-size-mm: var(--s-font-size-md, 10px); //当组件size为''时使用此字号大小
+// $s-font-size-sm: var(--s-font-size-md, 12px); //当组件size为''时使用此字号大小
+// $s-font-size-md: var(--s-font-size-md, 14px); //当组件size为''时使用此字号大小
+// $s-font-size-lg: var(--s-font-size-md, 16px); //当组件size为''时使用此字号大小
+
+// $s-light-text: var(--s-light-text, #ffffff); // 有色深色背景下字体颜色（固定）
+// $s-primary: var(--s-primary, #5e7ce0); // 主要按钮，同品牌色
+// $s-primary-hover: var(--s-primary-hover, #7693f5); // 主要按钮悬停
+// $s-primary-disabled: var(--s-primary-disabled, #98a8df); // 主要按钮禁用状态
+// $s-primary-active: var(--s-primary-active, #344899); // 主要按钮激活
+// $s-text: var(--s-text, #252b3a); // 正文文本
+// $s-disabled-text: var(--s-disabled-text, #757a83); // 禁用文本
+// $s-disabled-bg: var(--s-disabled-bg, #c6c9cf); // 禁用背景
+// $s-disabled-line: var(--s-disabled-line, #a5a8ad); // 禁用边框
+// $s-block: var(
+//   --s-block,
+//   #ffffff
+// ); // 大面积的不可折叠区块的背景色（例如顶部导航背景色）
+// $s-line: var(--s-line, #adb0b8); // 边框分割线，仅用于边框
+// $s-form-control-line-active: var(
+//   --s-form-control-line-active,
+//   #5e7ce0
+// ); // 表单控件边框激活色，用于获得焦点
+// $s-brand-active: var(--s-brand-active, #526ecc); // 品牌色激活色（加深）
+// $s-brand-active-focus: var(
+//   --s-brand-active-focus,
+//   #344899
+// ); // 品牌色焦点色（重度加深）
+
+@import './button-base.scss';
 .s-button {
-  // 布局
-  @apply inline-flex items-center justify-center text-center;
-  // 元素
-  @apply border-[1px] border-solid border-transparent
-  h-[32px] py-[8px] px-[15px]
-  bg-transparent;
-  // 文本属性
-  @apply outline-0 leading-normal whitespace-nowrap
-     cursor-pointer;
-  line-height: 1;
-  border: 1px solid #dcdfe6;
-  font-weight: 500;
-  font-size: 14px;
-  color: #606266;
-  // 其他样式
-  transition:
-    background-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
-    border-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
-    color $s-animation-duration-slow $s-animation-ease-in-out-smooth;
-  &:hover {
-    color: #409eff;
-    border-color: #c6e2ff;
-    background-color: #ecf5ff;
-    @apply outline-none;
-  }
-  &:active {
-    color: #409eff;
-    border-color: #409eff;
-    background-color: #ecf5ff;
-    @apply outline-none;
-  }
-  &:focus-visible {
-    outline: 2px solid #a0cfff;
-    @apply outline-offset-1;
-    transition:
-      outline-offset 0s,
-      outline 0s;
-  }
-  &[disabled] {
-    @apply cursor-not-allowed;
-    color: #a8abb2;
-    background-image: none;
-    background-color: #fff;
-    border-color: #e4e7ed;
-  }
+  @include button-base;
   &.is-plain {
     &:hover {
       color: #409eff;
@@ -92,11 +46,10 @@ $s-brand-active-focus: var(
       outline: none;
     }
     &:focus-visible {
+      // outline: 2px solid #a0cfff;
       outline: 2px solid #a0cfff;
       @apply outline-offset-1;
-      transition:
-        outline-offset 0s,
-        outline 0s;
+      transition: outline-offset 0s, outline 0s;
     }
     &[disabled] {
       @apply cursor-not-allowed;
@@ -106,23 +59,7 @@ $s-brand-active-focus: var(
       border-color: #e4e7ed;
     }
   }
-  &.is-round {
-    border-radius: 20px;
-  }
-  &.is-circle {
-    width: 32px;
-    border-radius: 50%;
-    padding: 8px;
-  }
-  &.is-block {
-    @apply block w-full;
-    & + .s-button {
-      margin-left: 0px;
-    }
-  }
-  & + .s-button {
-    margin-left: 12px;
-  }
+
   &.s-button--small {
     height: 24px;
     padding: 5px 11px;
@@ -150,6 +87,7 @@ $s-brand-active-focus: var(
       border-color: #79bbff;
       background-color: #79bbff;
       @apply outline-none;
+     
     }
     &:active {
       color: #fff;
@@ -160,9 +98,7 @@ $s-brand-active-focus: var(
     &:focus-visible {
       outline: 2px solid #a0cfff;
       @apply outline-offset-1;
-      transition:
-        outline-offset 0s,
-        outline 0s;
+      transition: outline-offset 0s, outline 0s;
     }
     &[disabled] {
       color: #fff;
@@ -190,9 +126,7 @@ $s-brand-active-focus: var(
       &:focus-visible {
         outline: 2px solid #a0cfff;
         @apply outline-offset-1;
-        transition:
-          outline-offset 0s,
-          outline 0s;
+        transition: outline-offset 0s, outline 0s;
       }
       &[disabled] {
         color: #a0cfff;
@@ -220,9 +154,7 @@ $s-brand-active-focus: var(
     &:focus-visible {
       outline: 2px solid #b3e19d;
       @apply outline-offset-1;
-      transition:
-        outline-offset 0s,
-        outline 0s;
+      transition: outline-offset 0s, outline 0s;
     }
     &[disabled] {
       color: #fff;
@@ -250,9 +182,7 @@ $s-brand-active-focus: var(
       &:focus-visible {
         outline: 2px solid #b3e19d;
         @apply outline-offset-1;
-        transition:
-          outline-offset 0s,
-          outline 0s;
+        transition: outline-offset 0s, outline 0s;
       }
       &[disabled] {
         color: #b3e19d;
@@ -280,9 +210,7 @@ $s-brand-active-focus: var(
     &:focus-visible {
       outline: 2px solid #c8c9cc;
       @apply outline-offset-1;
-      transition:
-        outline-offset 0s,
-        outline 0s;
+      transition: outline-offset 0s, outline 0s;
     }
     &[disabled] {
       color: #fff;
@@ -310,9 +238,7 @@ $s-brand-active-focus: var(
       &:focus-visible {
         outline: 2px solid #73767a;
         @apply outline-offset-1;
-        transition:
-          outline-offset 0s,
-          outline 0s;
+        transition: outline-offset 0s, outline 0s;
       }
       &[disabled] {
         color: #c8c9cc;
@@ -340,9 +266,7 @@ $s-brand-active-focus: var(
     &:focus-visible {
       outline: 2px solid #b88230;
       @apply outline-offset-1;
-      transition:
-        outline-offset 0s,
-        outline 0s;
+      transition: outline-offset 0s, outline 0s;
     }
     &[disabled] {
       color: #fff;
@@ -370,9 +294,7 @@ $s-brand-active-focus: var(
       &:focus-visible {
         outline: 2px solid #f3d19e;
         @apply outline-offset-1;
-        transition:
-          outline-offset 0s,
-          outline 0s;
+        transition: outline-offset 0s, outline 0s;
       }
       &[disabled] {
         color: #f3d19e;
@@ -400,9 +322,7 @@ $s-brand-active-focus: var(
     &:focus-visible {
       outline: 2px solid #fab6b6;
       @apply outline-offset-1;
-      transition:
-        outline-offset 0s,
-        outline 0s;
+      transition: outline-offset 0s, outline 0s;
     }
     &[disabled] {
       color: #fff;
@@ -430,9 +350,7 @@ $s-brand-active-focus: var(
       &:focus-visible {
         outline: 2px solid #fab6b6;
         @apply outline-offset-1;
-        transition:
-          outline-offset 0s,
-          outline 0s;
+        transition: outline-offset 0s, outline 0s;
       }
       &[disabled] {
         color: #fab6b6;
@@ -442,315 +360,3 @@ $s-brand-active-focus: var(
     }
   }
 }
-
-// // 定义主题变量
-// $s-border-radius: var(--s-border-radius, 2px);
-// $s-font-size-mm: var(--s-font-size-md, 10px);
-// $s-font-size-sm: var(--s-font-size-md, 12px);
-// $s-font-size-md: var(--s-font-size-md, 14px);
-// $s-font-size-lg: var(--s-font-size-md, 16px);
-// $s-animation-duration-slow: var(--s-animation-duration-slow, 300ms);
-// $s-animation-ease-in-out-smooth: var(
-//   --s-animation-ease-in-out-smooth,
-//   cubic-bezier(0.645, 0.045, 0.355, 1)
-// );
-// $s-light-text: var(--s-light-text, #ffffff);
-// $s-primary: var(--s-primary, #5e7ce0);
-// $s-primary-hover: var(--s-primary-hover, #7693f5);
-// $s-primary-disabled: var(--s-primary-disabled, #98a8df);
-// $s-primary-active: var(--s-primary-active, #344899);
-// $s-text: var(--s-text, #252b3a);
-// $s-disabled-text: var(--s-disabled-text, #757a83);
-// $s-disabled-bg: var(--s-disabled-bg, #c6c9cf);
-// $s-disabled-line: var(--s-disabled-line, #a5a8ad);
-// $s-block: var(--s-block, #ffffff);
-// $s-line: var(--s-line, #adb0b8);
-// $s-form-control-line-active: var(--s-form-control-line-active, #5e7ce0);
-// $s-brand-active: var(--s-brand-active, #526ecc);
-// $s-brand-active-focus: var(--s-brand-active-focus, #344899);
-
-// // 定义按钮类型的颜色
-// $button-types: (
-//   primary: (
-//     color: #fff,
-//     background-color: #409eff,
-//     border-color: #409eff,
-//     hover: (
-//       color: #fff,
-//       background-color: #79bbff,
-//       border-color: #79bbff
-//     ),
-//     active: (
-//       color: #fff,
-//       background-color: #337ecc,
-//       border-color: #337ecc
-//     ),
-//     disabled: (
-//       color: #fff,
-//       background-color: #a0cfff,
-//       border-color: #a0cfff
-//     )
-//   ),
-//   success: (
-//     color: #fff,
-//     background-color: #67c23a,
-//     border-color: #67c23a,
-//     hover: (
-//       color: #fff,
-//       background-color: #95d475,
-//       border-color: #95d475
-//     ),
-//     active: (
-//       color: #fff,
-//       background-color: #529b2e,
-//       border-color: #529b2e
-//     ),
-//     disabled: (
-//       color: #fff,
-//       background-color: #b3e19d,
-//       border-color: #b3e19d
-//     )
-//   ),
-//   info: (
-//     color: #fff,
-//     background-color: #909399,
-//     border-color: #909399,
-//     hover: (
-//       color: #fff,
-//       background-color: #b1b3b8,
-//       border-color: #b1b3b8
-//     ),
-//     active: (
-//       color: #fff,
-//       background-color: #73767a,
-//       border-color: #73767a
-//     ),
-//     disabled: (
-//       color: #fff,
-//       background-color: #c8c9cc,
-//       border-color: #c8c9cc
-//     )
-//   ),
-//   warning: (
-//     color: #fff,
-//     background-color: #e6a23c,
-//     border-color: #e6a23c,
-//     hover: (
-//       color: #fff,
-//       background-color: #eebe77,
-//       border-color: #eebe77
-//     ),
-//     active: (
-//       color: #fff,
-//       background-color: #b88230,
-//       border-color: #b88230
-//     ),
-//     disabled: (
-//       color: #fff,
-//       background-color: #f3d19e,
-//       border-color: #f3d19e
-//     )
-//   ),
-//   danger: (
-//     color: #fff,
-//     background-color: #f56c6c,
-//     border-color: #f56c6c,
-//     hover: (
-//       color: #fff,
-//       background-color: #f89898,
-//       border-color: #f89898
-//     ),
-//     active: (
-//       color: #fff,
-//       background-color: #c45656,
-//       border-color: #c45656
-//     ),
-//     disabled: (
-//       color: #fff,
-//       background-color: #fab6b6,
-//       border-color: #fab6b6
-//     )
-//   )
-// );
-
-// .s-button {
-//   // 基础样式
-//   @apply inline-flex items-center justify-center text-center;
-//   @apply border-[1px] border-solid border-transparent h-[32px] py-[8px] px-[15px] bg-transparent;
-//   @apply outline-0 leading-normal whitespace-nowrap cursor-pointer;
-//   line-height: 1;
-//   border: 1px solid #dcdfe6;
-//   font-weight: 500;
-//   font-size: 14px;
-//   color: #606266;
-//   transition:
-//     background-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
-//     border-color $s-animation-duration-slow $s-animation-ease-in-out-smooth,
-//     color $s-animation-duration-slow $s-animation-ease-in-out-smooth;
-
-//   &:hover {
-//     color: #409eff;
-//     border-color: #c6e2ff;
-//     background-color: #ecf5ff;
-//     @apply outline-none;
-//   }
-
-//   &:active {
-//     color: #409eff;
-//     border-color: #409eff;
-//     background-color: #ecf5ff;
-//     @apply outline-none;
-//   }
-
-//   &:focus-visible {
-//     outline: 2px solid #a0cfff;
-//     @apply outline-offset-1;
-//     transition:
-//       outline-offset 0s,
-//       outline 0s;
-//   }
-
-//   &[disabled] {
-//     @apply cursor-not-allowed;
-//     color: #a8abb2;
-//     background-image: none;
-//     background-color: #fff;
-//     border-color: #e4e7ed;
-//   }
-
-//   &.is-plain {
-//     &:hover,
-//     &:active {
-//       color: #409eff;
-//       border-color: #409eff;
-//       background-color: #fff;
-//       outline: none;
-//     }
-
-//     &:focus-visible {
-//       outline: 2px solid #a0cfff;
-//       @apply outline-offset-1;
-//       transition:
-//         outline-offset 0s,
-//         outline 0s;
-//     }
-
-//     &[disabled] {
-//       @apply cursor-not-allowed;
-//       color: #a8abb2;
-//       background-image: none;
-//       background-color: #fff;
-//       border-color: #e4e7ed;
-//     }
-//   }
-
-//   &.is-round {
-//     border-radius: 20px;
-//   }
-
-//   &.is-circle {
-//     width: 32px;
-//     border-radius: 50%;
-//     padding: 8px;
-//   }
-
-//   &.is-block {
-//     @apply block w-full;
-//     & + .s-button {
-//       margin-left: 0px;
-//     }
-//   }
-
-//   & + .s-button {
-//     margin-left: 12px;
-//   }
-
-//   &.s-button--small {
-//     height: 24px;
-//     padding: 5px 11px;
-//     font-size: 12px;
-
-//     &.is-circle {
-//       width: 24px;
-//       padding: 5px;
-//     }
-//   }
-
-//   &.s-button--large {
-//     height: 40px;
-//     padding: 12px 19px;
-//     font-size: 16px;
-
-//     &.is-circle {
-//       width: 40px;
-//       padding: 12px;
-//     }
-//   }
-
-//   // 循环生成不同类型的按钮样式
-//   @each $type, $values in $button-types {
-//     &.s-button--#{$type} {
-//       color: map-get($values, color);
-//       background-color: map-get($values, background-color);
-//       border-color: map-get($values, border-color);
-
-//       &:hover {
-//         color: map-get(map-get($values, hover), color);
-//         background-color: map-get(map-get($values, hover), background-color);
-//         border-color: map-get(map-get($values, hover), border-color);
-//         @apply outline-none;
-//       }
-
-//       &:active {
-//         color: map-get(map-get($values, active), color);
-//         background-color: map-get(map-get($values, active), background-color);
-//         border-color: map-get(map-get($values, active), border-color);
-//         @apply outline-none;
-//       }
-
-//       &:focus-visible {
-//         outline: 2px solid lighten(map-get($values, background-color), 10%);
-//         @apply outline-offset-1;
-//         transition:
-//           outline-offset 0s,
-//           outline 0s;
-//       }
-
-//       &[disabled] {
-//         color: map-get(map-get($values, disabled), color);
-//         background-image: none;
-//         background-color: map-get(map-get($values, disabled), background-color);
-//         border-color: map-get(map-get($values, disabled), border-color);
-//         @apply cursor-not-allowed;
-//       }
-
-//       &.is-plain {
-//         color: map-get($values, background-color);
-//         background-color: lighten(map-get($values, background-color), 30%);
-//         border-color: lighten(map-get($values, background-color), 20%);
-
-//         &:hover,
-//         &:active {
-//           color: #fff;
-//           background-color: map-get($values, background-color);
-//           border-color: map-get($values, border-color);
-//           @apply outline-none;
-//         }
-
-//         &:focus-visible {
-//           outline: 2px solid lighten(map-get($values, background-color), 10%);
-//           @apply outline-offset-1;
-//           transition:
-//             outline-offset 0s,
-//             outline 0s;
-//         }
-
-//         &[disabled] {
-//           color: lighten(map-get($values, background-color), 30%);
-//           background-color: lighten(map-get($values, background-color), 50%);
-//           border-color: lighten(map-get($values, background-color), 40%);
-//         }
-//       }
-//     }
-//   }
-// }

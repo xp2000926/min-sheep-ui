@@ -4,7 +4,7 @@ import { InputProps, inputProps } from './input-type';
 export default defineComponent({
   name: 'SInput',
   props: inputProps,
-  emits: ['update:modelValue', 'focus', 'blur', 'input', 'clear'],
+  emits: ['update:modelValue', 'focus', 'blur', 'input', 'clear', 'change'],
   setup(props: InputProps, { emit }) {
     const {
       modelValue,
@@ -22,7 +22,7 @@ export default defineComponent({
       const val = (e.target as HTMLInputElement).value;
       console.log('onInput', val, disabled.value);
       emit('update:modelValue', val);
-      emit('input');
+      emit('input', val);
     };
     const sInputClass = computed(() => ({
       's-input': true,
@@ -51,13 +51,16 @@ export default defineComponent({
               disabled={disabled.value}
               value={modelValue.value}
               onInput={onInput}
-              onFocus={() => {
+              onFocus={(e: FocusEvent) => {
                 isFocus.value = true;
-                emit('focus');
+                emit('focus', e);
               }}
-              onBlur={() => {
+              onBlur={(e: FocusEvent) => {
                 isFocus.value = false;
-                emit('blur');
+                emit('blur', e);
+              }}
+              onChange={(e: Event) => {
+                emit('change', (e.target as HTMLInputElement).value);
               }}
               type={showPassword.value ? viewPassword.value : type.value}
               placeholder={placeholder.value}

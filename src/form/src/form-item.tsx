@@ -31,7 +31,7 @@ export default defineComponent({
           {/* label */}
           <span class={labelClassSize.value}>{label.value}</span>
           {/* control */}
-          <div>{slots.default?.()}</div>
+          <div style="flex: 1;">{slots.default?.()}</div>
         </div>
       );
     };

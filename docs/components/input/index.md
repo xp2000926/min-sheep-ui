@@ -124,3 +124,27 @@ const successInput = ref('')
 </script>
 ```
 :::
+
+## Input API
+
+### Input 属性
+
+| 属性          | 说明                 | 类型      | 可选值                           | 默认值  | 备注 |
+| ------------- | -------------------- | --------- | -------------------------------- | ------- | ---- |
+| type          | 类型                 | `enum`    | `text` , `password`              | `text`  | -    |
+| disabled      | 是否禁用             | `boolean` | -                                | `false` | -    |
+| size          | 输入框尺寸           | `enum`    | `large` ,`default` , `small`     | -       | -    |
+| clearable     | 是否显示清除按钮     | `boolean` | -                                | `false` | -    |
+| show-password | 是否显示切换密码图标 | `boolean` | -                                | `false` | -    |
+| round         | 输入框是否圆角       | `boolean` | -                                | `false` | -    |
+| status        | 验证状态             | `enum`    | `'success` ,`warning` , `error ` | -       | -    |
+
+### Input 事件
+
+| 名称   | 说明                                                        | 类型                              | 备注 |
+| ------ | ----------------------------------------------------------- | --------------------------------- | ---- |
+| blur   | 当选择器的输入框失去焦点时触发                              | `(e:FocusEvent) => void`          |      |
+| focus  | 当选择器的输入框获得焦点时触发                              | `(e:FocusEvent) => void`          |      |
+| input  | 在 Input 值改变时触发                                       | `(value:string,number) => void`   |      |
+| clear  | 在点击由 clearable 属性生成的清空按钮时触发                 | `() => void`                      |      |
+| change | 仅当 modelValue 改变时，当输入框失去焦点或用户按Enter时触发 | `(value: string, number) => void` |      |

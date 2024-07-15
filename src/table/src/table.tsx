@@ -19,7 +19,8 @@ export default defineComponent({
       columns,
       showSummary,
       headerCellStyle,
-      showHeader
+      showHeader,
+      rowClassName
     } = toRefs(props)
     // 获取 Column 数组中的列数据
     const columnData = ref([])
@@ -115,36 +116,45 @@ export default defineComponent({
           >
           </STableTbody> */}
           {data.value.length > 0 ? (
-            data.value.map((row: any, index: number) => (
-              <tr
-                class={classNames({
-                  's-table__row--striped': index % 2 == 1 && stripe.value
-                })}
-              >
-                {columnData.value.map(
-                  (column: ColumnContext, index: number) => {
-                    // 如果存在默认插槽，则优先渲染
-                    const columnSlots = slots.default?.()[index]
-                    if (columnSlots?.children) {
+            data.value.map((row: any, index: number) => {
+              const newRowClassName =
+                typeof rowClassName.value == 'function'
+                  ? rowClassName.value({ row, rowIndex: index })
+                  : rowClassName.value
+              return (
+                <tr
+                  class={classNames({
+                    's-table__row--striped': index % 2 == 1 && stripe.value,
+                    [newRowClassName]: true
+                  })}
+                >
+                  {columnData.value.map(
+                    (column: ColumnContext, index: number) => {
+                      // 如果存在默认插槽，则优先渲染
+                      const columnSlots = slots.default?.()[index]
+                      if (columnSlots?.children) {
+                        return (
+                          <td>
+                            {(columnSlots?.children as any).default?.(row)}
+                          </td>
+                        )
+                      }
                       return (
-                        <td>{(columnSlots?.children as any).default?.(row)}</td>
+                        <td>
+                          {column.prop ? (
+                            row[column.prop!]
+                          ) : column.type === 'selection' ? (
+                            <input type="checkbox" v-model={row.checked} />
+                          ) : (
+                            ''
+                          )}
+                        </td>
                       )
                     }
-                    return (
-                      <td>
-                        {column.prop ? (
-                          row[column.prop!]
-                        ) : column.type === 'selection' ? (
-                          <input type="checkbox" v-model={row.checked} />
-                        ) : (
-                          ''
-                        )}
-                      </td>
-                    )
-                  }
-                )}
-              </tr>
-            ))
+                  )}
+                </tr>
+              )
+            })
           ) : (
             <tr class="s-table-placeholder">
               <td colspan={3}>

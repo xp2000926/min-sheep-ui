@@ -304,6 +304,7 @@ const tableData = ref([
   }
 ])
 const tableRowClassName = ({ row, rowIndex }) => {
+  console.log('rowIndex',rowIndex);
   if (rowIndex === 1) {
     return 'warning-row'
   } else if (rowIndex === 3) {
@@ -312,13 +313,13 @@ const tableRowClassName = ({ row, rowIndex }) => {
   return ''
 }
 </script>
-<style>
-.el-table .warning-row {
-  background: oldlace;
+<style scoped>
+.s-table .warning-row {
+  background: #fdf6ec !important;
 }
 
-.el-table .success-row {
-  background: #f0f9eb;
+.s-table .success-row {
+  background: #f0f9eb !important;
 }
 </style>
 ```
@@ -406,25 +407,25 @@ const onSelectionChange = checkedRows => {
 
 ### Table 属性
 
-| 属性名 | 说明 | 类型 | 可选值 | 默认值 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| data | 显示的数据 | array | — | — | — |
-| columns | 表格列的配置描述，具体项见 | array | — | — | — |
-| stripe | 是否为斑马纹 table | boolean | — | false | — |
-| border | 是否带有纵向边框 | boolean | — | false | — |
-| row-class-name | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。 | Function({row, rowIndex})/String | — | — | 实现中 |
-| headerCellStyle |表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。  | Function({row, column, rowIndex, columnIndex})/Object | — | — | — |
-| show-header |是否显示表头  | boolean	 | — | true | — |
+| 属性名          | 说明                                                                                          | 类型                                                  | 可选值 | 默认值 | 备注   |
+| --------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------------- | ------ | ------ | ------ |
+| data            | 显示的数据                                                                                    | array                                                 | —      | —      | —      |
+| columns         | 表格列的配置描述，具体项见                                                                    | array                                                 | —      | —      | —      |
+| stripe          | 是否为斑马纹 table                                                                            | boolean                                               | —      | false  | —      |
+| border          | 是否带有纵向边框                                                                              | boolean                                               | —      | false  | —      |
+| row-class-name  | 行的 className 的回调方法，也可以使用字符串为所有行设置一个固定的 className。                 | Function({row, rowIndex})/String                      | —      | —      | 实现中 |
+| headerCellStyle | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。 | Function({row, column, rowIndex, columnIndex})/Object | —      | —      | —      |
+| show-header     | 是否显示表头                                                                                  | boolean                                               | —      | true   | —      |
 
 
 ### Column 属性
 
 > 列描述数据对象，是 columns 中的一项，Column 使用相同的 API
 
-| 属性名 | 说明 | 类型 | 可选值 | 默认值 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| title | 列头显示文字 | string | — | '' | — |
-| prop | 列数据在数据项中对应的路径，支持通过数组查询嵌套路径 | string | — | '' | — |
+| 属性名 | 说明                                                 | 类型   | 可选值 | 默认值 | 备注 |
+| ------ | ---------------------------------------------------- | ------ | ------ | ------ | ---- |
+| title  | 列头显示文字                                         | string | —      | ''     | —    |
+| prop   | 列数据在数据项中对应的路径，支持通过数组查询嵌套路径 | string | —      | ''     | —    |
 
 ### Table 事件
 

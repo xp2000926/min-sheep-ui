@@ -30,6 +30,10 @@ export const tableProps = {
   headerRowClassName: {
     type: [Object, Function], //as PropType<object | function>,
     default: {}
+  },
+  rowClassName: {
+    type: [String, Function], //as PropType<string | Function>,
+    default: ''
   }
 } as const
 export type TableProps = ExtractPropTypes<typeof tableProps>

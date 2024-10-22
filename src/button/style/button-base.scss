@@ -62,6 +62,9 @@ $s-animation-ease-in-out-smooth: var(
       margin-left: 0px;
     }
   }
+  .is-bg{
+    background-color:#f5f7fa
+  }
   & + .s-button {
     margin-left: 12px;
   }

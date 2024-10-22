@@ -40,13 +40,18 @@ export const buttonProps = {
   circle: {
     type: Boolean,
     default: false
-  }, //todo
+  },
+  // 虚线按钮
   dashed: {
     type: Boolean,
     default: false
   },
-
+  // todo
   link: {
+    type: Boolean,
+    default: false
+  },
+  text: {
     type: Boolean,
     default: false
   },
@@ -57,6 +62,11 @@ export const buttonProps = {
   color: {
     type: String,
     default: ''
+  },
+  //	是否显示文字按钮背景颜色
+  bg: {
+    type: Boolean,
+    default: false
   }
 } as const; //as const 表示以后 buttonProps 是不可以动态设置一些其他属性
 

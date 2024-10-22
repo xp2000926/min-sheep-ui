@@ -59,6 +59,38 @@
       border-color: #e4e7ed;
     }
   }
+  &.is-dashed{
+    background-color: transparent;
+    border-style:dashed;
+    // color: #409eff;
+    // border-color: #a0cfff;
+    &:hover {
+      color: #c6e2ff; 
+      border-color: #c6e2ff;
+      @apply outline-none
+    }
+    &:active {
+      color: #ecf5ff;
+      border-color: #ecf5ff;
+      @apply outline-none;
+    }
+    &:focus-visible {
+      outline: 2px solid #a0cfff;
+      @apply outline-offset-1;
+      transition: outline-offset 0s, outline 0s;
+    }
+    &[disabled] {
+      color: #a8abb2;
+      border-color: #e4e7ed;
+    }
+  }
+  // &.is-dashed{ background-color: transparent;
+  //   border-style:dashed;
+  //   &:hover {
+  //     border-color: #409eff;
+  //     background-color: transparent;
+  //   }
+  // }
 
   &.s-button--small {
     height: 24px;
@@ -78,6 +110,7 @@
       padding: 12px;
     }
   }
+  
   &.s-button--primary {
     color: #fff;
     background-color: #409eff;
@@ -87,7 +120,6 @@
       border-color: #79bbff;
       background-color: #79bbff;
       @apply outline-none;
-     
     }
     &:active {
       color: #fff;
@@ -132,6 +164,29 @@
         color: #a0cfff;
         background-color: #ecf5ff;
         border-color: #d9ecff;
+      }
+    }
+    &.is-dashed{
+      background-color: transparent;
+      color: #409eff;
+      border-color: #a0cfff;
+      &:hover {
+        color: #409eff; border-color: #409eff;
+        @apply outline-none
+      }
+      &:active {
+        color: #337ecc;
+        border-color: #337ecc;
+        @apply outline-none;
+      }
+      &:focus-visible {
+        outline: 2px solid #a0cfff;
+        @apply outline-offset-1;
+        transition: outline-offset 0s, outline 0s;
+      }
+      &[disabled] {
+        color: #a0cfff;
+        border-color: #a0cfff;
       }
     }
   }
@@ -187,7 +242,30 @@
       &[disabled] {
         color: #b3e19d;
         background-color: #f0f9eb;
-        border-color: #d9ecff;
+        border-color: rgb(224.6, 242.8, 215.6);
+      }
+    }
+    &.is-dashed{
+      background-color: transparent;
+      color: #67c23a;
+      border-color: #b3e19d;
+      &:hover {
+        color: #67c23a; border-color: #67c23a;
+        @apply outline-none
+      }
+      &:active {
+        color: #529b2e;
+        border-color: #529b2e;
+        @apply outline-none;
+      }
+      &:focus-visible {
+        outline: 2px solid #b3e19d;
+        @apply outline-offset-1;
+        transition: outline-offset 0s, outline 0s;
+      }
+      &[disabled] {
+        color: #b3e19d;
+        border-color: #b3e19d;
       }
     }
   }
@@ -246,6 +324,29 @@
         border-color: #e9e9eb;
       }
     }
+    &.is-dashed{
+      background-color: transparent;
+      color: #909399;
+      border-color: #c8c9cc;
+      &:hover {
+        color: #909399; border-color: #909399;
+        @apply outline-none
+      }
+      &:active {
+        color: #73767a;
+        border-color: #73767a;
+        @apply outline-none;
+      }
+      &:focus-visible {
+        outline: 2px solid #73767a;
+        @apply outline-offset-1;
+        transition: outline-offset 0s, outline 0s;
+      }
+      &[disabled] {
+        color: #c8c9cc;
+        border-color: #c8c9cc;
+      }
+    }
   }
   &.s-button--warning {
     color: #fff;
@@ -302,6 +403,28 @@
         border-color: #faecd8;
       }
     }
+    &.is-dashed{
+      background-color: transparent;
+      color: #e6a23c; border-color: #f3d19e;
+      &:hover {
+        color: #e6a23c; border-color: #e6a23c;
+        @apply outline-none
+      }
+      &:active {
+        color: #b88230;
+        border-color: #b88230;
+        @apply outline-none;
+      }
+      &:focus-visible {
+        outline: 2px solid #f3d19e;
+        @apply outline-offset-1;
+        transition: outline-offset 0s, outline 0s;
+      }
+      &[disabled] {
+        color: #f3d19e;
+        border-color: #f3d19e;
+      }
+    }
   }
   &.s-button--danger {
     color: #fff;
@@ -356,6 +479,28 @@
         color: #fab6b6;
         background-color: #fef0f0;
         border-color: #fde2e2;
+      }
+    }
+    &.is-dashed{
+      background-color: transparent;
+      color: #f56c6c;border-color: #fab6b6;
+      &:hover {
+        color: #f56c6c;border-color: #f56c6c;
+        @apply outline-none
+      }
+      &:active {
+        color: #c45656;
+        border-color: #c45656;
+        @apply outline-none;
+      }
+      &:focus-visible {
+        outline: 2px solid #fab6b6;
+        @apply outline-offset-1;
+        transition: outline-offset 0s, outline 0s;
+      }
+      &[disabled] {
+        color: #fab6b6;
+        border-color: #fab6b6;
       }
     }
   }

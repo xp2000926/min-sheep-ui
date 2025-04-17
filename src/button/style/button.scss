@@ -2,7 +2,7 @@
 @import './button-base.scss';
 
 .s-btn {
-  @include button-base;
+  // @include button-base;
   @include button-variant(button-config.$plain); // 导入朴素按钮相关样式
   @include button-variant(
     button-config.$plainPseudo,

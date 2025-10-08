@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "homepage":"https://min-sheep-ui.vercel.app/",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",

@@ -359,6 +359,9 @@ const createPackageJson = (name, version, isComponent = false) => {
   const baseConfig = {
     name: name || 'min-sheep-ui',
     version: version || '0.1.1',
+    homepage: isComponent
+      ? `https://min-sheep-ui.vercel.app/components/${name}/`
+      : 'https://min-sheep-ui.vercel.app/',
     main: isComponent ? 'index.umd.js' : 'min-sheep-ui.umd.js',
     module: isComponent ? 'index.esm.js' : 'min-sheep-ui.esm.js',
     unpkg: isComponent ? 'index.umd.js' : 'min-sheep-ui.umd.js',

@@ -3,19 +3,25 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "module": "commonjs",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "cli":"node ./build/src/index.js create"
+    "cli": "node ./build/src/index.js create",
+    "del": "node ./build/src/index.js remove"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
-    "commander": "^12.1.0",
-    "fs-extra": "^11.2.0",
-    "inquirer": "8.2.2",
+  "dependencies": {
+    "@figliolia/chalk-animation": "^1.0.4",
+    "commander": "^13.0.0",
+    "figlet": "^1.8.0",
+    "inquirer": "^8.2.2",
     "kolorist": "^1.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "typescript": "^5.7.2"
   }
 }

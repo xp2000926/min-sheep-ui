@@ -1,0 +1,323 @@
+// 菜单模式类型
+export type MenuMode = 'horizontal' | 'vertical' | 'pop';
+// pop是右边弹出，部署从下边
+
+// 菜单项配置接口
+export interface MenuOption {
+  // 菜单项类型，'group' 表示分组
+  type?: string;
+  // 菜单项显示文本，可以是字符串或渲染函数
+  label: string | (() => VNode | string);
+  // 图标类名
+  icon?: string;
+  // 是否禁用
+  disabled?: boolean;
+  // 是否显示（用于动态控制显示/隐藏）
+  show?: boolean;
+  // 子菜单项
+  children?: MenuOption[];
+  // 唯一标识
+  key: string;
+  // 路由配置（在路由模式下使用）
+  route?: any;
+  // 其他任意属性
+  [key: string]: any;
+}
+
+// 手动定义 Props 类型，避免使用 ExtractPropTypes
+export interface MenuProps {
+  option?: MenuOption[];
+  mode?: MenuMode;
+  router?: boolean;
+  defaultActive?: string;
+  accordion?: boolean;
+  expandedKeys?: string[];
+  selectedKeys?: string[];
+  menuClass?: string;
+  showIcon?: boolean;
+  inlineIndent?: number;
+  triggerSubMenuAction?: 'hover' | 'click';
+  closeOnClick?: boolean;
+  popupClassName?: string;
+  popupStyle?: Record<string, any>;
+}
+
+// 菜单项 Props 类型
+export interface MenuItemProps {
+  path?: string;
+  icon?: string;
+  title?: string;
+  popperClass?: string;
+  disabled?: boolean;
+  route?: any;
+  option: MenuOption;
+  active?: boolean;
+  selected?: boolean;
+  customClass?: string;
+  onClick?: (option: MenuOption) => void;
+  onMouseenter?: (option: MenuOption) => void;
+  onMouseleave?: (option: MenuOption) => void;
+}
+
+// 菜单分组 Props 类型
+export interface MenuItemGroupProps {
+  title?: string;
+  disabled?: boolean;
+  customClass?: string;
+  mode?: 'vertical' | 'horizontal';
+}
+
+// 子菜单 Props 类型
+export interface SubMenuProps {
+  option: MenuOption;
+  active?: boolean;
+  mode?: MenuMode;
+  popperClass?: string;
+  disabled?: boolean;
+  expanded?: boolean;
+  popupStyle?: Record<string, any>;
+  onExpandChange?: (expanded: boolean, option: MenuOption) => void;
+  onTitleClick?: (option: MenuOption) => void;
+}
+
+// 为了兼容性，保留原来的 props 定义（但不用于类型提取）
+export const menuProps = {
+  option: {
+    type: Array as PropType<MenuOption[]>,
+    default: (): MenuOption[] => []
+  },
+  mode: {
+    type: String as PropType<MenuMode>,
+    default: 'vertical' as MenuMode,
+    validator: (value: string): boolean =>
+      ['horizontal', 'vertical', 'pop'].includes(value),
+  },
+  router: {
+    type: Boolean,
+    default: false,
+  },
+  defaultActive: {
+    type: String,
+    default: '',
+  },
+  accordion: {
+    type: Boolean,
+    default: false,
+  },
+  expandedKeys: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  selectedKeys: {
+    type: Array as PropType<string[]>,
+    default: () => [],
+  },
+  menuClass: {
+    type: String,
+    default: '',
+  },
+  showIcon: {
+    type: Boolean,
+    default: true,
+  },
+  inlineIndent: {
+    type: Number,
+    default: 24,
+  },
+  triggerSubMenuAction: {
+    type: String as PropType<'hover' | 'click'>,
+    default: 'hover',
+  },
+  closeOnClick: {
+    type: Boolean,
+    default: true,
+  },
+  popupClassName: {
+    type: String,
+    default: '',
+  },
+  popupStyle: {
+    type: Object as PropType<Record<string, any>>,
+    default: () => ({}),
+  }
+};
+
+export const menuItemProps = {
+  path: {
+    type: String,
+    default: '',
+  },
+  icon: {
+    type: String,
+    default: '',
+  },
+  title: {
+    type: String,
+    default: '',
+  },
+  popperClass: {
+    type: String,
+    default: '',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  route: {
+    type: [Object, String] as PropType<any>,
+    default: () => ({}),
+  },
+  option: {
+    type: Object as PropType<MenuOption>,
+    required: true
+  },
+  active: {
+    type: Boolean,
+    default: false
+  },
+  selected: {
+    type: Boolean,
+    default: false
+  },
+  customClass: {
+    type: String,
+    default: ''
+  }
+};
+
+export const menuItemGroupProps = {
+  title: {
+    type: String,
+    default: '',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+  customClass: {
+    type: String,
+    default: '',
+  },
+  mode: {
+    type: String as PropType<'vertical' | 'horizontal'>,
+    default: 'vertical',
+  }
+};
+
+export const subMenuProps = {
+  option: {
+    type: Object as PropType<MenuOption>,
+    required: true
+  },
+  active: {
+    type: Boolean,
+    default: false
+  },
+  mode: {
+    type: String as PropType<MenuMode>,
+    default: 'vertical' as MenuMode
+  },
+  popperClass: {
+    type: String,
+    default: ''
+  },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
+  expanded: {
+    type: Boolean,
+    default: false
+  },
+  popupStyle: {
+    type: Object as PropType<Record<string, any>>,
+    default: () => ({})
+  }
+};
+
+// 菜单上下文类型
+export interface MenuContext {
+  mode: MenuMode;
+  router: boolean;
+  activeKey: string;
+  expandedKeys: string[];
+  selectedKeys: string[];
+  accordion: boolean;
+  inlineIndent: number;
+  triggerSubMenuAction: 'hover' | 'click';
+  showIcon: boolean;
+  handleItemClick: (option: MenuOption) => void;
+  handleSubMenuExpand: (key: string, expanded: boolean) => void;
+  registerMenuItem: (key: string, element: any) => void;
+  unregisterMenuItem: (key: string) => void;
+  registerSubMenu: (key: string, element: any) => void;
+  unregisterSubMenu: (key: string) => void;
+}
+
+// 菜单项注册信息
+export interface MenuItemRegister {
+  key: string;
+  element: HTMLElement;
+  option: MenuOption;
+}
+
+// 子菜单注册信息
+export interface SubMenuRegister {
+  key: string;
+  element: HTMLElement;
+  option: MenuOption;
+}
+
+// 菜单事件类型
+export interface MenuEvents {
+  onItemClick: (option: MenuOption) => void;
+  onSubMenuExpand: (keys: string[]) => void;
+  onSelectChange: (keys: string[]) => void;
+  onActiveChange: (key: string) => void;
+}
+
+// 菜单暴露的方法
+export interface MenuExpose {
+  updateActiveKey: (key: string) => void;
+  updateExpandedKeys: (keys: string[]) => void;
+  updateSelectedKeys: (keys: string[]) => void;
+  getMenuItems: () => MenuItemRegister[];
+  getSubMenus: () => SubMenuRegister[];
+  getMenuItemByKey: (key: string) => MenuItemRegister | undefined;
+  getSubMenuByKey: (key: string) => SubMenuRegister | undefined;
+}
+
+// 菜单项暴露的方法
+export interface MenuItemExpose {
+  getElement: () => HTMLElement;
+  getOption: () => MenuOption;
+  setActive: (active: boolean) => void;
+  setSelected: (selected: boolean) => void;
+}
+
+// 子菜单暴露的方法
+export interface SubMenuExpose {
+  getElement: () => HTMLElement;
+  getOption: () => MenuOption;
+  setExpanded: (expanded: boolean) => void;
+  getExpanded: () => boolean;
+}
+
+// 菜单分组暴露的方法
+export interface MenuItemGroupExpose {
+  getElement: () => HTMLElement;
+  getTitle: () => string;
+  setDisabled: (disabled: boolean) => void;
+}
+
+// 菜单主题类型
+export type MenuTheme = 'light' | 'dark';
+
+// 菜单尺寸类型
+export type MenuSize = 'large' | 'default' | 'small';
+
+// 导出所有类型
+export type { VNode };
+
+// 默认导出菜单配置类型
+export default MenuOption;

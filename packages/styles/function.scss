@@ -1,0 +1,34 @@
+@use 'sass:meta';
+@use 'sass:string';
+@use 'sass:math';
+@use 'sass:color';
+@use 'config' as *;
+
+@function joinVarName($list) {
+  $name: '--'+ $namespace;
+
+  @each $item in $list {
+    @if $item !='' {
+      $name: $name + '-'+ $item;
+    }
+  }
+
+  @return $name;
+}
+
+@function getCssVar($args...) {
+  @return var(#{joinVarName($args)});
+}
+
+@function getCssVarName($args...) {
+  @return joinVarName($args);
+}
+
+@function roundColor($color) {
+  $r: math.round(color.channel($color, 'red'));
+  $g: math.round(color.channel($color, 'green'));
+  $b: math.round(color.channel($color, 'blue'));
+  $a: color.channel($color, 'alpha');
+
+  @return rgba($r, $g, $b, $a);
+}

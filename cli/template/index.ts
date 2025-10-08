@@ -1,21 +1,22 @@
-import { upperFirst } from './utils';
+import { toPascalCase, upperFirst } from './utils';
 
-export default function genIndexTemplate(name) {
+export const genIndexTemplate = name => {
   const compName = upperFirst(name);
-  return `\
-import { App } from 'vue'
-import ${compName} from './src/${name}'
+
+  return `import type { App } from 'vue';
+import ${toPascalCase(compName)} from './src/${name}';
 import '../index.scss';
 import './style/${name}.scss';
 
 // 具名导出
-export { ${compName} }
+export { ${toPascalCase(compName)} };
 
 // 导出插件
 export default {
   install(app: App) {
-    app.component(${compName}.name, ${compName})
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    app.component(${toPascalCase(compName)}.name!, ${toPascalCase(compName)});
   }
-}
+};
 `;
-}
+};

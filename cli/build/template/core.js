@@ -1,13 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = genCoreTypesTemplate;
+exports.genCoreTypesTemplate = void 0;
 var utils_1 = require("./utils");
 // 创建组件核心文件模板
-function genCoreTypesTemplate(name) {
-    var compName = 'S' + (0, utils_1.upperFirst)(name); //组件名称
-    var propsTypeName = (0, utils_1.upperFirst)(name) + 'Props'; //类型名
-    var propsName = name + 'Props'; //属性名
-    var propsFileName = name + '-type'; //文件名称
-    var className = 's-' + name;
-    return "import { defineComponent, toRefs } from 'vue'\nimport { ".concat(propsTypeName, ", ").concat(propsName, " } from './").concat(propsFileName, "'\n\nexport default defineComponent({\n  name: '").concat(compName, "',\n  props: ").concat(propsName, ",\n  setup(props: ").concat(propsTypeName, ") {\n    return () => {\n      return (\n        <div class=\"").concat(className, "\"></div>\n      )\n    }\n  }\n})");
-}
+var genCoreTypesTemplate = function (name) {
+    var compName = "S".concat((0, utils_1.toPascalCase)(name)); //组件名称
+    var propsTypeName = "".concat((0, utils_1.toPascalCase)(name), "Props"); //类型名
+    var propsName = "".concat((0, utils_1.toCamelCase)(name), "Props"); //属性名
+    var propsFileName = "".concat(name, "-type"); //文件名称
+    var className = "s-".concat(name);
+    return "import { defineComponent } from 'vue';\nimport { ".concat(propsTypeName, ", ").concat(propsName, " } from './").concat(propsFileName, "';\n\nexport default defineComponent({\n  name: '").concat(compName, "',\n  props: ").concat(propsName, ",\n  setup(props: ").concat(propsTypeName, ") {\n    return () => <div class=\"").concat(className, "\">").concat(name, "</div>\n  }\n});\n");
+};
+exports.genCoreTypesTemplate = genCoreTypesTemplate;

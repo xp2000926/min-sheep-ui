@@ -1,0 +1,9 @@
+.s-flex {
+  display: flex;
+  justify-content: start;
+  gap: 8px 12px;
+
+  &-vertical {
+    flex-direction: column;
+  }
+}

@@ -1,6 +1,6 @@
 import * as inquirer from 'inquirer'; // 如果你使用的是tsnd方式需要这样导入
 import { red } from 'kolorist'; //颜色库
-import createComponent from '../shared/create-component';
+import { createComponent } from '../shared/create-component';
 
 // create type 支持项
 const CREATE_TYPES = ['component', 'lib-entry'];
@@ -11,9 +11,11 @@ const DOCS_CATEGORIES = [
   '反馈',
   '数据录入',
   '数据展示',
-  '布局'
+  '布局',
+  '其他',
+  '全局化配置'
 ];
-export async function onCreate(args = { type: '' }) {
+export const onCreate = async (args = { type: '' }) => {
   // 容错,判断用户是否输入type
   let { type } = args;
   //未输入,提示用户重新输入,给用户一个列表去选择
@@ -45,7 +47,7 @@ export async function onCreate(args = { type: '' }) {
     );
     return onCreate();
   }
-  //输入则创建对应的内容
+  // 输入则创建对应的内容
   try {
     switch (type) {
       case 'component':
@@ -81,6 +83,7 @@ export async function onCreate(args = { type: '' }) {
             default: 0
           }
         ]);
+        console.log(info);
         // 创建组件模板文件
         createComponent(info);
         break;
@@ -88,4 +91,4 @@ export async function onCreate(args = { type: '' }) {
         break;
     }
   } catch (error) {}
-}
+};

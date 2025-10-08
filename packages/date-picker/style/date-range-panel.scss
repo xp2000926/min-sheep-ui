@@ -1,0 +1,8 @@
+.s-date-range-panel{
+    @apply flex;
+   .s-date-range-panel-header{
+
+    @apply grid justify-items-center  items-center  h-7 flex-1;
+    grid-template-columns: 28px 28px 1fr 28px 28px;
+   }
+}

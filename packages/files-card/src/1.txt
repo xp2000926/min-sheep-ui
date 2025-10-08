@@ -1,0 +1,324 @@
+import { h, ref, computed, watch, defineComponent, toRefs, withDefaults } from 'vue';
+import type { FilesCardEmits, FilesCardProps } from './types.d.ts';
+import { CircleCloseFilled, View } from '@element-plus/icons-vue';
+import { ElImage, ElIcon, ElProgress, ElTransition } from 'element-plus';
+import { getFileType, getSize, previewImage } from '../../utils/index.ts';
+import useFileNameParser from '../../utils/useFileNameParser.ts';
+import svgIconMap from './fileSvg/index.ts';
+import { colorMap } from './options.ts';
+
+export default defineComponent({
+  name: 'FilesCard',
+  props: withDefaults(defineProps<FilesCardProps>(), {
+    uid: undefined,
+    name: undefined,
+    fileSize: undefined,
+    fileType: undefined,
+    description: undefined,
+    url: undefined,
+    thumbUrl: undefined,
+    imgFile: undefined,
+    iconSize: '42px',
+    iconColor: undefined,
+    showDelIcon: false,
+    maxWidth: '236px',
+    style: undefined,
+    hoverStyle: undefined,
+    imgVariant: 'rectangle',
+    imgPreview: true,
+    imgPreviewMask: true,
+    status: undefined,
+    percent: undefined,
+    errorTip: undefined
+  }),
+  emits: ['delete', 'imagePreview'] as unknown as FilesCardEmits,
+  setup(props, { slots, emit }) {
+    const { name, fileType, description, url, thumbUrl, fileSize, imgVariant } = toRefs(props);
+
+    const { namePrefix, nameSuffix } = useFileNameParser(name);
+    const isHovered = ref(false);
+    const imageHovered = ref(false);
+    const _previewImg = ref<string | undefined>(undefined);
+    const imgRef = ref();
+
+    const _fileType = computed(() => {
+      if (fileType.value) return fileType.value;
+      if (!name.value) return undefined;
+      if (!nameSuffix.value) return 'unknown';
+      return getFileType(nameSuffix.value).lowerCase;
+    });
+
+    const _fileTypeUpperCase = computed(() => {
+      if (fileType.value) return fileType.value.replace(/^\w/, match => match.toUpperCase());
+      if (!name.value) return '';
+      if (!nameSuffix.value) return 'Unknown';
+      return getFileType(nameSuffix.value).upperCase;
+    });
+
+    const _description = computed(() => {
+      if (description.value) return description.value;
+      const typeStr = _fileTypeUpperCase.value;
+      const sizeStr = fileSize.value ? `・${getSize(fileSize.value)}` : '';
+
+      if (props.status === 'uploading') {
+        return `上传中...${`・${props.percent || 0}`}%${sizeStr}`;
+      }
+      if (props.status === 'error') {
+        return props.errorTip || '上传失败';
+      }
+      return `${typeStr}${sizeStr}`;
+    });
+
+    const isImageFile = computed(() => _fileType.value === 'image');
+    const isSquareVariant = computed(() => imgVariant.value === 'square');
+
+    const _previewImgUrl = computed(() => {
+      if (!isImageFile.value) return undefined;
+      if (thumbUrl.value) return thumbUrl.value;
+      if (url.value) return url.value;
+      return _previewImg.value;
+    });
+
+    const _iconSize = computed(() => {
+      if (
+        (isSquareVariant.value && isImageFile.value && !props.iconSize) ||
+        (isSquareVariant.value && isImageFile.value && props.iconSize === '42px')
+      ) {
+        return '64px';
+      }
+      return props.iconSize;
+    });
+
+    watch(
+      () => props.imgFile,
+      async (newFile) => {
+        if (newFile) {
+          try {
+            const url = await previewImage(newFile);
+            _previewImg.value = url;
+          } catch (error) {
+            console.error('Preview failed:', error);
+          }
+        } else {
+          _previewImg.value = undefined;
+        }
+      },
+      { deep: true, immediate: true }
+    );
+
+    function handleDelete() {
+      emit('delete', { ...props });
+    }
+
+    function handlePreviewAction(type: 'self' | 'mask') {
+      if (props.imgPreview && imgRef.value && _previewImgUrl.value && type === 'mask') {
+        imgRef.value.showPreview();
+      }
+      if (type === 'self') {
+        emit('imagePreview', { ...props });
+      }
+    }
+
+    return () => {
+      // 容器样式处理
+      const containerStyles = {
+        '--elx-files-card-icon-size': `${_iconSize.value}`,
+        '--elx-files-card-max-width': `${props.maxWidth}`,
+        ...props.style,
+        ...(isHovered.value && props.hoverStyle ? props.hoverStyle : {})
+      };
+
+      // 容器类名处理
+      const containerClasses = [
+        'elx-files-card',
+        {
+          'elx-files-card-square': isSquareVariant.value && isImageFile.value,
+          'elx-files-card-hovered': isHovered.value,
+          'elx-files-card-error': props.status === 'error',
+          'elx-files-card-done': props.status === 'done',
+          'elx-files-card-uploading': props.status === 'uploading'
+        }
+      ];
+
+      return (
+        <div
+          style={containerStyles}
+          class={containerClasses}
+          onMouseenter={() => isHovered.value = true}
+          onMouseleave={() => isHovered.value = false}
+        >
+          {/* 上传进度条 */}
+          {props.status === 'uploading' && !(isSquareVariant.value && isImageFile.value) && (
+            <div
+              class="elx-files-card-progress"
+              style={{ width: `${props.percent || 0}%` }}
+            />
+          )}
+
+          {/* 图标插槽 */}
+          {((slots.icon && slots.icon()) || _fileType.value) && (
+            slots.icon
+              ? slots.icon({ item: props })
+              : (
+                <>
+                  {/* 非图片文件图标 */}
+                  {!isImageFile.value && (
+                    <component
+                      is={svgIconMap[_fileType.value!]}
+                      class="elx-files-card-icon"
+                      color={props.iconColor || colorMap[_fileType.value!]}
+                    />
+                  )}
+
+                  {/* 图片文件处理区域 */}
+                  {isImageFile.value && (
+                    <div
+                      class={[
+                        'image-preview-container',
+                        { 'image-preview-container-square': isSquareVariant.value && isImageFile.value }
+                      ]}
+                      onMouseenter={() => imageHovered.value = true}
+                      onMouseleave={() => imageHovered.value = false}
+                    >
+                      {/* 图片预览 */}
+                      {_previewImgUrl.value ? (
+                        <ElImage
+                          ref={imgRef}
+                          class="elx-files-card-img"
+                          src={_previewImgUrl.value}
+                          previewSrcList={props.imgPreview ? [_previewImgUrl.value] : []}
+                          fit="cover"
+                          showProgress={false}
+                          hideOnClickModal
+                          onShow={() => handlePreviewAction('self')}
+                        />
+                      ) : (
+                        <component
+                          is={svgIconMap[_fileType.value!]}
+                          class="elx-files-card-img"
+                          color={props.iconColor || colorMap[_fileType.value!]}
+                        />
+                      )}
+
+                      {/* 图片预览遮罩层 */}
+                      <ElTransition name="fade">
+                        {imageHovered.value && _previewImgUrl.value && props.imgPreviewMask && props.imgPreview
+                          ? slots['image-preview-actions']
+                            ? slots['image-preview-actions']({
+                                item: { ...props, prefix: namePrefix.value, suffix: nameSuffix.value }
+                              })
+                            : (
+                                <div
+                                  class="preview-mask"
+                                  onClick={() => handlePreviewAction('mask')}
+                                >
+                                  <ElIcon>
+                                    <View />
+                                  </ElIcon>
+                                  <span>预览</span>
+                                </div>
+                              )
+                          : null
+                        }
+                      </ElTransition>
+
+                      {/* 状态显示区域 */}
+                      {props.status === 'uploading' && isSquareVariant.value && (
+                        <div class="preview-mask-loading">
+                          <ElProgress
+                            color="#fff"
+                            type="circle"
+                            percentage={props.percent}
+                            class="circle-progress"
+                          />
+                        </div>
+                      )}
+
+                      {props.status === 'error' && isSquareVariant.value && (
+                        <div class="preview-mask-error">
+                          <span class="error-text">{props.errorTip || '上传失败'}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </>
+              )
+          )}
+
+          {/* 内容插槽 */}
+          {((slots.content && slots.content()) || props.name || description.value) &&
+           !(isSquareVariant.value && isImageFile.value) && (
+            slots.content
+              ? slots.content({ item: props })
+              : (
+                <div class="elx-files-card-content">
+                  {props.name && (
+                    <div class="elx-files-card-name">
+                      {slots['name-prefix']
+                        ? slots['name-prefix']({
+                            item: { ...props, prefix: namePrefix.value, suffix: nameSuffix.value }
+                          })
+                        : (
+                            <div class="elx-files-card-name-prefix">
+                              {namePrefix.value}
+                            </div>
+                          )
+                      }
+
+                      {slots['name-suffix']
+                        ? slots['name-suffix']({
+                            item: { ...props, prefix: namePrefix.value, suffix: nameSuffix.value }
+                          })
+                        : (
+                            <div class="elx-files-card-name-suffix">
+                              {nameSuffix.value}
+                            </div>
+                          )
+                      }
+                    </div>
+                  )}
+
+                  {slots.description
+                    ? slots.description({
+                        item: { ...props, prefix: namePrefix.value, suffix: nameSuffix.value }
+                      })
+                    : (
+                        <div
+                          class={[
+                            'elx-files-card-description',
+                            {
+                              'elx-files-card-description-error': props.status === 'error',
+                              'elx-files-card-description-done': props.status === 'done',
+                              'elx-files-card-description-uploading': props.status === 'uploading'
+                            }
+                          ]}
+                        >
+                          {_description.value}
+                        </div>
+                      )
+                  }
+                </div>
+              )
+          )}
+
+          {/* 删除图标插槽 */}
+          {props.showDelIcon && isHovered.value && (
+            <div
+              class="elx-files-card-delete-icon"
+              onClick={handleDelete}
+            >
+              {slots['del-icon']
+                ? slots['del-icon']({ item: props })
+                : (
+                    <ElIcon>
+                      <CircleCloseFilled />
+                    </ElIcon>
+                  )
+              }
+            </div>
+          )}
+        </div>
+      );
+    };
+  }
+});

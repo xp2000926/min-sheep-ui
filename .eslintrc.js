@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
-    complexity: ['error', 25], // 圈复杂度
+    complexity: ['error', 15], // 圈复杂度
     'no-plusplus': 'off' // 关闭i++ 报错
   }
 };

@@ -1,0 +1,124 @@
+.s-scroll {
+  overflow: hidden;
+  position: relative;
+  z-index: auto;
+  height: 100%;
+  width: 100%;
+
+  // 支持自定义样式变量
+  --scroll-rail-color: rgba(0, 0, 0, 0.25);
+  --scroll-rail-hover-color: rgba(0, 0, 0, 0.4);
+  --scroll-rail-active-color: rgba(0, 0, 0, 0.6);
+  --scroll-rail-size: 5px;
+  --scroll-rail-border-radius: 3px;
+  --scroll-rail-transition: background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --scroll-rail-opacity: 1;
+  --scroll-rail-opacity-transition: opacity 0.2s ease-in-out;
+
+  >.s-scroll-container {
+    width: 100%;
+    overflow: scroll;
+    height: 100%;
+    min-height: inherit;
+    max-height: inherit;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    >.s-scroll-content {
+      box-sizing: border-box;
+      min-width: 100%;
+    }
+  }
+
+  >.s-scroll-rail {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    background: transparent;
+    -webkit-user-select: none;
+    z-index: 10;
+    transition: var(--scroll-rail-opacity-transition, opacity 0.2s ease-in-out);
+  }
+
+  // 垂直滚动条
+  >.s-scroll-rail.s-scroll-rail--vertical {
+    width: var(--scroll-rail-size, 5px);
+    top: 2px;
+    bottom: 2px;
+
+    &.s-scroll-rail--vertical--right {
+      right: 4px;
+      left: auto;
+    }
+
+    &.s-scroll-rail--vertical--left {
+      left: 4px;
+      right: auto;
+    }
+  }
+
+  // 水平滚动条
+  >.s-scroll-rail.s-scroll-rail--horizontal {
+    height: var(--scroll-rail-size, 5px);
+    left: 2px;
+    right: 2px;
+
+    &.s-scroll-rail--horizontal--bottom {
+      bottom: 4px;
+      top: auto;
+    }
+
+    &.s-scroll-rail--horizontal--top {
+      top: 4px;
+      bottom: auto;
+    }
+  }
+
+  // 滚动条滑块
+  >.s-scroll-rail>.s-scroll-rail__scroll {
+    z-index: 1;
+    position: absolute;
+    cursor: pointer;
+    pointer-events: all;
+    background-color: var(--scroll-rail-color, rgba(0, 0, 0, 0.25));
+    transition: var(--scroll-rail-transition, background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1));
+    border-radius: var(--scroll-rail-border-radius, 3px);
+
+    &:hover {
+      background-color: var(--scroll-rail-hover-color, rgba(0, 0, 0, 0.4));
+    }
+
+    &:active {
+      background-color: var(--scroll-rail-active-color, rgba(0, 0, 0, 0.6));
+    }
+  }
+
+  // 垂直滚动条滑块
+  >.s-scroll-rail.s-scroll-rail--vertical>.s-scroll-rail__scroll {
+    width: var(--scroll-rail-size, 5px);
+    border-radius: var(--scroll-rail-border-radius, 3px);
+    bottom: 0;
+  }
+
+  // 水平滚动条滑块
+  >.s-scroll-rail.s-scroll-rail--horizontal>.s-scroll-rail__scroll {
+    height: var(--scroll-rail-size, 5px);
+    border-radius: var(--scroll-rail-border-radius, 3px);
+    right: 0;
+  }
+
+  // 当同时显示水平和垂直滚动条时的样式调整
+  &.s-scroll--has-both {
+    >.s-scroll-rail.s-scroll-rail--vertical {
+      bottom: 9px; // 为水平滚动条留出空间
+    }
+
+    >.s-scroll-rail.s-scroll-rail--horizontal {
+      right: 9px; // 为垂直滚动条留出空间
+    }
+  }
+}

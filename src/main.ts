@@ -1,13 +1,17 @@
+// import './assets/main.css';
+import './index.scss';
 import { createApp } from 'vue';
 import App from './App.vue';
-import Button from './button';
-import Tree from './tree';
-import './reset.scss';
-//使用全量导出
-// import MinSheepUI from '../build/min-sheep-ui.mjs';
-// import '../build/style.css';
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+
+import Button from '../packages/button';
+// import CodeEditor from '../packages/code-editor';
+import { Tree } from '../packages/tree';
+
 createApp(App)
   .use(Button)
+  // .use(CodeEditor)
   .use(Tree)
-  // .use(MinSheepUI)
+  .use(ElementPlus)
   .mount('#app');

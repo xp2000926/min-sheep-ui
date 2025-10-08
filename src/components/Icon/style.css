@@ -1,0 +1,30 @@
+.s-icon {
+  --s-icon-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--s-icon-color);
+  font-size: inherit;
+}
+
+.s-icon--primary {
+  --s-icon-color: var(--s-color-primary);
+}
+
+.s-icon--info {
+  --s-icon-color: var(--s-color-info);
+}
+
+.s-icon--success {
+  --s-icon-color: var(--s-color-success);
+}
+
+.s-icon--warning {
+  --s-icon-color: var(--s-color-warning);
+}
+
+.s-icon--danger {
+  --s-icon-color: var(--s-color-danger);
+}

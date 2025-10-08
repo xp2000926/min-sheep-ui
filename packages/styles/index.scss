@@ -1,0 +1,25 @@
+@forward 'breakpoints';
+@forward 'mixins';
+@use "./common/var.scss" as *;
+@use "mixins";
+
+// common
+:root {
+    @include mixins.set-css-var-value('color-white', $color-white);
+    @include mixins.set-css-var-value('color-black', $color-black);
+
+    @each $type in (primary, success, warning, danger, error, info) {
+        @include mixins.set-css-color-type($colors, $type);
+    }
+}
+
+// for light
+:root {
+    color-scheme: light;
+
+    // --el-color-#{$type}
+    // --el-color-#{$type}-light-{$i}
+    @each $type in (primary, success, warning, danger, error, info) {
+        @include mixins.set-css-color-type($colors, $type);
+    }
+}

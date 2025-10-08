@@ -1,0 +1,35 @@
+.s-avatar {
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+  overflow: hidden;
+  color: #fff;
+  background: #c0c4cc;
+  @apply w-9 h-9 leading-9;
+  font-size: 14px;
+  > img {
+    max-width: inherit;
+    display: block;
+    height: 100%;
+    vertical-align: middle;
+  }
+
+  &--large {
+    @apply w-10 h-10   leading-10;
+  }
+  &--small {
+    @apply w-7 h-7  leading-7;
+  }
+  &--circle {
+    border-radius: 50%;
+  }
+  &--square {
+    border-radius: 4px;
+  }
+}
+.s-avatar-group {
+  @apply inline-flex   relative flex-nowrap;
+}
+.s-avatar-group:not(.s-avatar-group--vertical) .s-avatar:not(:first-child) {
+  margin-left: -12px;
+}

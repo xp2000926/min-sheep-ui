@@ -1,9 +1,17 @@
+*.sh
+node_modules
+lib
+coverage
+*.md
+*.scss
+*.woff
+*.ttf
+src/index.ts
+src/test/tree.vue
+src/components
 dist
 build
-views
-study
-node_modules
-scripts
-.vitepress
-scripts
-icons
+document
+libs/*
+packages/table copy/*/*
+packages/files-card/src/fileSvg/*

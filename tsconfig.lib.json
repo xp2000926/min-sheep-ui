@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    /* Bundler mode */
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    // "emitDeclarationOnly": true,
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "jsxFactory": "h",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsxFragmentFactory": "Fragment",
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": [
+      "vitest/globals"
+    ],
+    "outDir": "./build",
+    "baseUrl": ".",
+    "declaration": true, // 生成 .d.ts 声明文件
+    "declarationDir": "./build", // 指定声明文件的输出目录
+    "paths":{
+      "@min-sheep-ui/utils":["./libs/utils"],
+      "@min-sheep-ui/hooks":["./libs/hooks"]
+    }
+  },
+  "include": [
+    "packages/**",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+}

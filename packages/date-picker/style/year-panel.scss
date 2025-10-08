@@ -1,0 +1,17 @@
+.s-year-panel {
+  .s-year-panel-header {
+    @apply grid justify-items-center  items-center  h-7;
+    grid-template-columns: 28px 1fr 28px;
+
+    .icon {
+      @apply cursor-pointer;
+    }
+    .years,
+    .month {
+      @apply cursor-pointer;
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+}

@@ -4,7 +4,10 @@
 
 ## 基础用法
 
-:::demo 绑定 v-model 到一个 Boolean 类型的变量。 可以使用 --s-switch-on-color 属性与 --s-switch-off-color 属性来设置开关的背景色。
+绑定 v-model 到一个 Boolean 类型的变量。 可以使用 --s-switch-on-color 属性与 --s-switch-off-color 属性来设置开关的背景色。
+
+:::demo
+
 ```vue
 <template>
   <s-switch v-model="value1" />
@@ -15,17 +18,19 @@
   />
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const value1 = ref(true)
-const value2 = ref(true)
+const value1 = ref(true);
+const value2 = ref(true);
 </script>
 ```
+
 :::
 
 ## 尺寸
 
 :::demo
+
 ```vue
 <template>
   <s-switch
@@ -46,16 +51,20 @@ const value2 = ref(true)
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const value = ref(true)
+const value = ref(true);
 </script>
 ```
+
 :::
 
 ## 文字描述
 
-:::demo 使用active-text属性与inactive-text属性来设置开关的文字描述。 使用 inline-prompt 属性来控制文本是否显示在点内。<br><br>使用active-text属性与inactive-text属性来设置开关的文字描述。
+使用active-text属性与inactive-text属性来设置开关的文字描述。 使用 inline-prompt 属性来控制文本是否显示在点内。<br><br>使用active-text属性与inactive-text属性来设置开关的文字描述。
+
+:::demo
+
 ```vue
 <template>
   <s-switch
@@ -73,12 +82,7 @@ const value = ref(true)
     inactive-text="Pay by year"
   />
   <br />
-  <s-switch
-    v-model="value3"
-    inlinePrompt
-    active-text="是"
-    inactive-text="否"
-  />
+  <s-switch v-model="value3" inlinePrompt active-text="是" inactive-text="否" />
   <s-switch
     v-model="value4"
     class="ml-2"
@@ -106,37 +110,45 @@ const value = ref(true)
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const value1 = ref(true)
-const value2 = ref(true)
-const value3 = ref(true)
-const value4 = ref(true)
-const value5 = ref(true)
-const value6 = ref(true)
+const value1 = ref(true);
+const value2 = ref(true);
+const value3 = ref(true);
+const value4 = ref(true);
+const value5 = ref(true);
+const value6 = ref(true);
 </script>
 ```
+
 :::
 
 ## 形状
 
-:::demo 开关可以设为方形。
+开关可以设为方形。
+
+:::demo
+
 ```vue
 <template>
-  <s-switch v-model="value1" class="ml-2"  :round="false" />
-  <s-switch v-model="value1"/>
+  <s-switch v-model="value1" class="ml-2" :round="false" />
+  <s-switch v-model="value1" />
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const value1 = ref(true)
+const value1 = ref(true);
 </script>
 ```
+
 :::
 
 ## 禁用状态
 
-:::demo 设置disabled属性，接受一个Boolean，设置true即可禁用。
+设置disabled属性，接受一个Boolean，设置true即可禁用。
+
+:::demo
+
 ```vue
 <template>
   <s-switch v-model="value1" disabled />
@@ -144,16 +156,21 @@ const value1 = ref(true)
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const value1 = ref(true)
-const value2 = ref(true)
+const value1 = ref(true);
+const value2 = ref(true);
 </script>
 ```
+
 :::
+
 ## 自定义操作图标
 
-:::demo 使用 active-action 和 inactive-action 属性来添加图标。
+使用 active-action 和 inactive-action 属性来添加图标。
+
+:::demo
+
 ```vue
 <template>
   <s-switch v-model="value1">
@@ -166,9 +183,10 @@ const value2 = ref(true)
   </s-switch>
 </template>
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const value1 = ref(true)
+const value1 = ref(true);
 </script>
 ```
+
 :::

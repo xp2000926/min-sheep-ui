@@ -1,3 +1,14 @@
-.ml-2 {
-    margin-left: 0.5rem;
+.vp-doc {
+  a {
+  text-decoration: auto;
+  }
+  table{
+    display: revert;
+  }
+}
+.vp-doc th, .vp-doc td{
+  border: inherit;
+}
+.vp-doc tr:nth-child(2n){
+  background-color: inherit;
 }

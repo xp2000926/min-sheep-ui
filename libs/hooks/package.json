@@ -1,0 +1,10 @@
+{
+  "name": "@min-sheep-ui/hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.17.1"
+}

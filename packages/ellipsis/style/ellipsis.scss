@@ -1,0 +1,20 @@
+.s-ellipsis {
+    overflow: hidden;
+    font-size: 14px;
+
+    &.s-ellipsis-line--clamp {
+        display: -webkit-inline-box;
+        -webkit-box-orient: vertical;
+    }
+
+    &.s-ellipsis--cursor-pointer {
+        cursor: pointer;
+    }
+
+    &:not(.s-ellipsis-line--clamp) {
+        white-space: nowrap;
+        display: inline-block;
+        vertical-align: bottom;
+        max-width: 100%;
+    }
+}

@@ -1,0 +1,144 @@
+// src/style/code.scss - 更新行号相关样式
+.s-code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 3px;
+  
+  &--inline {
+    display: inline;
+    padding: 2px 4px;
+    background-color: #f5f5f5;
+    border: 1px solid #eaeaea;
+    border-radius: 2px;
+  }
+  
+  &--block {
+    display: block;
+    padding: 0;
+    margin: 8px 0;
+    background-color: #f8f8f8;
+    border: 1px solid #eaeaea;
+    overflow-x: auto;
+    
+    pre {
+      margin: 0;
+      padding: 12px;
+    }
+  }
+  
+  &--word-wrap {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  &--show-line-numbers {
+    .s-code-container {
+      display: flex;
+      min-width: 100%;
+      
+      .s-code-line-numbers {
+        padding: 12px 8px 12px 12px;
+        text-align: right;
+        user-select: none;
+        background-color: #f5f5f5;
+        border-right: 1px solid #eaeaea;
+        min-height: 100%;
+        
+        .s-code-line-number {
+          line-height: 1.5;
+          color: #999;
+          font-size: 12px;
+          padding-right: 8px;
+          
+          &::before {
+            content: attr(data-line-number);
+          }
+        }
+      }
+      
+      .s-code-content {
+        flex: 1;
+        padding: 12px 12px 12px 8px;
+        overflow-x: auto;
+        
+        .s-code-line {
+          line-height: 1.5;
+          min-height: 1.5em;
+        }
+      }
+    }
+  }
+  
+  // Highlight.js 样式兼容
+  .hljs {
+    background: transparent;
+  }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+  .s-code {
+    &--inline {
+      background-color: #2a2a2a;
+      border-color: #444;
+      color: #e0e0e0;
+    }
+    
+    &--block {
+      background-color: #1e1e1e;
+      border-color: #444;
+      color: #e0e0e0;
+    }
+    
+    &--show-line-numbers {
+      .s-code-container {
+        .s-code-line-numbers {
+          background-color: #2a2a2a;
+          border-right-color: #444;
+          color: #666;
+        }
+        
+        .s-code-content {
+          background-color: #1e1e1e;
+        }
+      }
+    }
+  }
+}
+
+// 确保代码块正确滚动
+.s-code--block {
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .s-code--block {
+    &::-webkit-scrollbar-track {
+      background: #2a2a2a;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: #555;
+    }
+    
+    &::-webkit-scrollbar-thumb:hover {
+      background: #666;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+.s-month-panel {
+  .s-month-panel-header {
+    @apply grid justify-items-center  items-center  h-7;
+    grid-template-columns: 28px 1fr 28px;
+
+    .icon {
+      @apply cursor-pointer;
+    }
+    .month {
+      @apply cursor-pointer;
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+}

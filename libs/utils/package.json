@@ -1,0 +1,17 @@
+{
+  "name": "@min-sheep-ui/utils",
+  "private": true,
+  "license": "MIT",
+  "main": "index.ts",
+  "peerDependencies": {
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@vue/shared": "^3.5.22",
+    "@vueuse/core": "catalog:",
+    "lodash-unified": "catalog:"
+  },
+  "devDependencies": {
+    "type-fest": "catalog:"
+  }
+}

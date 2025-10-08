@@ -1,0 +1,66 @@
+.s-date-picker-panel {
+  width: 290px;
+  padding: 6px 12px 4px 12px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  .s-date-picker-panel-header {
+    display: grid;
+    grid-template-columns: 28px 28px 1fr 28px 28px;
+    align-items: center;
+    justify-items: center;
+    @apply h-7;
+    &.select-years{
+      grid-template-columns: 28px  1fr 28px;
+    }
+    .icon {
+      @apply cursor-pointer;
+    }
+    .years,
+    .month {
+      @apply cursor-pointer;
+      &:hover {
+        color: #409eff;
+      }
+    }
+  }
+  .s-date-picker-panel-body {
+    width: 100%;
+    height: 265px;
+  }
+  .s-date-picker-panel-weekdays {
+    display: grid;
+    margin: auto;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(1, 32px);
+    align-items: center;
+    justify-items: center;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    user-select: none;
+  }
+  .s-date-panel-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, 38px);
+    .s-date-panel-date {
+      @apply text-center;
+      line-height: 38px;
+      &.today {
+        color: #409eff;
+      }
+    }
+  }
+  .s-date-picker-panel-years{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    align-items: center;
+    justify-items: center;
+    .s-date-picker-panel-year{
+      @apply cursor-pointer;
+      &.today {
+        color: #409eff;
+      }
+    }
+  }
+}

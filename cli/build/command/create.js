@@ -9,8 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
@@ -35,8 +35,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.onCreate = onCreate;
+exports.onCreate = void 0;
 var inquirer = require("inquirer"); // 如果你使用的是tsnd方式需要这样导入
 var kolorist_1 = require("kolorist"); //颜色库
 var create_component_1 = require("../shared/create-component");
@@ -49,10 +58,16 @@ var DOCS_CATEGORIES = [
     '反馈',
     '数据录入',
     '数据展示',
-    '布局'
+    '布局',
+    '其他',
+    '全局化配置'
 ];
-function onCreate() {
-    return __awaiter(this, arguments, void 0, function (args) {
+var onCreate = function () {
+    var args_1 = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        args_1[_i] = arguments[_i];
+    }
+    return __awaiter(void 0, __spreadArray([], args_1, true), void 0, function (args) {
         var type, result, _a, info, error_1;
         if (args === void 0) { args = { type: '' }; }
         return __generator(this, function (_b) {
@@ -82,7 +97,7 @@ function onCreate() {
                     // 另一个错误，用户输入了信息，但是输入错误,要求用户重新选择
                     if (!CREATE_TYPES.includes(type)) {
                         console.log((0, kolorist_1.red)("\u5F53\u524D\u7C7B\u578B\u4EC5\u652F\u6301\uFF1A".concat(CREATE_TYPES.join(', '), "\uFF0C\u6536\u5230\u4E0D\u5728\u652F\u6301\u8303\u56F4\u5185\u7684 \"").concat(type, "\"\uFF0C\u8BF7\u91CD\u65B0\u9009\u62E9\uFF01")));
-                        return [2 /*return*/, onCreate()];
+                        return [2 /*return*/, (0, exports.onCreate)()];
                     }
                     _b.label = 3;
                 case 3:
@@ -125,8 +140,9 @@ function onCreate() {
                     ])];
                 case 5:
                     info = _b.sent();
+                    console.log(info);
                     // 创建组件模板文件
-                    (0, create_component_1.default)(info);
+                    (0, create_component_1.createComponent)(info);
                     return [3 /*break*/, 7];
                 case 6: return [3 /*break*/, 7];
                 case 7: return [3 /*break*/, 9];
@@ -137,4 +153,5 @@ function onCreate() {
             }
         });
     });
-}
+};
+exports.onCreate = onCreate;

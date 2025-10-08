@@ -1,0 +1,7 @@
+.s-button-group {
+  display: inline-block;
+  vertical-align: middle;
+  > .s-button + .s-button {
+    margin-left: 1px;
+  }
+}

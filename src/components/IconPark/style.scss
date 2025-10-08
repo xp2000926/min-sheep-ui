@@ -1,0 +1,109 @@
+/**
+ * IconPark 图标组件样式
+ * 基于 @icon-park/svg 的图标组件样式
+ */
+
+.s-iconpark {
+  --s-iconpark-color: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentColor;
+  color: var(--s-iconpark-color);
+  font-size: inherit;
+  vertical-align: middle;
+
+  // 图标容器样式
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  // SVG 样式
+  svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    color: inherit;
+  }
+
+  // 旋转动画
+  &--spin {
+    animation: s-iconpark-spin 1s linear infinite;
+  }
+
+  // 类型样式
+  @each $val in primary, info, success, warning, danger {
+    &--#{$val} {
+      --s-iconpark-color: var(--s-color-#{$val});
+    }
+  }
+}
+
+/**
+ * 旋转动画关键帧
+ */
+@keyframes s-iconpark-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * 不同尺寸的图标
+ */
+.s-iconpark {
+  // 小尺寸
+  &.s-iconpark--small {
+    font-size: 0.875em;
+  }
+
+  // 中等尺寸
+  &.s-iconpark--medium {
+    font-size: 1em;
+  }
+
+  // 大尺寸
+  &.s-iconpark--large {
+    font-size: 1.25em;
+  }
+
+  // 超大尺寸
+  &.s-iconpark--extra-large {
+    font-size: 1.5em;
+  }
+}
+
+/**
+ * 响应式图标尺寸
+ */
+@media (max-width: 768px) {
+  .s-iconpark {
+    &.s-iconpark--responsive {
+      font-size: 0.875em;
+    }
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .s-iconpark {
+    &.s-iconpark--responsive {
+      font-size: 1em;
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .s-iconpark {
+    &.s-iconpark--responsive {
+      font-size: 1.125em;
+    }
+  }
+}

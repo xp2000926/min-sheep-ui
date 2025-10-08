@@ -1,0 +1,33 @@
+.s-input {
+  @apply inline-block relative w-full;
+  font-size: 14px;
+  &__input {
+    @apply w-full px-[15px] py-0 h-10 outline-none bg-white text-[#606266] rounded-[2px];
+    border: 1px solid #d7d8da;
+  }
+  &__suffix{
+    @apply absolute h-full right-0 top-0 pointer-events-none  text-[#c0c4cc]  text-center;
+    transition: all .3s;
+    &-inner {
+        @apply pointer-events-auto;
+    }
+  }
+  .s-input__icon{
+    @apply leading-10;
+    width: 25px;
+  }
+  &.is-disabled {
+    .s-input__input {
+      @apply bg-[#f5f7fa] border-[#e4e7ed] text-[#c0c4cc] cursor-not-allowed;
+    }
+  }
+}
+
+// 暗色主题支持
+@media (prefers-color-scheme: dark) {
+  .s-input{
+    &__input {
+      @apply bg-[#262626] text-[#c0c4cc];
+    }
+  }
+}

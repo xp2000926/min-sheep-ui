@@ -1,0 +1,132 @@
+@use 'sass:map';
+@use 'sass:string';
+@use 'config' as *; 
+@use './common/var' as *;
+@use './breakpoints' as *;
+@use './function' as *;
+
+$B: null;
+$E: null;
+
+@mixin b($block) {
+  $B: $namespace + $common-separator + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
+
+@mixin when($state) {
+  @at-root {
+    &.#{$state-prefix + $state} {
+      @content;
+    }
+  }
+}
+
+@mixin res($key, $map: $breakpoints) {
+  @if map.has-key($map, $key) {
+    @media only screen and #{string.unquote(map.get($map, $key))} {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "Undefined breakpoint: `#{$key}` in map `#{$map}`";
+  }
+}
+
+@mixin set-component-css-var($name, $variables) {
+
+  @each $attribute,
+  $value in $variables {
+    @if $attribute=='default' {
+      #{getCssVarName($name)}: #{$value};
+    }
+
+    @else {
+      #{getCssVarName($name, $attribute)}: #{$value};
+    }
+  }
+}
+
+@mixin css-var-from-global($var, $gVar) {
+  $varName: joinVarName($var);
+  $gVarName: joinVarName($gVar);
+  #{$varName}: var(#{$gVarName});
+}
+@mixin m($modifier) {
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $modifier {
+    $currentSelector: #{$currentSelector +
+      $selector +
+      $modifier-separator +
+      $unit +
+      ','};
+  }
+
+  @at-root {
+    #{$currentSelector} {
+      @content;
+    }
+  }
+}
+
+@mixin set-css-var-value($name, $value) {
+  @if $value == null or $value == '' {
+    @warn "Skipping empty CSS var value for #{joinVarName($name)}";
+  } @else {
+    #{joinVarName($name)}: #{$value};
+  }
+}
+@mixin set-css-var-type($name, $type, $variables) {
+  #{getCssVarName($name, $type)}: #{map.get($variables, $type)};
+}
+@mixin set-css-color-type($colors, $type) {
+  $base: map.get($colors, $type, 'base');
+  @include set-css-var-value(('color', $type), $base);
+
+  @each $i in (3, 5, 7, 8, 9) {
+    $light: map.get($colors, $type, 'light-#{$i}');
+    @include set-css-var-value(
+      ('color', $type, 'light', $i),
+      if($light == null or $light == '', $base, $light)
+    );
+  }
+
+  $dark2: map.get($colors, $type, 'dark-2');
+  @include set-css-var-value(
+    ('color', $type, 'dark-2'),
+    if($dark2 == null or $dark2 == '', $base, $dark2)
+  );
+}
+@mixin e($element) {
+  $E: $element !global;
+  $selector: &;
+  $currentSelector: '';
+  @each $unit in $element {
+    $currentSelector: #{$currentSelector +
+      '.' +
+      $B +
+      $element-separator +
+      $unit +
+      ','};
+  }
+
+  @if hitAllSpecialNestRule($selector) {
+    @at-root {
+      #{$selector} {
+        #{$currentSelector} {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @at-root {
+      #{$currentSelector} {
+        @content;
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+packages:
+  - cli/**
+  - libs/hooks/**
+  - libs/utils/**
+
+catalog:
+  '@vueuse/core': ^10.11.0
+  lodash-unified: ^1.0.2
+  type-fest: ^2.14.0
+  vue: ~3.5.19

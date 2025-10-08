@@ -1,0 +1,34 @@
+.s-radio-button {
+  @apply relative inline-block outline-none;
+  &__inner {
+    @apply bg-white  border-[#dcdfe6] font-[500] text-[#606266];
+    @apply leading-none whitespace-nowrap border-[1px] border-solid  select-none;
+    @apply text-center m-0 cursor-pointer   box-border;
+    @apply border-l-0 text-[14px] px-5 py-3 rounded-[0] transition-all duration-300;
+  }
+  &:first-child .s-radio-button__inner {
+    @apply border-l-[1px] border-l-[#dcdfe6]  rounded-[4px_0_0_4px] border-solid;
+    box-shadow: none !important;
+  }
+  &.is-active {
+    .s-radio-button__inner {
+      @apply text-[#fff]       bg-[#409eff] border-[#409eff];
+      box-shadow: -1px 0 0 0 #409eff;
+    }
+  }
+  &.is-disabled {
+    &.is-active {
+      .s-radio-button__inner {
+        background-color: #f2f6fc;
+      }
+    }
+    .s-radio-button__inner {
+      cursor: not-allowed;
+      color: #c0c4cc;
+      border-left: 1px solid #dcdfe6;
+      border-radius: 4px 0 0 4px;
+      box-shadow: none !important;
+      border-color: #ebeef5;
+    }
+  }
+}

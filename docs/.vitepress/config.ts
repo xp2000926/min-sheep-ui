@@ -18,11 +18,11 @@ let sidebar: Array<{
     items: [
       {
         text: '安装',
-        link: '/guide/Install.md'
+        link: '/guide/install/'
       },
       {
         text: '快速上手',
-        link: '/guide/quickstart.md'
+        link: '/guide/quickstart/'
       }
     ]
   },

@@ -8,7 +8,7 @@ import {
   watch,
   getCurrentInstance
 } from 'vue';
-import { type IconParkProps, iconParkProps } from './icon-type';
+import { type IconProps, iconProps } from './icon-type';
 import * as IconParkIcons from '@icon-park/svg';
 import { IconWrapper, getConfig } from '@icon-park/svg/lib/runtime';
 
@@ -24,7 +24,7 @@ const iconfontCache = new Map<
 let globalIconConfig: {
   css?: string[];
   js?: string[];
-  defaultProps?: Partial<IconParkProps>;
+  defaultProps?: Partial<IconProps>;
 } = {};
 
 // 提供设置全局配置的方法
@@ -34,8 +34,8 @@ export const setGlobalIconConfig = (config: typeof globalIconConfig) => {
 
 export default defineComponent({
   name: 'SIcon',
-  props: iconParkProps,
-  setup(props: IconParkProps) {
+  props: iconProps,
+  setup(props: IconProps) {
     const vm = getCurrentInstance();
     const {
       iconType,
@@ -223,7 +223,7 @@ export default defineComponent({
               break;
           }
         } else {
-          // IconPark模式
+          // Icon 模式
           styles.width = sizeValue;
           styles.height = sizeValue;
         }
@@ -259,7 +259,7 @@ export default defineComponent({
 
     // -------------------------- 类名计算 --------------------------
     const iconClass = computed(() => {
-      const baseClass = 's-iconpark';
+      const baseClass = 's-icon';
       const classes = [baseClass];
 
       // 类型样式（如 primary/success）
@@ -300,17 +300,14 @@ export default defineComponent({
 
       // 加载中状态
       if (!iconfontLoaded.value) {
-        return <div class="s-iconpark__loading">加载中...</div>;
+        return <div class="s-icon__loading">加载中...</div>;
       }
 
       // JS/Symbol 模式渲染
       if (type === 'js-symbol') {
         return (
           <svg
-            class={`${iconClass.value} s-iconpark-${iconName.replace(
-              'icon-',
-              ''
-            )}`}
+            class={`${iconClass.value} s-icon-${iconName.replace('icon-', '')}`}
             style={customStyles.value}
             aria-label={iconName.replace('icon-', '') || 'icon'}
             viewBox="0 0 1024 1024"
@@ -326,7 +323,7 @@ export default defineComponent({
           <i
             class={`${
               iconClass.value
-            } ${iconName} s-iconpark-${iconName.replace('icon-', '')}`}
+            } ${iconName} s-icon-${iconName.replace('icon-', '')}`}
             style={customStyles.value}
             aria-label={iconName.replace('icon-', '') || 'icon'}
           />
@@ -351,7 +348,7 @@ export default defineComponent({
         pascalCaseName
       ];
       if (!OfficialIcon) {
-        console.warn(`IconPark: 未找到图标 "${iconName}"`);
+        console.warn(`Icon: 未找到图标 "${iconName}"`);
         return null;
       }
 
@@ -370,9 +367,9 @@ export default defineComponent({
               ? [unref(color)]
               : getConfig().colors[getConfig().theme].fill)
         });
-        return <i class="s-iconpark__svg" innerHTML={svgString} />;
+        return <i class="s-icon__svg" innerHTML={svgString} />;
       } catch (error) {
-        console.error(`IconPark: 渲染图标 "${iconName}" 失败`, error);
+        console.error(`Icon: 渲染图标 "${iconName}" 失败`, error);
         return null;
       }
     };

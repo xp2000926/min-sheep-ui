@@ -2,8 +2,8 @@ import type { ExtractPropTypes } from 'vue';
 /**
  * IconPark 图标主题类型
  */
-export type IconParkTheme = 'outline' | 'filled' | 'two-tone' | 'multi-color';
-export const iconParkProps = {
+export type IconTheme = 'outline' | 'filled' | 'two-tone' | 'multi-color';
+export const iconProps = {
   /** 图标名称 */
   name: {
     type: String,
@@ -11,7 +11,7 @@ export const iconParkProps = {
   },
   /** 图标主题 */
   theme: {
-    type: String as () => IconParkTheme,
+    type: String as () => IconTheme,
     default: 'outline'
   } /** 自定义颜色 */,
   color: {
@@ -28,10 +28,10 @@ export const iconParkProps = {
     default: undefined
   },
   iconType: {
-    type: String as () => 'iconpark' | 'iconfont',
-    default: 'iconpark',
-    validator: (val: string) => ['iconpark', 'iconfont'].includes(val),
-    description: `图标库类型，默认 'iconpark'，设置为 'iconfont' 时切换到 iconfont 模式`
+    type: String as () => 'icon' | 'iconfont',
+    default: 'icon',
+    validator: (val: string) => ['icon', 'iconfont'].includes(val),
+    description: `图标库类型，默认 'icon'，设置为 'iconfont' 时切换到 iconfont 模式`
   },
   iconfontUrl: {
     type: String,
@@ -58,4 +58,4 @@ export const iconParkProps = {
     default: undefined
   }
 } as const;
-export type IconParkProps = ExtractPropTypes<typeof iconParkProps>;
+export type IconProps = ExtractPropTypes<typeof iconProps>;

@@ -13,7 +13,8 @@
   <!-- <CustomSVgIconPark /> -->
   <!-- <BasePopover /> -->
   <!-- <Popover /> -->
-  <Typewriter />
+  <!-- <TyAHPpewriter /> -->
+  <AHP />
 </template>
 
 <script setup lang="ts">
@@ -33,6 +34,7 @@
 // import BasePopover from './components/BasePopover.vue';
 // import Popover from './components/Popover.vue';
 import Typewriter from './components/Typewriter.vue';
+import AHP from './components/AHP.vue';
 </script>
 
 <style lang="scss" scoped></style>

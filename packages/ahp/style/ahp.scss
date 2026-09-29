@@ -1,3 +1,52 @@
 .s-ahp {
-/* your component style */
+  --ahp-border: #e5e7eb;
+  --ahp-success: #00b42a;
+  --ahp-error: #f53f3f;
+
+  .ahp-matrix-wrap {
+    margin-bottom: 12px;
+  }
+  .ahp-table {
+    border-collapse: collapse;
+    th, td {
+      border: 1px solid var(--ahp-border);
+      padding: 4px;
+      min-width: 72px;
+      text-align: center;
+    }
+    .ahp-label-cell {
+      background: #fafafa;
+      font-weight: 500;
+      min-width: 80px;
+    }
+  }
+  .ahp-cell {
+    &__diag {
+      background: #f2f3f5;
+    }
+    &__upper {
+      background: #e8f3ff;
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #94bfff;
+        padding: 3px;
+        text-align: center;
+      }
+    }
+    &__lower {
+      background: #f7f8fa;
+    }
+  }
+
+  .ahp-result {
+    line-height: 1.8;
+    font-size: 14px;
+  }
+  .text-success {
+    color: var(--ahp-success);
+  }
+  .text-error {
+    color: var(--ahp-error);
+  }
 }

@@ -40,7 +40,12 @@
     }
   },
   "include": [
-    "packages/**",
+    "packages/**/*.ts",
+    "packages/**/*.tsx",
+    "packages/**/*.vue",
+    "libs/**/*.ts",
+    "libs/**/*.tsx",
+    "scripts/entry.ts",
   ],
   "exclude": [
     "node_modules",

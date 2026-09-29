@@ -116,12 +116,17 @@ const config = {
       // 默认禁用；设置为 true 可为所有图片启用懒加载。
       lazyLoading: true
     },
-    config: md => {
+    config: (md: any) => {
       md.use(demoblockPlugin);
     }
   },
   vite: {
-    plugins: [demoblockVitePlugin()]
+    plugins: [demoblockVitePlugin()],
+    resolve: {
+      alias: {
+        'min-sheep-ui': path.resolve(__dirname, '../../scripts/entry.ts')
+      }
+    }
   }
 };
 export default config;

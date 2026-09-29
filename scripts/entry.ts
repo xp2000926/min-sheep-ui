@@ -67,8 +67,31 @@ import FilesCardPlugin, { FilesCard } from '../packages/files-card'; // 打字�
 import TimePickerPanelPlugin, {
   TimePickerPanel
 } from '../packages/time-picker-panel'; // 时间选择器面板
+import AhpPlugin, { Ahp } from '../packages/ahp'; // AHP 矩阵
+// export type {
+//   AhpProps,
+//   AhpEditor,
+//   AhpCellSlotProps,
+//   Criterion,
+//   ComparisonMatrix,
+//   WeightResult
+// } from '../packages/ahp';
+// export {
+//   SAATY_VALUES,
+//   RI_TABLE,
+//   computeWeights,
+//   createIdentityMatrix,
+//   formatFraction,
+//   nearestSaaty,
+//   parseSaaty,
+//   isSaatyValue,
+//   AhpSelectEditor,
+//   AhpInputEditor,
+//   AhpStepperEditor
+// } from '../packages/ahp';
 
 export {
+  Ahp,
   Alert,
   Button,
   ButtonGroup,
@@ -138,6 +161,7 @@ export {
 };
 
 const installs = [
+  AhpPlugin,
   ButtonPlugin,
   TreePlugin,
   EmptyPlugin,

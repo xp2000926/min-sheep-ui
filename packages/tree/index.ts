@@ -5,6 +5,13 @@ import './style/tree.scss';
 
 // 具名导出
 export { Tree };
+export type {
+  ITreeNode,
+  IInnerTreeNode,
+  FieldType,
+  treeProps,
+  TreeProps
+} from './src/tree-type';
 
 // 导出插件
 export default {

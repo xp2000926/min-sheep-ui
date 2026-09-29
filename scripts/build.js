@@ -16,10 +16,13 @@ const fsExtra = require('fs-extra');
 const inquirer = require('inquirer');
 
 const pathConfig = {
+  rootDir: path.resolve(__dirname, '..'),
   entryFile: path.resolve(__dirname, './entry.ts'),
   componentsDir: path.resolve(__dirname, '../packages'),
   outputDir: path.resolve(__dirname, '../build'),
-  tsconfigPath: path.resolve(__dirname, '../tsconfig.json')
+  // 库构建必须使用 tsconfig.lib.json：根 tsconfig.json 的 include 只有 src/**，
+  // 且 exclude 排除了 packages，会导致 dts 插件拿不到源文件，产物退化为 export {}
+  tsconfigPath: path.resolve(__dirname, '../tsconfig.lib.json')
 };
 
 const calculateFolderSize = folderPath => {
@@ -405,7 +408,9 @@ const buildAll = async version => {
           vue(),
           vueJsx(),
           dts({
-            entryRoot: pathConfig.componentsDir,
+            // 入口 scripts/entry.ts 位于 packages 之外，entryRoot 必须取仓库根目录，
+            // 否则声明会被判定为 outDir 外部产物而丢弃，min-sheep-ui.d.ts 退化为 export {}
+            entryRoot: pathConfig.rootDir,
             outDir: pathConfig.outputDir,
             insertTypesEntry: true,
             copyDtsFiles: true,
@@ -533,7 +538,9 @@ const generateSingleComponentType = async name => {
           vue(),
           vueJsx(),
           dts({
-            entryRoot: path.dirname(componentEntry),
+            // entryRoot 取组件目录本身，index.d.ts 才会落在 build/<name>/index.d.ts；
+            // 若取 packages 目录会多嵌套一层 build/<name>/<name>/index.d.ts，导致入口为空
+            entryRoot: componentEntry,
             outDir: componentOutDir,
             insertTypesEntry: true,
             copyDtsFiles: true,

@@ -1,5 +1,12 @@
-import { defineComponent, computed, watch, ref, useSlots } from 'vue';
-import { ahpProps, ahpEmits, type AhpMatrix, type AhpResult } from './ahp-type';
+import { defineComponent, computed, watch, ref } from 'vue';
+import {
+  ahpProps,
+  ahpEmits,
+  type AhpMatrix,
+  type AhpResult,
+  type AhpInputSlotProps,
+  type AhpResultSlotProps
+} from './ahp-type';
 
 // RI随机一致性指标表
 const RI_TABLE: Record<number, number> = {
@@ -96,7 +103,8 @@ function createIdentityMatrix(n: number): AhpMatrix {
   for (let i = 0; i < n; i++) {
     const row: number[] = [];
     for (let j = 0; j < n; j++) {
-      row.push(i === j ? 1 : 1);
+      // AHP 判断矩阵的“单位矩阵”全部填 1
+      row.push(1);
     }
     mat.push(row);
   }
@@ -155,8 +163,8 @@ export default defineComponent({
       }
       return m;
     }
-    // 修改上三角单元格
-    function handleCellChange(i: number, j: number, rawVal: string) {
+    // 修改上三角单元格；插槽/原生输入可能传来字符串或数字
+    function handleCellChange(i: number, j: number, rawVal: string | number) {
       if (props.disabled) return;
       if (i >= j) return;
 
@@ -188,7 +196,6 @@ export default defineComponent({
     );
 
     return () => {
-      const n = order.value;
       const mat = innerMatrix.value;
       const res = result.value;
       const labels = normLabels.value;
@@ -236,7 +243,7 @@ export default defineComponent({
                                 col: j,
                                 onChange: (val: string | number) =>
                                   handleCellChange(i, j, val)
-                              })
+                              } satisfies AhpInputSlotProps)
                             ) : (
                               <input
                                 type="number"
@@ -268,7 +275,7 @@ export default defineComponent({
           {props.showResult ? (
             <div class="ahp-result">
               {slots.result ? (
-                slots.result({ res, labels })
+                slots.result({ res, labels } satisfies AhpResultSlotProps)
               ) : (
                 <>
                   <div>

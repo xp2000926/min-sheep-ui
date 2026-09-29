@@ -1,6 +1,13 @@
 import { mount } from '@vue/test-utils';
+import { describe, test, expect } from 'vitest';
+import { h } from 'vue';
 import SAhp from '../src/ahp';
-import type { AhpMatrix, AhpResult } from '../src/ahp-type';
+import {
+  ahpProps,
+  ahpEmits,
+  type AhpMatrix,
+  type AhpResult
+} from '../src/ahp-type';
 
 describe('SAhp AHP判断矩阵组件', () => {
   test('组件正常渲染根节点 s-ahp', async () => {
@@ -353,5 +360,201 @@ describe('SAhp - slots.input 自定义输入插槽', () => {
 
     // 下三角显示 1/4
     expect(wrapper.text()).toContain('0.250');
+  });
+});
+
+describe('ahp-type props / emits 定义', () => {
+  test('props 默认值与 ahp.tsx 使用一致', () => {
+    expect(ahpProps.order.default).toBe(3);
+    expect(ahpProps.disabled.default).toBe(false);
+    expect(ahpProps.showResult.default).toBe(true);
+    expect(ahpProps.labels.default()).toEqual([]);
+    expect(ahpProps.modelValue.default()).toEqual([]);
+  });
+
+  test('emits 校验器：update:modelValue 仅接受数组', () => {
+    expect(
+      ahpEmits['update:modelValue']([
+        [1, 3],
+        [1 / 3, 1]
+      ] as AhpMatrix)
+    ).toBe(true);
+    expect(ahpEmits['update:modelValue'](null as unknown as AhpMatrix)).toBe(
+      false
+    );
+  });
+
+  test('emits 校验器：change 仅接受真值结果对象', () => {
+    expect(
+      ahpEmits.change({
+        weights: [0.5, 0.5],
+        lambdaMax: 2,
+        CI: 0,
+        RI: 0,
+        CR: NaN,
+        pass: true
+      } as AhpResult)
+    ).toBe(true);
+    expect(ahpEmits.change(undefined as unknown as AhpResult)).toBe(false);
+  });
+});
+
+describe('SAhp - order 钳制（2~9）', () => {
+  const tick = () => new Promise(r => setTimeout(r, 10));
+
+  test('order=1 被钳制为 2 阶，按 2 阶矩阵特殊处理', async () => {
+    const wrapper = mount(SAhp, { props: { order: 1 } });
+    await tick();
+    // 2 阶矩阵：CR 无意义，展示特殊提示
+    expect(wrapper.text()).toContain('2阶矩阵，无随机一致性指标');
+    // 权重只到 C2，不会出现 C3
+    expect(wrapper.text()).toContain('C2=');
+    expect(wrapper.text()).not.toContain('C3=');
+  });
+
+  test('order=99 被钳制为 9 阶，标签补齐到 C9', async () => {
+    const wrapper = mount(SAhp, { props: { order: 99 } });
+    await tick();
+    // 单位矩阵 CR=0，一致性通过
+    expect(wrapper.text()).toContain('C9=');
+    expect(wrapper.text()).not.toContain('C10=');
+    expect(wrapper.text()).toContain('一致性检验通过');
+  });
+});
+
+describe('SAhp - modelValue / labels 规范化', () => {
+  const tick = () => new Promise(r => setTimeout(r, 10));
+
+  test('modelValue 尺寸与 order 不一致：重置为单位矩阵参与计算', async () => {
+    // order=3 但传入 2x2 矩阵 → 组件降级为 3 阶单位矩阵
+    const wrapper = mount(SAhp, {
+      props: {
+        order: 3,
+        modelValue: [
+          [1, 9],
+          [1 / 9, 1]
+        ] as AhpMatrix
+      }
+    });
+    await tick();
+
+    const changes = wrapper.emitted('change') as AhpResult[][];
+    const res = changes.at(-1)![0];
+    // 3 阶单位矩阵：权重均分 1/3
+    expect(res.weights).toEqual([1 / 3, 1 / 3, 1 / 3]);
+    expect(res.lambdaMax).toBeCloseTo(3, 6);
+    // 单位矩阵 CI=0、CR=0，通过
+    expect(res.CR).toBeCloseTo(0, 6);
+    expect(res.pass).toBe(true);
+  });
+
+  test('labels 含空白项：空白项替换为 Cx 占位', async () => {
+    const wrapper = mount(SAhp, {
+      props: { order: 2, labels: ['', '  '] }
+    });
+    await tick();
+    // 两个空白标签分别补 C1、C2；权重区精确展示占位标签
+    expect(wrapper.text()).toContain('C1=0.5000；C2=0.5000');
+  });
+
+  test('labels 超过 order：多余项截断不渲染', async () => {
+    const wrapper = mount(SAhp, {
+      props: { order: 2, labels: ['价格', '质量', '多余项XYZ'] }
+    });
+    await tick();
+    const text = wrapper.text();
+    expect(text).toContain('价格');
+    expect(text).toContain('质量');
+    // 第 3 个标签超出 order=2，被截断
+    expect(text).not.toContain('多余项XYZ');
+  });
+
+  test('labels 会被 trim：前后空格去除后仍作为有效标签', async () => {
+    const wrapper = mount(SAhp, {
+      props: { order: 2, labels: [' 价格 ', '质量'] }
+    });
+    await tick();
+    // trim 后仍是有效标签，不会被 Cx 替换
+    expect(wrapper.text()).toContain('价格=0.5000');
+  });
+});
+
+describe('SAhp - 原生 input 输入路径（无插槽）', () => {
+  const tick = () => new Promise(r => setTimeout(r, 10));
+
+  test('原生 input 输入合法值：更新矩阵、同步下三角并 emit', async () => {
+    const wrapper = mount(SAhp, { props: { order: 3 } });
+    await tick();
+
+    // 默认渲染 n*(n-1)/2 = 3 个数字输入框，首个对应上三角 (0,1)
+    const inputs = wrapper.findAll('input[type="number"]');
+    expect(inputs).toHaveLength(3);
+
+    await inputs[0].setValue('5');
+    await tick();
+
+    const emits = wrapper.emitted('update:modelValue') as AhpMatrix[][];
+    expect(emits).toBeTruthy();
+    const last = emits.at(-1)![0];
+    // 上三角 (0,1)=5，下三角 (1,0)=1/5
+    expect(last[0][1]).toBe(5);
+    expect(last[1][0]).toBeCloseTo(0.2);
+    // 下三角只读文本展示 0.200
+    expect(wrapper.text()).toContain('0.200');
+  });
+
+  test('原生 input 输入非法值（空串/非数字/非正数）：不 emit', async () => {
+    const wrapper = mount(SAhp, { props: { order: 3 } });
+    await tick();
+
+    const input = wrapper.find('input[type="number"]');
+    // 空串：保留空态不写入
+    await input.setValue('');
+    // 非数字
+    await input.setValue('abc');
+    // 非正数
+    await input.setValue('0');
+    await input.setValue('-2');
+    await tick();
+
+    expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+  });
+
+  test('对角线与下三角为只读文本（toFixed(3) 格式）', async () => {
+    const wrapper = mount(SAhp, {
+      props: {
+        order: 2,
+        modelValue: [
+          [1, 4],
+          [0.25, 1]
+        ] as AhpMatrix
+      }
+    });
+    await tick();
+
+    const text = wrapper.text();
+    // 对角线固定 1.000，下三角只读展示 0.250
+    expect(text).toContain('1.000');
+    expect(text).toContain('0.250');
+    // 只有 1 个上三角输入框
+    expect(wrapper.findAll('input[type="number"]')).toHaveLength(1);
+  });
+
+  test('disabled 时输入框不渲染，仅 span 只读文本', async () => {
+    const wrapper = mount(SAhp, {
+      props: {
+        order: 2,
+        disabled: true,
+        modelValue: [
+          [1, 3],
+          [1 / 3, 1]
+        ] as AhpMatrix
+      }
+    });
+    await tick();
+
+    // 上三角也降级为只读文本 3.000，全表无输入框
+    expect(wrapper.findAll('input')).toHaveLength(0);
+    expect(wrapper.text()).toContain('3.000');
   });
 });

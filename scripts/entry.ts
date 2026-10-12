@@ -67,7 +67,7 @@ import FilesCardPlugin, { FilesCard } from '../packages/files-card'; // 打字�
 import TimePickerPanelPlugin, {
   TimePickerPanel
 } from '../packages/time-picker-panel'; // 时间选择器面板
-import AhpPlugin, { Ahp } from '../packages/ahp'; // AHP 矩阵
+import AhpPlugin, { Ahp, validateMatrix } from '../packages/ahp'; // AHP 矩阵
 // export type {
 //   AhpProps,
 //   AhpEditor,
@@ -92,6 +92,7 @@ import AhpPlugin, { Ahp } from '../packages/ahp'; // AHP 矩阵
 
 export {
   Ahp,
+  validateMatrix,
   Alert,
   Button,
   ButtonGroup,

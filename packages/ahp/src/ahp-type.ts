@@ -1,6 +1,8 @@
 import type { ExtractPropTypes } from 'vue';
 /** AHP矩阵行，二维数组 */
 export type AhpMatrix = number[][];
+/** 上三角单元格编辑器类型 */
+export type AhpEditor = 'input' | 'select' | 'stepper';
 /** 计算结果类型 */
 export interface AhpResult {
   /** 权重向量，总和为 1（方根法归一化） */
@@ -17,20 +19,25 @@ export interface AhpResult {
   pass: boolean;
 }
 export const ahpProps = {
-  /** 矩阵阶数，传入值会被钳制到 2~9（Math.max(2, Math.min(9, order))） */
-  order: {
-    type: Number,
-    default: 3
+  /**
+   * 准则标签数组，长度即矩阵阶数：
+   * - 阶数 = clamp(criteria.length, 2, 9)，超出 9 项截断；
+   * - 未传或传空数组时默认 3 阶；
+   * - 空白项自动补 C1、C2… 占位
+   */
+  criteria: {
+    type: Array as () => string[],
+    default: () => []
   },
-  /** n×n 判断矩阵，v-model 绑定；行数与 order 不一致时组件会重置为单位矩阵 */
+  /** n×n 判断矩阵，v-model 绑定；校验不通过（方阵/对角线=1/正数/上下三角互为倒数）时降级为单位矩阵并给出警告 */
   modelValue: {
     type: Array as () => AhpMatrix,
     default: () => []
   },
-  /** 准则标签：长度不足或存在空白项时自动补 C1、C2… 占位；超过 order 的部分截断不渲染 */
-  labels: {
-    type: Array as () => string[],
-    default: () => []
+  /** 上三角单元格编辑器类型：input 原生数字输入框 / select 1-9 标度下拉 / stepper 1-9 标度步进 */
+  editor: {
+    type: String as () => AhpEditor,
+    default: 'input'
   },
   /** 是否禁用整个编辑器 */
   disabled: {
@@ -66,6 +73,8 @@ export interface AhpResultSlotProps {
   res: AhpResult;
   /** 当前生效的准则标签（含自动补齐的 Cx 占位） */
   labels: string[];
+  /** 外部矩阵校验失败降级为单位矩阵时的警告文案；空串表示无警告 */
+  warning: string;
 }
 
 /** 组件插槽签名（仅供类型标注使用） */

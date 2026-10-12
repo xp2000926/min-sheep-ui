@@ -20,6 +20,71 @@ const RI_TABLE: Record<number, number> = {
   8: 1.41,
   9: 1.45
 };
+
+// 1-9 标度（含倒数），select / stepper 编辑器共用
+const SAATY_SCALE: number[] = [
+  1 / 9,
+  1 / 8,
+  1 / 7,
+  1 / 6,
+  1 / 5,
+  1 / 4,
+  1 / 3,
+  1 / 2,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9
+];
+
+// 倒数比较的浮点容差
+const EPS = 1e-6;
+
+/**
+ * 校验外部传入的判断矩阵
+ * 规则：n×n 方阵、全为正数、对角线 = 1、下三角与上三角互为倒数
+ * @param mat 待校验矩阵
+ * @param n 期望阶数
+ * @returns 校验通过返回 null；失败返回错误原因（文案）
+ */
+export function validateMatrix(mat: unknown, n: number): string | null {
+  if (!Array.isArray(mat) || mat.length !== n) {
+    return `矩阵必须是 ${n}×${n} 方阵`;
+  }
+  for (let i = 0; i < n; i++) {
+    const row = (mat as unknown[])[i];
+    if (!Array.isArray(row) || row.length !== n) {
+      return `矩阵必须是 ${n}×${n} 方阵`;
+    }
+    for (let j = 0; j < n; j++) {
+      const v = row[j];
+      if (typeof v !== 'number' || !(v > 0)) {
+        return `第 ${i + 1} 行第 ${j + 1} 列必须为正数`;
+      }
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    if (Math.abs((mat as number[][])[i][i] - 1) > EPS) {
+      return `对角线元素必须为 1（第 ${i + 1} 行）`;
+    }
+  }
+  for (let i = 0; i < n; i++) {
+    for (let j = i + 1; j < n; j++) {
+      const upper = (mat as number[][])[i][j];
+      const lower = (mat as number[][])[j][i];
+      if (Math.abs(lower - 1 / upper) > EPS) {
+        return `下三角须为上三角的倒数（第 ${j + 1} 行第 ${i + 1} 列）`;
+      }
+    }
+  }
+  return null;
+}
+
 /**
  * AHP 方根法（几何平均法）计算权重 + 一致性检验
  * @param matrix 判断矩阵
@@ -110,16 +175,50 @@ function createIdentityMatrix(n: number): AhpMatrix {
   }
   return mat;
 }
+
+function deepCopy<T>(v: T): T {
+  return JSON.parse(JSON.stringify(v)) as T;
+}
+
+function sameMatrix(a: unknown, b: unknown): boolean {
+  return JSON.stringify(a) === JSON.stringify(b);
+}
+
+/** 标度值 → 友好文本：1、3、1/3 … */
+function formatScaleVal(v: number): string {
+  if (v >= 1) return String(v);
+  return `1/${Math.round(1 / v)}`;
+}
+
+/** 非标度的普通数值文本 */
+function formatCellText(v: number): string {
+  return String(Math.round(v * 1000) / 1000);
+}
+
+/** 距 v 最近的标度下标 */
+function nearestScaleIndex(v: number): number {
+  let best = 0;
+  for (let k = 1; k < SAATY_SCALE.length; k++) {
+    if (Math.abs(v - SAATY_SCALE[k]) < Math.abs(v - SAATY_SCALE[best])) {
+      best = k;
+    }
+  }
+  return best;
+}
+
 export default defineComponent({
   name: 'SAhp',
   props: ahpProps,
   emits: ahpEmits,
   setup(props, { emit, slots }) {
-    const order = computed(() => Math.max(2, Math.min(9, props.order)));
-    // 规范化label：不足补Cx，超过order截断
+    // 阶数由 criteria 长度决定：钳制 2~9；未传/为空时默认 3 阶
+    const order = computed(() =>
+      Math.max(2, Math.min(9, props.criteria.length || 3))
+    );
+    // 规范化准则标签：空白项补 Cx，超出部分截断
     const normLabels = computed(() => {
       const n = order.value;
-      const raw = props.labels;
+      const raw = props.criteria;
       const list: string[] = [];
       for (let i = 0; i < n; i++) {
         if (raw[i] && raw[i].trim()) {
@@ -130,31 +229,57 @@ export default defineComponent({
       }
       return list;
     });
-    // 内部矩阵，做代理
-    const innerMatrix = ref<AhpMatrix>([]);
-    // 外部modelValue同步到内部
+    // 内部矩阵
+    const innerMatrix = ref<AhpMatrix>(createIdentityMatrix(order.value));
+    // 外部矩阵校验失败降级时的警告文案
+    const warning = ref('');
+    // 外部modelValue同步到内部：校验通过采用；失败降级单位矩阵并警告
     watch(
       () => props.modelValue,
       v => {
-        if (Array.isArray(v) && v.length === order.value) {
-          innerMatrix.value = JSON.parse(JSON.stringify(v));
+        // 未传/空数组：静默使用单位矩阵
+        if (!Array.isArray(v) || v.length === 0) {
+          if (innerMatrix.value.length !== order.value) {
+            innerMatrix.value = createIdentityMatrix(order.value);
+          }
+          return;
+        }
+        // 回声：自身 emit 后父组件同步回来的同一矩阵，跳过（保留警告）
+        if (sameMatrix(v, innerMatrix.value)) return;
+        const err = validateMatrix(v, order.value);
+        if (err) {
+          warning.value = `传入矩阵校验失败：${err}，已降级为 ${order.value} 阶单位矩阵`;
+          const identity = createIdentityMatrix(order.value);
+          innerMatrix.value = identity;
+          // 把降级结果同步回父组件，避免父子状态脱节
+          emit('update:modelValue', deepCopy(identity));
         } else {
-          innerMatrix.value = createIdentityMatrix(order.value);
+          warning.value = '';
+          innerMatrix.value = deepCopy(v);
         }
       },
       { immediate: true, deep: true }
     );
-    // 阶数变化重建矩阵
+    // 阶数变化：若父组件矩阵与新阶数匹配则直接采用，否则重建单位矩阵并 emit，避免父子脱节
     watch(
       order,
       n => {
-        innerMatrix.value = createIdentityMatrix(n);
+        const v = props.modelValue;
+        if (Array.isArray(v) && v.length > 0 && !validateMatrix(v, n)) {
+          warning.value = '';
+          innerMatrix.value = deepCopy(v);
+          return;
+        }
+        warning.value = '';
+        const identity = createIdentityMatrix(n);
+        innerMatrix.value = identity;
+        emit('update:modelValue', deepCopy(identity));
       },
       { immediate: false }
     );
     // 自动填充下三角：mat[j][i] = 1 / mat[i][j]，i<j（上三角）
     function syncLowerTriangle(mat: AhpMatrix) {
-      const m = JSON.parse(JSON.stringify(mat)) as AhpMatrix;
+      const m = deepCopy(mat);
       const n = m.length;
       for (let i = 0; i < n; i++) {
         for (let j = i + 1; j < n; j++) {
@@ -176,10 +301,12 @@ export default defineComponent({
       // 2. 非数字 / 非正数：丢弃
       if (!Number.isFinite(val) || val <= 0) return;
 
-      const newMat = JSON.parse(JSON.stringify(innerMatrix.value)) as AhpMatrix;
+      const newMat = deepCopy(innerMatrix.value);
       newMat[i][j] = val;
       const syncedMat = syncLowerTriangle(newMat);
       innerMatrix.value = syncedMat;
+      // 用户手动编辑后，旧的降级警告不再适用
+      warning.value = '';
       emit('update:modelValue', syncedMat);
     }
     // 实时计算结果
@@ -194,6 +321,83 @@ export default defineComponent({
       },
       { immediate: true }
     );
+
+    // 编辑器类型：非法值兜底为 input
+    const editorType = computed(() =>
+      ['select', 'stepper'].includes(props.editor) ? props.editor : 'input'
+    );
+
+    // 上三角单元格编辑器（#input 插槽优先）
+    function renderCellEditor(cellVal: number, i: number, j: number) {
+      const onCellChange = (val: string | number) =>
+        handleCellChange(i, j, val);
+      if (editorType.value === 'select') {
+        const onScale = SAATY_SCALE.some(s => Math.abs(s - cellVal) < 1e-9);
+        return (
+          <select
+            class="ahp-select"
+            onChange={(e: Event) =>
+              onCellChange((e.target as HTMLSelectElement).value)
+            }
+          >
+            {/* 当前值不在标度上时（如手输 2.5），追加一个选项避免显示错位 */}
+            {!onScale ? (
+              <option value={String(cellVal)} selected>
+                {formatCellText(cellVal)}
+              </option>
+            ) : null}
+            {SAATY_SCALE.map(s => (
+              <option
+                key={s}
+                value={String(s)}
+                selected={Math.abs(s - cellVal) < 1e-9}
+              >
+                {formatScaleVal(s)}
+              </option>
+            ))}
+          </select>
+        );
+      }
+      if (editorType.value === 'stepper') {
+        const idx = nearestScaleIndex(cellVal);
+        const onScale = Math.abs(SAATY_SCALE[idx] - cellVal) < 1e-9;
+        return (
+          <div class="ahp-stepper">
+            <button
+              type="button"
+              class="ahp-stepper__btn"
+              disabled={idx === 0}
+              onClick={() => onCellChange(SAATY_SCALE[idx - 1])}
+            >
+              -
+            </button>
+            <span class="ahp-stepper__val">
+              {onScale ? formatScaleVal(cellVal) : formatCellText(cellVal)}
+            </span>
+            <button
+              type="button"
+              class="ahp-stepper__btn"
+              disabled={idx === SAATY_SCALE.length - 1}
+              onClick={() => onCellChange(SAATY_SCALE[idx + 1])}
+            >
+              +
+            </button>
+          </div>
+        );
+      }
+      return (
+        <input
+          type="number"
+          min="0.001"
+          max="9"
+          step="0.1"
+          value={cellVal}
+          onInput={e => {
+            handleCellChange(i, j, (e.target as HTMLInputElement).value);
+          }}
+        />
+      );
+    }
 
     return () => {
       const mat = innerMatrix.value;
@@ -245,20 +449,7 @@ export default defineComponent({
                                   handleCellChange(i, j, val)
                               } satisfies AhpInputSlotProps)
                             ) : (
-                              <input
-                                type="number"
-                                min="0.001"
-                                max="9"
-                                step="0.1"
-                                value={cellVal}
-                                onInput={e => {
-                                  handleCellChange(
-                                    i,
-                                    j,
-                                    (e.target as HTMLInputElement).value
-                                  );
-                                }}
-                              />
+                              renderCellEditor(cellVal, i, j)
                             )
                           ) : (
                             <span>{cellVal.toFixed(3)}</span>
@@ -275,9 +466,16 @@ export default defineComponent({
           {props.showResult ? (
             <div class="ahp-result">
               {slots.result ? (
-                slots.result({ res, labels } satisfies AhpResultSlotProps)
+                slots.result({
+                  res,
+                  labels,
+                  warning: warning.value
+                } satisfies AhpResultSlotProps)
               ) : (
                 <>
+                  {warning.value ? (
+                    <div class="ahp-warning">⚠ {warning.value}</div>
+                  ) : null}
                   <div>
                     权重向量：
                     {res.weights

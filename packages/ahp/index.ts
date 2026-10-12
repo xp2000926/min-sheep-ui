@@ -1,9 +1,9 @@
 import type { App } from 'vue';
-import Ahp from './src/ahp';
+import Ahp, { validateMatrix } from './src/ahp';
 import '../index.scss';
 import './style/ahp.scss';
 
-export { Ahp };
+export { Ahp, validateMatrix };
 
 export default {
   install(app: App) {

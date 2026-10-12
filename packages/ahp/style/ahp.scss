@@ -2,6 +2,7 @@
   --ahp-border: #e5e7eb;
   --ahp-success: #00b42a;
   --ahp-error: #f53f3f;
+  --ahp-warning: #fa8c16;
 
   .ahp-matrix-wrap {
     margin-bottom: 12px;
@@ -33,6 +34,45 @@
         padding: 3px;
         text-align: center;
       }
+      .ahp-select {
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #94bfff;
+        padding: 3px;
+        text-align: center;
+        text-align-last: center;
+        background: #fff;
+        cursor: pointer;
+      }
+      .ahp-stepper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+      .ahp-stepper__btn {
+        width: 22px;
+        height: 24px;
+        padding: 0;
+        border: 1px solid #94bfff;
+        border-radius: 3px;
+        background: #fff;
+        color: #1677ff;
+        line-height: 1;
+        cursor: pointer;
+        &:hover:not(:disabled) {
+          background: #f0f7ff;
+        }
+        &:disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
+        }
+      }
+      .ahp-stepper__val {
+        min-width: 36px;
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
     }
     &__lower {
       background: #f7f8fa;
@@ -42,6 +82,9 @@
   .ahp-result {
     line-height: 1.8;
     font-size: 14px;
+  }
+  .ahp-warning {
+    color: var(--ahp-warning);
   }
   .text-success {
     color: var(--ahp-success);

@@ -68,6 +68,15 @@ import TimePickerPanelPlugin, {
   TimePickerPanel
 } from '../packages/time-picker-panel'; // 时间选择器面板
 import AhpPlugin, { Ahp, validateMatrix } from '../packages/ahp'; // AHP 矩阵
+import MatrixPlugin, { Matrix } from '../packages/matrix'; // 矩阵
+import type {
+  MatrixProps,
+  MatrixCellPayload,
+  MatrixLevel,
+  MatrixLevelResolver,
+  MatrixCellClass,
+  MatrixAlign
+} from '../packages/matrix'; // 矩阵
 // export type {
 //   AhpProps,
 //   AhpEditor,
@@ -93,6 +102,13 @@ import AhpPlugin, { Ahp, validateMatrix } from '../packages/ahp'; // AHP 矩阵
 export {
   Ahp,
   validateMatrix,
+  Matrix,
+  MatrixProps,
+  MatrixCellPayload,
+  MatrixLevel,
+  MatrixLevelResolver,
+  MatrixCellClass,
+  MatrixAlign,
   Alert,
   Button,
   ButtonGroup,
@@ -163,6 +179,7 @@ export {
 
 const installs = [
   AhpPlugin,
+  MatrixPlugin,
   ButtonPlugin,
   TreePlugin,
   EmptyPlugin,

@@ -1,0 +1,97 @@
+/* =========================================================
+ * SMatrix 矩阵组件样式
+ * - 布局（grid 行列、单元格尺寸、边框）由组件内联样式控制
+ * - 本文件负责：主题变量、交互态、等级色卡、热力色卡、选中态
+ * ========================================================= */
+
+.s-matrix {
+  /* ─────────────── 容器 ─────────────── */
+  font-family: inherit;
+  font-size: 14px;
+  color: #333;
+  user-select: none;
+
+  /* 单元格内容超长省略 */
+  > div {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ─────────────── 语义化单元格 ─────────────── */
+
+  &__corner {
+    user-select: none;
+    cursor: default;
+  }
+
+  &__col-header {
+    user-select: none;
+    cursor: default;
+  }
+
+  &__row-header {
+    user-select: none;
+    cursor: default;
+  }
+
+  &__cell {
+    /* 基础样式由内联控制，这里只放可被外部覆盖的扩展点 */
+    cursor: pointer;
+
+    &:active {
+      /* 点击时的轻微反馈 */
+      filter: brightness(0.97);
+    }
+  }
+
+  &__footer-label,
+  &__footer-cell {
+    user-select: none;
+    cursor: default;
+  }
+
+  /* ─────────────── 等级色卡（供 cellClass 引用） ─────────────── */
+
+  .cell-excellent {
+    background-color: #fff1f0 !important;
+    color: #cf1322 !important;
+
+    &:hover {
+      background-color: #ffccc7 !important;
+    }
+  }
+
+  .cell-good {
+    background-color: #fff7e6 !important;
+    color: #d46b08 !important;
+
+    &:hover {
+      background-color: #ffe7ba !important;
+    }
+  }
+
+  .cell-fair {
+    background-color: #fffbe6 !important;
+    color: #d48806 !important;
+
+    &:hover {
+      background-color: #fff1b8 !important;
+    }
+  }
+
+  .cell-poor {
+    background-color: #e6f7ff !important;
+    color: #096dd9 !important;
+
+    &:hover {
+      background-color: #bae7ff !important;
+    }
+  }
+
+  /* ─────────────── 空数据 / 占位 ─────────────── */
+
+  .is-empty {
+    color: #bbb !important;
+  }
+}

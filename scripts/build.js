@@ -324,6 +324,7 @@ const formatFileSize = bytes => {
 //   };
 // };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const getRollupOptions = (isExternalDeps = false) => {
   // 直接将 monaco-editor 和 @icon-park/svg 加入外部依赖列表
   const external = [
@@ -735,6 +736,7 @@ const printBuildSummary = (
     // 按体积大小分类
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const largeComponents = sortedComponents.filter(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ([_, size]) => size > 80 * 1024
     ); // > 80KB
     const mediumComponents = sortedComponents.filter(
@@ -824,6 +826,7 @@ const buildLib = async () => {
     const componentList = getComponentList();
 
     const buildComponentsStart = Date.now();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const componentSizes = await buildAllComponents(version);
     timeStats.buildComponents = Date.now() - buildComponentsStart;
 

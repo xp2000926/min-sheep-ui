@@ -1,4 +1,4 @@
-// 人口文件
+// 入口文件
 import type { App } from 'vue';
 import ButtonPlugin, { Button, ButtonGroup } from '../packages/button'; // 按钮
 import TreePlugin, { Tree } from '../packages/tree'; // tree
@@ -226,3 +226,6 @@ export default {
     installs.forEach(p => app.use(p));
   }
 };
+
+export { MinSheepUiResolver, MinSheepUiAutoImportResolver } from '../resolver';
+export type { MinSheepUiResolverOptions } from '../resolver';

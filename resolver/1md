@@ -1,0 +1,17 @@
+使用者最终用法
+
+```md
+import Components from 'unplugin-vue-components/vite';
+import AutoImport from 'unplugin-auto-import/vite';
+import {
+  MinSheepUiResolver,
+  MinSheepUiAutoImportResolver,
+} from 'min-sheep-ui';
+
+export default defineConfig({
+  plugins: [
+    Components({ resolvers: [MinSheepUiResolver()] }),
+    AutoImport({ resolvers: [MinSheepUiAutoImportResolver()] }),
+  ],
+});
+```

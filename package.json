@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage":"https://min-sheep-ui.vercel.app/",
+  "homepage": "https://min-sheep-ui.vercel.app/",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
@@ -45,6 +45,8 @@
     "vue": "^3.5.22"
   },
   "devDependencies": {
+    "unplugin-auto-import": "^0.17.0",
+    "unplugin-vue-components": "^0.26.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/vue": "^8.1.0",
     "@types/jest": "^29.5.14",

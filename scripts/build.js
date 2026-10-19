@@ -326,7 +326,14 @@ const formatFileSize = bytes => {
 
 const getRollupOptions = (isExternalDeps = false) => {
   // 直接将 monaco-editor 和 @icon-park/svg 加入外部依赖列表
-  const external = ['vue', 'vue-router', 'monaco-editor', '@icon-park/svg'];
+  const external = [
+    'vue',
+    'vue-router',
+    'monaco-editor',
+    '@icon-park/svg',
+    'unplugin-vue-components',
+    'unplugin-auto-import'
+  ];
   return {
     external,
     output: {

@@ -77,6 +77,12 @@ import type {
   MatrixCellClass,
   MatrixAlign
 } from '../packages/matrix'; // 矩阵
+import ConfigProviderPlugin, {
+  ConfigProvider
+} from '../packages/config-provider';
+import { zhCN, enUS, useLocale } from '../packages/locale';
+import type { Locale } from '../packages/locale';
+
 // export type {
 //   AhpProps,
 //   AhpEditor,
@@ -174,10 +180,15 @@ export {
   SubMenu,
   Typewriter,
   FilesCard,
-  TimePickerPanel
+  TimePickerPanel,
+  ConfigProvider,
+  zhCN,
+  enUS,
+  useLocale
 };
 
 const installs = [
+  ConfigProviderPlugin,
   AhpPlugin,
   MatrixPlugin,
   ButtonPlugin,
@@ -229,3 +240,4 @@ export default {
 
 export { MinSheepUiResolver, MinSheepUiAutoImportResolver } from '../resolver';
 export type { MinSheepUiResolverOptions } from '../resolver';
+export type { Locale };

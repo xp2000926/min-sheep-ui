@@ -1,8 +1,9 @@
-import { ExtractPropTypes } from 'vue';
+import { ExtractPropTypes, PropType } from 'vue';
+import { Locale } from '../../locale';
 
 export const configProviderProps = {
   locale: {
-    type: String,
+    type: Object as PropType<Locale>,
     default: 'zh_CN'
   },
   namespace: {

@@ -1,10 +1,9 @@
 /* eslint-disable vue/multi-word-component-names */
-// eslint-disable-next-line vue/multi-word-component-names
 import { describe, it, expect, vi } from 'vitest';
 import { defineComponent, h, nextTick, ref, provide } from 'vue';
 import { mount } from '@vue/test-utils';
-import { zhCN } from '../src/lang/zh-CN';
-import { enUS } from '../src/lang/en-US';
+import zhCN from '../src/lang/zh-CN';
+import enUS from '../src/lang/en-US';
 import { localeContextKey } from '../src/context';
 import { useLocale } from '../src/use-locale';
 import LocalePlugin from '../index';
@@ -95,10 +94,12 @@ describe('Locale 语言包与 Hooks 测试', () => {
     it('注入的 locale 改变时，组件内的翻译应该响应式更新', async () => {
       // 模拟 ConfigProvider 的响应式语言变量
       const currentLocale = ref(zhCN);
+
       // eslint-disable-next-line vue/one-component-per-file
       const ChildComp = defineComponent({
         setup() {
           const { t } = useLocale();
+
           return () => h('div', { class: 'content' }, t('common.confirm'));
         }
       });
